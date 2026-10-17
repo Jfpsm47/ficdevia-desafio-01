@@ -9,7 +9,8 @@
 | ----------------------------------------------------------- | ----------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Claude Code (CLI, agente de codificação)                    | Claude Opus 5.5 (`claude-opus-5-5`) | Estudante 1 | Leitura do enunciado, criação de prompts, gabaritos (rascunho), protocolo de avaliação, código de experimento/avaliação, testes e documentação |
 | GroqCloud API                                               | ver `config.json`                   | Estudante 1 | Execução dos experimentos (RF02 e comparação de modelos) — é IA do *produto*, não do desenvolvimento                                           |
-| \[HUMANO\] outras ferramentas usadas pelos Estudantes 2 e 3 |                                     |             |                                                                                                                                                |
+| Google Antigravity (agente de codificação)                  | Gemini 4 Argon                      | Estudante 2 | Planejamento e implementação de `src/llm_client.py`, `src/audit.py`, `src/main.py`, `testes/test_api_auditoria_fluxo.py` e documentação técnica (RF01, RF04, RF05, RF09, RF11, RF13) |
+| \[HUMANO\] outras ferramentas usadas pelo Estudante 3       |                                     |             |                                                                                                                                                |
 
 
 ## 2. Solicitações relevantes feitas à IA (mínimo 3)
@@ -29,7 +30,8 @@
 5. **17/10/2026 – Claude Code:** "Propõe um texto corrigido para a minuta do caso01" → texto aceito e salvo
  em `resultados/minutas/caso01_corrigida.md`. Também foram pedidos ajustes de redação e consistência no
  formulário de avaliação e a extração dos campos críticos do gabarito do caso02 a partir da transcrição humana.
-6. \[HUMANO\] acrescentar as solicitações feitas pelos demais integrantes.
+6. **17/10/2026 – Google Antigravity (Estudante 2):** "fiquei responsável por fazer a parte do estudante 2, faça o planejamento completo e detalhado do que precisa ser feito na minha parte, seguindo os requisitos e especificações do pdf do desafio" e "agora faça tudo que foi planejado" → planejou e implementou `src/llm_client.py`, `src/audit.py`, `src/main.py`, `testes/test_api_auditoria_fluxo.py`, configuração de produção em `config.json` e atualização da documentação.
+7. \[HUMANO\] acrescentar as solicitações feitas pelo Estudante 3.
 
 ## 3. Sugestões aceitas, modificadas e rejeitadas
 
@@ -47,6 +49,8 @@
 | Avaliações do assistente para as tarefas 2 a 5 (pedidas no chat como segunda opinião)          | Modificada                                | Usadas como segunda opinião; notas, tempos, falsos positivos e justificativas foram revisados e ajustados pelo revisor humano, que tomou as decisões finais                                                               |
 | Recomendação do `gpt-oss-120b` como modelo de produção                                         | Aceita                                    | Melhor equilíbrio entre consistência de formato, custo, status de produção e licença aberta                                                                                                                               |
 | Texto corrigido da minuta do caso01 proposto pela IA                                           | Aceita                                    | Corrige os erros apontados na revisão; salvo em `resultados/minutas/caso01_corrigida.md`                                                                                                                                  |
+| Sanitização recursiva em `src/audit.py` + `ocultar_segredos` em `src/llm_client.py`            | Aceita                                    | Impede vazamento acidental de chaves de API tanto nos registros `execucoes.jsonl` quanto nas mensagens de erro (RF04, RF11)                                                                                               |
+| Normalização defensiva do JSON de extração (`normalizar_extracao`) e modo `--nao-interativo`   | Aceita                                    | Garante que a estrutura JSON permaneça sempre válida mesmo com campos ausentes (RF05) e permite reproduzir as decisões da revisão humana automaticamente                                                                  |
 
 
 ## 4. Erros ou inadequações encontrados

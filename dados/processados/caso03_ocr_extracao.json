@@ -1,0 +1,41 @@
+{
+  "protocolo": "2026-000142",
+  "data_solicitacao": "14/10/2026",
+  "canal": "Documento digitalizado (Ficha de Matrícula)",
+  "solicitante": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+  "assunto": "Efetivação de matrícula",
+  "pedido": "Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.",
+  "perguntas_do_cidadao": [],
+  "categoria": "matricula",
+  "dados_do_curso": {
+    "curso": "TÉCNICO EM ENFERMAGEM",
+    "eixo_tecnologico": "SAÚDE",
+    "carga_horaria": "1200 HORAS",
+    "turno": "NOTURNO",
+    "inicio_curso": "01/02/2027",
+    "data_matricula": "14/10/2026"
+  },
+  "dados_pessoais_detectados": [
+    "CPF",
+    "RG",
+    "data de nascimento",
+    "e-mail",
+    "filiação"
+  ],
+  "campos_ausentes": [],
+  "evidencias": {
+    "protocolo": "Protocolo/Código: 2026-000142",
+    "data_solicitacao": "Data da matrícula: 14/10/2026",
+    "solicitante": "Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS",
+    "pedido": "Solicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar."
+  },
+  "confianca": "alta",
+  "requer_revisao_humana": true,
+  "motivos_revisao": [
+    "verificar autenticidade da solicitação",
+    "confirmar dados do curso"
+  ],
+  "alertas_seguranca": [],
+  "arquivo_origem": "dados/originais/entrada_pdf-imagem.pdf",
+  "texto_original_preservado": "FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO - RF08)\nProtocolo/Código: 2026-000142\nData da matrícula: 14/10/2026\nCanal de entrada: Documento digitalizado (Ficha de Matrícula)\nNome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS\nData de nascimento: 12/08/2008\nCPF: 123.456.789-00 | RG: 1234567-8\nNome da mãe: LUCIA HELENA DE ALMEIDA SANTOS\nE-mail: marcos.almeida.teste@examplo.com\nCurso: TÉCNICO EM ENFERMAGEM | Eixo: SAÚDE\nCarga horária: 1200 HORAS | Turno: NOTURNO\nInício do curso: 01/02/2027\nSolicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar."
+}

@@ -8,13 +8,13 @@ automaticamente**: toda saída é minuta pendente de revisão de um servidor res
 
 | Integrante | Responsabilidade | Situação |
 |---|---|---|
-| Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado (aguarda avaliação humana) |
-| Estudante 2 | Integração por API, segurança, processamento de texto e registro das execuções (`src/main.py`, `src/llm_client.py`, `src/audit.py`) | A FAZER |
+| Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado |
+| Estudante 2 | Integração por API, segurança, processamento de texto e registro das execuções (`src/main.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
 | Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | A FAZER |
 
 ## Instalação
 
-Requer Python 3.13 (testado com 3.13.5).
+Requer Python 3.13 (testado com 3.13.5 / 3.13.14).
 
 ```bash
 python -m venv .venv
@@ -32,15 +32,17 @@ Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.2` (ver `requirements.tx
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | 14 testes offline (prompts, minimização, avaliação) — não chama API |
+| `python -m unittest discover -s testes -t .` | 24 testes offline (prompts, minimização, avaliação, cliente de API, auditoria e fluxo principal) — não chama API |
+| `python -m src.main` | Fluxo completo de atendimento (RF01, RF04, RF05, RF09, RF11, RF13) com revisão humana |
+| `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo sem chamar a API (usando cache validado) e aplica as decisões de revisão humana |
+| `python -m src.main --caso caso01_texto` | Executa o fluxo principal apenas para um caso específico |
 | `python -m src.experimento_prompts listar --provedor groq` | Lista os modelos disponíveis para a sua chave |
 | `python -m src.experimento_prompts prompts` | **RF02**: gera o Prompt C via metaprompt e executa A, B e C com o mesmo modelo e parâmetros |
 | `python -m src.experimento_prompts prompts --reusar-prompt-c` | Repete o RF02 com o Prompt C já salvo |
 | `python -m src.experimento_prompts modelos` | Compara modelos com os prompts de produção nos casos 01, 04 e 05 |
 | `python -m src.experimento_prompts reavaliar resultados/<tipo>/<execução>` | Recalcula as matrizes após mudar um gabarito (sem API) |
-| `python -m src.main` | Fluxo completo — **A FAZER (Estudante 2)** |
 
-Qualquer comando de experimento aceita `--dry-run` (monta e salva os prompts sem chamar a API) e
+Qualquer comando aceita `--dry-run` (executa sem chamar a API) e
 `--provedor` / `--modelo(s)` para sobrescrever o `config.json`.
 
 ## Configuração
@@ -54,15 +56,19 @@ Provedores prontos: `groq`, `gemini`, `openai`, `openrouter`, `ollama` (local, s
 ```
 dados/originais/     entradas fictícias (arquivos fornecidos, inalterados, + casos 04 e 05 criados pela equipe)
 dados/gabaritos/     resultado esperado de cada caso, escrito antes da execução
+dados/processados/   extrações estruturadas em JSON (RF05) e textos intermediários revisados
 prompts/             todos os prompts versionados (ver prompts/README.md)
+src/main.py          ponto de entrada principal, orquestração, extração JSON, minuta e revisão humana
+src/llm_client.py    cliente oficial HTTP (timeout, retries 429/5xx, 401/403, resposta vazia, ocultação de chaves)
+src/audit.py         registro estruturado em JSONL, sanitização de segredos e relatório de auditoria
 src/prompts.py       montagem segura das mensagens, minimização, modelo da minuta
 src/avaliacao.py     critérios automáticos de avaliação
 src/experimento_prompts.py   RF02 + comparação de modelos
-src/cliente_experimento.py   cliente HTTP mínimo dos experimentos (timeout, 401/429/5xx, resposta vazia)
-resultados/          saídas, matrizes e registros (execucoes.jsonl) de cada execução
+src/cliente_experimento.py   delega ao cliente oficial src/llm_client.py
+resultados/          minutas, matrizes e logs estruturados (resultados/logs/execucoes.jsonl)
 documentacao/        protocolo de avaliação, comparação de modelos, relatório técnico, uso de IA,
                      AVALIACAO_HUMANA.md (decisões humanas)
-testes/              testes automatizados
+testes/              testes automatizados (test_prompts_avaliacao.py e test_api_auditoria_fluxo.py)
 ```
 
 ## Casos de teste

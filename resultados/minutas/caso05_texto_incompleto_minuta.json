@@ -1,0 +1,45 @@
+{
+  "referencia": {
+    "protocolo": "não localizado",
+    "data": "não localizado"
+  },
+  "destinatario": "Carlos Eduardo Nunes",
+  "assunto": "Procedimento para trancamento de curso",
+  "saudacao": "Prezado(a) Senhor(a) Carlos Eduardo Nunes,",
+  "corpo": [
+    "Em atenção ao seu contato via WhatsApp institucional, registramos o pedido de trancamento do curso de Técnico em Administração, conforme relatado.",
+    "Para efetivar o trancamento, é necessário apresentar um requerimento escrito, assinado, contendo a justificativa (ex.: início de atividade profissional noturna) e a documentação comprobatória pertinente. O requerimento deverá ser entregue à Secretaria Escolar, onde será gerado o protocolo de acompanhamento.",
+    "Informamos que detalhes sobre a documentação específica exigida, prazos para análise e demais procedimentos internos não foram localizados nos dados disponíveis; tais informações serão confirmadas pelo servidor responsável e disponibilizadas ao requerente."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "protocolo da solicitação",
+    "data da solicitação",
+    "documentação exigida para trancamento",
+    "prazo para análise do pedido",
+    "normas ou procedimentos internos aplicáveis"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "O solicitante, Carlos Eduardo Nunes, deseja trancar o curso de Técnico em Administração.",
+      "trecho_fonte": "solicitante: \"Carlos Eduardo Nunes\"; pedido: \"trancar o curso de Técnico em Administração\""
+    },
+    {
+      "afirmacao": "O pedido foi realizado via WhatsApp institucional.",
+      "trecho_fonte": "canal: \"WhatsApp institucional (mensagem copiada pelo atendente)\""
+    },
+    {
+      "afirmacao": "O assunto da solicitação é \"Pedido de trancamento de curso por trabalho noturno\".",
+      "trecho_fonte": "assunto: \"Pedido de trancamento de curso por trabalho noturno\""
+    },
+    {
+      "afirmacao": "A motivação do pedido é o início de trabalho noturno.",
+      "trecho_fonte": "perguntas_do_cidadao: \"como faço pra trancar meu curso de Técnico em Administração, porque comecei a trabalhar à noite.\""
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/caso05_texto_incompleto.txt",
+    "contexto_institucional"
+  ]
+}

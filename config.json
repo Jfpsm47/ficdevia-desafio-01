@@ -6,7 +6,11 @@
     "processados": "dados/processados",
     "prompts": "prompts",
     "resultados": "resultados",
-    "logs": "resultados/logs"
+    "minutas": "resultados/minutas",
+    "audios": "resultados/audios",
+    "imagens": "resultados/imagens",
+    "logs": "resultados/logs",
+    "brasao": "dados/originais/brasao.png"
   },
   "provedores": {
     "gemini": {
@@ -50,6 +54,27 @@
         "qwen2.5:7b"
       ]
     }
+  },
+  "producao": {
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "casos": [
+      "caso01_texto",
+      "caso02_audio",
+      "caso03_ocr",
+      "caso04_texto_injection",
+      "caso05_texto_incompleto"
+    ],
+    "parametros": {
+      "temperature": 0.2,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "json_mode": true,
+    "timeout_s": 60,
+    "tentativas": 5,
+    "pausa_entre_chamadas_s": 3,
+    "max_novas_geracoes": 2
   },
   "experimento_prompts": {
     "provedor": "groq",

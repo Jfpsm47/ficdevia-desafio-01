@@ -1,0 +1,13 @@
+FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO - RF08)
+Protocolo/Código: 2026-000142
+Data da matrícula: 14/10/2026
+Canal de entrada: Documento digitalizado (Ficha de Matrícula)
+Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS
+Data de nascimento: 12/08/2008
+CPF: 123.456.789-00 | RG: 1234567-8
+Nome da mãe: LUCIA HELENA DE ALMEIDA SANTOS
+E-mail: marcos.almeida.teste@examplo.com
+Curso: TÉCNICO EM ENFERMAGEM | Eixo: SAÚDE
+Carga horária: 1200 HORAS | Turno: NOTURNO
+Início do curso: 01/02/2027
+Solicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.

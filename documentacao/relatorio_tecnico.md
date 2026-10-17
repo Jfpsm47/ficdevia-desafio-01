@@ -70,7 +70,17 @@ Protocolo: `documentacao/protocolo_avaliacao.md`. Resultados por caso, taxa de a
 
 Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-mail em domínio fictício.
 
-## 7. Segurança e tratamento de falhas — A PREENCHER (Estudante 2)
+## 7. Segurança e tratamento de falhas (Estudante 2 — RF01, RF04, RF05, RF09, RF11, RF12)
+
+- **Proteção de credenciais (RF01, RF04, RF11):** Chaves de API são lidas exclusivamente do ambiente / `.env` via `src/llm_client.verificar_chave` (perfis locais como `ollama` operam sem chave). A função `ocultar_segredos` (`src/llm_client.py`) e a varredura recursiva `sanitizar_dados` (`src/audit.py`) mascaram como `[CREDENCIAL_OCULTADA]` qualquer valor de variável `*_API_KEY`/`*_TOKEN`/`*_SECRET`, cabeçalhos `Bearer` ou prefixos conhecidos (`gsk_`, `sk-`, `AIza`) antes de exibir erros ou gravar logs.
+- **Tratamento de falhas de API (`src/llm_client.py` — RF04):**
+  - *Chave ausente:* bloqueia a chamada antes da rede (`codigo_erro="chave_ausente"`) com instrução clara indicando a variável e o `.env.example`.
+  - *Autenticação inválida (HTTP 401/403):* interrompe imediatamente sem repetir tentativas (`codigo_erro="autenticacao_invalida"`).
+  - *Limite de requisições (HTTP 429) e indisponibilidade (HTTP 5xx):* realiza até 5 tentativas respeitando o cabeçalho `Retry-After` ou espera progressiva (*backoff*).
+  - *Timeout e falha de conexão:* `timeout_s` configurável em `config.json` (60 s), tratando `httpx.TimeoutException` e `httpx.HTTPError` com retentativas e mensagem amigável ao operador.
+  - *Resposta vazia ou JSON malformado:* detecta `choices` vazio ou texto em branco (`codigo_erro="resposta_vazia"`), repete a tentativa e, no fluxo principal (`src/main.py`), aplica `normalizar_extracao` e `normalizar_minuta` para garantir que a estrutura JSON permaneça 100% válida mesmo quando houver campos ausentes (Critério de aceite RF05).
+- **Bloqueio de envio automático (RF09):** Nenhuma rotina de envio externo (SMTP, webhook ou mensageria) existe no sistema. Todas as saídas são gravadas localmente em `resultados/minutas/` com o cabeçalho explícito `MINUTA GERADA COM APOIO DE IA – PENDENTE DE REVISÃO HUMANA – ENVIO AUTOMÁTICO BLOQUEADO` e registro da decisão do servidor responsável.
+- **Rastreabilidade e auditoria (`src/audit.py` — RF11, RF13):** Cada etapa gera um registro em `resultados/logs/execucoes.jsonl` e um consolidado em `resultados/logs/relatorio_auditoria.md` contendo `id_execucao`, `data_hora`, `caso_id`, `etapa`, `modalidade`, `arquivo_origem`, `provedor`, `modelo`, `parametros`, `versao_prompt`, `hash_prompt`, `dados_minimizados`, `latencia_s`, `tokens_entrada`/`tokens_saida`, `custo_usd`, `tentativas`, `erro`, `avaliacao_automatica`, `decisao_humana` e versões do ambiente Python/bibliotecas.
 
 ## 8. Áudio, visão/OCR e imagem — A PREENCHER (Estudante 3)
 
@@ -87,4 +97,5 @@ Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-
 - Dependência de fornecedor: mitigada pela API compatível com OpenAI (troca por `config.json`) e pelo
   perfil local `ollama`.
 - Modelos de raciocínio consomem tokens extras de raciocínio (custo e latência maiores).
-- **A PREENCHER:** limitações dos Estudantes 2 e 3.
+- **Integração e operação (Estudante 2):** Cotas gratuitas em nuvem estão sujeitas a limites severos de requisições por minuto (HTTP 429) e variações de latência; embora o cliente aplique retentativas com *backoff* e modo `--dry-run` com cache validado, o uso institucional contínuo exigiria hospedagem local ou contrato dedicado com SLA. Além disso, o arquivo `execucoes.jsonl` é local (sem banco transacional ou controle de acesso multiusuário).
+- **A PREENCHER:** limitações do Estudante 3.

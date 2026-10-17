@@ -1,0 +1,37 @@
+{
+  "referencia": {
+    "protocolo": "2026-000142",
+    "data": "14/10/2026"
+  },
+  "destinatario": "Marcos Vinícius de Almeida Santos",
+  "assunto": "Informações sobre documentos pendentes para efetivação de matrícula",
+  "saudacao": "Prezado(a) Senhor(a) Marcos Vinícius de Almeida Santos,",
+  "corpo": [
+    "Referente ao protocolo 2026-000142, datado de 14/10/2026, recebemos sua solicitação referente à efetivação da matrícula no curso Técnico em Enfermagem, turno noturno, com início em 01/02/2027.",
+    "No momento, não localizamos nos dados disponíveis a relação dos documentos ainda necessários para a efetivação da matrícula. Essa informação será verificada e retornaremos com a lista completa assim que possível.",
+    "Agradecemos o contato e permanecemos à disposição para quaisquer esclarecimentos adicionais."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "documentos ainda necessários para efetivação da matrícula"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "Protocolo 2026-000142, datado de 14/10/2026, recebido",
+      "trecho_fonte": "Protocolo: 2026-000142"
+    },
+    {
+      "afirmacao": "Solicitação refere-se à efetivação da matrícula no curso Técnico em Enfermagem, turno noturno, início em 01/02/2027",
+      "trecho_fonte": "curso\":\"Técnico em Enfermagem\",\"turno\":\"noturno\",\"inicio_curso\":\"01/02/2027\""
+    },
+    {
+      "afirmacao": "Lista de documentos exigidos para matrícula não está disponível no contexto institucional",
+      "trecho_fonte": "- Lista de documentos exigidos para matrícula ou para qualquer outro procedimento."
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/entrada_texto.txt",
+    "contexto_institucional"
+  ]
+}
