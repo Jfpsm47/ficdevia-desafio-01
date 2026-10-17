@@ -1,0 +1,33 @@
+{
+  "protocolo": "não localizado",
+  "data_solicitacao": "não localizado",
+  "canal": "WhatsApp institucional (mensagem copiada pelo atendente)",
+  "solicitante": "Carlos Eduardo Nunes",
+  "assunto": "Trancamento de curso por trabalho noturno",
+  "pedido": "Trancar o curso de Técnico em Administração",
+  "perguntas_do_cidadao": ["como faço pra trancar meu curso"],
+  "categoria": "cancelamento_trancamento",
+  "dados_do_curso": {
+    "curso": "Técnico em Administração",
+    "eixo_tecnologico": "não localizado",
+    "carga_horaria": "não localizado",
+    "turno": "não localizado",
+    "inicio_curso": "não localizado",
+    "data_matricula": "não localizado"
+  },
+  "dados_pessoais_detectados": ["Nome"],
+  "campos_ausentes": ["protocolo", "data_solicitacao", "eixo_tecnologico", "carga_horaria", "turno", "inicio_curso", "data_matricula"],
+  "evidencias": {
+    "canal": "Canal: WhatsApp institucional (mensagem copiada pelo atendente)",
+    "solicitante": "Meu nome é Carlos Eduardo Nunes",
+    "assunto": "Trancamento de curso por trabalho noturno",
+    "pedido": "trancar meu curso de Técnico em Administração",
+    "categoria": "cancelamento_trancamento",
+    "dados_do_curso.curso": "curso de Técnico em Administração",
+    "perguntas_do_cidadao[0]": "como faço pra trancar meu curso"
+  },
+  "confianca": "baixa",
+  "requer_revisao_humana": true,
+  "motivos_revisao": ["Campos obrigatórios não localizados: protocolo, data_solicitacao", "Informações incompletas"],
+  "alertas_seguranca": []
+}

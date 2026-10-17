@@ -1,0 +1,40 @@
+{
+  "protocolo": "2026-000142",
+  "data_solicitacao": "14/10/2026",
+  "canal": "E-mail",
+  "solicitante": "Marcos Vinícius de Almeida Santos",
+  "assunto": "Solicitação de efetivação de matrícula em curso técnico de enfermagem",
+  "pedido": "Solicita a efetivação da matrícula e informações sobre documentos necessários.",
+  "perguntas_do_cidadao": [
+    "quais documentos ainda preciso apresentar"
+  ],
+  "categoria": "matricula",
+  "dados_do_curso": {
+    "curso": "Técnico em Enfermagem",
+    "eixo_tecnologico": "Saúde",
+    "carga_horaria": "1200 horas",
+    "turno": "noturno",
+    "inicio_curso": "01/02/2027",
+    "data_matricula": "14/10/2026"
+  },
+  "dados_pessoais_detectados": [
+    "Data de nascimento",
+    "CPF",
+    "RG",
+    "Filiação",
+    "E-mail"
+  ],
+  "campos_ausentes": [],
+  "evidencias": {
+    "protocolo": "Protocolo: 2026-000142",
+    "data_solicitacao": "Data: 14/10/2026",
+    "solicitante": "Meu nome é Marcos Vinícius de Almeida Santos",
+    "pedido": "solicito a efetivação da minha matrícula... Peço que me informem quais documentos ainda preciso apresentar."
+  },
+  "confianca": "alta",
+  "requer_revisao_humana": true,
+  "motivos_revisao_humana": [
+    "Política padrão de triagem exige revisão humana para todas as solicitações."
+  ],
+  "alertas_seguranca": []
+}

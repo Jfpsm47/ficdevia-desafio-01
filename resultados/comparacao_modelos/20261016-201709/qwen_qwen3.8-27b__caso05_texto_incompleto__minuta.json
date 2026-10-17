@@ -1,0 +1,35 @@
+{
+  "referencia": {
+    "protocolo": "não localizado",
+    "data": "não localizado"
+  },
+  "destinatario": "Carlos Eduardo Nunes",
+  "assunto": "Solicitação de informações sobre trancamento de curso técnico",
+  "saudacao": "Prezado(a) Sr(a).",
+  "corpo": [
+    "Em atenção à sua solicitação, informamos que os dados disponíveis não contêm as orientações específicas ou a lista de documentos necessários para o procedimento de trancamento do curso Técnico em Administração.",
+    "A informação solicitada encontra-se como 'não localizada' nos registros atuais e será confirmada pelo servidor responsável após a devida análise do seu caso.",
+    "Solicitamos a gentileza de aguardar o retorno oficial da Secretaria Escolar para as devidas providências."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "Procedimento para trancamento de curso",
+    "Documentos exigidos para trancamento",
+    "Prazo para conclusão do trancamento"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "O solicitante deseja realizar o trancamento do curso Técnico em Administração.",
+      "trecho_fonte": "Quero saber como faço pra trancar meu curso de Técnico em Administração"
+    },
+    {
+      "afirmacao": "O solicitante identificou-se como Carlos Eduardo Nunes.",
+      "trecho_fonte": "Meu nome é Carlos Eduardo Nunes."
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/caso05_texto_incompleto.txt",
+    "contexto_institucional"
+  ]
+}

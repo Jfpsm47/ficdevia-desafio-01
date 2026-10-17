@@ -1,0 +1,106 @@
+{
+  "_comentario": "Parâmetros NÃO sensíveis. Chaves de API ficam somente no .env (ver .env.example).",
+  "caminhos": {
+    "originais": "dados/originais",
+    "gabaritos": "dados/gabaritos",
+    "processados": "dados/processados",
+    "prompts": "prompts",
+    "resultados": "resultados",
+    "logs": "resultados/logs"
+  },
+  "provedores": {
+    "gemini": {
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+      "env_chave": "GEMINI_API_KEY",
+      "modelos": [
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite"
+      ]
+    },
+    "groq": {
+      "base_url": "https://api.groq.com/openai/v1",
+      "env_chave": "GROQ_API_KEY",
+      "modelos": [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "qwen/qwen3.8-27b"
+      ]
+    },
+    "openai": {
+      "base_url": "https://api.openai.com/v1",
+      "env_chave": "OPENAI_API_KEY",
+      "modelos": [
+        "gpt-4.1-mini",
+        "gpt-4.1-nano"
+      ]
+    },
+    "openrouter": {
+      "base_url": "https://openrouter.ai/api/v1",
+      "env_chave": "OPENROUTER_API_KEY",
+      "modelos": [
+        "meta-llama/llama-3.3-70b-instruct",
+        "google/gemma-3-27b-it"
+      ]
+    },
+    "ollama": {
+      "base_url": "http://localhost:11434/v1",
+      "env_chave": null,
+      "modelos": [
+        "llama3.2",
+        "qwen2.5:7b"
+      ]
+    }
+  },
+  "experimento_prompts": {
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "caso": "caso01_texto",
+    "parametros": {
+      "temperature": 0.2,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "timeout_s": 60,
+    "tentativas": 5,
+    "pausa_entre_chamadas_s": 3
+  },
+  "comparacao_modelos": {
+    "provedor": "groq",
+    "modelos": [
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "qwen/qwen3.8-27b"
+    ],
+    "casos": [
+      "caso01_texto",
+      "caso04_texto_injection",
+      "caso05_texto_incompleto"
+    ],
+    "parametros": {
+      "temperature": 0.2,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "json_mode": true,
+    "timeout_s": 60,
+    "tentativas": 5,
+    "pausa_entre_chamadas_s": 3
+  },
+  "precos_usd_por_milhao_tokens": {
+    "_comentario": "Preço vigente consultado na página oficial do provedor. Modelos sem entrada = custo não estimado (ex.: 'Contact Sales').",
+    "_fonte": "https://console.groq.com/docs/models",
+    "_data_consulta": "2026-10-16",
+    "openai/gpt-oss-120b": {
+      "entrada": 0.15,
+      "saida": 0.6
+    },
+    "openai/gpt-oss-20b": {
+      "entrada": 0.075,
+      "saida": 0.3
+    },
+    "qwen/qwen3.8-27b": {
+      "entrada": 0.8,
+      "saida": 4.0
+    }
+  }
+}

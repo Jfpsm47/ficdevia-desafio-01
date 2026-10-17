@@ -1,0 +1,51 @@
+{
+  "caso_id": "caso03_ocr",
+  "arquivo_origem": "dados/originais/entrada_pdf-imagem.pdf",
+  "modalidade": "imagem/documento digitalizado",
+  "finalidade": "Testar OCR ou compreensão visual e validação do texto extraído (RF08). Usado pelo Estudante 3 para registrar acertos e erros.",
+  "elaborado_por": "Estudante 1 (rascunho a partir de leitura visual do documento, assistido por IA)",
+  "data_elaboracao": "2026-10-16",
+  "status_validacao_humana": "VALIDADO - João Flávio 17/10/2026",
+  "observacao_geral": "Documento escaneado SEM camada de texto (pdftotext não extrai nada): exige OCR ou modelo de visão. Campos manuscritos. Os valores abaixo são o resultado CORRETO esperado (conferido com entrada_texto.txt), não necessariamente o que um OCR lê.",
+  "cabecalho_esperado": [
+    "GOVERNO DE MATO GROSSO",
+    "SECRETARIA DE ESTADO DE CIÊNCIA, TECNOLOGIA E INOVAÇÃO - SECITECI/MT",
+    "ESCOLA TÉCNICA ESTADUAL DE CUIABÁ",
+    "FICHA DE MATRÍCULA"
+  ],
+  "campos_esperados": {
+    "codigo": "2026-000142",
+    "nome": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+    "data_nascimento": "12/08/2008",
+    "cpf": "123.456.789-00",
+    "rg": "1234567-8",
+    "orgao_expedidor": "em branco",
+    "naturalidade": "CUIABÁ",
+    "uf": "em branco",
+    "nome_mae": "LUCIA HELENA DE ALMEIDA SANTOS",
+    "nome_pai": "em branco",
+    "curso": "TÉCNICO EM ENFERMAGEM",
+    "carga_horaria": "1200 HORAS",
+    "eixo_tecnologico": "SAÚDE",
+    "turma": "em branco",
+    "municipio": "em branco",
+    "turno": "NOTURNO",
+    "inicio_curso": "01/02/2027",
+    "termino_curso": "em branco",
+    "telefone_celular": "em branco",
+    "telefone_residencial": "em branco",
+    "email": "marcos.almeida.teste@examplo.com",
+    "data_matricula": "14/10/2026",
+    "declaracao_ciencia_marcada": true,
+    "assinatura_aluno": "presente",
+    "assinatura_secretaria": "ausente"
+  },
+  "campos_criticos_para_confirmacao_humana": ["codigo", "nome", "data_nascimento", "cpf", "rg", "curso", "inicio_curso", "data_matricula"],
+  "trechos_provavelmente_incertos": [
+    {"campo": "codigo", "motivo": "O 4º dígito do ano parece sobrescrito (pode ser lido como 2024 ou 2026)."},
+    {"campo": "cpf", "motivo": "Manuscrito com vírgula no lugar do ponto e dígitos finais pouco legíveis ('789-00')."},
+    {"campo": "rg", "motivo": "O dígito '7' manuscrito pode ser lido como '1' ou '+'."},
+    {"campo": "email", "motivo": "Manuscrito em maiúsculas; o '@' pode ser lido como 'e' ou 'C'."}
+  ],
+  "dados_pessoais_no_documento": ["nome", "data_nascimento", "cpf", "rg", "naturalidade", "nome_mae", "email", "assinatura"]
+}

@@ -1,0 +1,193 @@
+{
+  "A": {
+    "registro": {
+      "id_execucao": "exp-b63506ba",
+      "data_hora": "2026-10-16T20:09:46-04:00",
+      "etapa": "prompt_A",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "experimento-A",
+      "hash_prompt": "da382030199b",
+      "latencia_s": 3.12,
+      "tokens_entrada": 326,
+      "tokens_saida": 1144,
+      "custo_usd": 0.000735,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "prompt_A_saida.md",
+      "decisao_humana": "PENDENTE",
+      "ajustes": []
+    },
+    "avaliacao": {
+      "achados": [
+        {
+          "criterio": "completude",
+          "gravidade": "medio",
+          "descricao": "Não contém nenhum de: ['2026-000142']"
+        },
+        {
+          "criterio": "lacunas",
+          "gravidade": "alto",
+          "descricao": "Não contém nenhum de: ['não localizado', 'nao localizado']"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Contém termo proibido: 'histórico escolar'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Contém termo proibido: 'comprovante de residência'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Contém termo proibido: 'certidão de nascimento'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Prazo/quantidade possivelmente inventado: '10 dias'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Prazo/quantidade possivelmente inventado: '90 dias'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "critico",
+          "descricao": "Prazo/quantidade possivelmente inventado: '3 dias'"
+        },
+        {
+          "criterio": "formato",
+          "gravidade": "medio",
+          "descricao": "Seções do modelo institucional ausentes: ['destinatario', 'fontes', 'informacoes nao localizadas', 'minuta', 'referencia']"
+        },
+        {
+          "criterio": "linguagem",
+          "gravidade": "baixo",
+          "descricao": "Texto longo (572 palavras)."
+        }
+      ],
+      "contagem": {
+        "critico": 6,
+        "alto": 1,
+        "medio": 2,
+        "baixo": 1
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": false,
+      "palavras": 572,
+      "decisao_sugerida": "rejeitar_nova_geracao"
+    }
+  },
+  "B": {
+    "registro": {
+      "id_execucao": "exp-80344352",
+      "data_hora": "2026-10-16T20:09:48-04:00",
+      "etapa": "prompt_B",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "experimento-B",
+      "hash_prompt": "706995e64dff",
+      "latencia_s": 1.88,
+      "tokens_entrada": 1258,
+      "tokens_saida": 535,
+      "custo_usd": 0.00051,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "prompt_B_saida.md",
+      "decisao_humana": "PENDENTE",
+      "ajustes": []
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "6/6",
+      "marca_nao_localizado": true,
+      "palavras": 135,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  "C": {
+    "registro": {
+      "id_execucao": "exp-845d7dae",
+      "data_hora": "2026-10-16T20:09:50-04:00",
+      "etapa": "prompt_C",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "experimento-C",
+      "hash_prompt": "8b0dc1771143",
+      "latencia_s": 2.0,
+      "tokens_entrada": 1412,
+      "tokens_saida": 622,
+      "custo_usd": 0.000585,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "prompt_C_saida.md",
+      "decisao_humana": "PENDENTE",
+      "ajustes": [],
+      "latencia_preparo_metaprompt_s": 4.09
+    },
+    "avaliacao": {
+      "achados": [
+        {
+          "criterio": "completude",
+          "gravidade": "medio",
+          "descricao": "Não contém nenhum de: ['Marcos']"
+        },
+        {
+          "criterio": "lacunas",
+          "gravidade": "alto",
+          "descricao": "Não contém nenhum de: ['não localizado', 'nao localizado']"
+        },
+        {
+          "criterio": "formato",
+          "gravidade": "medio",
+          "descricao": "Seções do modelo institucional ausentes: ['destinatario', 'fontes', 'informacoes nao localizadas', 'referencia']"
+        }
+      ],
+      "contagem": {
+        "critico": 0,
+        "alto": 1,
+        "medio": 2,
+        "baixo": 0
+      },
+      "secoes_presentes": "2/6",
+      "marca_nao_localizado": false,
+      "palavras": 168,
+      "decisao_sugerida": "correcao_manual"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "referencia": {
+    "protocolo": "não localizado",
+    "data": "não localizado"
+  },
+  "destinatario": "Carlos Eduardo Nunes",
+  "assunto": "Solicitação de informações sobre trancamento de curso",
+  "saudacao": "Prezado(a) Sr. Carlos Eduardo Nunes,",
+  "corpo": [
+    "Acusamos o recebimento de sua solicitação, encaminhada via WhatsApp institucional, referente ao procedimento de trancamento do curso Técnico em Administração.",
+    "Informamos que os dados disponíveis não contêm as orientações específicas, prazos ou documentos necessários para a realização do trancamento. Dessa forma, a informação solicitada encontra-se como 'não localizado' nos registros atuais e será confirmada pelo servidor responsável após análise do processo.",
+    "Solicitamos a gentileza de aguardar o retorno oficial da Secretaria Escolar para as devidas providências."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "Procedimento para trancamento de curso",
+    "Documentos exigidos para trancamento",
+    "Prazos para solicitação de trancamento"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "A solicitação foi recebida via WhatsApp institucional.",
+      "trecho_fonte": "Canal: WhatsApp institucional (mensagem copiada pelo atendente)"
+    },
+    {
+      "afirmacao": "O solicitante deseja trancar o curso de Técnico em Administração.",
+      "trecho_fonte": "Quero saber como faço pra trancar meu curso de Técnico em Administração"
+    },
+    {
+      "afirmacao": "O motivo alegado é o início de trabalho noturno.",
+      "trecho_fonte": "porque comecei a trabalhar à noite"
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/caso05_texto_incompleto.txt",
+    "contexto_institucional"
+  ]
+}

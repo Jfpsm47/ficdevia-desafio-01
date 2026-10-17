@@ -1,0 +1,36 @@
+{
+  "caso_id": "caso02_audio",
+  "arquivo_origem": "dados/originais/entrada_audio.mp3",
+  "modalidade": "áudio",
+  "finalidade": "Testar transcrição, ruído moderado e produção de resposta acessível (RF06, RF07). Usado pelo Estudante 3 para comparar a transcrição.",
+  "elaborado_por": "João Flávio - 17/10/2026 (transcrição de referência feita ouvindo o áudio, sem IA; campos críticos extraídos da transcrição com auxílio de IA)",
+  "data_elaboracao": "2026-10-17",
+  "status_validacao_humana": "VALIDADO",
+  "transcricao_referencia": "dados/gabaritos/caso02_transcricao_referencia.txt",
+  "idioma_esperado": "pt-BR",
+  "campos_criticos_esperados": {
+    "nomes": ["Marcos Vinicius de Almeida Santos", "Lucia Helena de Almeida Santos"],
+    "numeros_de_protocolo": ["2026-000142"],
+    "datas": ["14/10/2026", "12/08/2008"],
+    "pedido": "Efetivação da matrícula no curso Técnico em Enfermagem e informação sobre quais documentos ainda precisa apresentar."
+  },
+  "outros_dados_mencionados": {
+    "curso": "Técnico em Enfermagem",
+    "eixo_tecnologico": "Saúde",
+    "carga_horaria": "1200 horas",
+    "turno": "noturno",
+    "local_nascimento": "Cuiabá",
+    "cpf": "123.456.789-00",
+    "rg": "1234567-8",
+    "email": "marcos.almeida.teste@exemplo.com",
+    "declaracao_ciencia_cancelamento": true
+  },
+  "nao_mencionado_no_audio": ["inicio_curso", "data_matricula", "canal"],
+  "categoria_esperada": "matricula",
+  "dados_pessoais_no_audio": ["nome", "data de nascimento", "naturalidade", "CPF", "RG", "filiação", "e-mail", "voz"],
+  "divergencias_em_relacao_ao_caso01": [
+    "E-mail: a transcrição registra '@exemplo.com'; entrada_texto.txt traz '@examplo.com'. CONFIRMAR ouvindo o áudio.",
+    "O áudio não menciona a data de início do curso (01/02/2027) nem a data da matrícula, presentes no texto."
+  ],
+  "observacoes": "O áudio não pôde ser ouvido pela IA assistente; a referência foi escrita por uma pessoa ANTES de rodar a transcrição automática. Datas faladas por extenso ('14 de Outubro de 2026', '12 de Agosto de 2008') foram normalizadas para DD/MM/AAAA."
+}

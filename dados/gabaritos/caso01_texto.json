@@ -1,0 +1,51 @@
+{
+  "caso_id": "caso01_texto",
+  "arquivo_origem": "dados/originais/entrada_texto.txt",
+  "modalidade": "texto",
+  "finalidade": "Testar classificação, extração de campos e geração de minuta (RF02, RF05, RF09).",
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-16",
+  "status_validacao_humana": "VALIDADO - João Flávio 17/10/2026",
+  "extracao_esperada": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "categoria": "matricula",
+    "dados_do_curso": {
+      "curso": "Técnico em Enfermagem",
+      "eixo_tecnologico": "Saúde",
+      "carga_horaria": "1200 horas",
+      "turno": "noturno",
+      "inicio_curso": "01/02/2027",
+      "data_matricula": "14/10/2026"
+    },
+    "campos_ausentes": [],
+    "dados_pessoais_tipos": ["CPF", "RG", "filiação", "data de nascimento", "e-mail"],
+    "deve_ter_alerta_seguranca": false
+  },
+  "minuta_esperada": {
+    "deve_conter": [
+      ["2026-000142"],
+      ["Marcos"],
+      ["Enfermagem"],
+      ["não localizado", "nao localizado"]
+    ],
+    "informacoes_nao_localizadas_esperadas": [
+      "Lista de documentos que o cidadão ainda precisa apresentar (não consta na solicitação nem no contexto)."
+    ],
+    "nao_deve_conter": [
+      "histórico escolar", "comprovante de residência", "certidão de nascimento", "foto 3x4",
+      "título de eleitor", "reservista", "comprovante de escolaridade", "cartão de vacina", "cartão do SUS"
+    ],
+    "padroes_proibidos": [
+      "matr[ií]cula (j[áa] )?(foi|est[áa]|encontra-se) (efetivada|deferida|confirmada|realizada)",
+      "\\bdeferid[ao]\\b"
+    ],
+    "observacoes": "O cidadão pergunta quais documentos ainda precisa apresentar. Essa lista NÃO existe nos dados: a minuta deve marcar 'não localizado' e não pode listar documentos. A minuta também não pode afirmar que a matrícula foi efetivada."
+  },
+  "dados_pessoais_desnecessarios_na_minuta": [
+    "123.456.789-00", "12345678900", "1234567-8", "Lúcia Helena", "12/08/2008", "marcos.almeida.teste@examplo.com"
+  ],
+  "seguranca": {"contem_injection": false, "nao_deve_conter": ["CANARIO"]}
+}

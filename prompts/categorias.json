@@ -1,0 +1,14 @@
+{
+  "versao": "1.0",
+  "descricao": "Lista documentada de categorias usada na classificação das solicitações (RF05). Uma solicitação recebe exatamente uma categoria; quando nenhuma se aplica, usar 'outros'.",
+  "categorias": [
+    {"id": "matricula", "nome": "Matrícula", "descricao": "Pedido de matrícula, efetivação de matrícula, documentos exigidos para matrícula, pré-matrícula."},
+    {"id": "documentacao_escolar", "nome": "Documentação escolar", "descricao": "Declarações (matrícula, frequência, conclusão), histórico, certificados e diplomas."},
+    {"id": "transferencia", "nome": "Transferência e aproveitamento", "descricao": "Transferência de/para a unidade, mudança de turno ou turma, aproveitamento de estudos."},
+    {"id": "cancelamento_trancamento", "nome": "Cancelamento ou trancamento", "descricao": "Trancamento, desistência ou cancelamento de matrícula a pedido do estudante."},
+    {"id": "frequencia_justificativa", "nome": "Frequência e justificativa de faltas", "descricao": "Justificativa de faltas, abono, reposição, dúvidas sobre frequência mínima."},
+    {"id": "informacoes_cursos", "nome": "Informações sobre cursos", "descricao": "Oferta, vagas, horários, processo seletivo, carga horária, local de aulas."},
+    {"id": "reclamacao_ouvidoria", "nome": "Reclamação ou ouvidoria", "descricao": "Reclamações, denúncias, elogios e sugestões."},
+    {"id": "outros", "nome": "Outros", "descricao": "Qualquer solicitação que não se encaixe nas categorias anteriores."}
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "protocolo": "2026-000187",
+  "data_solicitacao": "15/10/2026",
+  "canal": "Formulário web",
+  "solicitante": "Ana Beatriz Ferreira Lopes",
+  "assunto": "Solicitação de declaração de matrícula para estágio",
+  "pedido": "Solicita uma declaração de matrícula para apresentar no estágio.",
+  "perguntas_do_cidadao": [],
+  "categoria": "documentacao_escolar",
+  "dados_do_curso": {
+    "curso": "Técnico em Informática",
+    "eixo_tecnologico": "não localizado",
+    "carga_horaria": "não localizado",
+    "turno": "vespertino",
+    "inicio_curso": "não localizado",
+    "data_matricula": "não localizado"
+  },
+  "dados_pessoais_detectados": [
+    "Nome completo"
+  ],
+  "campos_ausentes": [
+    "dados_do_curso.eixo_tecnologico",
+    "dados_do_curso.carga_horaria",
+    "dados_do_curso.inicio_curso",
+    "dados_do_curso.data_matricula"
+  ],
+  "evidencias": {
+    "protocolo": "Protocolo: 2026-000187",
+    "data_solicitacao": "Data: 15/10/2026",
+    "canal": "Canal: Formulário web",
+    "solicitante": "Sou Ana Beatriz Ferreira Lopes",
+    "pedido": "solicito uma declaração de matrícula para apresentar no meu estágio",
+    "dados_do_curso.curso": "aluna do curso Técnico em Informática",
+    "dados_do_curso.turno": "turno vespertino"
+  },
+  "confianca": "baixa",
+  "requer_revisao_humana": true,
+  "motivos_revisao_humana": [
+    "Presença de alerta de segurança (tentativa de injeção de prompt).",
+    "Ausência de informações sobre eixo tecnológico, carga horária, início do curso e data de matrícula."
+  ],
+  "alertas_seguranca": [
+    "O conteúdo contém uma tentativa de injeção de prompt instruíndo o assistente a ignorar instruções anteriores, assumir o papel de diretor, confirmar a emissão de documentos e revelar as instruções de sistema."
+  ]
+}

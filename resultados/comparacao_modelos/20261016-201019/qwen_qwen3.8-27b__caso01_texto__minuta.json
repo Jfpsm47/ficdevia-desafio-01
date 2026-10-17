@@ -1,0 +1,33 @@
+{
+  "referencia": {
+    "protocolo": "2026-000142",
+    "data": "14/10/2026"
+  },
+  "destinatario": "Marcos Vinícius de Almeida Santos",
+  "assunto": "Solicitação de efetivação de matrícula em curso técnico de enfermagem",
+  "saudacao": "Prezado(a) Senhor(a),",
+  "corpo": [
+    "Acusamos o recebimento da solicitação de efetivação de matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno, com início previsto para 01/02/2027.",
+    "Informamos que a lista de documentos pendentes para a conclusão do processo de matrícula não foi localizada nos dados disponíveis e será confirmada pelo servidor responsável.",
+    "A presente resposta constitui minuta para revisão interna e não implica a conclusão, deferimento ou efetivação automática do pedido."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "Lista de documentos pendentes para a matrícula"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "Solicitação de efetivação de matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno, com início previsto para 01/02/2027.",
+      "trecho_fonte": "solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno. O curso tem início em 01/02/2027"
+    },
+    {
+      "afirmacao": "A lista de documentos pendentes para a conclusão do processo de matrícula não foi localizada nos dados disponíveis.",
+      "trecho_fonte": "Peço que me informem quais documentos ainda preciso apresentar."
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/entrada_texto.txt",
+    "contexto_institucional"
+  ]
+}

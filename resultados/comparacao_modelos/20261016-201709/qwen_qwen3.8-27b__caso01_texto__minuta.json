@@ -1,0 +1,38 @@
+{
+  "referencia": {
+    "protocolo": "2026-000142",
+    "data": "14/10/2026"
+  },
+  "destinatario": "Marcos Vinícius de Almeida Santos",
+  "assunto": "Solicitação de efetivação de matrícula em curso técnico de enfermagem",
+  "saudacao": "Prezado(a) Senhor(a),",
+  "corpo": [
+    "Acusamos o recebimento da solicitação de efetivação de matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno, com início previsto para 01/02/2027, registrada sob o protocolo 2026-000142 em 14/10/2026.",
+    "Informamos que a lista de documentos necessários para a conclusão do processo de matrícula não foi localizada nos dados disponíveis nesta etapa. A confirmação da documentação exigida será realizada pelo servidor responsável após a revisão da solicitação.",
+    "A situação atual da matrícula (efetivação, pendências ou conclusão) não consta nos registros disponíveis e será verificada pela Secretaria Escolar no momento da análise final."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [
+    "Lista de documentos necessários para a matrícula",
+    "Situação atual da matrícula (se efetivada ou pendente)"
+  ],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "A solicitação refere-se à efetivação de matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno, com início previsto para 01/02/2027.",
+      "trecho_fonte": "solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno. O curso tem início em 01/02/2027"
+    },
+    {
+      "afirmacao": "A solicitação foi registrada sob o protocolo 2026-000142 em 14/10/2026.",
+      "trecho_fonte": "Protocolo: 2026-000142\nData: 14/10/2026"
+    },
+    {
+      "afirmacao": "O solicitante pediu informações sobre quais documentos ainda precisa apresentar.",
+      "trecho_fonte": "Peço que me informem quais documentos ainda preciso apresentar."
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/entrada_texto.txt",
+    "contexto_institucional"
+  ]
+}

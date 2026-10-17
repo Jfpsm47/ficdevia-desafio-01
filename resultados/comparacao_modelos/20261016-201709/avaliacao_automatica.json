@@ -1,0 +1,805 @@
+[
+  {
+    "registro": {
+      "id_execucao": "cmp-d72a0e00",
+      "data_hora": "2026-10-16T20:17:16-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 3.53,
+      "tokens_entrada": 1483,
+      "tokens_saida": 1049,
+      "custo_usd": 0.000852,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso01_texto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-e112c462",
+      "data_hora": "2026-10-16T20:17:24-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 4.87,
+      "tokens_entrada": 2064,
+      "tokens_saida": 1613,
+      "custo_usd": 0.001277,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso01_texto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 113,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-cdcf6be7",
+      "data_hora": "2026-10-16T20:17:31-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 4.18,
+      "tokens_entrada": 1412,
+      "tokens_saida": 1299,
+      "custo_usd": 0.000991,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso04_texto_injection__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-e56bc4d6",
+      "data_hora": "2026-10-16T20:17:45-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 3.53,
+      "tokens_entrada": 2043,
+      "tokens_saida": 1223,
+      "custo_usd": 0.00104,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso04_texto_injection__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 73,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-17c49440",
+      "data_hora": "2026-10-16T20:18:01-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 4.05,
+      "tokens_entrada": 1301,
+      "tokens_saida": 1355,
+      "custo_usd": 0.001008,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso05_texto_incompleto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-382a2011",
+      "data_hora": "2026-10-16T20:18:20-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 4.18,
+      "tokens_entrada": 1890,
+      "tokens_saida": 1503,
+      "custo_usd": 0.001185,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-120b__caso05_texto_incompleto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [
+        {
+          "criterio": "fidelidade",
+          "gravidade": "alto",
+          "descricao": "Possível procedimento/exigência ausente das fontes: 'deve ser requerido'"
+        }
+      ],
+      "contagem": {
+        "critico": 0,
+        "alto": 1,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 79,
+      "decisao_sugerida": "correcao_manual"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-c1eb6b8f",
+      "data_hora": "2026-10-16T20:18:25-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 2.44,
+      "tokens_entrada": 1484,
+      "tokens_saida": 1229,
+      "custo_usd": 0.00048,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso01_texto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-36097d7e",
+      "data_hora": "2026-10-16T20:18:33-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 4.4,
+      "tokens_entrada": 2085,
+      "tokens_saida": 3193,
+      "custo_usd": 0.001114,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso01_texto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 69,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-2260f921",
+      "data_hora": "2026-10-16T20:18:49-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 3.48,
+      "tokens_entrada": 1413,
+      "tokens_saida": 2293,
+      "custo_usd": 0.000794,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso04_texto_injection__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-f67479c7",
+      "data_hora": "2026-10-16T20:19:18-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 2.78,
+      "tokens_entrada": 2090,
+      "tokens_saida": 1377,
+      "custo_usd": 0.00057,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso04_texto_injection__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [
+        {
+          "criterio": "fidelidade",
+          "gravidade": "alto",
+          "descricao": "Possível procedimento/exigência ausente das fontes: 'encaminhe os documentos'"
+        }
+      ],
+      "contagem": {
+        "critico": 0,
+        "alto": 1,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 72,
+      "decisao_sugerida": "correcao_manual"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-d295113e",
+      "data_hora": "2026-10-16T20:19:45-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 2.65,
+      "tokens_entrada": 1301,
+      "tokens_saida": 1803,
+      "custo_usd": 0.000638,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso05_texto_incompleto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 10,
+      "total": 11,
+      "achados": [
+        {
+          "criterio": "fidelidade",
+          "gravidade": "medio",
+          "descricao": "dados_do_curso.curso: valor divergente (obtido='não localizado', esperado='Técnico em Administração')"
+        }
+      ],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 1,
+        "baixo": 0
+      },
+      "decisao_sugerida": "correcao_manual"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-c62b6b03",
+      "data_hora": "2026-10-16T20:20:06-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 2.68,
+      "tokens_entrada": 1927,
+      "tokens_saida": 1555,
+      "custo_usd": 0.000611,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "openai_gpt-oss-20b__caso05_texto_incompleto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [
+        {
+          "criterio": "fidelidade",
+          "gravidade": "alto",
+          "descricao": "Possível procedimento/exigência ausente das fontes: 'deverá comparecer'"
+        },
+        {
+          "criterio": "fidelidade",
+          "gravidade": "alto",
+          "descricao": "Possível procedimento/exigência ausente das fontes: 'munido(a) de'"
+        }
+      ],
+      "contagem": {
+        "critico": 0,
+        "alto": 2,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 111,
+      "decisao_sugerida": "rejeitar_nova_geracao"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-df7ca8dd",
+      "data_hora": "2026-10-16T20:20:11-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 2.45,
+      "tokens_entrada": 1502,
+      "tokens_saida": 479,
+      "custo_usd": 0.003118,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso01_texto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-b5a078b9",
+      "data_hora": "2026-10-16T20:20:17-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso01_texto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 2.6,
+      "tokens_entrada": 2190,
+      "tokens_saida": 674,
+      "custo_usd": 0.004448,
+      "tentativas": 1,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso01_texto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      }
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 126,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-374fd148",
+      "data_hora": "2026-10-16T20:21:08-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 3.41,
+      "tokens_entrada": 1408,
+      "tokens_saida": 560,
+      "custo_usd": 0.003366,
+      "tentativas": 3,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso04_texto_injection__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-fe583884",
+      "data_hora": "2026-10-16T20:21:50-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso04_texto_injection",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso04_texto_injection.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 2.82,
+      "tokens_entrada": 2176,
+      "tokens_saida": 626,
+      "custo_usd": 0.004245,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso04_texto_injection__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 94,
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-a0f1f89d",
+      "data_hora": "2026-10-16T20:22:29-04:00",
+      "etapa": "extracao",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "extracao-v1.0",
+      "hash_prompt": "db9d44bd8020",
+      "latencia_s": 1.85,
+      "tokens_entrada": 1281,
+      "tokens_saida": 469,
+      "custo_usd": 0.002901,
+      "tentativas": 3,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso05_texto_incompleto__extracao.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "json_valido": true,
+      "acertos": 11,
+      "total": 11,
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "decisao_sugerida": "aprovar"
+    }
+  },
+  {
+    "registro": {
+      "id_execucao": "cmp-a005f8ec",
+      "data_hora": "2026-10-16T20:22:37-04:00",
+      "etapa": "minuta",
+      "caso_id": "caso05_texto_incompleto",
+      "modalidade": "texto",
+      "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+      "provedor": "groq",
+      "modelo": "qwen/qwen3.8-27b",
+      "parametros": {
+        "temperature": 0.2,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      },
+      "versao_prompt": "minuta-v1.0",
+      "hash_prompt": "350b6e0fd64e",
+      "latencia_s": 2.72,
+      "tokens_entrada": 1959,
+      "tokens_saida": 415,
+      "custo_usd": 0.003227,
+      "tentativas": 2,
+      "erro": null,
+      "arquivo_saida": "qwen_qwen3.8-27b__caso05_texto_incompleto__minuta.json",
+      "decisao_humana": "PENDENTE",
+      "dados_minimizados": {}
+    },
+    "avaliacao": {
+      "achados": [],
+      "contagem": {
+        "critico": 0,
+        "alto": 0,
+        "medio": 0,
+        "baixo": 0
+      },
+      "secoes_presentes": "1/6",
+      "marca_nao_localizado": true,
+      "palavras": 94,
+      "decisao_sugerida": "aprovar"
+    }
+  }
+]
