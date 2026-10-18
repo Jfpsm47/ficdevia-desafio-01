@@ -1,4 +1,4 @@
 # Dependências usadas pelos módulos do Estudante 1 (prompts, experimento, avaliação).
 # Estudantes 2 e 3: acrescentem aqui as dependências de API, áudio, OCR e imagem.
 httpx==0.28.1
-python-dotenv==1.2.2
+python-dotenv==1.2.1

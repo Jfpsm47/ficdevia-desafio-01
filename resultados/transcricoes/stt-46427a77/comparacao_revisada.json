@@ -1,0 +1,192 @@
+{
+  "distancia_edicao": 10,
+  "palavras_referencia": 134,
+  "wer": 0.0746,
+  "diferencas": [
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "em"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "1200",
+      "obtido": "1 200"
+    },
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "e o"
+    },
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "de"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "2",
+      "obtido": "dois"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "3",
+      "obtido": "tres"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "aulas",
+      "obtido": "aula"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "10",
+      "obtido": "dez"
+    }
+  ],
+  "diferencas_literais": [
+    {
+      "tipo": "replace",
+      "referencia": "Meu",
+      "obtido": "meu"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "Outubro",
+      "obtido": "outubro"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "Vinicius",
+      "obtido": "Vinícius"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "Santos",
+      "obtido": "Santos,"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "Agosto",
+      "obtido": "agosto"
+    },
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "em"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "tecnico",
+      "obtido": "técnico"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "tecnologico",
+      "obtido": "tecnológico"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "horaria",
+      "obtido": "horária"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "1200",
+      "obtido": "1.200"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "123456789-00 meu",
+      "obtido": "123456789-00. Meu"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "1234567-8 o",
+      "obtido": "1234567-8. O"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "Lucia",
+      "obtido": "Lúcia"
+    },
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "e o"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "marcos.almeida.teste@exemplo.com.",
+      "obtido": "marcos.almeida.teste@exemplo.com"
+    },
+    {
+      "tipo": "insert",
+      "referencia": "",
+      "obtido": "de"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "matricula",
+      "obtido": "matrícula"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "2",
+      "obtido": "dois"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "3",
+      "obtido": "três"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "aulas",
+      "obtido": "aula"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "10",
+      "obtido": "dez"
+    },
+    {
+      "tipo": "replace",
+      "referencia": "apresentar, muito",
+      "obtido": "apresentar. Muito"
+    }
+  ],
+  "campos_criticos": [
+    {
+      "campo": "nomes",
+      "esperado": "Marcos Vinicius de Almeida Santos",
+      "correspondencia_textual": true,
+      "requer_conferencia_humana": true
+    },
+    {
+      "campo": "nomes",
+      "esperado": "Lucia Helena de Almeida Santos",
+      "correspondencia_textual": true,
+      "requer_conferencia_humana": true
+    },
+    {
+      "campo": "numeros_de_protocolo",
+      "esperado": "2026-000142",
+      "correspondencia_textual": true,
+      "requer_conferencia_humana": true
+    },
+    {
+      "campo": "datas",
+      "esperado": "14/10/2026",
+      "correspondencia_textual": false,
+      "requer_conferencia_humana": true
+    },
+    {
+      "campo": "datas",
+      "esperado": "12/08/2008",
+      "correspondencia_textual": false,
+      "requer_conferencia_humana": true
+    }
+  ],
+  "aviso": "WER normalizado ignora pontuação; confira diferenças literais (ex.: @). Correspondência textual não comprova correção; números por extenso podem divergir."
+}

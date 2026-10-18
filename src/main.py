@@ -35,7 +35,7 @@ RAIZ = prompts.RAIZ
 CONFIG = json.loads((RAIZ / "config.json").read_text(encoding="utf-8"))
 
 EXTENSOES_TEXTO = {".txt", ".md"}
-EXTENSOES_AUDIO = {".mp3", ".wav", ".ogg", ".m4a"}
+EXTENSOES_AUDIO = {".flac", ".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".ogg", ".wav", ".webm"}
 EXTENSOES_IMAGEM_DOC = {".pdf", ".png", ".jpg", ".jpeg", ".webp"}
 
 # Decisões humanas já validadas pela equipe em documentacao/AVALIACAO_HUMANA.md (RF13).
@@ -297,29 +297,22 @@ def obter_texto_da_entrada(
         return caminho_abs.read_text(encoding="utf-8")
 
     if modalidade == "audio":
-        # Tenta usar o módulo do Estudante 3 (src/audio.py) se já implementado
-        try:
-            from src import audio  # type: ignore
-            if hasattr(audio, "transcrever_audio") and not dry_run:
-                res_audio = audio.transcrever_audio(caminho_abs)
-                texto_transcrito = res_audio["texto"] if isinstance(res_audio, dict) else str(res_audio)
-                audit.registrar_execucao(
-                    audit.criar_registro(
-                        caso_id=caso_id,
-                        etapa="transcricao",
-                        modalidade="audio",
-                        arquivo_origem=arquivo_origem,
-                        provedor=provedor,
-                        modelo=res_audio.get("modelo", modelo) if isinstance(res_audio, dict) else modelo,
-                        resumo_resultado="Transcrição via src/audio.py conferida.",
-                        decisao_humana="Conferido",
-                    ),
-                    caminho_log=caminho_log,
-                )
-                return texto_transcrito
-        except Exception:
-            pass
+        if not dry_run:
+            from src import audio
+            resultado = audio.obter_transcricao_confirmada(caminho_abs, caso_id=caso_id, config=CONFIG)
+            registro = audit.criar_registro(
+                caso_id=caso_id, etapa="entrada_audio_confirmada", modalidade="audio",
+                arquivo_origem=arquivo_origem, provedor=resultado["provedor"], modelo=resultado["modelo"],
+                arquivo_saida=resultado["arquivo_metadados"], decisao_humana="Conferido",
+                revisor=resultado["revisor"], justificativa_humana=resultado["justificativa_humana"],
+                resumo_resultado="Reutilizada transcrição confirmada; nenhuma chamada STT adicional.",
+            )
+            registro.update(id_transcricao=resultado["id_execucao"], sha256_origem=resultado["sha256_origem"],
+                            sha256_revisado=resultado["sha256_revisado"])
+            audit.registrar_execucao(registro, caminho_log=caminho_log)
+            return resultado["texto"]
 
+        # Apenas demonstração offline: a referência não comprova transcrição por modelo.
         # Fallback reprodutível usando a transcrição de referência validada por humano
         ref_rel = (gabarito or {}).get("transcricao_referencia", "dados/gabaritos/caso02_transcricao_referencia.txt")
         caminho_ref = RAIZ / ref_rel
@@ -333,7 +326,7 @@ def obter_texto_da_entrada(
                 provedor=provedor,
                 modelo="referencia-humana",
                 arquivo_saida=ref_rel,
-                resumo_resultado="Transcrição de referência carregada e campos críticos conferidos (RF06).",
+                resumo_resultado="Demonstração dry-run com referência humana; não executa nem valida o RF06.",
                 decisao_humana="Conferido",
                 revisor="João Flávio Pompeo",
                 justificativa_humana="Nomes, protocolo 2026-000142 e datas conferidos antes da geração da minuta.",
@@ -1094,6 +1087,11 @@ def processar_caso(
         nao_interativo=nao_interativo,
         revisor_padrao=revisor,
     )
+    if modalidade == "audio" and not dry_run:
+        # Conferir a transcrição não aprova uma minuta nova. Decisões antigas são só do exemplo offline.
+        decisao_hum, nome_revisor, justificativa_hum, arq_corrigido_rel = (
+            "PENDENTE", "—", "Nova minuta de áudio aguardando revisão humana na interface Web.", None,
+        )
 
     data_curta = time.strftime("%d/%m/%Y")
     minuta_md_final = aplicar_decisao_no_markdown(
@@ -1249,16 +1247,20 @@ def main(argv: list[str] | None = None) -> int:
             continue
         if idx > 0 and not usar_dry_run and cfg_prod.get("pausa_entre_chamadas_s", 0) > 0:
             time.sleep(cfg_prod["pausa_entre_chamadas_s"])
-        res = processar_caso(
-            caso_id=cid,
-            provedor=args.provedor,
-            modelo=args.modelo,
-            cfg_prod=cfg_prod,
-            dry_run=usar_dry_run,
-            nao_interativo=args.nao_interativo,
-            revisor=args.revisor,
-            arquivo_avulso=args.arquivo,
-        )
+        try:
+            res = processar_caso(
+                caso_id=cid,
+                provedor=args.provedor,
+                modelo=args.modelo,
+                cfg_prod=cfg_prod,
+                dry_run=usar_dry_run,
+                nao_interativo=args.nao_interativo,
+                revisor=args.revisor,
+                arquivo_avulso=args.arquivo,
+            )
+        except (ValueError, ErroProvedor) as exc:
+            print(f"Caso {cid} bloqueado: {llm_client.ocultar_segredos(str(exc))}", file=sys.stderr)
+            return 2
         resultados_sessao.append(res)
 
     audit.gerar_relatorio_auditoria()

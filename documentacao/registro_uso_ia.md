@@ -1,5 +1,22 @@
 # Registro do uso de IA no desenvolvimento (seção 10 do enunciado)
 
+## Atualização do Estudante 3 — 18/10/2026 — RF06
+
+- Ferramenta: Codex desktop, assistente GPT-6 (identificador exato da variante não registrado).
+- Solicitações do usuário: relacionar responsabilidades do integrante 3 com os RFs; manter o Groq;
+  implementar por etapas, documentar no chat e deixar os commits exclusivamente para o usuário.
+- Trabalho produzido: `src/audio.py`, configuração de transcrição, integração do bloqueio de revisão,
+  comparação com referência, 13 testes offline e documentação `RF06_AUDIO.md`.
+- Decisões propostas e implementadas, ainda sujeitas à revisão do usuário: Whisper Large V3,
+  preservar texto bruto, revisar por CLI, impedir que o gabarito substitua STT no fluxo real.
+- Problemas encontrados: dependência python-dotenv 1.2.2 indisponível no índice consultado;
+  Python 3.13 ausente nesta máquina; rede inicialmente bloqueada pelo sandbox;
+  comparação normalizada não identificava ausência de `@`, corrigida com diferenças literais.
+- Validação: 38 testes offline aprovados em Python 3.14.7 e uma chamada real ao Groq com áudio fictício.
+  A saída trouxe divergências de e-mail e turno em relação à referência. Em 18/10/2026, o integrante 3 confirmou essas divergências e a correção dos nomes, protocolo e datas após escuta. As duas correções foram aplicadas somente em revisada.txt e a conferência foi registrada com base nessa confirmação explícita.
+- **[HUMANO]** Aceitar/modificar/rejeitar as decisões, conferir a transcrição e assumir a responsabilidade
+  pela entrega. O assistente registrou a conferência da transcrição com base na confirmação explícita do integrante 3 no chat; nenhuma minuta foi aprovada e nenhum commit foi realizado.
+
 > Seções marcadas com **[HUMANO]** só podem ser preenchidas pela equipe.
 
 ## 1. Ferramentas, modelos e versões

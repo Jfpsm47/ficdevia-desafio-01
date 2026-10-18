@@ -83,7 +83,16 @@ Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-
 - **Interface Web de Revisão Humana (`src/web.py` — RF13):** A revisão humana é realizada por meio de uma interface Web local responsiva (`http://127.0.0.1:8000`) que solicita a identificação do servidor revisor (nome e cargo/setor) ao abrir a sessão e exibe lado a lado: à esquerda, o conteúdo original da solicitação (texto, player de áudio MP3 ou visualizador de documento PDF); à direita, o PDF da minuta institucional gerada, a extração JSON, os achados da avaliação automática e os controles para aprovar, corrigir manualmente (regenerando o PDF) ou rejeitar/solicitar nova geração.
 - **Rastreabilidade e auditoria (`src/audit.py` — RF11, RF13):** Cada etapa gera um registro em `resultados/logs/execucoes.jsonl` e um consolidado em `resultados/logs/relatorio_auditoria.md` contendo `id_execucao`, `data_hora`, `caso_id`, `etapa`, `modalidade`, `arquivo_origem`, `provedor`, `modelo`, `parametros`, `versao_prompt`, `hash_prompt`, `dados_minimizados`, `latencia_s`, `tokens_entrada`/`tokens_saida`, `custo_usd`, `tentativas`, `erro`, `avaliacao_automatica`, `decisao_humana`, `revisor` e versões do ambiente Python/bibliotecas.
 
-## 8. Áudio, visão/OCR e imagem — A PREENCHER (Estudante 3)
+## 8. Áudio, visão/OCR e imagem (Estudante 3)
+
+RF06 implementado com Groq/Whisper Large V3 em `src/audio.py`; detalhes, custos, execução,
+testes e limitações em [RF06_AUDIO.md](RF06_AUDIO.md). A amostra real `stt-46427a77` processou
+89,160 s de áudio em 1,584 s, com custo estimado de US$ 0,002749. Evidências em
+`resultados/transcricoes/stt-46427a77/`. A transcrição foi corrigida (e-mail e repetição de turno) e conferida pelo integrante 3 em 18/10/2026, conforme confirmação no chat. Essa decisão não aprova uma nova minuta.
+O fluxo real de áudio não utiliza mais o gabarito como substituto da transcrição; a referência
+permanece apenas na demonstração `--dry-run` e na comparação posterior à chamada.
+
+RF07 (TTS), RF08 (visão/OCR) e RF10 (imagem) continuam **A PREENCHER**.
 
 ## 9. Limitações e riscos residuais
 

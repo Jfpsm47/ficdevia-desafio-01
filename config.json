@@ -55,6 +55,21 @@
       ]
     }
   },
+  "transcricao": {
+    "provedor": "groq",
+    "modelo": "whisper-large-v3",
+    "idioma": "pt",
+    "temperature": 0,
+    "max_bytes": 25000000,
+    "timeout_s": 90,
+    "tentativas": 3,
+    "pausa_base_s": 2,
+    "diretorio": "resultados/transcricoes",
+    "preco_usd_hora": 0.111,
+    "minimo_faturado_s": 10,
+    "fonte_preco": "https://console.groq.com/docs/speech-to-text",
+    "data_consulta_preco": "2026-10-18"
+  },
   "producao": {
     "provedor": "groq",
     "modelo": "openai/gpt-oss-120b",

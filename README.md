@@ -10,11 +10,12 @@ automaticamente**: toda saída é minuta pendente de revisão de um servidor res
 |---|---|---|
 | Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado |
 | Estudante 2 | Integração por API, segurança, processamento de texto, interface Web de revisão e auditoria (`src/main.py`, `src/web.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
-| Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | A FAZER |
+| Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | RF06 implementado e testado; amostra corrigida e conferida pelo integrante 3. RF07/RF08/RF10 a fazer |
 
 ## Instalação
 
-Requer Python 3.13 (testado com 3.13.5 / 3.13.14).
+Base do projeto: Python 3.13 (testes anteriores em 3.13.5 / 3.13.14).
+RF06 e suíte completa também testados com Python 3.14.7 no macOS.
 
 ```bash
 python -m venv .venv
@@ -26,13 +27,16 @@ cp .env.example .env      # Windows: copy .env.example .env
 Abra `.env` e preencha **somente** a chave do provedor que for usar (padrão: `GROQ_API_KEY`, obtida em
 console.groq.com/keys). O `.env` está no `.gitignore` e nunca deve ser entregue.
 
-Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.2` (ver `requirements.txt`).
+Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.1` (ver `requirements.txt`).
+A versão 1.2.2 anteriormente declarada não estava disponível no índice consultado durante a instalação.
 
 ## Execução
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | 25 testes offline (prompts, minimização, avaliação, cliente de API, auditoria, fluxo e interface Web) — não chama API |
+| `python -m unittest discover -s testes -t .` | 38 testes offline (incluindo 13 de áudio/RF06) — não chama API |
+| `python -m src.audio transcrever` | Transcreve o áudio fictício no Groq; salva evidências e comparação, sem aprovar a transcrição |
+| `python -m src.audio revisar --help` | Instruções para confirmar os campos críticos após ouvir o áudio e revisar o texto |
 | `python -m src.main` | Inicia o fluxo completo e abre a **Interface Web de Revisão Humana** (`http://127.0.0.1:8000`) |
 | `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo em lote sem chamar a API (usando cache validado) e gera os PDFs das minutas |
 | `python -m src.main --caso caso01_texto` | Executa o fluxo principal e abre a revisão para um caso específico |
@@ -42,8 +46,10 @@ Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.2` (ver `requirements.tx
 | `python -m src.experimento_prompts modelos` | Compara modelos com os prompts de produção nos casos 01, 04 e 05 |
 | `python -m src.experimento_prompts reavaliar resultados/<tipo>/<execução>` | Recalcula as matrizes após mudar um gabarito (sem API) |
 
-Qualquer comando aceita `--dry-run` (executa sem chamar a API) e
+Os comandos de `src.main` e `src.experimento_prompts` aceitam `--dry-run` (sem API) e
 `--provedor` / `--modelo(s)` para sobrescrever o `config.json`.
+O módulo `src.audio` usa a seção `transcricao` do `config.json`; seu comando `transcrever` chama a API.
+O comando `revisar` é local. Passo a passo e limitações: [RF06 — Áudio](documentacao/RF06_AUDIO.md).
 
 ## Configuração
 
@@ -61,12 +67,14 @@ prompts/             todos os prompts versionados (ver prompts/README.md)
 src/main.py          ponto de entrada principal, orquestração, extração JSON, geração de minuta em PDF e revisão
 src/web.py           interface Web responsiva de revisão humana lado a lado (original à esquerda, PDF à direita)
 src/llm_client.py    cliente oficial HTTP (timeout, retries 429/5xx, 401/403, resposta vazia, ocultação de chaves)
+src/audio.py         transcrição Groq, comparação, preservação de evidências e conferência humana (RF06)
 src/audit.py         registro estruturado em JSONL, sanitização de segredos e relatório de auditoria
 src/prompts.py       montagem segura das mensagens, minimização, modelo da minuta
 src/avaliacao.py     critérios automáticos de avaliação
 src/experimento_prompts.py   RF02 + comparação de modelos
 src/cliente_experimento.py   delega ao cliente oficial src/llm_client.py
 resultados/          minutas em PDF (resultados/minutas/*_minuta.pdf), matrizes e logs (resultados/logs/execucoes.jsonl)
+resultados/transcricoes/     execuções RF06: texto bruto, cópia para revisão, comparação e metadados
 documentacao/        protocolo de avaliação, comparação de modelos, relatório técnico, uso de IA,
                      AVALIACAO_HUMANA.md (decisões humanas)
 testes/              testes automatizados (test_prompts_avaliacao.py e test_api_auditoria_fluxo.py)

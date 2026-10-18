@@ -50,6 +50,9 @@ def _carregar_estado_caso(caso_id: str) -> dict[str, Any]:
     # Extração JSON (RF05)
     arq_ext = RAIZ / main.CONFIG["caminhos"]["processados"] / f"{caso_id}_extracao.json"
     extracao = json.loads(arq_ext.read_text(encoding="utf-8")) if arq_ext.exists() else None
+    if modalidade == "audio" and extracao and extracao.get("texto_original_preservado"):
+        # Exibe o texto efetivamente usado no caso, em vez de substituí-lo pelo gabarito.
+        texto_original = extracao["texto_original_preservado"]
     if not texto_original and extracao and extracao.get("texto_original_preservado"):
         texto_original = extracao["texto_original_preservado"]
 
