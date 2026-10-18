@@ -91,6 +91,32 @@
     "fonte_modelo": "https://huggingface.co/Trelis/piper-pt-br-faber-medium",
     "data_consulta_modelo": "2026-10-18"
   },
+  "visao": {
+    "provedor": "groq",
+    "modelo": "qwen/qwen3.8-27b",
+    "dpi": 200,
+    "max_paginas": 1,
+    "max_bytes_origem": 20000000,
+    "max_bytes_imagem": 20000000,
+    "temperature": 0,
+    "max_tokens": 6000,
+    "timeout_s": 90,
+    "tentativas": 3,
+    "pausa_base_s": 2,
+    "diretorio": "resultados/ocr",
+    "mascara_assinatura": {
+      "x": 0.15,
+      "y": 0.53,
+      "largura": 0.30,
+      "altura": 0.08
+    },
+    "preco_usd_por_milhao_tokens": {
+      "entrada": 0.8,
+      "saida": 4.0
+    },
+    "fonte_preco": "https://console.groq.com/docs/models",
+    "data_consulta_preco": "2026-10-18"
+  },
   "producao": {
     "provedor": "groq",
     "modelo": "openai/gpt-oss-120b",

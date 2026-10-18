@@ -1,0 +1,163 @@
+{
+  "campos": [
+    {
+      "campo": "codigo",
+      "esperado": "2026-000142",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "nome",
+      "esperado": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "data_nascimento",
+      "esperado": "12/08/2008",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "cpf",
+      "esperado": "123.456.789-00",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "rg",
+      "esperado": "1234567-8",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "naturalidade",
+      "esperado": "CUIABÁ",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "nome_mae",
+      "esperado": "LUCIA HELENA DE ALMEIDA SANTOS",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "curso",
+      "esperado": "TÉCNICO EM ENFERMAGEM",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "carga_horaria",
+      "esperado": "1200 HORAS",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "eixo_tecnologico",
+      "esperado": "SAÚDE",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "turno",
+      "esperado": "NOTURNO",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "inicio_curso",
+      "esperado": "01/02/2027",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "email",
+      "esperado": "marcos.almeida.teste@exemplo.com",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": false
+    },
+    {
+      "campo": "data_matricula",
+      "esperado": "14/10/2026",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    }
+  ],
+  "campos_criticos": [
+    {
+      "campo": "codigo",
+      "esperado": "2026-000142",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "nome",
+      "esperado": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "data_nascimento",
+      "esperado": "12/08/2008",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "cpf",
+      "esperado": "123.456.789-00",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "rg",
+      "esperado": "1234567-8",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "curso",
+      "esperado": "TÉCNICO EM ENFERMAGEM",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "inicio_curso",
+      "esperado": "01/02/2027",
+      "correspondencia_textual": false,
+      "requer_confirmacao_humana": true
+    },
+    {
+      "campo": "data_matricula",
+      "esperado": "14/10/2026",
+      "correspondencia_textual": true,
+      "requer_confirmacao_humana": true
+    }
+  ],
+  "campos_omitidos_do_envio": [
+    "assinatura_aluno",
+    "assinatura_secretaria"
+  ],
+  "trechos_ilegiveis_marcados": 0,
+  "incertezas_previamente_mapeadas": [
+    {
+      "campo": "codigo",
+      "motivo": "O 4º dígito do ano parece sobrescrito (pode ser lido como 2024 ou 2026)."
+    },
+    {
+      "campo": "cpf",
+      "motivo": "Manuscrito com vírgula no lugar do ponto e dígitos finais pouco legíveis ('789-00')."
+    },
+    {
+      "campo": "rg",
+      "motivo": "O dígito '7' manuscrito pode ser lido como '1' ou '+'."
+    },
+    {
+      "campo": "email",
+      "motivo": "Manuscrito em maiúsculas; o '@' pode ser lido como 'e' ou 'C'."
+    }
+  ],
+  "assinatura": "Não enviada ao provedor: região mascarada para minimização de dados.",
+  "aviso": "Correspondência textual não comprova correção. CPF, RG, datas, protocolo e nomes exigem conferência no documento original."
+}

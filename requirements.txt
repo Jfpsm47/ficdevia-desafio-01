@@ -2,4 +2,5 @@
 # Estudantes 2 e 3: acrescentem aqui as dependências de API, áudio, OCR e imagem.
 httpx==0.28.1
 python-dotenv==1.2.1
+Pillow==13.0.0
 piper-tts==1.8.0

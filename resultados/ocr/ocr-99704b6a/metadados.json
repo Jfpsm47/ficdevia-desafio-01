@@ -1,0 +1,45 @@
+{
+  "id_execucao": "ocr-99704b6a",
+  "data_hora": "2026-10-18T11:11:46-04:00",
+  "caso_id": "caso03_ocr",
+  "arquivo_origem": "dados/originais/entrada_pdf-imagem.pdf",
+  "sha256_origem": "a4b3bc0518df73244856ab27e010b561680b5f60ee8e730be4df83b3b567505f",
+  "provedor": "groq",
+  "modelo": "qwen/qwen3.8-27b",
+  "decisao_humana": "Conferido",
+  "parametros": {
+    "dpi": 200,
+    "temperature": 0,
+    "max_tokens": 6000,
+    "timeout_s": 90,
+    "tentativas": 3
+  },
+  "fonte_preco": "https://console.groq.com/docs/models",
+  "data_consulta_preco": "2026-10-18",
+  "paginas": 1,
+  "dimensoes_imagem": [
+    1653,
+    2339
+  ],
+  "retangulo_assinatura_mascarado": [
+    247,
+    1239,
+    742,
+    1426
+  ],
+  "assinatura_omitida_do_envio": true,
+  "sha256_imagem_mascarada": "5c049c1fe7b3dcdb038dd297a8461abcbb7e45177611e05aa2798cb93a0dea1c",
+  "arquivo_imagem_mascarada": "resultados/ocr/ocr-99704b6a/pagina-1-mascarada.png",
+  "tentativas": 1,
+  "latencia_s": 2.176,
+  "tokens_entrada": 1950,
+  "tokens_saida": 351,
+  "modelo_resposta": "qwen/qwen3.8-27b",
+  "custo_usd": 0.002964,
+  "sha256_bruta": "ac4ae8006474889f2d22f126dc0b5bf9d180b933e5f50ed0fe69bfda4000b66b",
+  "arquivo_metadados": "resultados/ocr/ocr-99704b6a/metadados.json",
+  "revisor": "Integrante 3",
+  "justificativa_humana": "Conferidos visualmente no documento original: código 2026-000142, data de nascimento 12/08/2008, início 01/02/2027 e e-mail marcos.almeida.teste@exemplo.com. Corrigidos somente em revisada.txt.",
+  "data_revisao": "2026-10-18T11:19:33-04:00",
+  "sha256_revisado": "5fe853e676efe7e8b72f40d5155dab7dc2763c1f7442d7bb8667f36f6a9af081"
+}

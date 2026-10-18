@@ -327,38 +327,30 @@ def obter_texto_da_entrada(
                 modelo="referencia-humana",
                 arquivo_saida=ref_rel,
                 resumo_resultado="Demonstração dry-run com referência humana; não executa nem valida o RF06.",
-                decisao_humana="Conferido",
-                revisor="João Flávio Pompeo",
-                justificativa_humana="Nomes, protocolo 2026-000142 e datas conferidos antes da geração da minuta.",
+                decisao_humana="PENDENTE",
+                justificativa_humana="Referência usada exclusivamente em demonstração offline; não há transcrição automática nesta execução.",
             ),
             caminho_log=caminho_log,
         )
         return texto_ref
 
     if modalidade == "imagem":
-        # Tenta usar o módulo do Estudante 3 (src/vision.py) se já implementado
-        try:
-            from src import vision  # type: ignore
-            if hasattr(vision, "extrair_texto") and not dry_run:
-                res_vis = vision.extrair_texto(caminho_abs)
-                texto_ocr = res_vis["texto"] if isinstance(res_vis, dict) else str(res_vis)
-                audit.registrar_execucao(
-                    audit.criar_registro(
-                        caso_id=caso_id,
-                        etapa="ocr",
-                        modalidade="imagem",
-                        arquivo_origem=arquivo_origem,
-                        provedor=provedor,
-                        modelo=res_vis.get("modelo", modelo) if isinstance(res_vis, dict) else modelo,
-                        resumo_resultado="Extração OCR/visão via src/vision.py conferida.",
-                        decisao_humana="Conferido",
-                    ),
-                    caminho_log=caminho_log,
-                )
-                return texto_ocr
-        except Exception:
-            pass
+        if not dry_run:
+            from src import vision
+            resultado = vision.obter_ocr_confirmado(caminho_abs, caso_id=caso_id, config=CONFIG)
+            registro = audit.criar_registro(
+                caso_id=caso_id, etapa="entrada_ocr_confirmada", modalidade="imagem",
+                arquivo_origem=arquivo_origem, provedor=resultado["provedor"], modelo=resultado["modelo"],
+                arquivo_saida=resultado["arquivo_metadados"], decisao_humana="Conferido",
+                revisor=resultado["revisor"], justificativa_humana=resultado["justificativa_humana"],
+                resumo_resultado="Reutilizado OCR confirmado; nenhuma chamada de visão adicional.",
+            )
+            registro.update(id_ocr=resultado["id_execucao"], sha256_origem=resultado["sha256_origem"],
+                            sha256_revisado=resultado["sha256_revisado"])
+            audit.registrar_execucao(registro, caminho_log=caminho_log)
+            return resultado["texto"]
 
+        # Apenas demonstração offline: o gabarito não comprova extração por OCR/visão.
         # Fallback estruturado a partir dos campos validados no gabarito do caso03_ocr
         campos = (gabarito or {}).get("campos_esperados", {})
         linhas_doc = [
@@ -370,7 +362,7 @@ def obter_texto_da_entrada(
             f"Data de nascimento: {campos.get('data_nascimento', '12/08/2008')}",
             f"CPF: {campos.get('cpf', '123.456.789-00')} | RG: {campos.get('rg', '1234567-8')}",
             f"Nome da mãe: {campos.get('nome_mae', 'LUCIA HELENA DE ALMEIDA SANTOS')}",
-            f"E-mail: {campos.get('email', 'marcos.almeida.teste@examplo.com')}",
+            f"E-mail: {campos.get('email', 'marcos.almeida.teste@exemplo.com')}",
             f"Curso: {campos.get('curso', 'TÉCNICO EM ENFERMAGEM')} | Eixo: {campos.get('eixo_tecnologico', 'SAÚDE')}",
             f"Carga horária: {campos.get('carga_horaria', '1200 HORAS')} | Turno: {campos.get('turno', 'NOTURNO')}",
             f"Início do curso: {campos.get('inicio_curso', '01/02/2027')}",
@@ -387,10 +379,9 @@ def obter_texto_da_entrada(
                 provedor=provedor,
                 modelo="ocr-revisado-humano",
                 arquivo_saida=f"dados/processados/{nome_arq_ocr}",
-                resumo_resultado="Texto do documento digitalizado extraído e confirmado por revisão humana (RF08).",
-                decisao_humana="Conferido",
-                revisor="João Flávio Pompeo",
-                justificativa_humana="Dados críticos da ficha manuscrita conferidos com confirmação humana.",
+                resumo_resultado="Demonstração dry-run com gabarito humano; não executa nem valida o RF08.",
+                decisao_humana="PENDENTE",
+                justificativa_humana="Gabarito usado exclusivamente em demonstração offline; não há OCR automático nesta execução.",
             ),
             caminho_log=caminho_log,
         )
@@ -1087,10 +1078,10 @@ def processar_caso(
         nao_interativo=nao_interativo,
         revisor_padrao=revisor,
     )
-    if modalidade == "audio" and not dry_run:
-        # Conferir a transcrição não aprova uma minuta nova. Decisões antigas são só do exemplo offline.
+    if modalidade in ("audio", "imagem") and not dry_run:
+        # Conferir a entrada não aprova uma minuta nova. Decisões antigas são só do exemplo offline.
         decisao_hum, nome_revisor, justificativa_hum, arq_corrigido_rel = (
-            "PENDENTE", "—", "Nova minuta de áudio aguardando revisão humana na interface Web.", None,
+            "PENDENTE", "—", "Nova minuta multimodal aguardando revisão humana na interface Web.", None,
         )
 
     data_curta = time.strftime("%d/%m/%Y")
