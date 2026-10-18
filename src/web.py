@@ -704,7 +704,7 @@ PAGINA_HTML = r"""<!DOCTYPE html>
       <img src="/arquivos/dados/originais/brasao.png" alt="Brasão GOV-MT" onerror="this.style.display='none'" />
       <div>
         <h1>Central Inteligente de Atendimento e Comunicação Institucional</h1>
-        <p>Revisão Humana Obrigatória (RF13) · Envio Automático Bloqueado (RF09)</p>
+        <p>Revisão Humana Obrigatória · Envio Automático Bloqueado</p>
       </div>
     </div>
     <div class="indicadores-topo">
@@ -762,9 +762,9 @@ PAGINA_HTML = r"""<!DOCTYPE html>
         </div>
 
         <div class="abas-resultado">
-          <button class="btn-aba ativa" id="btnAbaMinuta" onclick="alternarAba('minuta')">Minuta Institucional PDF (RF09)</button>
-          <button class="btn-aba" id="btnAbaExtracao" onclick="alternarAba('extracao')">Extração JSON (RF05)</button>
-          <button class="btn-aba" id="btnAbaAvaliacao" onclick="alternarAba('avaliacao')">Avaliação &amp; Segurança (RF13)</button>
+          <button class="btn-aba ativa" id="btnAbaMinuta" onclick="alternarAba('minuta')">Minuta Institucional PDF</button>
+          <button class="btn-aba" id="btnAbaExtracao" onclick="alternarAba('extracao')">Extração JSON</button>
+          <button class="btn-aba" id="btnAbaAvaliacao" onclick="alternarAba('avaliacao')">Avaliação &amp; Segurança</button>
         </div>
 
         <!-- ABA 1: MINUTA PDF -->
@@ -842,7 +842,7 @@ PAGINA_HTML = r"""<!DOCTYPE html>
             </div>
 
             <div class="campo-form">
-              <label for="txtJustificativa">Justificativa da decisão humana (obrigatória — RF13):</label>
+              <label for="txtJustificativa">Justificativa da decisão humana (obrigatória):</label>
               <textarea id="txtJustificativa" rows="2" placeholder="Descreva os motivos da aprovação, correção manual ou rejeição..."></textarea>
             </div>
 

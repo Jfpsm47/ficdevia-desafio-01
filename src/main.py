@@ -369,7 +369,7 @@ def obter_texto_da_entrada(
         # Fallback estruturado a partir dos campos validados no gabarito do caso03_ocr
         campos = (gabarito or {}).get("campos_esperados", {})
         linhas_doc = [
-            "FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO - RF08)",
+            "FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO)",
             f"Protocolo/Código: {campos.get('codigo', '2026-000142')}",
             f"Data da matrícula: {campos.get('data_matricula', '14/10/2026')}",
             "Canal de entrada: Documento digitalizado (Ficha de Matrícula)",

@@ -1,6 +1,6 @@
 # Relatório de Auditoria e Rastreabilidade (RF11, RF13)
 
-- **Gerado em:** `2026-10-17T21:11:14-04:00`
+- **Gerado em:** `2026-10-17T21:20:18-04:00`
 - **Python:** `3.13.14` · **Sistema:** `Windows 11`
 - **Bibliotecas principais:** `httpx 0.28.1`, `python-dotenv 1.2.2`
 - **Arquivo de log estruturado:** `execucoes.jsonl`
@@ -62,7 +62,7 @@
 
 | Caso | ID Execução | Decisão Sugerida (Auto) | Decisão Humana Final | Revisor | Justificativa |
 |---|---|---|---|---|---|
-| `caso01_texto` | `min-3d3a99e9` | `aprovar` | **Aprovada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Correto |
+| `caso01_texto` | `min-3d3a99e9` | `aprovar` | **Aprovada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Correto. |
 | `caso02_audio` | `min-e8a02419` | `aprovar` | **Aprovada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Correto |
 | `caso03_ocr` | `min-2f1d8aa5` | `aprovar` | **Aprovada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Correto |
 | `caso04_texto_injection` | `min-520e7096` | `aprovar` | **Rejeitada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Prompt injection |
