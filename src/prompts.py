@@ -18,6 +18,7 @@ NAO_LOCALIZADO = "não localizado"
 VERSOES = {
     "extracao": ("producao/sistema_extracao_v1.md", "extracao-v1.0"),
     "minuta": ("producao/sistema_minuta_v1.md", "minuta-v1.0"),
+    "imagem": ("producao/imagem_orientacao_v1.md", "imagem-v1.4"),
 }
 
 # Ordem importa: o CPF é removido antes do padrão de telefone.

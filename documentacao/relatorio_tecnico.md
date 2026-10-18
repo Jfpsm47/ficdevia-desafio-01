@@ -92,7 +92,29 @@ testes e limitações em [RF06_AUDIO.md](RF06_AUDIO.md). A amostra real `stt-464
 O fluxo real de áudio não utiliza mais o gabarito como substituto da transcrição; a referência
 permanece apenas na demonstração `--dry-run` e na comparação posterior à chamada.
 
-RF07 (TTS), RF08 (visão/OCR) e RF10 (imagem) continuam **A PREENCHER**.
+RF08 implementado com Groq/Qwen 3.8 27B em `src/vision.py`; detalhes de segurança, execução, custo,
+testes e limitações em [RF08_VISAO_OCR.md](RF08_VISAO_OCR.md). A execução real `ocr-99704b6a` processou
+uma ficha digitalizada em 2,176 s, com custo estimado de US$ 0,002964. A assinatura manuscrita foi
+mascarada antes do envio ao provedor. O OCR identificou três divergências críticas (código, nascimento e
+início do curso) e uma divergência na grafia do e-mail. O integrante 3 conferiu a ficha original em
+18/10/2026, corrigiu somente `revisada.txt` e registrou a decisão `Conferido`; a saída bruta foi preservada.
+O fluxo real não utiliza o gabarito como substituto do OCR.
+
+RF07 implementado em `src/audio.py` com Piper local e o modelo aberto `pt_BR-faber-medium`. A síntese
+gera WAV sem enviar a minuta a um provedor externo e registra modelo, voz, ajustes de ritmo, hashes,
+latência e a relação com a minuta de origem. A rotina só aceita uma minuta cuja última decisão de
+auditoria **e** cujo próprio PDF indiquem `Aprovada`; preserva em `texto_falado.txt` o conteúdo enviado
+e mantém avisos de informações não localizadas. A voz Faber usa ritmo levemente reduzido e pausas entre
+blocos; sua inteligibilidade em nomes, siglas, datas e números exige escuta humana antes de aceite.
+O Integrante 3 ouviu e aprovou a amostra `tts-9c86357b` em 18/10/2026; a decisão está vinculada ao WAV
+e à sua minuta de origem na auditoria.
+RF10 implementado em `src/image_generation.py` com geração local no Draw Things e o modelo aberto
+`FLUX.2 [klein] 4B (6-bit)`. O fluxo não usa chave nem envia o prompt a provedor externo: importa o PNG
+exportado localmente, preserva a imagem-base, compõe a peça final 16:9 com aviso de proveniência e registra
+prompt, seed, parâmetros, hashes e revisão humana. A execução `img-078d5e9a` foi aprovada pelo Integrante 3
+em 18/10/2026 após conferência de textos, símbolos, mãos/objetos/proporções e coerência. A alternativa
+hospedada gratuita teve sua cota limitada; por isso foi adotado o modelo local compacto, cujo acabamento
+visual é mais simples do que o de modelos maiores. Detalhes em [RF10_IMAGEM.md](RF10_IMAGEM.md).
 
 ## 9. Limitações e riscos residuais
 

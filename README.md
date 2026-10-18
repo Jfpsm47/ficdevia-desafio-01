@@ -10,7 +10,7 @@ automaticamente**: toda saída é minuta pendente de revisão de um servidor res
 |---|---|---|
 | Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado |
 | Estudante 2 | Integração por API, segurança, processamento de texto, interface Web de revisão e auditoria (`src/main.py`, `src/web.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
-| Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | RF06 implementado e testado; amostra corrigida e conferida pelo integrante 3. RF07/RF08/RF10 a fazer |
+| Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | RF06, RF07, RF08 e RF10 concluídos; RF07 usa Piper local em pt-BR; RF10 usa FLUX.2 klein 4B local no Draw Things |
 
 ## Instalação
 
@@ -22,21 +22,30 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate   ·   Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env      # Windows: copy .env.example .env
+# Necessário uma única vez para executar o RF07 localmente:
+python -m piper.download_voices pt_BR-faber-medium --download-dir .cache/piper
 ```
 
 Abra `.env` e preencha **somente** a chave do provedor que for usar (padrão: `GROQ_API_KEY`, obtida em
 console.groq.com/keys). O `.env` está no `.gitignore` e nunca deve ser entregue.
 
-Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.1` (ver `requirements.txt`).
+Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.1`, `Pillow 13.0.0` e `piper-tts 1.8.0`
+(ver `requirements.txt`).
 A versão 1.2.2 anteriormente declarada não estava disponível no índice consultado durante a instalação.
 
 ## Execução
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | 38 testes offline (incluindo 13 de áudio/RF06) — não chama API |
+| `python -m unittest discover -s testes -t .` | Testes offline, incluindo transcrição, síntese de voz e OCR — não chamam API |
 | `python -m src.audio transcrever` | Transcreve o áudio fictício no Groq; salva evidências e comparação, sem aprovar a transcrição |
 | `python -m src.audio revisar --help` | Instruções para confirmar os campos críticos após ouvir o áudio e revisar o texto |
+| `python -m src.audio sintetizar --caso caso02_audio` | Gera localmente um WAV Piper da última minuta comprovadamente aprovada; bloqueia minutas pendentes, corrigidas ou rejeitadas |
+| `python -m src.audio revisar-voz --help` | Registra a escuta humana e a decisão sobre o WAV gerado |
+| `python -m src.vision extrair` | Renderiza o PDF, mascara a assinatura e extrai texto com visão/OCR no Groq, sem aprovar o resultado |
+| `python -m src.vision revisar --help` | Instruções para conferir a ficha original e confirmar o OCR revisado |
+| `python -m src.image_generation importar resultados/imagens/<png>.png` | Importa o PNG gerado localmente pelo Draw Things, monta a peça 16:9 e preserva a evidência para revisão humana |
+| `python -m src.image_generation revisar --help` | Instruções para registrar a revisão obrigatória da peça visual do RF10 |
 | `python -m src.main` | Inicia o fluxo completo e abre a **Interface Web de Revisão Humana** (`http://127.0.0.1:8000`) |
 | `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo em lote sem chamar a API (usando cache validado) e gera os PDFs das minutas |
 | `python -m src.main --caso caso01_texto` | Executa o fluxo principal e abre a revisão para um caso específico |
@@ -48,8 +57,10 @@ A versão 1.2.2 anteriormente declarada não estava disponível no índice consu
 
 Os comandos de `src.main` e `src.experimento_prompts` aceitam `--dry-run` (sem API) e
 `--provedor` / `--modelo(s)` para sobrescrever o `config.json`.
-O módulo `src.audio` usa a seção `transcricao` do `config.json`; seu comando `transcrever` chama a API.
-O comando `revisar` é local. Passo a passo e limitações: [RF06 — Áudio](documentacao/RF06_AUDIO.md).
+Os módulos `src.audio` e `src.vision` usam respectivamente as seções `transcricao`, `sintese_voz` e
+`visao` do `config.json`; `transcrever` e `extrair` chamam a API, `sintetizar` usa Piper local,
+`image_generation` importa a saída local do Draw Things e os comandos `revisar` são locais.
+Passos e limitações: [RF06 — Áudio](documentacao/RF06_AUDIO.md), [RF07 — Síntese de voz](documentacao/RF07_VOZ.md), [RF08 — Visão e OCR](documentacao/RF08_VISAO_OCR.md) e [RF10 — Imagem](documentacao/RF10_IMAGEM.md).
 
 ## Configuração
 
@@ -68,6 +79,7 @@ src/main.py          ponto de entrada principal, orquestração, extração JSON
 src/web.py           interface Web responsiva de revisão humana lado a lado (original à esquerda, PDF à direita)
 src/llm_client.py    cliente oficial HTTP (timeout, retries 429/5xx, 401/403, resposta vazia, ocultação de chaves)
 src/audio.py         transcrição Groq, comparação, preservação de evidências e conferência humana (RF06)
+src/vision.py        renderização de PDF, mascaramento de assinatura, OCR Groq e conferência humana (RF08)
 src/audit.py         registro estruturado em JSONL, sanitização de segredos e relatório de auditoria
 src/prompts.py       montagem segura das mensagens, minimização, modelo da minuta
 src/avaliacao.py     critérios automáticos de avaliação
@@ -75,6 +87,9 @@ src/experimento_prompts.py   RF02 + comparação de modelos
 src/cliente_experimento.py   delega ao cliente oficial src/llm_client.py
 resultados/          minutas em PDF (resultados/minutas/*_minuta.pdf), matrizes e logs (resultados/logs/execucoes.jsonl)
 resultados/transcricoes/     execuções RF06: texto bruto, cópia para revisão, comparação e metadados
+resultados/audios/            execuções RF07: WAV, texto falado e metadados da minuta aprovada
+resultados/ocr/     execuções RF08: imagem mascarada, texto bruto/revisado, comparação e metadados
+resultados/imagens/ execuções RF10: imagem-base local, peça visual 16:9, inspeção, revisão e metadados
 documentacao/        protocolo de avaliação, comparação de modelos, relatório técnico, uso de IA,
                      AVALIACAO_HUMANA.md (decisões humanas)
 testes/              testes automatizados (test_prompts_avaliacao.py e test_api_auditoria_fluxo.py)

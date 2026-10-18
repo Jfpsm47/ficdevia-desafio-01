@@ -1,0 +1,14 @@
+{
+  "id_execucao": "img-078d5e9a",
+  "data_revisao_humana": "2026-10-18T12:27:03-04:00",
+  "decisao_humana": "Aprovada",
+  "revisor": "Integrante 3",
+  "justificativa_humana": "Aprovação do Integrante 3 neste chat em 18/10/2026: conferidos textos e números, símbolos e marcas, mãos, objetos e proporções, e coerência com a orientação. A peça é fictícia, não afirma matrícula concluída e contém aviso de proveniência visível.",
+  "itens_confirmados": {
+    "textos": true,
+    "simbolos": true,
+    "maos_objetos": true,
+    "coerencia": true
+  },
+  "sha256_peca": "fdad4d59f2e899a527f6ad99c8d7779b98279ef8c3fffc2deb21d57733180dd7"
+}

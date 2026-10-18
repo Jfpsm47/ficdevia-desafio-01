@@ -1,0 +1,13 @@
+{
+  "pngs_validos": true,
+  "dimensoes_peca_corretas": true,
+  "proporcao_final_16_9": true,
+  "proveniencia_visivel_aplicada": true,
+  "imagem_base_preservada_sem_corte": true,
+  "revisao_humana_obrigatoria": [
+    "textos e números legíveis",
+    "símbolos, logotipos e marcas",
+    "mãos, objetos e proporções",
+    "coerência visual com a orientação"
+  ]
+}

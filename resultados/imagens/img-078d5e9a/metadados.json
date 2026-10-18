@@ -1,0 +1,76 @@
+{
+  "id_execucao": "img-078d5e9a",
+  "data_hora": "2026-10-18T12:24:25-04:00",
+  "caso_id": "caso01_texto",
+  "provedor": "draw_things_local",
+  "modo_execucao": "local_offline",
+  "ferramenta": "Draw Things",
+  "versao_ferramenta": "26.1013.0",
+  "modelo": "FLUX.2 [klein] 4B (6-bit)",
+  "revisao_modelo": "FLUX.2-klein-4B, quantização 6-bit do Draw Things",
+  "decisao_humana": "Aprovada",
+  "arquivo_prompt": "prompts/producao/imagem_orientacao_v1.md",
+  "versao_prompt": "imagem-v1.4",
+  "hash_prompt": "47ebaf3f72fc",
+  "hash_especificacao_prompt": "0d8a3b6ce042",
+  "parametros": {
+    "seed": 20261018,
+    "proporcao": "16:9",
+    "largura": 1024,
+    "altura": 576,
+    "passos": 4,
+    "guidance_scale": 1.0,
+    "sampler": "DDIM Trailing",
+    "shift": 3.0,
+    "formato": "PNG"
+  },
+  "licenca_modelo": "Apache-2.0",
+  "fonte_modelo": "https://github.com/black-forest-labs/flux2",
+  "data_consulta_modelo": "2026-10-18",
+  "arquivo_origem_draw_things": "resultados/imagens/clean_flat_editorial_vector_illustration_for_a_fictional_digital_enrollment_request_at_a_brazilian_public_technical_school__a_generic_request_and_human_review__never_completed_or_approved_20261018.png",
+  "custo_usd": 0.0,
+  "tentativas": 1,
+  "latencia_s": null,
+  "edicao_local": "encaixe centralizado sem corte; título e aviso de proveniência aplicados pela equipe",
+  "arquivo_prompt_efetivo": "resultados/imagens/img-078d5e9a/prompt_efetivo.md",
+  "arquivo_imagem_base": "resultados/imagens/img-078d5e9a/imagem_base.png",
+  "arquivo_peca": "resultados/imagens/img-078d5e9a/peca_orientacao.png",
+  "arquivo_metadados": "resultados/imagens/img-078d5e9a/metadados.json",
+  "sha256_prompt_efetivo": "73fa1aceb5bfa48b41e94aa88f3ac71da71fced8b06809d94605756a71cd91aa",
+  "sha256_imagem_base": "381707899816d6c2b9bf95a1258a00538ecf599e926d2f1093e5def7bf9d9847",
+  "sha256_peca": "fdad4d59f2e899a527f6ad99c8d7779b98279ef8c3fffc2deb21d57733180dd7",
+  "dimensoes_imagem_base": [
+    1024,
+    1024
+  ],
+  "dimensoes_peca": [
+    1024,
+    576
+  ],
+  "textos_sobrepostos": [
+    "ORIENTAÇÃO SOBRE A SOLICITAÇÃO DE MATRÍCULA",
+    "VISUAL GERADO POR IA • MATERIAL FICTÍCIO • REVISÃO HUMANA OBRIGATÓRIA"
+  ],
+  "verificacoes_automaticas": {
+    "pngs_validos": true,
+    "dimensoes_peca_corretas": true,
+    "proporcao_final_16_9": true,
+    "proveniencia_visivel_aplicada": true,
+    "imagem_base_preservada_sem_corte": true,
+    "revisao_humana_obrigatoria": [
+      "textos e números legíveis",
+      "símbolos, logotipos e marcas",
+      "mãos, objetos e proporções",
+      "coerência visual com a orientação"
+    ]
+  },
+  "data_revisao_humana": "2026-10-18T12:27:03-04:00",
+  "revisor": "Integrante 3",
+  "justificativa_humana": "Aprovação do Integrante 3 neste chat em 18/10/2026: conferidos textos e números, símbolos e marcas, mãos, objetos e proporções, e coerência com a orientação. A peça é fictícia, não afirma matrícula concluída e contém aviso de proveniência visível.",
+  "itens_confirmados": {
+    "textos": true,
+    "simbolos": true,
+    "maos_objetos": true,
+    "coerencia": true
+  }
+}
