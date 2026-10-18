@@ -236,12 +236,22 @@ def gerar_relatorio_auditoria(
     amb = coletar_ambiente()
     libs_fmt = ", ".join(f"`{k} {v}`" for k, v in amb["bibliotecas"].items())
 
-    latencias = [r["latencia_s"] for r in registros if isinstance(r.get("latencia_s"), (int, float))]
+    # Uma execução pode aparecer novamente quando a revisão humana é registrada. A tabela abaixo
+    # preserva todo o histórico, mas os totais não podem cobrar a mesma chamada duas vezes.
+    ultimos_por_execucao: dict[str, dict[str, Any]] = {}
+    for indice, registro in enumerate(registros):
+        identificador = str(registro.get("id_execucao") or f"linha-{indice}")
+        ultimos_por_execucao[identificador] = registro
+    registros_metricas = list(ultimos_por_execucao.values())
+
+    latencias = [r["latencia_s"] for r in registros_metricas if isinstance(r.get("latencia_s"), (int, float))]
     lat_media = f"{sum(latencias) / len(latencias):.2f} s" if latencias else "—"
-    tokens_totais = sum((r.get("tokens_entrada") or 0) + (r.get("tokens_saida") or 0) for r in registros)
-    custos = [r["custo_usd"] for r in registros if isinstance(r.get("custo_usd"), (int, float))]
+    tokens_totais = sum((r.get("tokens_entrada") or 0) + (r.get("tokens_saida") or 0) for r in registros_metricas)
+    custos = [r["custo_usd"] for r in registros_metricas if isinstance(r.get("custo_usd"), (int, float))]
     custo_total = f"US$ {sum(custos):.6f}" if custos else "US$ 0.000000"
-    erros_totais = sum(1 for r in registros if r.get("erro") and not str(r.get("erro")).startswith("dry-run"))
+    erros_totais = sum(
+        1 for r in registros_metricas if r.get("erro") and not str(r.get("erro")).startswith("dry-run")
+    )
 
     # Taxa de aprovação considerando a última decisão humana de minuta por caso
     ultimas_minutas_por_caso: dict[str, dict[str, Any]] = {}
@@ -266,9 +276,10 @@ def gerar_relatorio_auditoria(
         "## 1. Resumo de Execuções e Custos",
         "",
         f"- **Total de eventos registrados:** {len(registros)}",
+        f"- **Execuções distintas usadas nas métricas:** {len(registros_metricas)}",
         f"- **Latência média por chamada:** {lat_media}",
         f"- **Tokens totais processados (entrada + saída):** {tokens_totais}",
-        f"- **Custo total estimado:** {custo_total}",
+        f"- **Custo total estimado (sem duplicar atualizações de revisão):** {custo_total}",
         f"- **Falhas de API tratadas:** {erros_totais}",
         f"- **Casos com minuta avaliada:** {len(decisoes_validas)} · **Taxa de aprovação direta (RF13):** {taxa:.0%}",
         "",
@@ -307,8 +318,9 @@ def gerar_relatorio_auditoria(
     linhas += [
         "",
         "> **Garantia de Segurança e Privacidade (RF04, RF11, RF12):** Nenhuma chave de API ou credencial "
-        "é armazenada nos logs. Dados pessoais desnecessários (CPF, RG, filiação, nascimento, e-mail, telefone) "
-        "foram mascarados antes do envio ao provedor.",
+        "é armazenada nos logs. Nos fluxos de texto e visão, os dados pessoais desnecessários são minimizados "
+        "ou mascarados antes da chamada; no fluxo de áudio, a gravação original é enviada ao provedor somente "
+        "para transcrição e essa limitação está registrada no relatório técnico.",
         "",
     ]
 

@@ -1,7 +1,6 @@
 # Relatório técnico — Central Inteligente de Atendimento e Comunicação Institucional
 
-> Documento consolidado da equipe. Seções dos Estudantes 1 e 2 preenchidas; seções do Estudante 3
-> marcadas como **A PREENCHER**.
+> Documento consolidado da equipe, com rastreabilidade das execuções reais e das decisões humanas registradas.
 
 ## 1. Problema e escopo
 
@@ -46,7 +45,15 @@ registro estruturado JSONL e relatório de auditoria (src/audit.py) ── Estud
 ## 4. Modelos e custos (Estudante 1 — texto; Estudante 3 — áudio/visão/imagem)
 
 Ver `documentacao/comparacao_modelos.md`. Custos de texto calculados por token a partir de
-`config.json` (`precos_usd_por_milhao_tokens`). **A PREENCHER:** custos de STT, TTS, OCR/visão e imagem.
+`config.json` (`precos_usd_por_milhao_tokens`). Nas execuções reais do Integrante 3, os valores registrados
+em `resultados/logs/execucoes.jsonl` foram:
+
+| Modalidade | Modelo/provedor | Execução | Custo registrado | Observação |
+|---|---|---|---:|---|
+| STT (RF06) | `groq/whisper-large-v3` | `stt-46427a77` | US$ 0,002749 | 89,160 s de áudio; o arquivo de voz é enviado para a transcrição. |
+| OCR/visão (RF08) | `groq/qwen/qwen3.8-27b` | `ocr-99704b6a` | US$ 0,002964 | A cópia enviada teve a região da assinatura mascarada. |
+| TTS (RF07) | `piper_local/pt_BR-faber-medium` | `tts-9c86357b` | US$ 0,000000 | Sem custo de API; não inclui hardware ou energia local. |
+| Imagem (RF10) | `draw_things_local/FLUX.2 [klein] 4B (6-bit)` | `img-078d5e9a` | US$ 0,000000 | Sem chamada a serviço externo; não inclui hardware ou energia local. |
 
 ## 5. Avaliação de qualidade (Estudante 1)
 
@@ -65,8 +72,8 @@ Protocolo: `documentacao/protocolo_avaliacao.md`. Resultados por caso, taxa de a
 | Filiação (nome da mãe/pai) | Sim | Cadastro escolar | Não | Médio | Mascarado antes do envio |
 | Data de nascimento | Sim | Cadastro / menoridade | Não | Médio | Mascarado antes do envio |
 | E-mail / telefone | Sim | Canal de resposta | Não (resposta pelo próprio canal) | Médio | Mascarado antes do envio |
-| Assinatura (imagem) | Sim | Validade do formulário | Não | Alto | **A PREENCHER (Estudante 3):** recorte/omissão no OCR |
-| Voz (áudio) | Sim (biométrico em potencial) | Canal de entrada | Não | Alto | **A PREENCHER (Estudante 3)** |
+| Assinatura (imagem) | Sim | Validade do formulário | Não | Alto | O PDF é renderizado em cópia e a faixa da assinatura é mascarada antes do envio ao Groq; o original não é alterado. A máscara é específica desta ficha e exige inspeção humana em outros layouts. |
+| Voz (áudio) | Sim (biométrico em potencial) | Canal de entrada | Não | Alto | O áudio completo é enviado ao Groq somente para transcrição, após validação local de extensão e tamanho. A síntese posterior é local com Piper. Em produção, exigiria base legal, retenção mínima e avaliação de STT local. |
 
 Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-mail em domínio fictício.
 
@@ -130,4 +137,6 @@ visual é mais simples do que o de modelos maiores. Detalhes em [RF10_IMAGEM.md]
   perfil local `ollama`.
 - Modelos de raciocínio consomem tokens extras de raciocínio (custo e latência maiores).
 - **Integração e operação (Estudante 2):** Cotas gratuitas em nuvem estão sujeitas a limites severos de requisições por minuto (HTTP 429) e variações de latência; embora o cliente aplique retentativas com *backoff* e modo `--dry-run` com cache validado, o uso institucional contínuo exigiria hospedagem local ou contrato dedicado com SLA. Além disso, o arquivo `execucoes.jsonl` é local (sem banco transacional ou controle de acesso multiusuário).
-- **A PREENCHER:** limitações do Estudante 3.
+- **Áudio e TTS (RF06/RF07):** há uma única amostra real. A transcrição em nuvem expõe a gravação ao provedor e a voz sintetizada ainda requer escuta humana para nomes, siglas, datas e números. O modelo Piper precisa estar instalado localmente para nova execução.
+- **OCR/visão (RF08):** a máscara de assinatura foi calibrada para uma única página e um único layout. O comparador textual não substitui a leitura visual; outros formulários, ruído, rotação ou páginas adicionais exigem nova validação.
+- **Imagem (RF10):** o FLUX.2 klein 4B quantizado foi escolhido para rodar localmente após limite da alternativa gratuita hospedada. Ele preserva privacidade e elimina custo de API, porém produz menos variações e acabamento visual mais simples; a peça só pode ser usada depois de revisão humana.

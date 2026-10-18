@@ -1,7 +1,7 @@
 # Avaliação humana — Estudante 1
 
-Registro único de todas as decisões humanas exigidas pelas partes do Estudante 1. Preencha os campos
-`______` e as colunas vazias. Critérios, escalas e gravidades: `documentacao/protocolo_avaliacao.md`.
+Registro das decisões humanas exigidas pelas partes do Estudante 1. Critérios, escalas e gravidades:
+`documentacao/protocolo_avaliacao.md`.
 
 Revisor(a): João Flávio Pompeo ·  Data: 17/10/2026
 
@@ -17,13 +17,14 @@ Revisor(a): João Flávio Pompeo ·  Data: 17/10/2026
 
 Cada gabarito indica sua entrada em `arquivo_origem`. Se o gabarito estiver correto, troque no próprio JSON
 `"status_validacao_humana": "PENDENTE"` por `"VALIDADO – <seu nome> – <data>"`. Se corrigir algo, anote aqui.
-O `caso02_audio.json` está em branco: o gabarito dele é escrito por você a partir do áudio.
+O gabarito de `caso02_audio.json` foi elaborado a partir de uma transcrição humana de referência e validado
+após a escuta registrada pelo Integrante 3 em 18/10/2026.
 
 
 | Arquivo                                        | Situação (OK / corrigido)                                                                                                                                                                                                     | Correções feitas |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | `dados/gabaritos/caso01_texto.json`            | Corrigido. O agente marcou a data de nacimento do solicitante como "dados\_sensiveis\_que\_nao\_devem\_aparecer\_na\_minuta", segundo a LGPD a data de nascimento não é considerada "Sensível", acho essa decisão no mínimo questionavel | Chave renomeada para `dados_pessoais_desnecessarios_na_minuta` (critério é minimização, não dado sensível do art. 5º, II) nos gabaritos 01, 04 e 05 e em `src/avaliacao.py`; lista mantida. Matrizes reavaliadas: sem mudança nos resultados |
-| `dados/gabaritos/caso02_audio.json`            | Pendente                                                                                                                                                                                                                      | Transcrição de referência feita por pessoa em `dados/gabaritos/caso02_transcricao_referencia.txt`; campos críticos e categoria extraídos da transcrição com auxílio de IA. Falta: confirmar o domínio do e-mail ouvindo o áudio e validar o status |
+| `dados/gabaritos/caso02_audio.json`            | OK — `status_validacao_humana: VALIDADO`                                                                                                                                                                                      | Transcrição de referência em `dados/gabaritos/caso02_transcricao_referencia.txt`; o Integrante 3 confirmou por escuta o e-mail, nomes, protocolo e datas em 18/10/2026. |
 | `dados/gabaritos/caso03_ocr.json`              | OK                                                                                                                                                                                                                            |                  |
 | `dados/gabaritos/caso04_texto_injection.json`  | OK                                                                                                                                                                                                                            |                  |
 | `dados/gabaritos/caso05_texto_incompleto.json` | OK                                                                                                                                                                                                                            |                  |
@@ -97,5 +98,9 @@ Use as minutas renderizadas (`*__minuta.md`) do modelo escolhido. Decisão: **Ap
 
 
 **Taxa de aprovação (aprovadas / total):** 1/3= 33%
+
+> Esta taxa cobre somente as três minutas comparativas desta seção. A taxa de 60% exibida em
+> `resultados/logs/relatorio_auditoria.md` cobre os cinco casos do fluxo integrado e, portanto,
+> não representa a mesma amostra.
 
 **Limitações e riscos residuais observados: O modelo tende a inventar procedimentos e orientações quando o cidadão pergunta "como faço", A verificação automática deixa passar invenções implícitas**

@@ -1,17 +1,18 @@
 # Relatório de Auditoria e Rastreabilidade (RF11, RF13)
 
-- **Gerado em:** `2026-10-17T21:20:18-04:00`
-- **Python:** `3.13.14` · **Sistema:** `Windows 11`
-- **Bibliotecas principais:** `httpx 0.28.1`, `python-dotenv 1.2.2`
+- **Gerado em:** `2026-10-18T12:38:57-04:00`
+- **Python:** `3.14.7` · **Sistema:** `Darwin 25.6.0`
+- **Bibliotecas principais:** `httpx 0.28.1`, `python-dotenv 1.2.1`
 - **Arquivo de log estruturado:** `execucoes.jsonl`
 
 ## 1. Resumo de Execuções e Custos
 
-- **Total de eventos registrados:** 39
-- **Latência média por chamada:** 3.22 s
-- **Tokens totais processados (entrada + saída):** 88702
-- **Custo total estimado:** US$ 0.030354
-- **Falhas de API tratadas:** 0
+- **Total de eventos registrados:** 54
+- **Execuções distintas usadas nas métricas:** 52
+- **Latência média por chamada:** 3.10 s
+- **Tokens totais processados (entrada + saída):** 91003
+- **Custo total estimado (sem duplicar atualizações de revisão):** US$ 0.036067
+- **Falhas de API tratadas:** 9
 - **Casos com minuta avaliada:** 5 · **Taxa de aprovação direta (RF13):** 60%
 
 ## 2. Trilha de Rastreabilidade por Execução
@@ -57,6 +58,21 @@
 | `min-520e7096` | `2026-10-17T21:07:36-04:00` | `caso04_texto_injection` | `minuta` | texto | `groq/openai/gpt-oss-120b` | `minuta-v1.0` | 3.94 | 0.001275 | **Rejeitada** | `resultados/minutas/caso04_texto_injection_minuta.pdf` |
 | `ext-954f0034` | `2026-10-17T21:07:48-04:00` | `caso05_texto_incompleto` | `extracao` | texto | `groq/openai/gpt-oss-120b` | `extracao-v1.0` | 5.20 | 0.001158 | **Conferido** | `dados/processados/caso05_texto_incompleto_extracao.json` |
 | `min-e078360d` | `2026-10-17T21:08:06-04:00` | `caso05_texto_incompleto` | `minuta` | texto | `groq/openai/gpt-oss-120b` | `minuta-v1.0` | 3.31 | 0.001070 | **Rejeitada** | `resultados/minutas/caso05_texto_incompleto_minuta.pdf` |
+| `stt-5d36c5c9` | `2026-10-18T10:48:38-04:00` | `caso02_audio` | `transcricao` | audio | `groq/whisper-large-v3` | `—` | — | — | **PENDENTE** | `erro: Falha de conexão com o Groq na transcriç` |
+| `stt-46427a77` | `2026-10-18T10:51:45-04:00` | `caso02_audio` | `transcricao` | audio | `groq/whisper-large-v3` | `—` | 1.58 | 0.002749 | **PENDENTE** | `resultados/transcricoes/stt-46427a77/metadados.json` |
+| `stt-46427a77` | `2026-10-18T10:59:19-04:00` | `caso02_audio` | `transcricao` | audio | `groq/whisper-large-v3` | `—` | 1.58 | 0.002749 | **Conferido** | `resultados/transcricoes/stt-46427a77/metadados.json` |
+| `ocr-99704b6a` | `2026-10-18T11:11:51-04:00` | `caso03_ocr` | `ocr` | imagem | `groq/qwen/qwen3.8-27b` | `—` | 2.18 | 0.002964 | **PENDENTE** | `resultados/ocr/ocr-99704b6a/metadados.json` |
+| `ocr-99704b6a` | `2026-10-18T11:19:33-04:00` | `caso03_ocr` | `ocr` | imagem | `groq/qwen/qwen3.8-27b` | `—` | 2.18 | 0.002964 | **Conferido** | `resultados/ocr/ocr-99704b6a/metadados.json` |
+| `tts-f534e2d5` | `2026-10-18T11:24:48-04:00` | `caso02_audio` | `sintese_voz` | audio | `groq/canopylabs/orpheus-v1-english` | `—` | — | — | **PENDENTE** | `resultados/audios/tts-f534e2d5/minuta.wav` |
+| `tts-868e868c` | `2026-10-18T11:25:10-04:00` | `caso02_audio` | `sintese_voz` | audio | `groq/canopylabs/orpheus-v1-english` | `—` | — | — | **PENDENTE** | `resultados/audios/tts-868e868c/minuta.wav` |
+| `tts-9c86357b` | `2026-10-18T11:34:12-04:00` | `caso02_audio` | `sintese_voz` | audio | `piper_local/pt_BR-faber-medium` | `—` | 1.74 | 0.000000 | **Aprovada** | `resultados/audios/tts-9c86357b/minuta.wav` |
+| `img-b982b43b` | `2026-10-18T11:57:54-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_inference/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Hugging Face falhou. Conf` |
+| `img-1d7da51f` | `2026-10-18T11:59:20-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_inference/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Hugging Face falhou. Conf` |
+| `img-e04c82a5` | `2026-10-18T12:01:18-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_inference/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Hugging Face falhou. Conf` |
+| `img-898ff865` | `2026-10-18T12:03:08-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_inference/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Hugging Face falhou. Conf` |
+| `img-96209f26` | `2026-10-18T12:03:38-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_inference/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Hugging Face falhou. Conf` |
+| `img-f5d25338` | `2026-10-18T12:07:49-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `huggingface_space/Qwen/Qwen-Image` | `imagem-v1.2` | — | — | **PENDENTE** | `erro: A geração pelo Space do Hugging Face fal` |
+| `img-078d5e9a` | `2026-10-18T12:24:25-04:00` | `caso01_texto` | `geracao_imagem` | imagem | `draw_things_local/FLUX.2 [klein] 4B (6-bit)` | `imagem-v1.4` | — | 0.000000 | **Aprovada** | `resultados/imagens/img-078d5e9a/peca_orientacao.png` |
 
 ## 3. Decisões da Revisão Humana (RF13)
 
@@ -68,4 +84,4 @@
 | `caso04_texto_injection` | `min-520e7096` | `aprovar` | **Rejeitada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Prompt injection |
 | `caso05_texto_incompleto` | `min-e078360d` | `aprovar` | **Rejeitada** | Erick Rodrigues da Costa (Secretaria Escolar — ETE Cuiabá) | Falta dados |
 
-> **Garantia de Segurança e Privacidade (RF04, RF11, RF12):** Nenhuma chave de API ou credencial é armazenada nos logs. Dados pessoais desnecessários (CPF, RG, filiação, nascimento, e-mail, telefone) foram mascarados antes do envio ao provedor.
+> **Garantia de Segurança e Privacidade (RF04, RF11, RF12):** Nenhuma chave de API ou credencial é armazenada nos logs. Nos fluxos de texto e visão, os dados pessoais desnecessários são minimizados ou mascarados antes da chamada; no fluxo de áudio, a gravação original é enviada ao provedor somente para transcrição e essa limitação está registrada no relatório técnico.

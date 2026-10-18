@@ -1,21 +1,20 @@
 # Registro do uso de IA no desenvolvimento (seção 10 do enunciado)
 
-## Atualização do Estudante 3 — 18/10/2026 — RF06
+## Atualização do Estudante 3 — 18/10/2026 — RF06, RF07, RF08 e RF10
 
-- Ferramenta: Codex desktop, assistente GPT-6 (identificador exato da variante não registrado).
-- Solicitações do usuário: relacionar responsabilidades do integrante 3 com os RFs; manter o Groq;
-  implementar por etapas, documentar no chat e deixar os commits exclusivamente para o usuário.
-- Trabalho produzido: `src/audio.py`, configuração de transcrição, integração do bloqueio de revisão,
-  comparação com referência, 13 testes offline e documentação `RF06_AUDIO.md`.
-- Decisões propostas e implementadas, ainda sujeitas à revisão do usuário: Whisper Large V3,
-  preservar texto bruto, revisar por CLI, impedir que o gabarito substitua STT no fluxo real.
-- Problemas encontrados: dependência python-dotenv 1.2.2 indisponível no índice consultado;
-  Python 3.13 ausente nesta máquina; rede inicialmente bloqueada pelo sandbox;
-  comparação normalizada não identificava ausência de `@`, corrigida com diferenças literais.
-- Validação: 38 testes offline aprovados em Python 3.14.7 e uma chamada real ao Groq com áudio fictício.
-  A saída trouxe divergências de e-mail e turno em relação à referência. Em 18/10/2026, o integrante 3 confirmou essas divergências e a correção dos nomes, protocolo e datas após escuta. As duas correções foram aplicadas somente em revisada.txt e a conferência foi registrada com base nessa confirmação explícita.
-- **[HUMANO]** Aceitar/modificar/rejeitar as decisões, conferir a transcrição e assumir a responsabilidade
-  pela entrega. O assistente registrou a conferência da transcrição com base na confirmação explícita do integrante 3 no chat; nenhuma minuta foi aprovada e nenhum commit foi realizado.
+- Ferramenta de desenvolvimento: Codex desktop.
+- Trabalho produzido: transcrição e revisão em `src/audio.py` (RF06), síntese local Piper no mesmo módulo
+  (RF07), OCR/visão em `src/vision.py` (RF08), geração local de imagem em `src/image_generation.py` (RF10),
+  documentação específica, evidências versionadas e testes offline.
+- Decisões aceitas após validação humana: Groq/Whisper Large V3 para STT; preservação das saídas brutas;
+  Piper local para TTS; cópia com assinatura mascarada para OCR; e Draw Things local com FLUX.2 klein 4B
+  para a imagem, após a alternativa hospedada gratuita não ficar disponível.
+- Problemas encontrados: o STT retornou o e-mail sem `@` e repetiu o turno; o OCR trouxe quatro campos
+  divergentes; o TTS da Groq exigia aceitação de termos e não era adequado ao português; e as tentativas
+  hospedadas de imagem falharam por disponibilidade/cota. Nenhum valor foi corrigido automaticamente.
+- Validação humana: o integrante 3 ouviu o áudio original e o WAV sintetizado, conferiu visualmente o
+  documento de OCR e aprovou a peça visual final. As correções ficaram restritas às versões revisadas,
+  preservando as saídas brutas. As decisões e os hashes estão em `resultados/logs/execucoes.jsonl`.
 
 > Seções marcadas com **[HUMANO]** só podem ser preenchidas pela equipe.
 
@@ -27,7 +26,10 @@
 | Claude Code (CLI, agente de codificação)                    | Claude Opus 5.5 (`claude-opus-5-5`) | Estudante 1 | Leitura do enunciado, criação de prompts, gabaritos (rascunho), protocolo de avaliação, código de experimento/avaliação, testes e documentação |
 | GroqCloud API                                               | ver `config.json`                   | Estudante 1 | Execução dos experimentos (RF02 e comparação de modelos) — é IA do *produto*, não do desenvolvimento                                           |
 | Google Antigravity (agente de codificação)                  | Gemini 4 Argon                      | Estudante 2 | Planejamento e implementação de `src/llm_client.py`, `src/audit.py`, `src/main.py`, `src/web.py`, geração de minutas em PDF, `testes/test_api_auditoria_fluxo.py` e documentação técnica (RF01, RF04, RF05, RF09, RF11, RF13) |
-| \[HUMANO\] outras ferramentas usadas pelo Estudante 3       |                                     |             |                                                                                                                                                |
+| Codex desktop                                                | —                                   | Estudante 3 | Planejamento, implementação, revisão e documentação dos RF06, RF07, RF08 e RF10; sugestões sempre submetidas à confirmação humana            |
+| GroqCloud API                                                | `whisper-large-v3`, `qwen/qwen3.8-27b` | Estudante 3 | IA do produto para STT e OCR/visão; as execuções reais e custos estão registrados na auditoria                                                |
+| Piper                                                        | `pt_BR-faber-medium`                 | Estudante 3 | Síntese de voz local do RF07, sem envio da minuta a uma API externa                                                                           |
+| Draw Things                                                  | FLUX.2 [klein] 4B (6-bit), versão 26.1013.0 | Estudante 3 | Geração local da imagem do RF10, sem chave de API nem envio do prompt a serviço externo                                                       |
 
 
 ## 2. Solicitações relevantes feitas à IA (mínimo 3)
@@ -48,7 +50,11 @@
  formulário de avaliação e a extração dos campos críticos do gabarito do caso02 a partir da transcrição humana.
 6. **17/10/2026 – Google Antigravity (Estudante 2):** "fiquei responsável por fazer a parte do estudante 2, faça o planejamento completo e detalhado do que precisa ser feito na minha parte, seguindo os requisitos e especificações do pdf do desafio" e "agora faça tudo que foi planejado" → planejou e implementou `src/llm_client.py`, `src/audit.py`, `src/main.py`, `testes/test_api_auditoria_fluxo.py`, configuração de produção em `config.json` e atualização da documentação.
 7. **17/10/2026 – Google Antigravity (Estudante 2):** "eu não quero que a interação do usuário seja pelo terminal, quero fazer isso na web, e sempre antes de começar uma revisão, deve pedir os dados do revisor. na tela de revisão, eu quero que do lado esquerdo fique o conteúdo original e do direito o resultado. quero que seja responsivo, limpo e de fácil utilização" e em seguida "eu só quero que pergunte quem é o revisor uma vez, quando abrir, a minuta deve ser um arquivo pdf e não um .md" e "[NOME DO SERVIDOR RESPONSÁVEL] deve ser substituído pelo nome do revisor" → implementou `src/web.py` e `gerar_pdf_minuta` em `src/main.py`.
-8. \[HUMANO\] acrescentar as solicitações feitas pelo Estudante 3.
+8. **18/10/2026 – Codex desktop:** "vamos de Piper mesmo" → substituição do TTS hospedado pelo Piper
+   local, com bloqueio de minutas não aprovadas, WAV, hashes, registro de escuta e testes offline.
+9. **18/10/2026 – Codex desktop:** "pode baixar e vamos utilizar e depois apagamos" e a aprovação da
+   imagem final → uso local do Draw Things com FLUX.2 klein 4B para o RF10, composição da peça 16:9,
+   proveniência visível, inspeção humana e registro de parâmetros e hashes.
 
 ## 3. Sugestões aceitas, modificadas e rejeitadas
 
@@ -69,6 +75,10 @@
 | Normalização defensiva do JSON de extração (`normalizar_extracao`) e modo `--nao-interativo`   | Aceita                                    | Garante que a estrutura JSON permaneça sempre válida mesmo com campos ausentes (RF05) e permite reproduzir as decisões da revisão humana automaticamente                                                                  |
 | Nomes de classes de teste com códigos de requisito (`TestRF04ClienteAPI`, etc.)                | Rejeitada                                 | Substituídos por nomes semânticos claros em português (`TestClienteAPI`, `TestRegistroAuditoria`, `TestFluxoAtendimento`) a pedido do Estudante 2                                                                         |
 | Revisão humana interativa via `input()` no terminal e minutas salvas apenas em `.md`           | Rejeitada / Modificada                    | Substituída por interface Web responsiva lado a lado (`src/web.py`), com identificação única do revisor ao abrir a sessão e geração das minutas em PDF (`resultados/minutas/*_minuta.pdf`) com assinatura do revisor      |
+| Corrigir automaticamente a transcrição e o OCR a partir do gabarito                             | Rejeitada                                 | As versões brutas foram preservadas. E-mail, turno e campos do formulário foram alterados somente após a conferência explícita do integrante 3 nos arquivos revisados. |
+| Usar o TTS Orpheus hospedado pela Groq                                                          | Rejeitada / Modificada                    | A execução exigia aceite de termos e o modelo era em inglês. Foi adotado Piper local `pt_BR-faber-medium`, com custo de API zero e escuta humana obrigatória. |
+| Usar apenas geração de imagem hospedada gratuita                                                | Modificada                                | As tentativas falharam por cota/disponibilidade. O RF10 passou a usar Draw Things local com FLUX.2 klein 4B, mantendo a limitação de acabamento documentada. |
+| Registrar custo de cada linha de auditoria sem distinguir revisão de nova chamada                | Modificada                                | O consolidado passou a calcular custo, tokens e latência por `id_execucao`, sem duplicar uma chamada quando a decisão humana é atualizada; há teste automatizado para o caso. |
 
 
 ## 4. Erros ou inadequações encontrados
@@ -101,6 +111,19 @@ problema foi detectado por teste manual e há teste automatizado novo para esse 
 - O Prompt C gerado pelo metaprompt colocou o texto do cidadão dentro de uma instrução, sem delimitação.
 Essa é uma fraqueza de segurança do próprio prompt gerado (achado do experimento, não do código).
 - Rate limit (HTTP 429) da cota gratuita em uma chamada: passou-se a usar pausa de 3 s e 5 tentativas.
+- Na transcrição real, o modelo devolveu o e-mail sem `@` e repetiu "noturno". A comparação normalizada
+  não capturava a ausência literal do símbolo; a validação passou a preservar diferenças literais e a
+  correção ocorreu somente após escuta humana.
+- No OCR real, o modelo divergiu no código, na data de nascimento, na data de início do curso e no e-mail.
+  A assinatura foi mascarada antes do envio; as quatro correções foram aplicadas somente em `revisada.txt`
+  depois da conferência visual humana.
+- O TTS da Groq retornou HTTP 400 por aceite de termos do modelo Orpheus. O fallback escolhido foi o Piper
+  local, cuja saída WAV foi ouvida e aprovada pelo integrante 3.
+- As tentativas com Hugging Face/Space para imagem falharam por crédito, cota ou disponibilidade. A saída
+  final veio do Draw Things local; o cache de imagem alternativo, sem uso no artefato aprovado, foi removido.
+- O relatório de auditoria somava uma chamada de STT/OCR duas vezes quando a mesma execução recebia revisão
+  humana posterior. A regra foi corrigida para usar o último registro de cada `id_execucao` nas métricas,
+  mantendo todas as ocorrências na trilha histórica.
 
 **Encontrados pelo revisor humano (Estudante 1) ao revisar o trabalho da IA:**
 
@@ -125,13 +148,15 @@ sem mudança nas regras.
 
 ## 5. Forma de validação
 
-- Código: 25 testes automatizados offline (`python -m unittest discover -s testes -t .`), execução em
-modo `--dry-run` e execução real registrada em `resultados/*/execucoes.jsonl` e `resultados/logs/relatorio_auditoria.md`.
-- Conteúdo gerado: gabaritos validados por pessoa, verificações automáticas de `src/avaliacao.py` e
-avaliação humana registrada em `documentacao/AVALIACAO_HUMANA.md` e na interface Web (`src/web.py`).
+- Código: 61 testes automatizados offline aprovados em 18/10/2026 (`python -m unittest discover -s testes -t .`),
+  compilação dos módulos e `pip check` sem dependências quebradas. Os testes cobrem credenciais, API,
+  prompts, avaliação, fluxo, STT, TTS, OCR/visão, imagem e a métrica de auditoria sem custo duplicado.
+- Conteúdo gerado: gabaritos e minutas avaliados por pessoas; verificações automáticas de `src/avaliacao.py`;
+  transcrição, OCR, áudio e imagem conferidos pelo integrante 3; e decisões rastreáveis em
+  `documentacao/AVALIACAO_HUMANA.md`, nos metadados dos artefatos e em `resultados/logs/relatorio_auditoria.md`.
 
 ## 6. Declaração de responsabilidade
 
-> Nós**, declaramos que utilizamos as ferramentas de IA acima de forma**  
-> **transparente, que revisamos, testamos e compreendemos todo o código e conteúdo entregues e que**  
-> **assumimos a responsabilidade pelo resultado final. Data: */*/**
+> A equipe declara que utilizou as ferramentas de IA acima de forma transparente, revisou, testou e
+> compreendeu o código e o conteúdo entregues e assume a responsabilidade pelo resultado final.
+> Data de consolidação do registro: **18/10/2026**.

@@ -187,6 +187,30 @@ class TestRegistroAuditoria(unittest.TestCase):
             self.assertIn("100%", md)
             self.assertNotIn(segredo_falso, md)
 
+    def test_relatorio_nao_duplica_custo_quando_execucao_e_revisada(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            caminho_log = Path(tmp) / "execucoes.jsonl"
+            caminho_rel = Path(tmp) / "relatorio.md"
+            for decisao in ("PENDENTE", "Conferido"):
+                registro = audit.criar_registro(
+                    id_execucao="exec-revisada",
+                    caso_id="caso02_audio",
+                    etapa="transcricao",
+                    modalidade="audio",
+                    arquivo_origem="dados/originais/entrada_audio.mp3",
+                    provedor="groq",
+                    modelo="whisper-large-v3",
+                    resposta_llm={"latencia_s": 1.5, "tokens_entrada": 100, "tokens_saida": 0, "custo_usd": 0.25},
+                    decisao_humana=decisao,
+                )
+                audit.registrar_execucao(registro, caminho_log=caminho_log)
+
+            relatorio = audit.gerar_relatorio_auditoria(caminho_log=caminho_log, caminho_relatorio=caminho_rel)
+            self.assertIn("**Total de eventos registrados:** 2", relatorio)
+            self.assertIn("**Execuções distintas usadas nas métricas:** 1", relatorio)
+            self.assertIn("US$ 0.250000", relatorio)
+            self.assertNotIn("US$ 0.500000", relatorio)
+
 
 class TestFluxoAtendimento(unittest.TestCase):
     """Testa extração estruturada com campos ausentes, minuta e execução dry-run (RF05, RF09, RF13)."""
