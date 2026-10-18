@@ -1,5 +1,6 @@
 # Segredos
 .env
+.cache/
 .env.*
 !.env.example
 

@@ -70,6 +70,27 @@
     "fonte_preco": "https://console.groq.com/docs/speech-to-text",
     "data_consulta_preco": "2026-10-18"
   },
+  "sintese_voz": {
+    "provedor": "piper_local",
+    "modelo": "pt_BR-faber-medium",
+    "voz": "Faber",
+    "direcao": "Comunicação institucional clara, com ritmo levemente reduzido e pausas entre blocos.",
+    "formato": "wav",
+    "arquivo_modelo": ".cache/piper/pt_BR-faber-medium.onnx",
+    "arquivo_config_modelo": ".cache/piper/pt_BR-faber-medium.onnx.json",
+    "length_scale": 1.05,
+    "noise_scale": 0.667,
+    "noise_w_scale": 0.8,
+    "volume": 1.0,
+    "pausa_entre_trechos_ms": 220,
+    "max_caracteres_por_trecho": 1000,
+    "max_caracteres_total": 12000,
+    "diretorio": "resultados/audios",
+    "licenca_modelo": "CC0-1.0",
+    "licenca_runtime": "GPL-3.0",
+    "fonte_modelo": "https://huggingface.co/Trelis/piper-pt-br-faber-medium",
+    "data_consulta_modelo": "2026-10-18"
+  },
   "producao": {
     "provedor": "groq",
     "modelo": "openai/gpt-oss-120b",
