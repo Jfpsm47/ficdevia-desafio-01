@@ -7,20 +7,21 @@
   "assunto": "Informação sobre documentos pendentes para efetivação de matrícula",
   "saudacao": "Prezado(a) Senhor(a) Marcos Vinicius de Almeida Santos,",
   "corpo": [
-    "Em atenção ao protocolo 2026-000142, recebido em 14 de outubro de 2026, referente à solicitação de efetivação de matrícula no curso técnico em enfermagem, informamos que sua demanda foi registrada.",
-    "Conforme os dados disponíveis, não localizamos a relação dos documentos ainda necessários para a conclusão da matrícula."
+    "Recebemos seu pedido de efetivação de matrícula no curso técnico em enfermagem, turno noturno, registrado sob o protocolo 2026-000142, datado de 14/10/2026.",
+    "Informamos que, nos dados disponíveis, não consta a relação dos documentos ainda necessários para a conclusão da matrícula; essa informação será confirmada pelo servidor responsável.",
+    "Colocamo-nos à disposição para quaisquer esclarecimentos adicionais."
   ],
   "fecho": "Atenciosamente,",
   "informacoes_nao_localizadas": [
-    "lista de documentos ainda necessários para a efetivação da matrícula"
+    "lista dos documentos ainda necessários para a efetivação da matrícula"
   ],
   "afirmacoes_e_evidencias": [
     {
-      "afirmacao": "Protocolo 2026-000142, recebido em 14 de outubro de 2026, referente à solicitação de efetivação de matrícula no curso técnico em enfermagem.",
-      "trecho_fonte": "Meu protocolo é 2026-000142\"...\"de 14 de Outubro de 2026\"...\"quero pedir a efetivação da minha matrícula"
+      "afirmacao": "Pedido de efetivação de matrícula no curso técnico em enfermagem, turno noturno, registrado sob o protocolo 2026-000142, datado de 14/10/2026",
+      "trecho_fonte": "Meu protocolo é 2026-000142 ... curso tecnico em enfermagem ... turno noturno"
     },
     {
-      "afirmacao": "Não localizamos a relação dos documentos ainda necessários para a efetivação da matrícula nos dados disponíveis.",
+      "afirmacao": "Não há informação disponível sobre os documentos ainda necessários para a efetivação da matrícula",
       "trecho_fonte": "- Lista de documentos exigidos para matrícula ou para qualquer outro procedimento."
     }
   ],

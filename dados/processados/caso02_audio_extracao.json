@@ -3,10 +3,10 @@
   "data_solicitacao": "14/10/2026",
   "canal": "não localizado",
   "solicitante": "Marcos Vinicius de Almeida Santos",
-  "assunto": "Efetivação de matrícula no curso técnico de enfermagem",
-  "pedido": "Efetivar a matrícula e informar os documentos ainda necessários",
+  "assunto": "Efetivação de matrícula e documentos pendentes",
+  "pedido": "Pedir a efetivação da matrícula e informar documentos ainda necessários",
   "perguntas_do_cidadao": [
-    "Peço que informem quais os documentos ainda preciso apresentar"
+    "Quais os documentos ainda preciso apresentar?"
   ],
   "categoria": "matricula",
   "dados_do_curso": {
@@ -18,10 +18,12 @@
     "data_matricula": "não localizado"
   },
   "dados_pessoais_detectados": [
+    "nome completo",
+    "data de nascimento",
     "CPF",
     "RG",
     "e-mail",
-    "data de nascimento"
+    "nome da mãe"
   ],
   "campos_ausentes": [
     "canal",
@@ -32,12 +34,17 @@
     "protocolo": "Meu protocolo é 2026-000142",
     "data_solicitacao": "de 14 de Outubro de 2026",
     "solicitante": "Meu nome é Marcos Vinicius de Almeida Santos",
-    "pedido": "quero pedir a efetivação da minha matrícula ... Peço que informem quais os documentos ainda preciso apresentar"
+    "pedido": "quero pedir a efetivação da minha matrícula ... Peço que informem quais os documentos ainda preciso apresentar",
+    "curso": "curso tecnico em enfermagem",
+    "eixo_tecnologico": "eixo tecnologico de saúde",
+    "carga_horaria": "carga horaria de 1200 horas",
+    "turno": "turno noturno"
   },
   "confianca": "alta",
   "requer_revisao_humana": true,
   "motivos_revisao": [
-    "Verificar documentos pendentes e confirmar data de início do curso"
+    "Validar a presença de dados pessoais sensíveis",
+    "Confirmar a exatidão das informações de curso e documentos solicitados"
   ],
   "alertas_seguranca": [],
   "arquivo_origem": "dados/originais/entrada_audio.mp3",

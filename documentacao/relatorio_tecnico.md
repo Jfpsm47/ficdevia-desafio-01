@@ -1,33 +1,33 @@
 # Relatório técnico — Central Inteligente de Atendimento e Comunicação Institucional
 
-> Documento consolidado da equipe. Seções do Estudante 1 preenchidas; seções dos Estudantes 2 e 3
+> Documento consolidado da equipe. Seções dos Estudantes 1 e 2 preenchidas; seções do Estudante 3
 > marcadas como **A PREENCHER**.
 
 ## 1. Problema e escopo
 
 Protótipo local que recebe solicitações fictícias (texto, áudio, imagem), extrai informações, gera
-minuta institucional, versão em áudio e peça visual sintética, sempre com decisão final de um servidor.
+minuta institucional em PDF, versão em áudio e peça visual sintética, sempre com decisão final de um servidor.
 Nenhuma resposta é enviada automaticamente.
 
 ## 2. Arquitetura
 
 ```
 entrada (texto | áudio | imagem)
-   │  validação do arquivo ─────────────── Estudante 2/3
+   │  validação do arquivo (src/main.py) ──── Estudante 2/3
    ▼
-extração de texto (STT | OCR/visão) ────── Estudante 3
+extração de texto (STT | OCR/visão) ───────── Estudante 3
    ▼
-minimização de dados (src/prompts.minimizar) ── Estudante 1
+minimização de dados (src/prompts.minimizar) ─ Estudante 1
    ▼
 triagem/extração JSON  [prompt extracao-v1.0] ─ Estudante 1 (prompt) / Estudante 2 (API)
    ▼
-minuta JSON → modelo institucional [prompt minuta-v1.0, modelo_minuta.md]
+minuta JSON → PDF institucional com Brasão [prompt minuta-v1.0, gerar_pdf_minuta] ── Estudante 1/2
    ▼
-avaliação automática (src/avaliacao.py) + REVISÃO HUMANA (aprovar / rejeitar / nova geração)
+avaliação automática (src/avaliacao.py) + REVISÃO HUMANA na Interface Web (src/web.py)
    ▼
 TTS da minuta aprovada · peça visual com nota de proveniência ── Estudante 3
    ▼
-registro estruturado (execução, modelo, prompt, tempo, erro, decisão) ── Estudante 2
+registro estruturado JSONL e relatório de auditoria (src/audit.py) ── Estudante 2
 ```
 
 ## 3. Engenharia de prompts (Estudante 1)
@@ -51,7 +51,7 @@ Ver `documentacao/comparacao_modelos.md`. Custos de texto calculados por token a
 ## 5. Avaliação de qualidade (Estudante 1)
 
 Protocolo: `documentacao/protocolo_avaliacao.md`. Resultados por caso, taxa de aprovação e decisões:
-`documentacao/AVALIACAO_HUMANA.md` (seção 5).
+`documentacao/AVALIACAO_HUMANA.md` (seção 5) e `resultados/logs/relatorio_auditoria.md` (seção 3).
 
 ## 6. LGPD, privacidade e minimização (RF12)
 
@@ -70,7 +70,7 @@ Protocolo: `documentacao/protocolo_avaliacao.md`. Resultados por caso, taxa de a
 
 Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-mail em domínio fictício.
 
-## 7. Segurança e tratamento de falhas (Estudante 2 — RF01, RF04, RF05, RF09, RF11, RF12)
+## 7. Segurança, interface de revisão e tratamento de falhas (Estudante 2 — RF01, RF04, RF05, RF09, RF11, RF12, RF13)
 
 - **Proteção de credenciais (RF01, RF04, RF11):** Chaves de API são lidas exclusivamente do ambiente / `.env` via `src/llm_client.verificar_chave` (perfis locais como `ollama` operam sem chave). A função `ocultar_segredos` (`src/llm_client.py`) e a varredura recursiva `sanitizar_dados` (`src/audit.py`) mascaram como `[CREDENCIAL_OCULTADA]` qualquer valor de variável `*_API_KEY`/`*_TOKEN`/`*_SECRET`, cabeçalhos `Bearer` ou prefixos conhecidos (`gsk_`, `sk-`, `AIza`) antes de exibir erros ou gravar logs.
 - **Tratamento de falhas de API (`src/llm_client.py` — RF04):**
@@ -79,8 +79,9 @@ Todos os dados do projeto são fictícios. O caso 01 contém CPF de exemplo e e-
   - *Limite de requisições (HTTP 429) e indisponibilidade (HTTP 5xx):* realiza até 5 tentativas respeitando o cabeçalho `Retry-After` ou espera progressiva (*backoff*).
   - *Timeout e falha de conexão:* `timeout_s` configurável em `config.json` (60 s), tratando `httpx.TimeoutException` e `httpx.HTTPError` com retentativas e mensagem amigável ao operador.
   - *Resposta vazia ou JSON malformado:* detecta `choices` vazio ou texto em branco (`codigo_erro="resposta_vazia"`), repete a tentativa e, no fluxo principal (`src/main.py`), aplica `normalizar_extracao` e `normalizar_minuta` para garantir que a estrutura JSON permaneça 100% válida mesmo quando houver campos ausentes (Critério de aceite RF05).
-- **Bloqueio de envio automático (RF09):** Nenhuma rotina de envio externo (SMTP, webhook ou mensageria) existe no sistema. Todas as saídas são gravadas localmente em `resultados/minutas/` com o cabeçalho explícito `MINUTA GERADA COM APOIO DE IA – PENDENTE DE REVISÃO HUMANA – ENVIO AUTOMÁTICO BLOQUEADO` e registro da decisão do servidor responsável.
-- **Rastreabilidade e auditoria (`src/audit.py` — RF11, RF13):** Cada etapa gera um registro em `resultados/logs/execucoes.jsonl` e um consolidado em `resultados/logs/relatorio_auditoria.md` contendo `id_execucao`, `data_hora`, `caso_id`, `etapa`, `modalidade`, `arquivo_origem`, `provedor`, `modelo`, `parametros`, `versao_prompt`, `hash_prompt`, `dados_minimizados`, `latencia_s`, `tokens_entrada`/`tokens_saida`, `custo_usd`, `tentativas`, `erro`, `avaliacao_automatica`, `decisao_humana` e versões do ambiente Python/bibliotecas.
+- **Geração de minuta em PDF e bloqueio de envio automático (RF09):** Nenhuma rotina de envio externo (SMTP, webhook ou mensageria) existe no sistema. Todas as minutas são geradas como documentos PDF 1.4 (`resultados/minutas/<caso_id>_minuta.pdf`) via `gerar_pdf_minuta` (`src/main.py`), com o Brasão oficial de Mato Grosso (`dados/originais/brasao.png`) embutido no cabeçalho, tarja explícita `MINUTA GERADA COM APOIO DE IA – PENDENTE DE REVISÃO HUMANA – ENVIO AUTOMÁTICO BLOQUEADO`, substituição automática de `[NOME DO SERVIDOR RESPONSÁVEL]` pelo nome do revisor na assinatura e registro da decisão humana no rodapé.
+- **Interface Web de Revisão Humana (`src/web.py` — RF13):** A revisão humana é realizada por meio de uma interface Web local responsiva (`http://127.0.0.1:8000`) que solicita a identificação do servidor revisor (nome e cargo/setor) ao abrir a sessão e exibe lado a lado: à esquerda, o conteúdo original da solicitação (texto, player de áudio MP3 ou visualizador de documento PDF); à direita, o PDF da minuta institucional gerada, a extração JSON, os achados da avaliação automática e os controles para aprovar, corrigir manualmente (regenerando o PDF) ou rejeitar/solicitar nova geração.
+- **Rastreabilidade e auditoria (`src/audit.py` — RF11, RF13):** Cada etapa gera um registro em `resultados/logs/execucoes.jsonl` e um consolidado em `resultados/logs/relatorio_auditoria.md` contendo `id_execucao`, `data_hora`, `caso_id`, `etapa`, `modalidade`, `arquivo_origem`, `provedor`, `modelo`, `parametros`, `versao_prompt`, `hash_prompt`, `dados_minimizados`, `latencia_s`, `tokens_entrada`/`tokens_saida`, `custo_usd`, `tentativas`, `erro`, `avaliacao_automatica`, `decisao_humana`, `revisor` e versões do ambiente Python/bibliotecas.
 
 ## 8. Áudio, visão/OCR e imagem — A PREENCHER (Estudante 3)
 

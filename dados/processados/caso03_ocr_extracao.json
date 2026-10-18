@@ -32,8 +32,7 @@
   "confianca": "alta",
   "requer_revisao_humana": true,
   "motivos_revisao": [
-    "verificar autenticidade da solicitação",
-    "confirmar dados do curso"
+    "Validação humana obrigatória antes de qualquer resposta institucional."
   ],
   "alertas_seguranca": [],
   "arquivo_origem": "dados/originais/entrada_pdf-imagem.pdf",

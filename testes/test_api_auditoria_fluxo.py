@@ -233,14 +233,35 @@ class TestFluxoAtendimento(unittest.TestCase):
                     caminho_log=log_temp,
                 )
                 self.assertEqual(res["decisao_humana"], "Corrigida")
-                arq_minuta = tmp_rel / "minutas" / "caso01_texto_minuta.md"
+                arq_minuta = tmp_rel / "minutas" / "caso01_texto_minuta.pdf"
                 self.assertTrue(arq_minuta.exists())
-                texto_minuta = arq_minuta.read_text(encoding="utf-8")
+                self.assertTrue(arq_minuta.read_bytes().startswith(b"%PDF-1.4"))
+                texto_minuta = main.ler_texto_minuta_pdf(arq_minuta)
                 self.assertIn("ENVIO AUTOMÁTICO BLOQUEADO", texto_minuta)
                 self.assertIn("Status: **Corrigida**", texto_minuta)
 
         hash_depois = prompts.hash_texto(caminho_original.read_text(encoding="utf-8"))
         self.assertEqual(hash_antes, hash_depois)
+
+    def test_revisao_web_exige_dados_do_revisor_e_layout_lado_a_lado(self):
+        from src import web
+
+        # Verifica que sem o nome do revisor a revisão web é bloqueada
+        with self.assertRaises(ValueError):
+            web.registrar_revisao_web(
+                caso_id="caso01_texto",
+                decisao="Aprovada",
+                revisor_nome="",
+                revisor_cargo="Secretaria Escolar",
+                justificativa="Tentativa sem identificar revisor.",
+            )
+        # Verifica presença da coluna esquerda (Conteúdo Original), direita (Resultado em PDF) e modal único de revisor
+        self.assertIn("1. Conteúdo Original da Solicitação", web.PAGINA_HTML)
+        self.assertIn("2. Resultado Processado", web.PAGINA_HTML)
+        self.assertIn("iframeMinutaPdf", web.PAGINA_HTML)
+        self.assertIn("let revisorConfirmado = false;", web.PAGINA_HTML)
+        self.assertIn("Identificação do Servidor Revisor", web.PAGINA_HTML)
+
 
 
 if __name__ == "__main__":

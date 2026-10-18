@@ -9,7 +9,7 @@
 | ----------------------------------------------------------- | ----------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Claude Code (CLI, agente de codificação)                    | Claude Opus 5.5 (`claude-opus-5-5`) | Estudante 1 | Leitura do enunciado, criação de prompts, gabaritos (rascunho), protocolo de avaliação, código de experimento/avaliação, testes e documentação |
 | GroqCloud API                                               | ver `config.json`                   | Estudante 1 | Execução dos experimentos (RF02 e comparação de modelos) — é IA do *produto*, não do desenvolvimento                                           |
-| Google Antigravity (agente de codificação)                  | Gemini 4 Argon                      | Estudante 2 | Planejamento e implementação de `src/llm_client.py`, `src/audit.py`, `src/main.py`, `testes/test_api_auditoria_fluxo.py` e documentação técnica (RF01, RF04, RF05, RF09, RF11, RF13) |
+| Google Antigravity (agente de codificação)                  | Gemini 4 Argon                      | Estudante 2 | Planejamento e implementação de `src/llm_client.py`, `src/audit.py`, `src/main.py`, `src/web.py`, geração de minutas em PDF, `testes/test_api_auditoria_fluxo.py` e documentação técnica (RF01, RF04, RF05, RF09, RF11, RF13) |
 | \[HUMANO\] outras ferramentas usadas pelo Estudante 3       |                                     |             |                                                                                                                                                |
 
 
@@ -27,11 +27,11 @@
 4. **17/10/2026 – Claude Code:** "Como você avaliaria todos os prompts?" e pedidos equivalentes para as
  tarefas 3 a 5 da avaliação humana → a IA deu uma segunda opinião no chat. As decisões e o registro em
  `AVALIACAO_HUMANA.md` são do revisor humano, que ajustou notas, tempos e justificativas.
-5. **17/10/2026 – Claude Code:** "Propõe um texto corrigido para a minuta do caso01" → texto aceito e salvo
- em `resultados/minutas/caso01_corrigida.md`. Também foram pedidos ajustes de redação e consistência no
+5. **17/10/2026 – Claude Code:** "Propõe um texto corrigido para a minuta do caso01" → texto revisado na etapa inicial do Estudante 1 (posteriormente consolidado em formato PDF no fluxo final do Estudante 2 em `resultados/minutas/caso01_texto_minuta.pdf`). Também foram pedidos ajustes de redação e consistência no
  formulário de avaliação e a extração dos campos críticos do gabarito do caso02 a partir da transcrição humana.
 6. **17/10/2026 – Google Antigravity (Estudante 2):** "fiquei responsável por fazer a parte do estudante 2, faça o planejamento completo e detalhado do que precisa ser feito na minha parte, seguindo os requisitos e especificações do pdf do desafio" e "agora faça tudo que foi planejado" → planejou e implementou `src/llm_client.py`, `src/audit.py`, `src/main.py`, `testes/test_api_auditoria_fluxo.py`, configuração de produção em `config.json` e atualização da documentação.
-7. \[HUMANO\] acrescentar as solicitações feitas pelo Estudante 3.
+7. **17/10/2026 – Google Antigravity (Estudante 2):** "eu não quero que a interação do usuário seja pelo terminal, quero fazer isso na web, e sempre antes de começar uma revisão, deve pedir os dados do revisor. na tela de revisão, eu quero que do lado esquerdo fique o conteúdo original e do direito o resultado. quero que seja responsivo, limpo e de fácil utilização" e em seguida "eu só quero que pergunte quem é o revisor uma vez, quando abrir, a minuta deve ser um arquivo pdf e não um .md" e "[NOME DO SERVIDOR RESPONSÁVEL] deve ser substituído pelo nome do revisor" → implementou `src/web.py` e `gerar_pdf_minuta` em `src/main.py`.
+8. \[HUMANO\] acrescentar as solicitações feitas pelo Estudante 3.
 
 ## 3. Sugestões aceitas, modificadas e rejeitadas
 
@@ -48,9 +48,10 @@
 | Arquivo separado com as observações do assistente para comparar depois                         | Rejeitada                                 | Desnecessário; mantido apenas o formulário de avaliação humana                                                                                                                                                            |
 | Avaliações do assistente para as tarefas 2 a 5 (pedidas no chat como segunda opinião)          | Modificada                                | Usadas como segunda opinião; notas, tempos, falsos positivos e justificativas foram revisados e ajustados pelo revisor humano, que tomou as decisões finais                                                               |
 | Recomendação do `gpt-oss-120b` como modelo de produção                                         | Aceita                                    | Melhor equilíbrio entre consistência de formato, custo, status de produção e licença aberta                                                                                                                               |
-| Texto corrigido da minuta do caso01 proposto pela IA                                           | Aceita                                    | Corrige os erros apontados na revisão; salvo em `resultados/minutas/caso01_corrigida.md`                                                                                                                                  |
 | Sanitização recursiva em `src/audit.py` + `ocultar_segredos` em `src/llm_client.py`            | Aceita                                    | Impede vazamento acidental de chaves de API tanto nos registros `execucoes.jsonl` quanto nas mensagens de erro (RF04, RF11)                                                                                               |
 | Normalização defensiva do JSON de extração (`normalizar_extracao`) e modo `--nao-interativo`   | Aceita                                    | Garante que a estrutura JSON permaneça sempre válida mesmo com campos ausentes (RF05) e permite reproduzir as decisões da revisão humana automaticamente                                                                  |
+| Nomes de classes de teste com códigos de requisito (`TestRF04ClienteAPI`, etc.)                | Rejeitada                                 | Substituídos por nomes semânticos claros em português (`TestClienteAPI`, `TestRegistroAuditoria`, `TestFluxoAtendimento`) a pedido do Estudante 2                                                                         |
+| Revisão humana interativa via `input()` no terminal e minutas salvas apenas em `.md`           | Rejeitada / Modificada                    | Substituída por interface Web responsiva lado a lado (`src/web.py`), com identificação única do revisor ao abrir a sessão e geração das minutas em PDF (`resultados/minutas/*_minuta.pdf`) com assinatura do revisor      |
 
 
 ## 4. Erros ou inadequações encontrados
@@ -99,12 +100,18 @@ maiores que os da IA (B: 5 min contra 2–3 min; C: 10 min contra 6–8 min) e n
 - **Contexto institucional:** os títulos do arquivo foram simplificados na revisão (versão 1.0 → 1.1),
 sem mudança nas regras.
 
+**Encontrados pelo revisor humano (Estudante 2) ao revisar o trabalho da IA:**
+
+- **Duplicação de cabeçalho e justificativa no PDF da minuta:** na primeira versão do gerador de PDF, as linhas de cabeçalho do Markdown repetiam o texto já desenhado ao lado do Brasão, e ao salvar uma revisão pela interface Web a linha `Justificativa da revisão humana:` anterior não era removida antes de gravar a nova. Ambos os problemas foram corrigidos em `src/main.py`.
+- **Placeholder `[NOME DO SERVIDOR RESPONSÁVEL]` na assinatura:** o modelo de minuta mantinha o marcador `[NOME DO SERVIDOR RESPONSÁVEL]` após a revisão; ajustado em `aplicar_decisao_no_markdown` para substituir automaticamente pelo nome do revisor identificado na sessão.
+- **Modal de identificação repetitivo:** inicialmente o modal na interface Web solicitava a identificação do revisor a cada troca de caso; ajustado para perguntar apenas uma única vez ao abrir a sessão.
+
 ## 5. Forma de validação
 
-- Código: 14 testes automatizados offline (`python -m unittest discover -s testes -t .`), execução em
-modo `--dry-run` e execução real registrada em `resultados/*/execucoes.jsonl`.
+- Código: 25 testes automatizados offline (`python -m unittest discover -s testes -t .`), execução em
+modo `--dry-run` e execução real registrada em `resultados/*/execucoes.jsonl` e `resultados/logs/relatorio_auditoria.md`.
 - Conteúdo gerado: gabaritos validados por pessoa, verificações automáticas de `src/avaliacao.py` e
-avaliação humana registrada em `documentacao/AVALIACAO_HUMANA.md`.
+avaliação humana registrada em `documentacao/AVALIACAO_HUMANA.md` e na interface Web (`src/web.py`).
 
 ## 6. Declaração de responsabilidade
 

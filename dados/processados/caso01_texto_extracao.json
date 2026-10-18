@@ -3,10 +3,10 @@
   "data_solicitacao": "14/10/2026",
   "canal": "E-mail",
   "solicitante": "Marcos Vinícius de Almeida Santos",
-  "assunto": "Efetivação de matrícula e documentos necessários",
-  "pedido": "Solicito a efetivação da matrícula e informações sobre os documentos ainda necessários",
+  "assunto": "Efetivação de matrícula e documentos pendentes",
+  "pedido": "Solicita a efetivação da matrícula e informações sobre documentos ainda necessários.",
   "perguntas_do_cidadao": [
-    "Quais documentos ainda preciso apresentar?"
+    "Peço que me informem quais documentos ainda preciso apresentar."
   ],
   "categoria": "matricula",
   "dados_do_curso": {
@@ -29,13 +29,13 @@
     "protocolo": "Protocolo: 2026-000142",
     "data_solicitacao": "Data: 14/10/2026",
     "solicitante": "Meu nome é Marcos Vinícius de Almeida Santos",
-    "pedido": "Peço que me informem quais documentos ainda preciso apresentar."
+    "pedido": "solicito a efetivação da minha matrícula ... Peço que me informem quais documentos ainda preciso apresentar."
   },
   "confianca": "alta",
   "requer_revisao_humana": true,
   "motivos_revisao": [
-    "Verificar se os dados pessoais foram corretamente identificados",
-    "Confirmar a categoria da solicitação"
+    "verificar documentos pendentes",
+    "confirmar dados da matrícula"
   ],
   "alertas_seguranca": [],
   "arquivo_origem": "dados/originais/entrada_texto.txt",

@@ -4,37 +4,36 @@
     "data": "não localizado"
   },
   "destinatario": "Carlos Eduardo Nunes",
-  "assunto": "Procedimento para trancamento de curso",
+  "assunto": "Trancamento de curso de Técnico em Administração",
   "saudacao": "Prezado(a) Senhor(a) Carlos Eduardo Nunes,",
   "corpo": [
-    "Em atenção ao seu contato via WhatsApp institucional, registramos o pedido de trancamento do curso de Técnico em Administração, conforme relatado.",
-    "Para efetivar o trancamento, é necessário apresentar um requerimento escrito, assinado, contendo a justificativa (ex.: início de atividade profissional noturna) e a documentação comprobatória pertinente. O requerimento deverá ser entregue à Secretaria Escolar, onde será gerado o protocolo de acompanhamento.",
-    "Informamos que detalhes sobre a documentação específica exigida, prazos para análise e demais procedimentos internos não foram localizados nos dados disponíveis; tais informações serão confirmadas pelo servidor responsável e disponibilizadas ao requerente."
+    "Em atenção à sua solicitação recebida via WhatsApp institucional, informamos que o pedido de trancamento do curso de Técnico em Administração será analisado pela Secretaria Escolar.",
+    "Para formalizar o trancamento, é necessário apresentar um requerimento por escrito, contendo seu nome completo, o curso a ser trancado e o motivo do pedido, dirigido à Secretaria Escolar. O documento deverá ser entregue pessoalmente ou enviado pelos canais oficiais da instituição.",
+    "Após o recebimento da documentação, será gerado o protocolo de atendimento e a data de registro, que serão informados ao requerente."
   ],
   "fecho": "Atenciosamente,",
   "informacoes_nao_localizadas": [
-    "protocolo da solicitação",
+    "protocolo",
     "data da solicitação",
-    "documentação exigida para trancamento",
-    "prazo para análise do pedido",
-    "normas ou procedimentos internos aplicáveis"
+    "número de matrícula",
+    "eixo tecnológico",
+    "carga horária",
+    "turno",
+    "início do curso",
+    "data de matrícula"
   ],
   "afirmacoes_e_evidencias": [
     {
       "afirmacao": "O solicitante, Carlos Eduardo Nunes, deseja trancar o curso de Técnico em Administração.",
-      "trecho_fonte": "solicitante: \"Carlos Eduardo Nunes\"; pedido: \"trancar o curso de Técnico em Administração\""
+      "trecho_fonte": "solicitante: \"Carlos Eduardo Nunes\"; pedido: \"Trancar o curso de Técnico em Administração\""
     },
     {
-      "afirmacao": "O pedido foi realizado via WhatsApp institucional.",
-      "trecho_fonte": "canal: \"WhatsApp institucional (mensagem copiada pelo atendente)\""
+      "afirmacao": "A solicitação foi feita via WhatsApp institucional.",
+      "trecho_fonte": "canal: \"WhatsApp institucional\""
     },
     {
-      "afirmacao": "O assunto da solicitação é \"Pedido de trancamento de curso por trabalho noturno\".",
-      "trecho_fonte": "assunto: \"Pedido de trancamento de curso por trabalho noturno\""
-    },
-    {
-      "afirmacao": "A motivação do pedido é o início de trabalho noturno.",
-      "trecho_fonte": "perguntas_do_cidadao: \"como faço pra trancar meu curso de Técnico em Administração, porque comecei a trabalhar à noite.\""
+      "afirmacao": "O assunto da solicitação é Trancamento de curso de Técnico em Administração.",
+      "trecho_fonte": "assunto: \"Trancamento de curso de Técnico em Administração\""
     }
   ],
   "alertas_seguranca": [],

@@ -18,8 +18,12 @@ Uso:
 from __future__ import annotations
 
 import argparse
+import base64
 import json
+import re
+import struct
 import sys
+import textwrap
 import time
 from pathlib import Path
 from typing import Any
@@ -41,9 +45,9 @@ DECISOES_VALIDADAS_EQUIPE: dict[str, dict[str, str]] = {
         "revisor": "João Flávio Pompeo",
         "justificativa": (
             "Há 1 achado alto (insinua que a lista de documentos está disponível em outro local) "
-            "e 2 médios. Aplicada versão revisada manualmente em resultados/minutas/caso01_corrigida.md."
+            "e 2 médios. Aplicada versão revisada manualmente em resultados/minutas/caso01_texto_minuta.pdf."
         ),
-        "arquivo_corrigido": "resultados/minutas/caso01_corrigida.md",
+        "arquivo_corrigido": "resultados/minutas/caso01_texto_minuta.pdf",
     },
     "caso04_texto_injection": {
         "decisao": "Aprovada",
@@ -380,6 +384,7 @@ def obter_texto_da_entrada(
             "Solicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.",
         ]
         texto_ocr = "\n".join(linhas_doc)
+        nome_arq_ocr = f"{caso_id}_revisado.txt" if caso_id.endswith("_ocr") else f"{caso_id}_ocr_revisado.txt"
         audit.registrar_execucao(
             audit.criar_registro(
                 caso_id=caso_id,
@@ -388,7 +393,7 @@ def obter_texto_da_entrada(
                 arquivo_origem=arquivo_origem,
                 provedor=provedor,
                 modelo="ocr-revisado-humano",
-                arquivo_saida=f"dados/processados/{caso_id}_ocr_revisado.txt",
+                arquivo_saida=f"dados/processados/{nome_arq_ocr}",
                 resumo_resultado="Texto do documento digitalizado extraído e confirmado por revisão humana (RF08).",
                 decisao_humana="Conferido",
                 revisor="João Flávio Pompeo",
@@ -396,7 +401,7 @@ def obter_texto_da_entrada(
             ),
             caminho_log=caminho_log,
         )
-        arq_ocr = RAIZ / CONFIG["caminhos"]["processados"] / f"{caso_id}_ocr_revisado.txt"
+        arq_ocr = RAIZ / CONFIG["caminhos"]["processados"] / nome_arq_ocr
         arq_ocr.parent.mkdir(parents=True, exist_ok=True)
         arq_ocr.write_text(texto_ocr + "\n", encoding="utf-8")
         return texto_ocr
@@ -413,11 +418,15 @@ def aplicar_decisao_no_markdown(
     data_str: str,
     justificativa: str = "",
 ) -> str:
-    """Atualiza a linha de decisão humana no rodapé da minuta renderizada (RF09, RF13)."""
+    """Atualiza o nome do servidor responsável e a linha de decisão humana na minuta renderizada (RF09, RF13)."""
     d_norm = decisao.strip().lower()
     chk_aprov = "X" if d_norm in ("aprovada", "aprovado", "aprovar", "corrigida", "corrigido") else " "
     chk_rejeit = "X" if d_norm.startswith("rejeit") else " "
     chk_nova = "X" if "nova" in d_norm or d_norm.startswith("rejeit") else " "
+
+    nome_revisor_assinatura = revisor.split("(")[0].strip() if revisor else ""
+    if nome_revisor_assinatura and nome_revisor_assinatura != "—":
+        texto_md = texto_md.replace("[NOME DO SERVIDOR RESPONSÁVEL]", nome_revisor_assinatura)
 
     nova_linha = (
         f"**Decisão humana:** ({chk_aprov}) Aprovada ({chk_rejeit}) Rejeitada "
@@ -428,7 +437,18 @@ def aplicar_decisao_no_markdown(
         nova_linha += f"\n**Justificativa da revisão humana:** {justificativa}"
 
     marcador = "**Decisão humana:**"
-    linhas = texto_md.splitlines()
+    marcador_just = "**Justificativa da revisão humana:**"
+    linhas = [
+        linha
+        for linha in texto_md.splitlines()
+        if not linha.strip().startswith(marcador_just)
+    ]
+    if nome_revisor_assinatura and nome_revisor_assinatura != "—":
+        for idx in range(len(linhas) - 1):
+            if linhas[idx + 1].strip().startswith("Secretaria Escolar") and linhas[idx].strip():
+                linhas[idx] = f"**{nome_revisor_assinatura}**"
+                break
+
     for i, linha in enumerate(linhas):
         if linha.startswith(marcador):
             linhas[i] = nova_linha
@@ -438,14 +458,309 @@ def aplicar_decisao_no_markdown(
     return "\n".join(linhas) + "\n"
 
 
+def _extrair_png_indexado(caminho_png: Path) -> dict[str, Any] | None:
+    """Extrai paleta PLTE e stream IDAT de um PNG indexado (8-bit color_type=3) para embutir no PDF."""
+    if not caminho_png.exists():
+        return None
+    dados = caminho_png.read_bytes()
+    if dados[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    pos = 8
+    largura = altura = bits = tipo_cor = 0
+    plte = b""
+    idat_partes: list[bytes] = []
+    while pos < len(dados):
+        tam = struct.unpack(">I", dados[pos : pos + 4])[0]
+        tipo = dados[pos + 4 : pos + 8]
+        corpo = dados[pos + 8 : pos + 8 + tam]
+        pos += 12 + tam
+        if tipo == b"IHDR":
+            largura, altura, bits, tipo_cor = struct.unpack(">IIBB", corpo[:10])
+        elif tipo == b"PLTE":
+            plte = corpo
+        elif tipo == b"IDAT":
+            idat_partes.append(corpo)
+        elif tipo == b"IEND":
+            break
+    if largura > 0 and altura > 0 and bits == 8 and tipo_cor == 3 and plte and idat_partes:
+        return {
+            "largura": largura,
+            "altura": altura,
+            "hival": (len(plte) // 3) - 1,
+            "plte_hex": plte.hex().upper(),
+            "idat": b"".join(idat_partes),
+        }
+    return None
+
+
+def _escapar_pdf_win1252(texto: str) -> bytes:
+    """Converte string Unicode para literal PDF codificado em WinAnsiEncoding (cp1252)."""
+    substituicoes = {
+        "—": "-",
+        "–": "-",
+        "·": "-",
+        "•": "*",
+        "“": '"',
+        "”": '"',
+        "‘": "'",
+        "’": "'",
+        "✓": "[X]",
+        "✕": "[X]",
+        "✎": "[E]",
+    }
+    for orig, dest in substituicoes.items():
+        texto = texto.replace(orig, dest)
+    bruto = texto.encode("cp1252", errors="replace")
+    escapado = (
+        bruto.replace(b"\\", b"\\\\")
+        .replace(b"(", b"\\(")
+        .replace(b")", b"\\)")
+        .replace(b"\r", b"")
+    )
+    return b"(" + escapado + b")"
+
+
+def gerar_pdf_minuta(
+    texto_md: str,
+    caminho_pdf: Path,
+    caminho_brasao: Path | None = None,
+) -> None:
+    """Gera um arquivo PDF 1.4 institucional a partir do texto da minuta (RF09), incluindo o brasão."""
+    caminho_pdf = Path(caminho_pdf)
+    caminho_pdf.parent.mkdir(parents=True, exist_ok=True)
+    brasao_alvo = caminho_brasao or (RAIZ / CONFIG["caminhos"].get("brasao", "dados/originais/brasao.png"))
+    info_png = _extrair_png_indexado(brasao_alvo)
+
+    # Prepara as linhas formatadas a partir do Markdown institucional
+    itens_render: list[tuple[str, str]] = []
+    for linha_bruta in texto_md.splitlines():
+        linha = linha_bruta.strip()
+        if not linha or linha.startswith("!["):
+            if not linha and itens_render and itens_render[-1][0] != "espaco":
+                itens_render.append(("espaco", ""))
+            continue
+        # Evita duplicar no corpo os 3 títulos do cabeçalho que já aparecem ao lado do Brasão no topo
+        linha_sem_md = re.sub(r"^[#*\s]+|[*\s]+$", "", linha).upper()
+        if info_png and (
+            linha_sem_md.startswith("GOVERNO DE MATO GROSSO")
+            or linha_sem_md.startswith("SECRETARIA DE ESTADO DE CI")
+            or linha_sem_md.startswith("ESCOLA TÉCNICA ESTADUAL")
+        ):
+            continue
+        if linha == "---":
+            itens_render.append(("divisor", ""))
+            continue
+        if linha.startswith("# "):
+            texto_limpo = re.sub(r"\*\*(.*?)\*\*", r"\1", linha[2:].strip())
+            for env in textwrap.wrap(texto_limpo, width=68) or [""]:
+                itens_render.append(("h1", env))
+            continue
+        if linha.startswith("## ") or linha.startswith("### "):
+            texto_limpo = re.sub(r"^#+\s*", "", linha)
+            texto_limpo = re.sub(r"\*\*(.*?)\*\*", r"\1", texto_limpo).strip()
+            for env in textwrap.wrap(texto_limpo, width=78) or [""]:
+                itens_render.append(("h2", env))
+            continue
+        if linha.startswith(">"):
+            texto_limpo = re.sub(r"^>\s*", "", linha)
+            texto_limpo = re.sub(r"\*\*(.*?)\*\*", r"\1", texto_limpo).strip()
+            for env in textwrap.wrap(texto_limpo, width=82) or [""]:
+                itens_render.append(("alerta", env))
+            continue
+        eh_negrito = linha.startswith("**")
+        texto_limpo = re.sub(r"\*\*(.*?)\*\*", r"\1", linha)
+        texto_limpo = re.sub(r"`(.*?)`", r"\1", texto_limpo)
+        estilo = "negrito" if eh_negrito else "normal"
+        for env in textwrap.wrap(texto_limpo, width=88) or [""]:
+            itens_render.append((estilo, env))
+
+    # Paginação A4 (595 x 842 pt)
+    paginas_cmds: list[bytes] = []
+    cmds_atuais: list[bytes] = []
+    y = 790.0
+    primeira_pagina = True
+
+    def _iniciar_pagina() -> None:
+        nonlocal y, primeira_pagina
+        cmds_atuais.clear()
+        # Faixa superior azul institucional
+        cmds_atuais.append(b"0.06 0.17 0.35 rg 45 805 505 6 re f 0 0 0 rg")
+        if primeira_pagina and info_png:
+            cmds_atuais.append(b"q 46 0 0 43 45 752 cm /Im1 Do Q")
+            cmds_atuais.append(
+                b"BT /F2 10.5 Tf 0.06 0.17 0.35 rg 100 784 Td "
+                + _escapar_pdf_win1252("GOVERNO DO ESTADO DE MATO GROSSO")
+                + b" Tj ET"
+            )
+            cmds_atuais.append(
+                b"BT /F2 8.5 Tf 0.18 0.25 0.35 rg 100 771 Td "
+                + _escapar_pdf_win1252("SECRETARIA DE ESTADO DE CIÊNCIA, TECNOLOGIA E INOVAÇÃO - SECITECI/MT")
+                + b" Tj ET"
+            )
+            cmds_atuais.append(
+                b"BT /F1 8.5 Tf 0.28 0.33 0.41 rg 100 758 Td "
+                + _escapar_pdf_win1252("ESCOLA TÉCNICA ESTADUAL DE CUIABÁ - SECRETARIA ESCOLAR")
+                + b" Tj ET"
+            )
+            y = 738.0
+        else:
+            y = 785.0
+        primeira_pagina = False
+
+    _iniciar_pagina()
+
+    for tipo, conteudo in itens_render:
+        if y < 58.0:
+            paginas_cmds.append(b"\n".join(cmds_atuais))
+            _iniciar_pagina()
+
+        if tipo == "espaco":
+            y -= 6.0
+        elif tipo == "divisor":
+            y -= 4.0
+            cmds_atuais.append(f"0.82 0.85 0.90 RG 0.8 w 45 {y:.1f} m 550 {y:.1f} l S 0 0 0 RG".encode("ascii"))
+            y -= 10.0
+        elif tipo == "h1":
+            y -= 4.0
+            cmds_atuais.append(
+                f"BT /F2 12 Tf 0.06 0.17 0.35 rg 45 {y:.1f} Td ".encode("ascii")
+                + _escapar_pdf_win1252(conteudo)
+                + b" Tj 0 0 0 rg ET"
+            )
+            y -= 16.0
+        elif tipo == "h2":
+            y -= 3.0
+            cmds_atuais.append(
+                f"BT /F2 10.5 Tf 0.06 0.17 0.35 rg 45 {y:.1f} Td ".encode("ascii")
+                + _escapar_pdf_win1252(conteudo)
+                + b" Tj 0 0 0 rg ET"
+            )
+            y -= 14.0
+        elif tipo == "alerta":
+            cmds_atuais.append(f"1.0 0.96 0.90 rg 45 {y - 3:.1f} 505 13 re f".encode("ascii"))
+            cmds_atuais.append(
+                f"BT /F2 8.5 Tf 0.60 0.20 0.07 rg 50 {y:.1f} Td ".encode("ascii")
+                + _escapar_pdf_win1252(conteudo)
+                + b" Tj 0 0 0 rg ET"
+            )
+            y -= 14.0
+        elif tipo == "negrito":
+            cmds_atuais.append(
+                f"BT /F2 9.5 Tf 0.06 0.09 0.16 rg 45 {y:.1f} Td ".encode("ascii")
+                + _escapar_pdf_win1252(conteudo)
+                + b" Tj ET"
+            )
+            y -= 13.0
+        else:
+            cmds_atuais.append(
+                f"BT /F1 9.5 Tf 0.06 0.09 0.16 rg 45 {y:.1f} Td ".encode("ascii")
+                + _escapar_pdf_win1252(conteudo)
+                + b" Tj ET"
+            )
+            y -= 12.5
+
+    if cmds_atuais:
+        paginas_cmds.append(b"\n".join(cmds_atuais))
+
+    # Montagem da tabela de objetos PDF 1.4
+    objetos: list[bytes] = []
+
+    def _add_obj(corpo_obj: bytes) -> int:
+        objetos.append(corpo_obj)
+        return len(objetos)
+
+    id_font_regular = _add_obj(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>")
+    id_font_bold = _add_obj(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>")
+
+    id_img = None
+    if info_png:
+        idat_bytes = info_png["idat"]
+        cab_img = (
+            f"<< /Type /XObject /Subtype /Image /Width {info_png['largura']} /Height {info_png['altura']} "
+            f"/ColorSpace [/Indexed /DeviceRGB {info_png['hival']} <{info_png['plte_hex']}>] "
+            f"/BitsPerComponent 8 /Filter /FlateDecode "
+            f"/DecodeParms << /Predictor 15 /Colors 1 /BitsPerComponent 8 /Columns {info_png['largura']} >> "
+            f"/Length {len(idat_bytes)} >>\nstream\n"
+        ).encode("ascii")
+        id_img = _add_obj(cab_img + idat_bytes + b"\nendstream")
+
+    # Reserva objeto Pages
+    id_pages = _add_obj(b"")
+    ids_paginas: list[int] = []
+
+    xobj_str = f"/XObject << /Im1 {id_img} 0 R >>" if id_img else ""
+    recursos_str = f"<< /Font << /F1 {id_font_regular} 0 R /F2 {id_font_bold} 0 R >> {xobj_str} >>"
+
+    for stream_pagina in paginas_cmds:
+        id_conteudo = _add_obj(
+            f"<< /Length {len(stream_pagina)} >>\nstream\n".encode("ascii")
+            + stream_pagina
+            + b"\nendstream"
+        )
+        id_pag = _add_obj(
+            f"<< /Type /Page /Parent {id_pages} 0 R /MediaBox [0 0 595 842] "
+            f"/Resources {recursos_str} /Contents {id_conteudo} 0 R >>".encode("ascii")
+        )
+        ids_paginas.append(id_pag)
+
+    kids_str = " ".join(f"{pid} 0 R" for pid in ids_paginas)
+    objetos[id_pages - 1] = f"<< /Type /Pages /Kids [{kids_str}] /Count {len(ids_paginas)} >>".encode("ascii")
+    id_catalogo = _add_obj(f"<< /Type /Catalog /Pages {id_pages} 0 R >>".encode("ascii"))
+
+    # Embute o texto estruturado codificado em Base64 num comentário PDF para recuperação fiel na edição/auditoria
+    b64_md = base64.b64encode(texto_md.encode("utf-8")).decode("ascii")
+    partes_pdf: list[bytes] = [
+        b"%PDF-1.4\n%\xe2\xe3\xcf\xd3\n",
+        f"% MINUTA_TEXTO_B64: {b64_md}\n".encode("ascii"),
+    ]
+    offsets: list[int] = []
+    cursor = sum(len(p) for p in partes_pdf)
+
+    for idx_obj, conteudo_obj in enumerate(objetos, start=1):
+        offsets.append(cursor)
+        bloco = f"{idx_obj} 0 obj\n".encode("ascii") + conteudo_obj + b"\nendobj\n"
+        partes_pdf.append(bloco)
+        cursor += len(bloco)
+
+    xref_pos = cursor
+    linhas_xref = [f"xref\n0 {len(objetos) + 1}\n0000000000 65535 f \n".encode("ascii")]
+    for off in offsets:
+        linhas_xref.append(f"{off:010d} 00000 n \n".encode("ascii"))
+    partes_pdf.extend(linhas_xref)
+    partes_pdf.append(
+        f"trailer\n<< /Size {len(objetos) + 1} /Root {id_catalogo} 0 R >>\nstartxref\n{xref_pos}\n%%EOF\n".encode(
+            "ascii"
+        )
+    )
+    caminho_pdf.write_bytes(b"".join(partes_pdf))
+
+
+def ler_texto_minuta_pdf(caminho_pdf: Path) -> str:
+    """Recupera o texto estruturado da minuta embutido no arquivo PDF (ou lê diretamente se for .md/.txt)."""
+    caminho_pdf = Path(caminho_pdf)
+    if not caminho_pdf.exists():
+        return ""
+    dados = caminho_pdf.read_bytes()
+    prefixo = b"% MINUTA_TEXTO_B64: "
+    for linha in dados.splitlines()[:10]:
+        if linha.startswith(prefixo):
+            b64_str = linha[len(prefixo) :].strip().decode("ascii", errors="ignore")
+            try:
+                return base64.b64decode(b64_str).decode("utf-8")
+            except Exception:
+                pass
+    return dados.decode("utf-8", errors="ignore")
+
+
+
 def solicitar_revisao_humana(
     caso_id: str,
     avaliacao_minuta: dict[str, Any],
     nao_interativo: bool,
     revisor_padrao: str,
 ) -> tuple[str, str, str, str | None]:
-    """Obtém a decisão humana (interativa no terminal ou a partir da revisão validada pela equipe)."""
-    if nao_interativo or not sys.stdin.isatty():
+    """Define o estado inicial da revisão humana (aplicando decisões validadas em --nao-interativo ou aguardando revisão na Web)."""
+    if nao_interativo:
         if caso_id in DECISOES_VALIDADAS_EQUIPE:
             info = DECISOES_VALIDADAS_EQUIPE[caso_id]
             return (
@@ -468,17 +783,13 @@ def solicitar_revisao_humana(
             None,
         )
 
-    print("\n  [Revisão Humana Obrigatória — RF13]")
-    print(f"  Decisão sugerida pelo protocolo automático: {avaliacao_minuta.get('decisao_sugerida')}")
-    for achado in avaliacao_minuta.get("achados", []):
-        print(f"    - [{achado['gravidade'].upper()}] ({achado['criterio']}): {achado['descricao']}")
-    escolha = input("  Escolha [A]provar, [C]orrigir manualmente ou [R]ejeitar/nova geração [A/C/R]: ").strip().upper()
-    justificativa = input("  Justificativa do revisor: ").strip() or "Revisão realizada pelo operador no terminal."
-    if escolha == "R":
-        return "Rejeitada", revisor_padrao, justificativa, None
-    if escolha == "C":
-        return "Corrigida", revisor_padrao, justificativa, DECISOES_VALIDADAS_EQUIPE.get(caso_id, {}).get("arquivo_corrigido")
-    return "Aprovada", revisor_padrao, justificativa, None
+    # No modo interativo, a revisão nunca é feita pelo terminal: fica pendente para a Interface Web
+    return (
+        "PENDENTE",
+        "—",
+        "Aguardando identificação do revisor e decisão na interface Web.",
+        None,
+    )
 
 
 # ---------------------------------------------------------------- Pipeline por Caso
@@ -739,7 +1050,7 @@ def processar_caso(
     minuta_json = normalizar_minuta(bruto_min, extracao_json, arquivo_origem)
 
     caminho_min_json_rel = f"{CONFIG['caminhos'].get('minutas', 'resultados/minutas')}/{caso_id}_minuta.json"
-    caminho_min_md_rel = f"{CONFIG['caminhos'].get('minutas', 'resultados/minutas')}/{caso_id}_minuta.md"
+    caminho_min_pdf_rel = f"{CONFIG['caminhos'].get('minutas', 'resultados/minutas')}/{caso_id}_minuta.pdf"
     (RAIZ / caminho_min_json_rel).write_text(
         json.dumps(minuta_json, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -792,9 +1103,15 @@ def processar_caso(
         data_str=data_curta,
         justificativa=justificativa_hum,
     )
-    (RAIZ / caminho_min_md_rel).write_text(minuta_md_final, encoding="utf-8")
+    gerar_pdf_minuta(minuta_md_final, RAIZ / caminho_min_pdf_rel)
 
-    saida_efetiva = arq_corrigido_rel if (arq_corrigido_rel and (RAIZ / arq_corrigido_rel).exists()) else caminho_min_md_rel
+    if arq_corrigido_rel:
+        caminho_corr_abs = RAIZ / arq_corrigido_rel
+        caminho_corr_md_legado = caminho_corr_abs.with_suffix(".md")
+        if not caminho_corr_abs.exists() and caminho_corr_md_legado.exists():
+            gerar_pdf_minuta(caminho_corr_md_legado.read_text(encoding="utf-8"), caminho_corr_abs)
+
+    saida_efetiva = arq_corrigido_rel if (arq_corrigido_rel and (RAIZ / arq_corrigido_rel).exists()) else caminho_min_pdf_rel
 
     audit.registrar_execucao(
         audit.criar_registro(
@@ -811,7 +1128,7 @@ def processar_caso(
             dados_minimizados=meta_min["dados_minimizados"],
             resposta_llm=resp_min,
             arquivo_saida=saida_efetiva,
-            resumo_resultado=f"Minuta gerada (bloqueio de envio ativo). Decisão: {decisao_hum}.",
+            resumo_resultado=f"Minuta gerada em PDF (bloqueio de envio ativo). Decisão: {decisao_hum}.",
             avaliacao_auto=av_min,
             decisao_humana=decisao_hum,
             revisor=nome_revisor,
@@ -819,7 +1136,7 @@ def processar_caso(
         ),
         caminho_log=log_alvo,
     )
-    print(f"  [OK] Minuta salva em: {caminho_min_md_rel} | Decisão humana: {decisao_hum}")
+    print(f"  [OK] Minuta PDF salva em: {caminho_min_pdf_rel} | Decisão humana: {decisao_hum}")
 
     return {
         "caso_id": caso_id,
@@ -839,7 +1156,7 @@ def construir_parser() -> argparse.ArgumentParser:
     cfg_prod = CONFIG.get("producao", CONFIG.get("experimento_prompts", {}))
     p = argparse.ArgumentParser(
         prog="python -m src.main",
-        description="Central Inteligente de Atendimento e Comunicação Institucional (Fluxo Principal).",
+        description="Central Inteligente de Atendimento e Comunicação Institucional (Fluxo Principal e Interface Web).",
     )
     p.add_argument(
         "--caso",
@@ -870,12 +1187,23 @@ def construir_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--nao-interativo",
         action="store_true",
-        help="Aplica automaticamente as decisões de revisão humana documentadas pela equipe.",
+        help="Executa em lote sem abrir o servidor Web, aplicando as decisões validadas pela equipe.",
+    )
+    p.add_argument(
+        "--porta",
+        type=int,
+        default=8000,
+        help="Porta HTTP da interface Web de revisão humana (padrão: 8000).",
+    )
+    p.add_argument(
+        "--sem-navegador",
+        action="store_true",
+        help="Não abre o navegador automaticamente ao iniciar a interface Web.",
     )
     p.add_argument(
         "--revisor",
         default="João Flávio Pompeo",
-        help="Nome do servidor responsável registrado na revisão humana.",
+        help="Nome do servidor responsável registrado em modo não interativo.",
     )
     return p
 
@@ -889,16 +1217,21 @@ def main(argv: list[str] | None = None) -> int:
     cfg_prod = CONFIG.get("producao", CONFIG.get("experimento_prompts", {}))
     amb = audit.coletar_ambiente()
     libs_str = ", ".join(f"{k}=={v}" for k, v in amb["bibliotecas"].items())
-    print(f"=== Central Inteligente de Atendimento e Comunicação Institucional ===")
-    print(f"Ambiente: Python {amb['python']} ({amb['sistema']}) · Bibliotecas: {libs_str}")
-    print(f"Configuração: provedor={args.provedor} · modelo={args.modelo} · dry_run={args.dry_run}")
+    print("=== Central Inteligente de Atendimento e Comunicação Institucional ===")
+    print(f"Ambiente: Python {amb['python']} ({amb['sistema']}) | Bibliotecas: {libs_str}")
 
-    if not args.dry_run:
+    usar_dry_run = args.dry_run
+    if not usar_dry_run:
         try:
             llm_client.verificar_chave(CONFIG["provedores"][args.provedor])
         except ErroProvedor as e:
-            print(f"Erro de inicialização: {e}", file=sys.stderr)
-            return 2
+            if args.nao_interativo:
+                print(f"Erro de inicialização: {e}", file=sys.stderr)
+                return 2
+            print(f"[Aviso] {e} Alternando para modo --dry-run (cache validado) para abrir a interface Web.")
+            usar_dry_run = True
+
+    print(f"Configuração: provedor={args.provedor} | modelo={args.modelo} | dry_run={usar_dry_run}")
 
     if args.arquivo:
         casos = [Path(args.arquivo).stem]
@@ -907,16 +1240,21 @@ def main(argv: list[str] | None = None) -> int:
     else:
         casos = [args.caso]
 
+    # Se estiver em modo Web interativo e os artefatos PDF já existirem, só processa os que faltarem
     resultados_sessao: list[dict[str, Any]] = []
+    dir_minutas = RAIZ / CONFIG["caminhos"].get("minutas", "resultados/minutas")
     for idx, cid in enumerate(casos):
-        if idx > 0 and not args.dry_run and cfg_prod.get("pausa_entre_chamadas_s", 0) > 0:
+        arq_min_existente = dir_minutas / f"{cid}_minuta.pdf"
+        if not args.nao_interativo and arq_min_existente.exists() and not args.arquivo:
+            continue
+        if idx > 0 and not usar_dry_run and cfg_prod.get("pausa_entre_chamadas_s", 0) > 0:
             time.sleep(cfg_prod["pausa_entre_chamadas_s"])
         res = processar_caso(
             caso_id=cid,
             provedor=args.provedor,
             modelo=args.modelo,
             cfg_prod=cfg_prod,
-            dry_run=args.dry_run,
+            dry_run=usar_dry_run,
             nao_interativo=args.nao_interativo,
             revisor=args.revisor,
             arquivo_avulso=args.arquivo,
@@ -924,9 +1262,16 @@ def main(argv: list[str] | None = None) -> int:
         resultados_sessao.append(res)
 
     audit.gerar_relatorio_auditoria()
-    print(f"\n[OK] Execução concluída ({len(resultados_sessao)} caso(s)).")
-    print(f"[OK] Log estruturado: {audit.ARQUIVO_LOG_PADRAO.relative_to(RAIZ)}")
+    print(f"\n[OK] Log estruturado: {audit.ARQUIVO_LOG_PADRAO.relative_to(RAIZ)}")
     print(f"[OK] Relatório de auditoria: {audit.ARQUIVO_RELATORIO_PADRAO.relative_to(RAIZ)}")
+
+    if not args.nao_interativo:
+        from src import web
+        web.iniciar_interface_web(
+            porta=args.porta,
+            abrir_navegador=not args.sem_navegador,
+            dry_run=usar_dry_run,
+        )
     return 0
 
 

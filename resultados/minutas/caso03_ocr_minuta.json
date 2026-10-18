@@ -4,12 +4,12 @@
     "data": "14/10/2026"
   },
   "destinatario": "MARCOS VINICIUS DE ALMEIDA SANTOS",
-  "assunto": "Efetivação de matrícula – Técnico em Enfermagem",
+  "assunto": "Efetivação de matrícula - Técnico em Enfermagem",
   "saudacao": "Prezado(a) Senhor(a) Marcos Vinicius de Almeida Santos,",
   "corpo": [
-    "Recebemos, sob o protocolo 2026-000142, a sua solicitação de efetivação de matrícula para o curso Técnico em Enfermagem, turno NOTURNO, com início previsto para 01/02/2027, datada de 14/10/2026.",
-    "Informamos que a solicitação será analisada pela Secretaria Escolar, observando os procedimentos internos vigentes, e que a situação da efetivação será comunicada ao senhor assim que concluída a avaliação.",
-    "Para eventuais esclarecimentos, dirija‑se à Secretaria Escolar."
+    "Confirmamos o recebimento da sua solicitação de efetivação de matrícula, protocolada sob o número 2026-000142 em 14/10/2026.",
+    "A Secretaria Escolar analisará a documentação apresentada e, caso necessário, solicitará complementação. O resultado será comunicado ao senhor assim que o processo for concluído.",
+    "Informamos que o curso solicitado é Técnico em Enfermagem, com carga horária de 1200 horas, turno noturno, com início previsto para 01/02/2027."
   ],
   "fecho": "Atenciosamente,",
   "informacoes_nao_localizadas": [
@@ -25,24 +25,12 @@
       "trecho_fonte": "Data da matrícula: 14/10/2026"
     },
     {
-      "afirmacao": "Solicitante: Marcos Vinicius de Almeida Santos",
+      "afirmacao": "Solicitante MARCOS VINICIUS DE ALMEIDA SANTOS",
       "trecho_fonte": "Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS"
     },
     {
-      "afirmacao": "Curso: Técnico em Enfermagem",
-      "trecho_fonte": "Curso: TÉCNICO EM ENFERMAGEM"
-    },
-    {
-      "afirmacao": "Turno: NOTURNO",
-      "trecho_fonte": "Turno: NOTURNO"
-    },
-    {
-      "afirmacao": "Início do curso em 01/02/2027",
-      "trecho_fonte": "Início do curso: 01/02/2027"
-    },
-    {
-      "afirmacao": "Pedido de efetivação de matrícula",
-      "trecho_fonte": "Solicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar."
+      "afirmacao": "Curso TÉCNICO EM ENFERMAGEM, eixo SAÚDE, carga horária 1200 HORAS, turno NOTURNO, início 01/02/2027",
+      "trecho_fonte": "Curso: TÉCNICO EM ENFERMAGEM | Eixo: SAÚDE\nCarga horária: 1200 HORAS | Turno: NOTURNO\nInício do curso: 01/02/2027"
     }
   ],
   "alertas_seguranca": [],

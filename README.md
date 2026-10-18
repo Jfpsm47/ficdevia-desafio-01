@@ -9,7 +9,7 @@ automaticamente**: toda saída é minuta pendente de revisão de um servidor res
 | Integrante | Responsabilidade | Situação |
 |---|---|---|
 | Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado |
-| Estudante 2 | Integração por API, segurança, processamento de texto e registro das execuções (`src/main.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
+| Estudante 2 | Integração por API, segurança, processamento de texto, interface Web de revisão e auditoria (`src/main.py`, `src/web.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
 | Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | A FAZER |
 
 ## Instalação
@@ -32,10 +32,10 @@ Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.2` (ver `requirements.tx
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | 24 testes offline (prompts, minimização, avaliação, cliente de API, auditoria e fluxo principal) — não chama API |
-| `python -m src.main` | Fluxo completo de atendimento (RF01, RF04, RF05, RF09, RF11, RF13) com revisão humana |
-| `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo sem chamar a API (usando cache validado) e aplica as decisões de revisão humana |
-| `python -m src.main --caso caso01_texto` | Executa o fluxo principal apenas para um caso específico |
+| `python -m unittest discover -s testes -t .` | 25 testes offline (prompts, minimização, avaliação, cliente de API, auditoria, fluxo e interface Web) — não chama API |
+| `python -m src.main` | Inicia o fluxo completo e abre a **Interface Web de Revisão Humana** (`http://127.0.0.1:8000`) |
+| `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo em lote sem chamar a API (usando cache validado) e gera os PDFs das minutas |
+| `python -m src.main --caso caso01_texto` | Executa o fluxo principal e abre a revisão para um caso específico |
 | `python -m src.experimento_prompts listar --provedor groq` | Lista os modelos disponíveis para a sua chave |
 | `python -m src.experimento_prompts prompts` | **RF02**: gera o Prompt C via metaprompt e executa A, B e C com o mesmo modelo e parâmetros |
 | `python -m src.experimento_prompts prompts --reusar-prompt-c` | Repete o RF02 com o Prompt C já salvo |
@@ -58,14 +58,15 @@ dados/originais/     entradas fictícias (arquivos fornecidos, inalterados, + ca
 dados/gabaritos/     resultado esperado de cada caso, escrito antes da execução
 dados/processados/   extrações estruturadas em JSON (RF05) e textos intermediários revisados
 prompts/             todos os prompts versionados (ver prompts/README.md)
-src/main.py          ponto de entrada principal, orquestração, extração JSON, minuta e revisão humana
+src/main.py          ponto de entrada principal, orquestração, extração JSON, geração de minuta em PDF e revisão
+src/web.py           interface Web responsiva de revisão humana lado a lado (original à esquerda, PDF à direita)
 src/llm_client.py    cliente oficial HTTP (timeout, retries 429/5xx, 401/403, resposta vazia, ocultação de chaves)
 src/audit.py         registro estruturado em JSONL, sanitização de segredos e relatório de auditoria
 src/prompts.py       montagem segura das mensagens, minimização, modelo da minuta
 src/avaliacao.py     critérios automáticos de avaliação
 src/experimento_prompts.py   RF02 + comparação de modelos
 src/cliente_experimento.py   delega ao cliente oficial src/llm_client.py
-resultados/          minutas, matrizes e logs estruturados (resultados/logs/execucoes.jsonl)
+resultados/          minutas em PDF (resultados/minutas/*_minuta.pdf), matrizes e logs (resultados/logs/execucoes.jsonl)
 documentacao/        protocolo de avaliação, comparação de modelos, relatório técnico, uso de IA,
                      AVALIACAO_HUMANA.md (decisões humanas)
 testes/              testes automatizados (test_prompts_avaliacao.py e test_api_auditoria_fluxo.py)
