@@ -10,5 +10,10 @@
 - Nenhuma funcionalidade pode enviar resposta ao cidadão automaticamente.
 - Testes: `python -m unittest discover -s testes -t .` (offline; devem passar antes de qualquer entrega).
 - Experimentos: `python -m src.experimento_prompts --help`; use `--dry-run` quando não houver chave.
-- Divisão: Estudante 1 = prompts/avaliação/documentação; Estudante 2 = `main.py`, `llm_client.py`,
-  `audit.py`; Estudante 3 = `audio.py`, `vision.py`, `image_generation.py`.
+- Contratos de dados ficam em `src/schemas.py` (Pydantic, versionados). Mudou um contrato → incrementar
+  `VERSAO` do modelo e rodar `python -m src.schemas exportar` (regrava `prompts/esquemas/`).
+- Divisão (Desafio 02): Estudante 1 = esquemas (`schemas.py`), NLP (`nlp.py`), dados fictícios e gabaritos;
+  Estudante 2 = embeddings, índice, RAG e abstração de provedor; Estudante 3 = guardrails, Streamlit,
+  sentimentos e painel.
+- Divisão (Desafio 01, módulos existentes): Estudante 1 = prompts/avaliação/documentação; Estudante 2 =
+  `main.py`, `llm_client.py`, `audit.py`; Estudante 3 = `audio.py`, `vision.py`, `image_generation.py`.

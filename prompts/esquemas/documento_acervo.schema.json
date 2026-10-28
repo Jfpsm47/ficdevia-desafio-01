@@ -1,0 +1,71 @@
+{
+  "$id": "documento_acervo-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "additionalProperties": false,
+  "description": "Cabeçalho obrigatório de cada documento do acervo fictício (seção 6 e RF17).",
+  "properties": {
+    "documento_id": {
+      "pattern": "^ACV-\\d{2}$",
+      "title": "Documento Id",
+      "type": "string"
+    },
+    "titulo": {
+      "minLength": 1,
+      "title": "Titulo",
+      "type": "string"
+    },
+    "versao": {
+      "minLength": 1,
+      "title": "Versao",
+      "type": "string"
+    },
+    "tema": {
+      "minLength": 1,
+      "title": "Tema",
+      "type": "string"
+    },
+    "formato": {
+      "enum": [
+        "txt",
+        "pdf"
+      ],
+      "title": "Formato",
+      "type": "string"
+    },
+    "vigencia_inicio": {
+      "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+      "title": "Vigencia Inicio",
+      "type": "string"
+    },
+    "vigencia_fim": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Vigencia Fim"
+    },
+    "arquivo": {
+      "minLength": 1,
+      "title": "Arquivo",
+      "type": "string"
+    }
+  },
+  "required": [
+    "documento_id",
+    "titulo",
+    "versao",
+    "tema",
+    "formato",
+    "vigencia_inicio",
+    "vigencia_fim",
+    "arquivo"
+  ],
+  "title": "DocumentoAcervo",
+  "type": "object"
+}

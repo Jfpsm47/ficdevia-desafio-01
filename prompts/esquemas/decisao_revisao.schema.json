@@ -1,0 +1,79 @@
+{
+  "$id": "decisao_revisao-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "additionalProperties": false,
+  "description": "Estado da minuta. Nenhuma resposta é enviada automaticamente: o campo só admite false.",
+  "properties": {
+    "id_minuta": {
+      "minLength": 1,
+      "title": "Id Minuta",
+      "type": "string"
+    },
+    "estado": {
+      "enum": [
+        "pendente",
+        "aprovada",
+        "rejeitada",
+        "revisar"
+      ],
+      "title": "Estado",
+      "type": "string"
+    },
+    "revisor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Revisor"
+    },
+    "justificativa": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Justificativa"
+    },
+    "data_hora": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ISO 8601 da decisão.",
+      "title": "Data Hora"
+    },
+    "participacao_ia": {
+      "default": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+      "minLength": 1,
+      "title": "Participacao Ia",
+      "type": "string"
+    },
+    "enviada_ao_cidadao": {
+      "const": false,
+      "default": false,
+      "title": "Enviada Ao Cidadao",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id_minuta",
+    "estado"
+  ],
+  "title": "DecisaoRevisao",
+  "type": "object"
+}

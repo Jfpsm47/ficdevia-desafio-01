@@ -1,0 +1,51 @@
+{
+  "$id": "resumo_solicitacao-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "$defs": {
+    "FatoResumo": {
+      "additionalProperties": false,
+      "properties": {
+        "afirmacao": {
+          "minLength": 1,
+          "title": "Afirmacao",
+          "type": "string"
+        },
+        "evidencia": {
+          "description": "Trecho literal do original que sustenta a afirmação.",
+          "minLength": 1,
+          "title": "Evidencia",
+          "type": "string"
+        }
+      },
+      "required": [
+        "afirmacao",
+        "evidencia"
+      ],
+      "title": "FatoResumo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Saída do modelo na sumarização (RF15): resumo de até 100 palavras e fatos com evidência literal.",
+  "properties": {
+    "resumo": {
+      "minLength": 1,
+      "title": "Resumo",
+      "type": "string"
+    },
+    "fatos": {
+      "items": {
+        "$ref": "#/$defs/FatoResumo"
+      },
+      "title": "Fatos",
+      "type": "array"
+    }
+  },
+  "required": [
+    "resumo",
+    "fatos"
+  ],
+  "title": "ResumoSolicitacao",
+  "type": "object"
+}

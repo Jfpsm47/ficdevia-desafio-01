@@ -7,7 +7,8 @@ de execução (versão + hash do prompt) continue reconstruível (RF11).
 | Arquivo | Uso | Versão |
 |---|---|---|
 | `contexto_institucional.md` | Único contexto institucional que o modelo pode usar; lista também o que NÃO está disponível | 1.1 (o RF02 e a comparação de 16/10 usaram a 1.0, registrada nos arquivos `_entrada.md`) |
-| `categorias.json` | Lista documentada de categorias (RF05) | 1.0 |
+| `categorias.json` | Lista documentada de categorias (RF05, RF15) | 2.0 (28/10/2026: acrescentada `revisao`; o Desafio 01 usou a 1.0, e a mudança altera o texto montado do `extracao-v1.0`, rastreável pelo hash registrado) |
+| `esquemas/*.schema.json` | JSON Schema dos contratos de dados, gerado por `python -m src.schemas exportar` (não editar à mão) | versão em `x-versao` de cada arquivo |
 | `experimento/prompt_A.md` | RF02 – zero-shot curto | experimento-A |
 | `experimento/prompt_B.md` | RF02 – Persona, Contexto, Tarefa, Formato, Critérios de sucesso | experimento-B |
 | `experimento/metaprompt.md` | RF02 – metaprompt que gera o Prompt C | metaprompt-v1.0 |

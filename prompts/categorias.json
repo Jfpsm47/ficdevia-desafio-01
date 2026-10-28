@@ -1,6 +1,6 @@
 {
-  "versao": "1.0",
-  "descricao": "Lista documentada de categorias usada na classificação das solicitações (RF05). Uma solicitação recebe exatamente uma categoria; quando nenhuma se aplica, usar 'outros'.",
+  "versao": "2.0",
+  "descricao": "Lista documentada de categorias usada na classificação das solicitações (RF05, RF15). Uma solicitação recebe exatamente uma categoria. 'outros' = o pedido é claro, mas nenhuma categoria se aplica; 'revisao' = não é possível escolher com segurança (pedido ambíguo, contraditório ou com mais de um assunto principal). v2.0 (28/10/2026): acrescentada 'revisao'; demais categorias inalteradas.",
   "categorias": [
     {"id": "matricula", "nome": "Matrícula", "descricao": "Pedido de matrícula, efetivação de matrícula, documentos exigidos para matrícula, pré-matrícula."},
     {"id": "documentacao_escolar", "nome": "Documentação escolar", "descricao": "Declarações (matrícula, frequência, conclusão), histórico, certificados e diplomas."},
@@ -9,6 +9,7 @@
     {"id": "frequencia_justificativa", "nome": "Frequência e justificativa de faltas", "descricao": "Justificativa de faltas, abono, reposição, dúvidas sobre frequência mínima."},
     {"id": "informacoes_cursos", "nome": "Informações sobre cursos", "descricao": "Oferta, vagas, horários, processo seletivo, carga horária, local de aulas."},
     {"id": "reclamacao_ouvidoria", "nome": "Reclamação ou ouvidoria", "descricao": "Reclamações, denúncias, elogios e sugestões."},
-    {"id": "outros", "nome": "Outros", "descricao": "Qualquer solicitação que não se encaixe nas categorias anteriores."}
+    {"id": "outros", "nome": "Outros", "descricao": "Pedido claro que não se encaixa em nenhuma das categorias anteriores."},
+    {"id": "revisao", "nome": "Revisão (classificação incerta)", "descricao": "Pedido ambíguo, contraditório ou com mais de um assunto principal, em que não é possível escolher uma categoria com segurança; encaminhar para classificação humana."}
   ]
 }

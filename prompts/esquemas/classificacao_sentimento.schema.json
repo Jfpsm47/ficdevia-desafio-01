@@ -1,0 +1,53 @@
+{
+  "$id": "classificacao_sentimento-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "additionalProperties": false,
+  "description": "Saída do modelo para uma avaliação (RF22). Não descreve o autor, só o texto avaliado.",
+  "properties": {
+    "id_avaliacao": {
+      "minLength": 1,
+      "title": "Id Avaliacao",
+      "type": "string"
+    },
+    "polaridade": {
+      "enum": [
+        "positiva",
+        "negativa",
+        "neutra",
+        "indeterminada"
+      ],
+      "title": "Polaridade",
+      "type": "string"
+    },
+    "justificativa": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Justificativa",
+      "type": "string"
+    },
+    "requer_revisao": {
+      "title": "Requer Revisao",
+      "type": "boolean"
+    },
+    "confianca_declarada": {
+      "description": "Estimativa NÃO calibrada do modelo; não é probabilidade de acerto.",
+      "enum": [
+        "alta",
+        "media",
+        "baixa"
+      ],
+      "title": "Confianca Declarada",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id_avaliacao",
+    "polaridade",
+    "justificativa",
+    "requer_revisao",
+    "confianca_declarada"
+  ],
+  "title": "ClassificacaoSentimento",
+  "type": "object"
+}

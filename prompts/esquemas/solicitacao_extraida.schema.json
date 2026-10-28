@@ -1,0 +1,210 @@
+{
+  "$id": "solicitacao_extraida-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "$defs": {
+    "Entidade": {
+      "additionalProperties": false,
+      "description": "Entidade presente na solicitação. 'literal' = escrita no texto; 'inferida' = deduzida (RF15).",
+      "properties": {
+        "tipo": {
+          "enum": [
+            "pessoa",
+            "orgao",
+            "local",
+            "data",
+            "protocolo"
+          ],
+          "title": "Tipo",
+          "type": "string"
+        },
+        "valor": {
+          "minLength": 1,
+          "title": "Valor",
+          "type": "string"
+        },
+        "origem": {
+          "enum": [
+            "literal",
+            "inferida"
+          ],
+          "title": "Origem",
+          "type": "string"
+        },
+        "evidencia": {
+          "description": "Trecho literal do original que sustenta a entidade.",
+          "minLength": 1,
+          "title": "Evidencia",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tipo",
+        "valor",
+        "origem",
+        "evidencia"
+      ],
+      "title": "Entidade",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Contrato de extração de uma solicitação (RF14). Saída do modelo.\n\nAusência = null no campo + nome do campo em `campos_ausentes`; a interface exibe \"não localizado\".\nTodos os campos são obrigatórios (sem valor padrão), o que permite usar o modo estrito do provedor.",
+  "properties": {
+    "protocolo": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Protocolo"
+    },
+    "data_solicitacao": {
+      "anyOf": [
+        {
+          "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Data Solicitacao"
+    },
+    "canal": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Canal"
+    },
+    "solicitante": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Nome fictício do solicitante.",
+      "title": "Solicitante"
+    },
+    "curso": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Curso"
+    },
+    "assunto": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Assunto",
+      "type": "string"
+    },
+    "pedido": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Pedido"
+    },
+    "categoria": {
+      "enum": [
+        "matricula",
+        "documentacao_escolar",
+        "transferencia",
+        "cancelamento_trancamento",
+        "frequencia_justificativa",
+        "informacoes_cursos",
+        "reclamacao_ouvidoria",
+        "outros",
+        "revisao"
+      ],
+      "title": "Categoria",
+      "type": "string"
+    },
+    "entidades": {
+      "items": {
+        "$ref": "#/$defs/Entidade"
+      },
+      "title": "Entidades",
+      "type": "array"
+    },
+    "dados_pessoais_detectados": {
+      "description": "Somente os TIPOS (ex.: 'CPF'), nunca os valores.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Dados Pessoais Detectados",
+      "type": "array"
+    },
+    "campos_ausentes": {
+      "items": {
+        "enum": [
+          "protocolo",
+          "data_solicitacao",
+          "canal",
+          "solicitante",
+          "curso",
+          "pedido"
+        ],
+        "type": "string"
+      },
+      "title": "Campos Ausentes",
+      "type": "array"
+    },
+    "requer_revisao": {
+      "title": "Requer Revisao",
+      "type": "boolean"
+    },
+    "motivos_revisao": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Motivos Revisao",
+      "type": "array"
+    },
+    "alertas_seguranca": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Alertas Seguranca",
+      "type": "array"
+    }
+  },
+  "required": [
+    "protocolo",
+    "data_solicitacao",
+    "canal",
+    "solicitante",
+    "curso",
+    "assunto",
+    "pedido",
+    "categoria",
+    "entidades",
+    "dados_pessoais_detectados",
+    "campos_ausentes",
+    "requer_revisao",
+    "motivos_revisao",
+    "alertas_seguranca"
+  ],
+  "title": "SolicitacaoExtraida",
+  "type": "object"
+}

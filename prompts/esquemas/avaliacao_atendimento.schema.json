@@ -1,0 +1,53 @@
+{
+  "$id": "avaliacao_atendimento-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "additionalProperties": false,
+  "description": "Avaliação fictícia de atendimento (entrada do RF22). A agregação é feita por código, não pelo modelo.",
+  "properties": {
+    "id_avaliacao": {
+      "pattern": "^AV-\\d{2}$",
+      "title": "Id Avaliacao",
+      "type": "string"
+    },
+    "data": {
+      "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+      "title": "Data",
+      "type": "string"
+    },
+    "canal": {
+      "minLength": 1,
+      "title": "Canal",
+      "type": "string"
+    },
+    "categoria_atendimento": {
+      "enum": [
+        "matricula",
+        "documentacao_escolar",
+        "transferencia",
+        "cancelamento_trancamento",
+        "frequencia_justificativa",
+        "informacoes_cursos",
+        "reclamacao_ouvidoria",
+        "outros",
+        "revisao"
+      ],
+      "title": "Categoria Atendimento",
+      "type": "string"
+    },
+    "texto": {
+      "minLength": 1,
+      "title": "Texto",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id_avaliacao",
+    "data",
+    "canal",
+    "categoria_atendimento",
+    "texto"
+  ],
+  "title": "AvaliacaoAtendimento",
+  "type": "object"
+}

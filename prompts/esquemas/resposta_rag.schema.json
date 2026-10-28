@@ -1,0 +1,150 @@
+{
+  "$id": "resposta_rag-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "$defs": {
+    "AfirmacaoInstitucional": {
+      "additionalProperties": false,
+      "properties": {
+        "texto": {
+          "minLength": 1,
+          "title": "Texto",
+          "type": "string"
+        },
+        "chunk_ids": {
+          "description": "Trechos que sustentam a afirmação.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Chunk Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "texto",
+        "chunk_ids"
+      ],
+      "title": "AfirmacaoInstitucional",
+      "type": "object"
+    },
+    "Citacao": {
+      "additionalProperties": false,
+      "description": "Fonte citada. Os metadados vêm do índice (TrechoIndexado), não do texto gerado pelo modelo.",
+      "properties": {
+        "chunk_id": {
+          "minLength": 1,
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "documento_id": {
+          "minLength": 1,
+          "title": "Documento Id",
+          "type": "string"
+        },
+        "versao_documento": {
+          "minLength": 1,
+          "title": "Versao Documento",
+          "type": "string"
+        },
+        "pagina": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pagina"
+        },
+        "secao": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Secao"
+        },
+        "trecho": {
+          "description": "Passagem original que permite conferir a afirmação.",
+          "minLength": 1,
+          "title": "Trecho",
+          "type": "string"
+        }
+      },
+      "required": [
+        "chunk_id",
+        "documento_id",
+        "versao_documento",
+        "pagina",
+        "secao",
+        "trecho"
+      ],
+      "title": "Citacao",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Resposta ou minuta fundamentada no acervo (RF19).\n\n'sem_evidencia' não pode trazer afirmação institucional: é assim que o contrato impede que a falta\nde fonte vire resposta inventada. 'conflito_fontes' exige ao menos dois documentos citados.",
+  "properties": {
+    "status": {
+      "enum": [
+        "fundamentada",
+        "sem_evidencia",
+        "conflito_fontes"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "resposta": {
+      "minLength": 1,
+      "title": "Resposta",
+      "type": "string"
+    },
+    "afirmacoes": {
+      "items": {
+        "$ref": "#/$defs/AfirmacaoInstitucional"
+      },
+      "title": "Afirmacoes",
+      "type": "array"
+    },
+    "citacoes": {
+      "items": {
+        "$ref": "#/$defs/Citacao"
+      },
+      "title": "Citacoes",
+      "type": "array"
+    },
+    "requer_revisao": {
+      "title": "Requer Revisao",
+      "type": "boolean"
+    },
+    "motivo_revisao": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Motivo Revisao"
+    }
+  },
+  "required": [
+    "status",
+    "resposta",
+    "afirmacoes",
+    "citacoes",
+    "requer_revisao",
+    "motivo_revisao"
+  ],
+  "title": "RespostaRAG",
+  "type": "object"
+}

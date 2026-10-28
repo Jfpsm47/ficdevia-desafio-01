@@ -1,0 +1,76 @@
+{
+  "$id": "trecho_indexado-v0.1.0",
+  "x-versao": "0.1.0",
+  "x-situacao": "proposta",
+  "additionalProperties": false,
+  "description": "Metadados de cada vetor no índice (RF17). Preenchido pelo sistema, nunca pelo modelo.",
+  "properties": {
+    "chunk_id": {
+      "minLength": 1,
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "documento_id": {
+      "minLength": 1,
+      "title": "Documento Id",
+      "type": "string"
+    },
+    "versao_documento": {
+      "minLength": 1,
+      "title": "Versao Documento",
+      "type": "string"
+    },
+    "hash_documento": {
+      "description": "SHA-256 do arquivo de origem; detecta reindexação duplicada.",
+      "minLength": 1,
+      "title": "Hash Documento",
+      "type": "string"
+    },
+    "pagina": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Pagina"
+    },
+    "secao": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Secao"
+    },
+    "configuracao_chunking": {
+      "description": "Ex.: 'caracteres-800-sobreposicao-100'.",
+      "minLength": 1,
+      "title": "Configuracao Chunking",
+      "type": "string"
+    },
+    "texto": {
+      "minLength": 1,
+      "title": "Texto",
+      "type": "string"
+    }
+  },
+  "required": [
+    "chunk_id",
+    "documento_id",
+    "versao_documento",
+    "hash_documento",
+    "pagina",
+    "secao",
+    "configuracao_chunking",
+    "texto"
+  ],
+  "title": "TrechoIndexado",
+  "type": "object"
+}
