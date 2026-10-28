@@ -1,0 +1,117 @@
+{
+  "versao_gabarito": "d2-1.0",
+  "contrato_resposta": "resposta_rag-v0.1.0",
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026; corrigido: padrões proibidos de P03, P06 e P07",
+  "criterio_acerto_recuperacao": "Uma pergunta conta como acerto (RF18) quando ao menos um trecho recuperado no top-k pertence ao documento da referência e contém o trecho de referência (comparação sem acentos, sem diferença de caixa e com espaços normalizados). Taxa = acertos / 5 perguntas respondíveis.",
+  "perguntas": [
+    {
+      "id": "P01",
+      "tipo": "respondivel",
+      "pergunta": "Quais documentos são exigidos para a matrícula nos cursos técnicos?",
+      "status_esperado": "fundamentada",
+      "referencias": [
+        {"documento_id": "ACV-01", "secao": "2. Documentos exigidos para a matrícula", "trecho": "comprovante de residência emitido nos últimos 90 dias"},
+        {"documento_id": "ACV-01", "secao": "2. Documentos exigidos para a matrícula", "trecho": "documento oficial de identidade com foto"}
+      ],
+      "fatos_esperados": [
+        "Documento oficial de identidade com foto, CPF, comprovante de residência dos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio para concomitantes) e uma foto 3x4.",
+        "Original e cópia, entregues na Secretaria Escolar.",
+        "Menores de 18 anos também apresentam identidade do responsável legal."
+      ],
+      "padroes_proibidos": ["t[íi]tulo de eleitor", "reservista", "certid[ãa]o de nascimento", "cart[ãa]o (de vacina|do SUS)"]
+    },
+    {
+      "id": "P02",
+      "tipo": "respondivel",
+      "pergunta": "Qual é o prazo para entregar um documento que ficou pendente na matrícula?",
+      "status_esperado": "fundamentada",
+      "referencias": [
+        {"documento_id": "ACV-01", "secao": "3. Documentos pendentes", "trecho": "tem até 10 (dez) dias úteis, contados da data da matrícula"}
+      ],
+      "fatos_esperados": [
+        "Até 10 dias úteis, contados da data da matrícula.",
+        "Até a entrega, a matrícula fica em situação provisória."
+      ],
+      "padroes_proibidos": ["dias corridos"]
+    },
+    {
+      "id": "P03",
+      "tipo": "respondivel",
+      "pergunta": "Em quanto tempo a declaração de matrícula fica pronta?",
+      "status_esperado": "fundamentada",
+      "referencias": [
+        {"documento_id": "ACV-03", "secao": "3. Prazo de emissão", "trecho": "são emitidas em até 3 (três) dias úteis após o pedido"}
+      ],
+      "fatos_esperados": [
+        "Em até 3 dias úteis após o pedido."
+      ],
+      "padroes_proibidos": ["declara[çc][ãa]o de matr[íi]cula(?:(?!conclus)[^.;])*\\b(10|dez)\\b", "imediat"]
+    },
+    {
+      "id": "P04",
+      "tipo": "respondivel",
+      "pergunta": "Posso fazer a matrícula pela internet?",
+      "status_esperado": "fundamentada",
+      "referencias": [
+        {"documento_id": "ACV-02", "secao": "2. A matrícula pode ser feita pela internet?", "trecho": "O formulário web serve apenas para a pré-matrícula"}
+      ],
+      "fatos_esperados": [
+        "Não: o formulário web serve apenas para a pré-matrícula.",
+        "A entrega e a conferência dos documentos são presenciais, na Secretaria Escolar."
+      ],
+      "padroes_proibidos": ["matr[íi]cula (pode ser feita|[ée] feita) (pela internet|online)"]
+    },
+    {
+      "id": "P05",
+      "tipo": "respondivel",
+      "pergunta": "Por quanto tempo o curso pode ficar trancado?",
+      "status_esperado": "fundamentada",
+      "referencias": [
+        {"documento_id": "ACV-04", "secao": "4. Duração do trancamento", "trecho": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez"}
+      ],
+      "fatos_esperados": [
+        "Por um módulo letivo, renovável uma única vez por igual período."
+      ],
+      "padroes_proibidos": ["dois anos", "semestres"]
+    },
+    {
+      "id": "P06",
+      "tipo": "contraditoria",
+      "pergunta": "Até quando posso pedir o trancamento do curso?",
+      "status_esperado": "conflito_fontes",
+      "referencias": [
+        {"documento_id": "ACV-04", "secao": "3. Prazo para solicitar o trancamento", "trecho": "até 30 (trinta) dias corridos após o início das aulas do módulo"},
+        {"documento_id": "ACV-05", "secao": "3. Prazo para trancamento", "trecho": "até 60 (sessenta) dias corridos após o início das aulas do módulo"}
+      ],
+      "fatos_esperados": [
+        "ACV-04 (v1.1) indica até 30 dias corridos após o início das aulas do módulo.",
+        "ACV-05 (v1.0) indica até 60 dias corridos após o início das aulas do módulo.",
+        "Os dois documentos estão vigentes desde 01/08/2026 e nenhum define prioridade: a divergência deve ser apresentada e encaminhada à revisão humana."
+      ],
+      "justificativa_rotulo": "Mesma natureza (orientação), mesmo setor emissor (Secretaria Escolar), mesma vigência e nenhuma regra de prioridade ou revogação no acervo. Escolher 30 ou 60 dias seria decisão sem fundamento; o resultado esperado é conflito de fontes e revisão humana (seção 6 do enunciado).",
+      "padroes_proibidos": ["45 dias", "\\bprevalecem? o (prazo|documento|acv)", "deve(-se)? (seguir|considerar|adotar|observar) o prazo de", "o prazo (correto|v[áa]lido|aplic[áa]vel|vigente) [ée]"]
+    },
+    {
+      "id": "P07",
+      "tipo": "sem_resposta",
+      "pergunta": "Existe bolsa ou auxílio financeiro para estudantes dos cursos técnicos?",
+      "status_esperado": "sem_evidencia",
+      "referencias": [],
+      "fatos_esperados": [],
+      "justificativa_rotulo": "Nenhum documento do acervo trata de bolsa, auxílio ou assistência estudantil.",
+      "padroes_proibidos": ["R\\$", "\\d+ ?%", "(?<!\\bse )(?<!\\bse a escola )(?<!\\bse a institui[çc][ãa]o )\\b(h[áa]|existe|oferece) (bolsa|aux[íi]lio)", "n[ãa]o (h[áa]|existe|oferece) (bolsa|aux[íi]lio)"]
+    },
+    {
+      "id": "P08",
+      "tipo": "sem_resposta",
+      "pergunta": "Como peço aproveitamento de disciplinas que cursei em outra instituição?",
+      "status_esperado": "sem_evidencia",
+      "referencias": [],
+      "fatos_esperados": [],
+      "justificativa_rotulo": "Nenhum documento do acervo trata de aproveitamento de estudos. A palavra aparece apenas na lista de categorias, que não é fonte institucional.",
+      "padroes_proibidos": ["requerimento", "dias [úu]teis", "hist[óo]rico", "ementa"]
+    }
+  ]
+}

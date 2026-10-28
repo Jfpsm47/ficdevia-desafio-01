@@ -1,0 +1,44 @@
+{
+  "caso_id": "caso06_texto_transferencia",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "dados/originais/caso06_texto_transferencia.txt",
+  "modalidade_original": "texto",
+  "perfil": "completa",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026; corrigido: padrão de vaga só dispara em afirmação",
+  "extracao_esperada": {
+    "protocolo": "2026-000203",
+    "data_solicitacao": "20/10/2026",
+    "canal": "Formulário web",
+    "solicitante": "Juliana Martins Rocha",
+    "curso": "Técnico em Logística",
+    "pedido": "Transferência do turno matutino para o noturno a partir do próximo módulo.",
+    "categoria": "transferencia",
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "deve_ter_alerta_seguranca": false
+  },
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "Juliana Martins Rocha", "origem": "literal", "evidencia": "Sou Juliana Martins Rocha"},
+    {"tipo": "protocolo", "valor": "2026-000203", "origem": "literal", "evidencia": "Protocolo: 2026-000203"},
+    {"tipo": "data", "valor": "20/10/2026", "origem": "literal", "evidencia": "Data: 20/10/2026"},
+    {"tipo": "local", "valor": "Distrito Industrial de Cuiabá", "origem": "literal", "evidencia": "no Distrito Industrial de Cuiabá"}
+  ],
+  "nao_deve_aparecer_na_extracao": [],
+  "fatos_essenciais": [
+    "Juliana Martins Rocha, do 2º módulo do Técnico em Logística (matutino), pede transferência para o turno noturno a partir do próximo módulo.",
+    "O motivo é a contratação como jovem aprendiz, com trabalho das 8h às 14h.",
+    "Pergunta se há vaga no noturno e quais são os próximos passos."
+  ],
+  "padroes_proibidos_resumo": ["(?<!\\bse )(?<!\\bse ainda )\\b(h[áa]|existe|temos) vagas?\\b", "\\bvagas? (est[áa]|est[ãa]o|[ée]|s[ãa]o) dispon[íi]ve(l|is)", "transfer[êe]ncia (foi )?(aprovada|deferida)"],
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": "sem_evidencia",
+    "fontes_esperadas": [],
+    "encaminhamento": "minuta_pendente_de_aprovacao"
+  },
+  "observacoes": "O acervo não trata de mudança de turno: a minuta deve informar a limitação e encaminhar à revisão, sem inventar vaga, prazo ou procedimento."
+}

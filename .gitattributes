@@ -1,0 +1,5 @@
+# Arquivos congelados por SHA-256 (dados/gabaritos/d2/HASHES.json) e PDFs do acervo: o Git não pode
+# converter quebras de linha, senão um checkout no Windows (core.autocrlf) altera os bytes e invalida os hashes.
+dados/** -text
+resultados/transcricoes/** -text
+*.pdf binary

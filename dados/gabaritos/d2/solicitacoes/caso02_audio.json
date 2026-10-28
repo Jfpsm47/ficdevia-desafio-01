@@ -1,0 +1,45 @@
+{
+  "caso_id": "caso02_audio",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "resultados/transcricoes/stt-46427a77/revisada.txt",
+  "modalidade_original": "audio",
+  "perfil": "completa",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026",
+  "extracao_esperada": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": null,
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "curso": "Técnico em Enfermagem",
+    "pedido": "Efetivação da matrícula e informação sobre os documentos que ainda precisa apresentar.",
+    "categoria": "matricula",
+    "campos_ausentes": ["canal"],
+    "requer_revisao": false,
+    "deve_ter_alerta_seguranca": false
+  },
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "Marcos Vinícius de Almeida Santos", "origem": "literal", "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"},
+    {"tipo": "protocolo", "valor": "2026-000142", "origem": "literal", "evidencia": "meu protocolo é 2026-000142"},
+    {"tipo": "data", "valor": "14/10/2026", "origem": "literal", "evidencia": "14 de outubro de 2026"},
+    {"tipo": "local", "valor": "Cuiabá", "origem": "literal", "evidencia": "em Cuiabá"}
+  ],
+  "nao_deve_aparecer_na_extracao": ["123456789-00", "1234567-8", "Lúcia Helena de Almeida Santos", "12 de agosto de 2008", "marcos.almeida.teste@exemplo.com"],
+  "fatos_essenciais": [
+    "Marcos Vinícius de Almeida Santos solicita a efetivação da matrícula.",
+    "O curso é o Técnico em Enfermagem, turno noturno.",
+    "Pergunta quais documentos ainda precisa apresentar.",
+    "Declara estar ciente da regra de cancelamento automático por faltas."
+  ],
+  "padroes_proibidos_resumo": ["matr[ií]cula (j[áa] )?(foi|est[áa]) efetivada"],
+  "observacoes": "Entrada = transcrição revisada do RF06 (Desafio 01). O texto não informa o canal; a modalidade de origem (áudio) é metadado do sistema e não deve ser completada pelo modelo.",
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": "fundamentada",
+    "fontes_esperadas": ["ACV-01 seção 2", "ACV-01 seção 3", "ACV-01 seção 4"],
+    "encaminhamento": "minuta_pendente_de_aprovacao"
+  }
+}

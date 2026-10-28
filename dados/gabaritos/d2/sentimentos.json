@@ -1,0 +1,27 @@
+{
+  "versao_gabarito": "d2-1.0",
+  "contrato": "classificacao_sentimento-v0.1.0",
+  "arquivo_origem": "dados/avaliacoes/avaliacoes.csv",
+  "guia_rotulagem": "documentacao/DADOS_E_GABARITOS_D2.md, seção 5",
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026; AV-06 passa a citar a regra de relato de falha ou prejuízo",
+  "rotulos": [
+    {"id_avaliacao": "AV-01", "grupo": "positiva", "polaridade_esperada": "positiva", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-02", "grupo": "positiva", "polaridade_esperada": "positiva", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-03", "grupo": "positiva", "polaridade_esperada": "positiva", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-04", "grupo": "negativa", "polaridade_esperada": "negativa", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-05", "grupo": "negativa", "polaridade_esperada": "negativa", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-06", "grupo": "negativa", "polaridade_esperada": "negativa", "requer_revisao_esperado": false,
+     "justificativa_rotulo": "Não há palavra avaliativa, mas o texto relata uma falha do atendimento (declaração com o curso errado) que causou prejuízo (voltar à escola). Pela regra de relato de falha ou prejuízo, o rótulo é 'negativa'."},
+    {"id_avaliacao": "AV-07", "grupo": "neutra", "polaridade_esperada": "neutra", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-08", "grupo": "neutra", "polaridade_esperada": "neutra", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-09", "grupo": "neutra", "polaridade_esperada": "neutra", "requer_revisao_esperado": false},
+    {"id_avaliacao": "AV-10", "grupo": "ambigua_ou_mista", "tipo_ambiguidade": "mista", "polaridade_esperada": "indeterminada", "requer_revisao_esperado": true,
+     "justificativa_rotulo": "Elogia a atendente e critica o processo com peso equivalente; o texto não diz qual avaliação prevalece. Pela regra de mensagens mistas, o rótulo é 'indeterminada'."},
+    {"id_avaliacao": "AV-11", "grupo": "ambigua_ou_mista", "tipo_ambiguidade": "ironia", "polaridade_esperada": "negativa", "requer_revisao_esperado": true,
+     "justificativa_rotulo": "O elogio literal ('Parabéns pela agilidade') é contradito por um fato explícito no próprio texto (atestado entregue em agosto e ainda não registrado). Pela regra de ironia, o fato explícito define a polaridade: 'negativa'. Fica marcada para revisão porque a leitura irônica depende de interpretação."},
+    {"id_avaliacao": "AV-12", "grupo": "ambigua_ou_mista", "tipo_ambiguidade": "falta_de_contexto", "polaridade_esperada": "indeterminada", "requer_revisao_esperado": true,
+     "justificativa_rotulo": "Refere-se a um atendimento anterior desconhecido; sem esse contexto, não há como saber se 'igual' é bom ou ruim. Pela regra de falta de contexto, o rótulo é 'indeterminada'."}
+  ]
+}

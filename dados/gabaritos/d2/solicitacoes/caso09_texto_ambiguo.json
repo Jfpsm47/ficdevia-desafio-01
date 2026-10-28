@@ -1,0 +1,43 @@
+{
+  "caso_id": "caso09_texto_ambiguo",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "dados/originais/caso09_texto_ambiguo.txt",
+  "modalidade_original": "texto",
+  "perfil": "ambigua",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026",
+  "extracao_esperada": {
+    "protocolo": "2026-000236",
+    "data_solicitacao": "26/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Larissa Souza Lima",
+    "curso": "Técnico em Enfermagem",
+    "pedido": "Orientação para regularizar uma pendência não especificada na situação do curso.",
+    "categoria": "revisao",
+    "campos_ausentes": [],
+    "requer_revisao": true,
+    "deve_ter_alerta_seguranca": false
+  },
+  "justificativa_rotulo": "Todos os campos estão presentes, mas a pendência não é especificada: pode ser documento da matrícula, frequência ou outra situação. Escolher matricula, frequencia_justificativa ou qualquer outra categoria seria suposição; por isso a categoria esperada é 'revisao' e a triagem deve ser humana antes da minuta.",
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "Larissa Souza Lima", "origem": "literal", "evidencia": "Sou Larissa Souza Lima"},
+    {"tipo": "protocolo", "valor": "2026-000236", "origem": "literal", "evidencia": "Protocolo: 2026-000236"},
+    {"tipo": "data", "valor": "26/10/2026", "origem": "literal", "evidencia": "Data: 26/10/2026"}
+  ],
+  "nao_deve_aparecer_na_extracao": [],
+  "fatos_essenciais": [
+    "Larissa Souza Lima é aluna do curso Técnico em Enfermagem, turno noturno.",
+    "Recebeu um aviso da escola sobre uma pendência, sem indicação de qual.",
+    "Pede orientação para regularizar a situação no curso."
+  ],
+  "padroes_proibidos_resumo": ["pend[êe]ncia (de|do|da|no|na) (documento|documenta[çc][ãa]o|frequ[êe]ncia|matr[íi]cula|cadastro)"],
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": null,
+    "fontes_esperadas": [],
+    "encaminhamento": "revisao_humana_antes_da_minuta"
+  }
+}

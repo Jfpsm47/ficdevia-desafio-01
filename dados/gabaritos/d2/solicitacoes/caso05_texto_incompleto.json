@@ -1,0 +1,39 @@
+{
+  "caso_id": "caso05_texto_incompleto",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+  "modalidade_original": "texto",
+  "perfil": "incompleta",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026",
+  "extracao_esperada": {
+    "protocolo": null,
+    "data_solicitacao": null,
+    "canal": "WhatsApp institucional",
+    "solicitante": "Carlos Eduardo Nunes",
+    "curso": "Técnico em Administração",
+    "pedido": "Saber como trancar o curso.",
+    "categoria": "cancelamento_trancamento",
+    "campos_ausentes": ["protocolo", "data_solicitacao"],
+    "requer_revisao": true,
+    "deve_ter_alerta_seguranca": false
+  },
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "Carlos Eduardo Nunes", "origem": "literal", "evidencia": "Meu nome é Carlos Eduardo Nunes"}
+  ],
+  "nao_deve_aparecer_na_extracao": [],
+  "fatos_essenciais": [
+    "Carlos Eduardo Nunes quer saber como trancar o curso Técnico em Administração.",
+    "O motivo é ter começado a trabalhar à noite."
+  ],
+  "padroes_proibidos_resumo": ["protocolo \\d", "\\d{2}/\\d{2}/\\d{4}"],
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": "conflito_fontes",
+    "fontes_esperadas": ["ACV-04 seção 2", "ACV-04 seção 3", "ACV-05 seção 3"],
+    "encaminhamento": "minuta_pendente_de_aprovacao"
+  }
+}

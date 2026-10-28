@@ -1,0 +1,23 @@
+{
+  "descricao": "Catálogo do acervo institucional FICTÍCIO (Desafio 02). Cada item segue o contrato DocumentoAcervo (src/schemas.py). Os PDFs são gerados a partir de dados/acervo_fontes/ por 'python -m src.dados_ficticios gerar-pdfs'.",
+  "documentos": [
+    {"documento_id": "ACV-01", "titulo": "Manual de Matrícula dos Cursos Técnicos", "versao": "2.0",
+     "tema": "Matrícula e documentação escolar", "formato": "pdf", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-01.pdf"},
+    {"documento_id": "ACV-02", "titulo": "Perguntas Frequentes sobre Matrícula", "versao": "1.2",
+     "tema": "Matrícula e documentação escolar", "formato": "txt", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-02.txt"},
+    {"documento_id": "ACV-03", "titulo": "Orientação para Emissão de Declarações Escolares", "versao": "1.0",
+     "tema": "Matrícula e documentação escolar", "formato": "txt", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-03.txt"},
+    {"documento_id": "ACV-04", "titulo": "Orientação sobre Trancamento de Matrícula", "versao": "1.1",
+     "tema": "Trancamento, cancelamento e frequência", "formato": "pdf", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-04.pdf"},
+    {"documento_id": "ACV-05", "titulo": "Orientação sobre Frequência, Faltas e Trancamento", "versao": "1.0",
+     "tema": "Trancamento, cancelamento e frequência", "formato": "txt", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-05.txt"},
+    {"documento_id": "ACV-06", "titulo": "Comunicado sobre o Atendimento da Secretaria Escolar", "versao": "1.0",
+     "tema": "Matrícula e documentação escolar", "formato": "pdf", "vigencia_inicio": "01/08/2026",
+     "vigencia_fim": null, "arquivo": "dados/acervo/ACV-06.pdf"}
+  ]
+}

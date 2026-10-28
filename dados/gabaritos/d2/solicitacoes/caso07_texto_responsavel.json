@@ -1,0 +1,45 @@
+{
+  "caso_id": "caso07_texto_responsavel",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "dados/originais/caso07_texto_responsavel.txt",
+  "modalidade_original": "texto",
+  "perfil": "incompleta",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026",
+  "extracao_esperada": {
+    "protocolo": "2026-000219",
+    "data_solicitacao": "22/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Rosana Alves",
+    "curso": null,
+    "pedido": "Saber qual providência é possível (trancamento, mudança de horário ou justificativa de faltas) para o filho não perder a vaga.",
+    "categoria": "revisao",
+    "campos_ausentes": ["curso"],
+    "requer_revisao": true,
+    "deve_ter_alerta_seguranca": false
+  },
+  "justificativa_rotulo": "Solicitação incompleta: o curso não é informado. A categoria também é incerta: o texto cita três providências de categorias diferentes (cancelamento_trancamento, transferencia e frequencia_justificativa) sem escolher nenhuma, e escolher uma delas seria suposição. Além disso, quem escreve (Rosana Alves) não é o estudante (Pedro Henrique Alves). Por isso a categoria esperada é 'revisao' e a triagem deve ser humana antes da minuta.",
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "Pedro Henrique Alves", "origem": "literal", "evidencia": "Meu filho Pedro Henrique Alves"},
+    {"tipo": "pessoa", "valor": "Rosana Alves", "origem": "literal", "evidencia": "Rosana Alves"},
+    {"tipo": "protocolo", "valor": "2026-000219", "origem": "literal", "evidencia": "Protocolo: 2026-000219"},
+    {"tipo": "data", "valor": "22/10/2026", "origem": "literal", "evidencia": "Data: 22/10/2026"}
+  ],
+  "nao_deve_aparecer_na_extracao": [],
+  "fatos_essenciais": [
+    "Rosana Alves escreve em nome do filho, Pedro Henrique Alves, estudante de curso técnico.",
+    "O estudante começou a trabalhar e não consegue frequentar todas as aulas.",
+    "Pergunta se o caso é de trancar, mudar de horário ou justificar as faltas.",
+    "Quer evitar que o estudante perca a vaga."
+  ],
+  "padroes_proibidos_resumo": ["t[ée]cnico em [a-z]"],
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": null,
+    "fontes_esperadas": [],
+    "encaminhamento": "revisao_humana_antes_da_minuta"
+  }
+}

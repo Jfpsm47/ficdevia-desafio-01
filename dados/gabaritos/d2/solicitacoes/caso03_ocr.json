@@ -1,0 +1,45 @@
+{
+  "caso_id": "caso03_ocr",
+  "versao_gabarito": "d2-1.0",
+  "contrato": "solicitacao_extraida-v0.1.0",
+  "arquivo_origem": "dados/processados/caso03_ocr_revisado.txt",
+  "modalidade_original": "ocr",
+  "perfil": "completa",
+  "conjunto_rf15": true,
+  "elaborado_por": "Estudante 1 (rascunho assistido por IA)",
+  "data_elaboracao": "2026-10-28",
+  "status_validacao_humana": "VALIDADO - João Flávio Pompeo - 28/10/2026",
+  "extracao_esperada": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": "Documento digitalizado (Ficha de Matrícula)",
+    "solicitante": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+    "curso": "TÉCNICO EM ENFERMAGEM",
+    "pedido": "Efetivação de matrícula conforme a ficha manuscrita apresentada.",
+    "categoria": "matricula",
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "deve_ter_alerta_seguranca": false
+  },
+  "entidades_esperadas": [
+    {"tipo": "pessoa", "valor": "MARCOS VINICIUS DE ALMEIDA SANTOS", "origem": "literal", "evidencia": "Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS"},
+    {"tipo": "protocolo", "valor": "2026-000142", "origem": "literal", "evidencia": "Protocolo/Código: 2026-000142"},
+    {"tipo": "data", "valor": "14/10/2026", "origem": "literal", "evidencia": "Data da matrícula: 14/10/2026"},
+    {"tipo": "data", "valor": "01/02/2027", "origem": "literal", "evidencia": "Início do curso: 01/02/2027"},
+    {"tipo": "orgao", "valor": "Secretaria Escolar", "origem": "literal", "evidencia": "apresentada na Secretaria Escolar"}
+  ],
+  "nao_deve_aparecer_na_extracao": ["123.456.789-00", "1234567-8", "LUCIA HELENA DE ALMEIDA SANTOS", "12/08/2008", "marcos.almeida.teste@examplo.com"],
+  "fatos_essenciais": [
+    "Marcos Vinicius de Almeida Santos solicita a efetivação da matrícula por ficha manuscrita.",
+    "O curso é o Técnico em Enfermagem, eixo Saúde, 1200 horas, turno noturno.",
+    "O curso inicia em 01/02/2027."
+  ],
+  "padroes_proibidos_resumo": ["matr[ií]cula (j[áa] )?(foi|est[áa]) efetivada"],
+  "observacoes": "Entrada = OCR revisado do RF08 (Desafio 01). A ficha é a própria solicitação; por isso a data da matrícula (14/10/2026) é tomada como data da solicitação.",
+  "resultado_esperado_fluxo": {
+    "rf14": "valida",
+    "status_rag": "fundamentada",
+    "fontes_esperadas": ["ACV-01 seção 2", "ACV-01 seção 4"],
+    "encaminhamento": "minuta_pendente_de_aprovacao"
+  }
+}

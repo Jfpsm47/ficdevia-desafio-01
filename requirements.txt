@@ -6,3 +6,6 @@ Pillow==13.0.0
 piper-tts==1.8.0
 # Desafio 02 — Estudante 1: contratos de dados versionados e validação por esquema (RF14).
 pydantic==2.14.1
+# Desafio 02 — Estudante 1: geração (fpdf2) e leitura (pypdf) dos PDFs textuais do acervo fictício.
+fpdf2==2.8.9
+pypdf==6.21.4

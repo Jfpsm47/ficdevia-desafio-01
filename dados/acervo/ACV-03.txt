@@ -1,0 +1,20 @@
+DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL
+Identificador: ACV-03
+Título: Orientação para Emissão de Declarações Escolares
+Versão: 1.0
+Tema: Matrícula e documentação escolar
+Vigência: a partir de 01/08/2026
+Setor responsável: Secretaria Escolar
+Unidade: Escola Técnica Estadual de Cuiabá (cenário fictício)
+
+1. Tipos de declaração
+A Secretaria Escolar emite declaração de matrícula, declaração de frequência e declaração de conclusão de curso.
+
+2. Como solicitar
+A declaração pode ser solicitada pelo formulário web da escola ou presencialmente na Secretaria Escolar. O pedido deve informar o nome completo do estudante, o curso e a finalidade da declaração.
+
+3. Prazo de emissão
+A declaração de matrícula e a declaração de frequência são emitidas em até 3 (três) dias úteis após o pedido. A declaração de conclusão de curso é emitida em até 10 (dez) dias úteis.
+
+4. Condições para emissão
+A declaração de matrícula só é emitida para estudante com matrícula efetivada. A Secretaria Escolar não emite declaração com informação que não conste nos registros escolares.

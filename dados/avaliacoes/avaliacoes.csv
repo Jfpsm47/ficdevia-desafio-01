@@ -1,0 +1,13 @@
+id_avaliacao,data,canal,categoria_atendimento,texto
+AV-01,05/10/2026,Presencial,matricula,"Fui muito bem atendida na Secretaria Escolar. A servidora conferiu meus documentos com calma e explicou cada etapa da matrícula."
+AV-02,07/10/2026,Formulário web,documentacao_escolar,"Pedi a declaração de matrícula pelo formulário e recebi em dois dias. Rápido e sem complicação, obrigado!"
+AV-03,08/10/2026,Telefone,informacoes_cursos,"Atendimento excelente por telefone, tiraram todas as minhas dúvidas sobre os horários do curso."
+AV-04,09/10/2026,Presencial,matricula,"Esperei quase duas horas para ser atendido e, no fim, disseram que faltava um documento que não estava em nenhuma lista."
+AV-05,12/10/2026,WhatsApp institucional,cancelamento_trancamento,"Mandei três mensagens perguntando sobre trancamento e ninguém respondeu. Péssimo."
+AV-06,14/10/2026,E-mail,documentacao_escolar,"A declaração veio com o nome do curso errado e tive que voltar à escola para corrigir."
+AV-07,15/10/2026,Presencial,documentacao_escolar,"Fui à Secretaria Escolar às 14h, peguei senha e entreguei o pedido de declaração."
+AV-08,16/10/2026,Telefone,informacoes_cursos,"Liguei para saber o horário de atendimento e me informaram que é das 7h30 às 17h30."
+AV-09,19/10/2026,Formulário web,matricula,"Preenchi a pré-matrícula pelo formulário web e recebi o número de protocolo."
+AV-10,20/10/2026,Presencial,matricula,"A atendente foi muito atenciosa, mas o processo é confuso e precisei voltar três vezes para concluir a matrícula."
+AV-11,21/10/2026,WhatsApp institucional,frequencia_justificativa,"Parabéns pela agilidade: entreguei o atestado em agosto e até hoje ninguém registrou minhas faltas como justificadas."
+AV-12,23/10/2026,E-mail,outros,"Igual da outra vez."
