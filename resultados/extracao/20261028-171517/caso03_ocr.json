@@ -1,0 +1,50 @@
+{
+  "caso_id": "caso03_ocr",
+  "estado": "erro_provedor",
+  "encaminhamento": "bloqueada_revisao_humana",
+  "extracao": null,
+  "erros": [
+    {
+      "camada": "provedor",
+      "campo": "(chamada)",
+      "categoria": "limite_requisicoes",
+      "detalhe": "Falha após 2 tentativa(s): Limite de requisições atingido na API do provedor (HTTP 429)."
+    }
+  ],
+  "tentativas": [],
+  "meta": {
+    "versao_prompt": "extracao-v2.0",
+    "hash_prompt_sistema": "e0d15fd04c4f",
+    "dados_minimizados": {
+      "CPF": 1,
+      "e-mail": 1,
+      "RG": 1,
+      "filiação": 1,
+      "data de nascimento": 1
+    },
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/processados/caso03_ocr_revisado.txt",
+    "sha256_origem": "321951d86d14cc1fd5b7381d6306f8f99d14b032df9ca9344c032f5553b22212",
+    "texto_enviado": "FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO)\nProtocolo/Código: 2026-000142\nData da matrícula: 14/10/2026\nCanal de entrada: Documento digitalizado (Ficha de Matrícula)\nNome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS\nData de nascimento: [DATA DE NASCIMENTO REMOVIDA]\nCPF: [CPF REMOVIDO] | RG [RG REMOVIDO]\nNome da mãe: [FILIAÇÃO REMOVIDA]\nE-mail: [E-MAIL REMOVIDO]\nCurso: TÉCNICO EM ENFERMAGEM | Eixo: SAÚDE\nCarga horária: 1200 HORAS | Turno: NOTURNO\nInício do curso: 01/02/2027\nSolicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.\n"
+  },
+  "libera_minuta": false,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": false,
+      "data_solicitacao": false,
+      "canal": false,
+      "solicitante": false,
+      "curso": false
+    },
+    "categoria": false,
+    "campos_ausentes": true,
+    "requer_revisao": false,
+    "alerta": true,
+    "encaminhamento": false,
+    "nao_deve_aparecer": []
+  }
+}

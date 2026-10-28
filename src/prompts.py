@@ -19,17 +19,27 @@ VERSOES = {
     "extracao": ("producao/sistema_extracao_v1.md", "extracao-v1.0"),
     "minuta": ("producao/sistema_minuta_v1.md", "minuta-v1.0"),
     "imagem": ("producao/imagem_orientacao_v1.md", "imagem-v1.4"),
+    # v2.0 (producao/sistema_extracao_v2.md) fica preservado: é a linha de base da execução de 28/10/2026 17:17.
+    "extracao_v2": ("producao/sistema_extracao_v2_1.md", "extracao-v2.1"),
+    "correcao_esquema": ("producao/correcao_esquema_v1.md", "correcao-esquema-v1.0"),
 }
 
-# Ordem importa: o CPF é removido antes do padrão de telefone.
+# Nome próprio: palavras com inicial maiúscula na mesma linha, admitindo "de/da/do/dos/das" entre elas.
+# Delimitar o nome assim evita engolir o resto da frase ("... Santos e o meu e-mail é ...", vindo de
+# transcrição) ou o rótulo da linha seguinte ("E-mail:", em ficha de OCR).
+_NOME = r"[A-ZÀ-Ý][\wÀ-ÿ'-]+(?:[ \t]+(?:d[aeo]s?[ \t]+)?[A-ZÀ-Ý][\wÀ-ÿ'-]+)*"
+_DATA = r"(?:\d{1,2}/\d{1,2}/\d{2,4}|\d{1,2}º? de [a-zç]+ de \d{4})"
+
+# Ordem importa: o CPF é removido antes do padrão de telefone. Os padrões cobrem o formato de formulário
+# ("RG: ...") e o de frase falada ou escrita ("Meu RG é ...", "o nome da minha mãe é ...").
 _PADROES_MINIMIZACAO = [
     ("CPF", re.compile(r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b"), "[CPF REMOVIDO]"),
     ("e-mail", re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+"), "[E-MAIL REMOVIDO]"),
-    ("RG", re.compile(r"\b(RG)[:\s]*[\dxX][\d.\-xX]{4,}", re.I), r"\1 [RG REMOVIDO]"),
-    ("filiação", re.compile(r"(nome d[ao] (?:m[ãa]e|pai)|filia[çc][ãa]o)[,:\s]+[^;.\n]+", re.I),
+    ("RG", re.compile(r"\b(RG)(?:\s*(?:é|e|:|n[º°o]\.?))?\s*[\dxX][\d.\-xX]{3,}[\dxX]", re.I), r"\1 [RG REMOVIDO]"),
+    ("filiação", re.compile(r"((?i:nome d[ao] (?:minha |meu )?(?:m[ãa]e|pai)|filia[çc][ãa]o))(?:[ \t]+é)?[,: \t]+" + _NOME),
      r"\1: [FILIAÇÃO REMOVIDA]"),
     ("data de nascimento",
-     re.compile(r"(nasci(?:do|da)? em|data de nascimento:?)\s*\d{1,2}/\d{1,2}/\d{2,4}", re.I),
+     re.compile(r"(nasci(?:do|da)? em|data de nascimento:?)\s*" + _DATA, re.I),
      r"\1 [DATA DE NASCIMENTO REMOVIDA]"),
     ("telefone", re.compile(r"\(?\b\d{2}\)?\s?9?\d{4}-?\d{4}\b"), "[TELEFONE REMOVIDO]"),
 ]
@@ -87,6 +97,28 @@ def montar_mensagens_extracao(texto: str, arquivo_origem: str, minimizar_dados: 
     meta = {"versao_prompt": VERSOES["extracao"][1], "hash_prompt_sistema": hash_texto(sistema),
             "dados_minimizados": removidos}
     return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
+def montar_mensagens_extracao_v2(texto: str, arquivo_origem: str, minimizar_dados: bool = True):
+    """Mensagens da extração estruturada do Desafio 02 (RF14, contrato SolicitacaoExtraida).
+
+    Retorna (mensagens, metadados). O texto enviado já minimizado volta nos metadados, para que as
+    regras de negócio aceitem evidências citadas a partir dele.
+    """
+    removidos = {}
+    if minimizar_dados:
+        texto, removidos = minimizar(texto)
+    sistema = ler_prompt(VERSOES["extracao_v2"][0]).replace("{{CATEGORIAS}}", categorias_formatadas())
+    usuario = ("Extraia os dados do conteúdo abaixo no formato do esquema.\n\n" + delimitar(texto, arquivo_origem))
+    meta = {"versao_prompt": VERSOES["extracao_v2"][1], "hash_prompt_sistema": hash_texto(sistema),
+            "dados_minimizados": removidos, "texto_enviado": texto}
+    return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
+def mensagem_correcao_esquema(erros: list[dict[str, str]]) -> str:
+    """Mensagem da única tentativa de correção (RF14). Os erros trazem campo e motivo, nunca valores."""
+    linhas = "\n".join(f"- {e['campo']}: {e['categoria']} ({e['detalhe']})" for e in erros)
+    return ler_prompt(VERSOES["correcao_esquema"][0]).replace("{{ERROS}}", linhas)
 
 
 def montar_mensagens_minuta(texto: str, arquivo_origem: str, extracao: dict | None,

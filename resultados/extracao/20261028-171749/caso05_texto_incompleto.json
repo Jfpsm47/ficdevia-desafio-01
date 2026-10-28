@@ -1,0 +1,76 @@
+{
+  "caso_id": "caso05_texto_incompleto",
+  "estado": "valida",
+  "encaminhamento": "minuta_pendente_de_aprovacao",
+  "extracao": {
+    "protocolo": null,
+    "data_solicitacao": null,
+    "canal": "WhatsApp institucional (mensagem copiada pelo atendente)",
+    "solicitante": "Carlos Eduardo Nunes",
+    "curso": "Técnico em Administração",
+    "assunto": "Solicitação de trancamento de curso por trabalho noturno",
+    "pedido": "Trancar o curso de Técnico em Administração.",
+    "categoria": "cancelamento_trancamento",
+    "entidades": [
+      {
+        "tipo": "pessoa",
+        "valor": "Carlos Eduardo Nunes",
+        "origem": "literal",
+        "evidencia": "Meu nome é Carlos Eduardo Nunes"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [
+      "protocolo",
+      "data_solicitacao"
+    ],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "protocolo ausente",
+      "data_solicitacao ausente"
+    ],
+    "alertas_seguranca": []
+  },
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "texto_bruto": "{\"alertas_seguranca\":[],\"assunto\":\"Solicitação de trancamento de curso por trabalho noturno\",\"campos_ausentes\":[\"protocolo\",\"data_solicitacao\"],\"canal\":\"WhatsApp institucional (mensagem copiada pelo atendente)\",\"categoria\":\"cancelamento_trancamento\",\"curso\":\"Técnico em Administração\",\"dados_pessoais_detectados\":[],\"data_solicitacao\":null,\"entidades\":[{\"tipo\":\"pessoa\",\"valor\":\"Carlos Eduardo Nunes\",\"origem\":\"literal\",\"evidencia\":\"Meu nome é Carlos Eduardo Nunes\"}],\"motivos_revisao\":[\"protocolo ausente\",\"data_solicitacao ausente\"],\"pedido\":\"Trancar o curso de Técnico em Administração.\",\"protocolo\":null,\"requer_revisao\":true,\"solicitante\":\"Carlos Eduardo Nunes\"}",
+      "valida_no_esquema": true,
+      "erros": [],
+      "latencia_s": 3.44,
+      "tokens_entrada": 2045,
+      "tokens_saida": 1187,
+      "custo_usd": 0.001019
+    }
+  ],
+  "meta": {
+    "versao_prompt": "extracao-v2.0",
+    "hash_prompt_sistema": "e0d15fd04c4f",
+    "dados_minimizados": {},
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+    "sha256_origem": "a793be504d5137ff2d988c5733eede1c5e961b99b7c0d888cc89d5d757428684",
+    "texto_enviado": "Canal: WhatsApp institucional (mensagem copiada pelo atendente)\n\nOi, bom dia. Quero saber como faço pra trancar meu curso de Técnico em Administração, porque comecei a trabalhar à noite. Meu nome é Carlos Eduardo Nunes. Obrigado.\n"
+  },
+  "libera_minuta": true,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": true,
+      "solicitante": true,
+      "curso": true
+    },
+    "categoria": true,
+    "campos_ausentes": true,
+    "requer_revisao": true,
+    "alerta": true,
+    "encaminhamento": true,
+    "nao_deve_aparecer": []
+  }
+}

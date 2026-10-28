@@ -1,0 +1,88 @@
+{
+  "caso_id": "caso06_texto_transferencia",
+  "estado": "valida",
+  "encaminhamento": "minuta_pendente_de_aprovacao",
+  "extracao": {
+    "protocolo": "2026-000203",
+    "data_solicitacao": "20/10/2026",
+    "canal": "Formulário web",
+    "solicitante": "Juliana Martins Rocha",
+    "curso": "Técnico em Logística",
+    "assunto": "Solicitação de transferência de turno para noturno",
+    "pedido": "Solicito a transferência para o turno noturno a partir do próximo módulo.",
+    "categoria": "transferencia",
+    "entidades": [
+      {
+        "tipo": "pessoa",
+        "valor": "Juliana Martins Rocha",
+        "origem": "literal",
+        "evidencia": "Sou Juliana Martins Rocha"
+      },
+      {
+        "tipo": "local",
+        "valor": "Distrito Industrial de Cuiabá",
+        "origem": "literal",
+        "evidencia": "no Distrito Industrial de Cuiabá"
+      },
+      {
+        "tipo": "data",
+        "valor": "20/10/2026",
+        "origem": "literal",
+        "evidencia": "Data: 20/10/2026"
+      },
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000203",
+        "origem": "literal",
+        "evidencia": "Protocolo: 2026-000203"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "motivos_revisao": [],
+    "alertas_seguranca": []
+  },
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "texto_bruto": "{\"alertas_seguranca\":[],\"assunto\":\"Solicitação de transferência de turno para noturno\",\"campos_ausentes\":[],\"canal\":\"Formulário web\",\"categoria\":\"transferencia\",\"curso\":\"Técnico em Logística\",\"dados_pessoais_detectados\":[],\"data_solicitacao\":\"20/10/2026\",\"entidades\":[{\"tipo\":\"pessoa\",\"valor\":\"Juliana Martins Rocha\",\"origem\":\"literal\",\"evidencia\":\"Sou Juliana Martins Rocha\"},{\"tipo\":\"local\",\"valor\":\"Distrito Industrial de Cuiabá\",\"origem\":\"literal\",\"evidencia\":\"no Distrito Industrial de Cuiabá\"},{\"tipo\":\"data\",\"valor\":\"20/10/2026\",\"origem\":\"literal\",\"evidencia\":\"Data: 20/10/2026\"},{\"tipo\":\"protocolo\",\"valor\":\"2026-000203\",\"origem\":\"literal\",\"evidencia\":\"Protocolo: 2026-000203\"}],\"motivos_revisao\":[],\"pedido\":\"Solicito a transferência para o turno noturno a partir do próximo módulo.\",\"protocolo\":\"2026-000203\",\"requer_revisao\":false,\"solicitante\":\"Juliana Martins Rocha\"}",
+      "valida_no_esquema": true,
+      "erros": [],
+      "latencia_s": 2.71,
+      "tokens_entrada": 2123,
+      "tokens_saida": 850,
+      "custo_usd": 0.000828
+    }
+  ],
+  "meta": {
+    "versao_prompt": "extracao-v2.0",
+    "hash_prompt_sistema": "e0d15fd04c4f",
+    "dados_minimizados": {},
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/originais/caso06_texto_transferencia.txt",
+    "sha256_origem": "3fd54fe873410bce76f318f8a5692377ce54a95950c1d89b6ac22133c328dc92",
+    "texto_enviado": "Canal: Formulário web\nProtocolo: 2026-000203\nData: 20/10/2026\n\nPrezados,\n\nSou Juliana Martins Rocha, aluna do 2º módulo do curso Técnico em Logística, turno matutino. Solicito a transferência para o turno noturno a partir do próximo módulo, pois fui contratada como jovem aprendiz em uma empresa no Distrito Industrial de Cuiabá e meu horário de trabalho é das 8h às 14h.\n\nGostaria de saber se há vaga no turno noturno e quais são os próximos passos.\n\nAtenciosamente,\nJuliana Martins Rocha\n"
+  },
+  "libera_minuta": true,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": true,
+      "solicitante": true,
+      "curso": true
+    },
+    "categoria": true,
+    "campos_ausentes": true,
+    "requer_revisao": true,
+    "alerta": true,
+    "encaminhamento": true,
+    "nao_deve_aparecer": []
+  }
+}

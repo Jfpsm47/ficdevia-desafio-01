@@ -1,0 +1,44 @@
+{
+  "caso_id": "caso05_texto_incompleto",
+  "estado": "erro_provedor",
+  "encaminhamento": "bloqueada_revisao_humana",
+  "extracao": null,
+  "erros": [
+    {
+      "camada": "provedor",
+      "campo": "(chamada)",
+      "categoria": "limite_requisicoes",
+      "detalhe": "Falha após 2 tentativa(s): Limite de requisições atingido na API do provedor (HTTP 429)."
+    }
+  ],
+  "tentativas": [],
+  "meta": {
+    "versao_prompt": "extracao-v2.0",
+    "hash_prompt_sistema": "e0d15fd04c4f",
+    "dados_minimizados": {},
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
+    "sha256_origem": "a793be504d5137ff2d988c5733eede1c5e961b99b7c0d888cc89d5d757428684",
+    "texto_enviado": "Canal: WhatsApp institucional (mensagem copiada pelo atendente)\n\nOi, bom dia. Quero saber como faço pra trancar meu curso de Técnico em Administração, porque comecei a trabalhar à noite. Meu nome é Carlos Eduardo Nunes. Obrigado.\n"
+  },
+  "libera_minuta": false,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": false,
+      "solicitante": false,
+      "curso": false
+    },
+    "categoria": false,
+    "campos_ausentes": false,
+    "requer_revisao": false,
+    "alerta": true,
+    "encaminhamento": false,
+    "nao_deve_aparecer": []
+  }
+}

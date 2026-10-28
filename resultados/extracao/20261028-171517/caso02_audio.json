@@ -1,0 +1,102 @@
+{
+  "caso_id": "caso02_audio",
+  "estado": "valida",
+  "encaminhamento": "minuta_pendente_de_aprovacao",
+  "extracao": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": null,
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "curso": "técnico em enfermagem",
+    "assunto": "Efetivação de matrícula e solicitação de documentos",
+    "pedido": "Solicito a efetivação da matrícula e informações sobre documentos pendentes.",
+    "categoria": "matricula",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000142",
+        "origem": "literal",
+        "evidencia": "meu protocolo é 2026-000142"
+      },
+      {
+        "tipo": "data",
+        "valor": "14 de outubro de 2026",
+        "origem": "literal",
+        "evidencia": "de 14 de outubro de 2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Marcos Vinícius de Almeida Santos",
+        "origem": "literal",
+        "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+      },
+      {
+        "tipo": "local",
+        "valor": "Cuiabá",
+        "origem": "literal",
+        "evidencia": "em Cuiabá"
+      }
+    ],
+    "dados_pessoais_detectados": [
+      "CPF",
+      "RG",
+      "email",
+      "data de nascimento",
+      "filiação"
+    ],
+    "campos_ausentes": [
+      "canal"
+    ],
+    "requer_revisao": false,
+    "motivos_revisao": [],
+    "alertas_seguranca": []
+  },
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "texto_bruto": "{\"alertas_seguranca\":[],\"assunto\":\"Efetivação de matrícula e solicitação de documentos\",\"campos_ausentes\":[\"canal\"],\"canal\":null,\"categoria\":\"matricula\",\"curso\":\"técnico em enfermagem\",\"dados_pessoais_detectados\":[\"CPF\",\"RG\",\"email\",\"data de nascimento\",\"filiação\"],\"data_solicitacao\":\"14/10/2026\",\"entidades\":[{\"tipo\":\"protocolo\",\"valor\":\"2026-000142\",\"origem\":\"literal\",\"evidencia\":\"meu protocolo é 2026-000142\"},{\"tipo\":\"data\",\"valor\":\"14 de outubro de 2026\",\"origem\":\"literal\",\"evidencia\":\"de 14 de outubro de 2026\"},{\"tipo\":\"pessoa\",\"valor\":\"Marcos Vinícius de Almeida Santos\",\"origem\":\"literal\",\"evidencia\":\"Meu nome é Marcos Vinícius de Almeida Santos\"},{\"tipo\":\"local\",\"valor\":\"Cuiabá\",\"origem\":\"literal\",\"evidencia\":\"em Cuiabá\"}],\"motivos_revisao\":[],\"pedido\":\"Solicito a efetivação da matrícula e informações sobre documentos pendentes.\",\"protocolo\":\"2026-000142\",\"requer_revisao\":false,\"solicitante\":\"Marcos Vinícius de Almeida Santos\"}",
+      "valida_no_esquema": true,
+      "erros": [],
+      "latencia_s": 4.4,
+      "tokens_entrada": 2189,
+      "tokens_saida": 1608,
+      "custo_usd": 0.001293
+    }
+  ],
+  "meta": {
+    "versao_prompt": "extracao-v2.0",
+    "hash_prompt_sistema": "e0d15fd04c4f",
+    "dados_minimizados": {
+      "CPF": 1,
+      "e-mail": 1,
+      "RG": 1,
+      "filiação": 1,
+      "data de nascimento": 1
+    },
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "resultados/transcricoes/stt-46427a77/revisada.txt",
+    "sha256_origem": "02175fd7b494da504d42ecd9f44c776301c1b350fc10ea8b75bd95b169ae89b2",
+    "texto_enviado": " Bom dia, meu protocolo é 2026-000142 de 14 de outubro de 2026. Meu nome é Marcos Vinícius de Almeida Santos, nasci em [DATA DE NASCIMENTO REMOVIDA] em Cuiabá e quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno. Meu CPF é [CPF REMOVIDO]. Meu RG [RG REMOVIDO]. O nome da minha mãe: [FILIAÇÃO REMOVIDA] e o meu e-mail é [E-MAIL REMOVIDO] Declaro estar ciente de que a matrícula será cancelada automaticamente se eu faltar sem justificativa comprovada nos dois primeiros dias de aula consecutivos ou em três dias de aula consecutivos ou não nos dez primeiros dias de aula. Peço que informem quais os documentos ainda preciso apresentar. Muito obrigado."
+  },
+  "libera_minuta": true,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": true,
+      "solicitante": true,
+      "curso": true
+    },
+    "categoria": true,
+    "campos_ausentes": true,
+    "requer_revisao": true,
+    "alerta": true,
+    "encaminhamento": true,
+    "nao_deve_aparecer": []
+  }
+}

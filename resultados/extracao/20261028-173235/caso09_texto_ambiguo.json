@@ -1,0 +1,90 @@
+{
+  "caso_id": "caso09_texto_ambiguo",
+  "estado": "valida",
+  "encaminhamento": "revisao_humana_antes_da_minuta",
+  "extracao": {
+    "protocolo": "2026-000236",
+    "data_solicitacao": "26/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Larissa Souza Lima",
+    "curso": "Técnico em Enfermagem",
+    "assunto": "Orientação para regularização de pendência no curso",
+    "pedido": "Orientação sobre como regularizar a pendência no curso",
+    "categoria": "revisao",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000236",
+        "origem": "literal",
+        "evidencia": "Protocolo: 2026-000236"
+      },
+      {
+        "tipo": "data",
+        "valor": "26/10/2026",
+        "origem": "literal",
+        "evidencia": "Data: 26/10/2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Larissa Souza Lima",
+        "origem": "literal",
+        "evidencia": "Sou Larissa Souza Lima"
+      },
+      {
+        "tipo": "orgao",
+        "valor": "escola",
+        "origem": "literal",
+        "evidencia": "aviso da escola"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "categoria revisao"
+    ],
+    "alertas_seguranca": []
+  },
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "texto_bruto": "{\"protocolo\":\"2026-000236\",\"data_solicitacao\":\"26/10/2026\",\"canal\":\"E-mail\",\"solicitante\":\"Larissa Souza Lima\",\"curso\":\"Técnico em Enfermagem\",\"assunto\":\"Orientação para regularização de pendência no curso\",\"pedido\":\"Orientação sobre como regularizar a pendência no curso\",\"categoria\":\"revisao\",\"entidades\":[{\"tipo\":\"protocolo\",\"valor\":\"2026-000236\",\"origem\":\"literal\",\"evidencia\":\"Protocolo: 2026-000236\"},{\"tipo\":\"data\",\"valor\":\"26/10/2026\",\"origem\":\"literal\",\"evidencia\":\"Data: 26/10/2026\"},{\"tipo\":\"pessoa\",\"valor\":\"Larissa Souza Lima\",\"origem\":\"literal\",\"evidencia\":\"Sou Larissa Souza Lima\"},{\"tipo\":\"orgao\",\"valor\":\"escola\",\"origem\":\"literal\",\"evidencia\":\"aviso da escola\"}],\"dados_pessoais_detectados\":[],\"campos_ausentes\":[],\"alertas_seguranca\":[],\"requer_revisao\":true,\"motivos_revisao\":[\"categoria revisao\"]}",
+      "valida_no_esquema": true,
+      "erros": [],
+      "latencia_s": 3.21,
+      "tokens_entrada": 2235,
+      "tokens_saida": 1140,
+      "custo_usd": 0.001019
+    }
+  ],
+  "meta": {
+    "versao_prompt": "extracao-v2.1",
+    "hash_prompt_sistema": "1b56b3f7c5d9",
+    "dados_minimizados": {},
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/originais/caso09_texto_ambiguo.txt",
+    "sha256_origem": "c465d7eb080ab1bf8c23b85271253f92fe6783141a800d5931f4ad30d556fe8f",
+    "texto_enviado": "Canal: E-mail\nProtocolo: 2026-000236\nData: 26/10/2026\n\nPrezados,\n\nSou Larissa Souza Lima, aluna do curso Técnico em Enfermagem, turno noturno. Recebi um aviso da escola dizendo que tenho uma pendência e que preciso regularizar minha situação no curso. Peço orientação sobre o que devo fazer.\n\nAtenciosamente,\nLarissa Souza Lima\n"
+  },
+  "libera_minuta": false,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": true,
+      "solicitante": true,
+      "curso": true
+    },
+    "categoria": true,
+    "campos_ausentes": true,
+    "requer_revisao": true,
+    "alerta": true,
+    "encaminhamento": true,
+    "nao_deve_aparecer": []
+  }
+}

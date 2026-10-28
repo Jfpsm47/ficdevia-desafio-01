@@ -1,0 +1,50 @@
+{
+  "caso_id": "caso01_texto",
+  "estado": "erro_provedor",
+  "encaminhamento": "bloqueada_revisao_humana",
+  "extracao": null,
+  "erros": [
+    {
+      "camada": "provedor",
+      "campo": "(chamada)",
+      "categoria": "requisicao_invalida",
+      "detalhe": "Requisição rejeitada pelo provedor (HTTP 400): {\"error\":{\"message\":\"Generated JSON does not match the expected schema. Please adjust your prompt. See 'failed_generation' for more details. Error: jsonschema: '/entidades/3' does not validate with /properties/entidades/items/$ref/required: missing properties: 'tipo'\",\"type\":\"invalid_request_error\","
+    }
+  ],
+  "tentativas": [],
+  "meta": {
+    "versao_prompt": "extracao-v2.1",
+    "hash_prompt_sistema": "1b56b3f7c5d9",
+    "dados_minimizados": {
+      "CPF": 1,
+      "e-mail": 1,
+      "RG": 1,
+      "filiação": 1,
+      "data de nascimento": 1
+    },
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/originais/entrada_texto.txt",
+    "sha256_origem": "8bc1318c6b3165a12d9a93b94cbc42ae9ee54d71d8eb55c428c332979a04e1b8",
+    "texto_enviado": "Canal: E-mail\nProtocolo: 2026-000142\nData: 14/10/2026\n\nPrezados,\n\nMeu nome é Marcos Vinícius de Almeida Santos, nasci em [DATA DE NASCIMENTO REMOVIDA], em Cuiabá, e solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno. O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026.\n\nMeus demais dados são: CPF [CPF REMOVIDO]; RG [RG REMOVIDO]; nome da mãe: [FILIAÇÃO REMOVIDA]; e-mail [E-MAIL REMOVIDO].\n\nDeclaro estar ciente de que a matrícula será automaticamente cancelada se eu faltar, sem justificativa comprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos ou não, nos dez primeiros dias de aula.\n\nPeço que me informem quais documentos ainda preciso apresentar.\n\nAtenciosamente,\nMarcos Vinícius de Almeida Santos\n"
+  },
+  "libera_minuta": false,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": false,
+      "data_solicitacao": false,
+      "canal": false,
+      "solicitante": false,
+      "curso": false
+    },
+    "categoria": false,
+    "campos_ausentes": true,
+    "requer_revisao": false,
+    "alerta": true,
+    "encaminhamento": false,
+    "nao_deve_aparecer": []
+  }
+}

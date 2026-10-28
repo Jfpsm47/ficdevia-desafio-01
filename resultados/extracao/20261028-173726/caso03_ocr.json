@@ -1,0 +1,93 @@
+{
+  "caso_id": "caso03_ocr",
+  "estado": "valida",
+  "encaminhamento": "minuta_pendente_de_aprovacao",
+  "extracao": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": "Documento digitalizado (Ficha de Matrícula)",
+    "solicitante": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+    "curso": "TÉCNICO EM ENFERMAGEM",
+    "assunto": "Efetivação de matrícula",
+    "pedido": "Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.",
+    "categoria": "matricula",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000142",
+        "origem": "literal",
+        "evidencia": "Protocolo/Código: 2026-000142"
+      },
+      {
+        "tipo": "data",
+        "valor": "14/10/2026",
+        "origem": "literal",
+        "evidencia": "Data da matrícula: 14/10/2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "MARCOS VINICIUS DE ALMEIDA SANTOS",
+        "origem": "literal",
+        "evidencia": "Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS"
+      }
+    ],
+    "dados_pessoais_detectados": [
+      "CPF",
+      "RG",
+      "data de nascimento",
+      "e-mail"
+    ],
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "motivos_revisao": [],
+    "alertas_seguranca": []
+  },
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "texto_bruto": "{\"protocolo\":\"2026-000142\",\"data_solicitacao\":\"14/10/2026\",\"canal\":\"Documento digitalizado (Ficha de Matrícula)\",\"solicitante\":\"MARCOS VINICIUS DE ALMEIDA SANTOS\",\"curso\":\"TÉCNICO EM ENFERMAGEM\",\"assunto\":\"Efetivação de matrícula\",\"pedido\":\"Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.\",\"categoria\":\"matricula\",\"entidades\":[{\"tipo\":\"protocolo\",\"valor\":\"2026-000142\",\"origem\":\"literal\",\"evidencia\":\"Protocolo/Código: 2026-000142\"},{\"tipo\":\"data\",\"valor\":\"14/10/2026\",\"origem\":\"literal\",\"evidencia\":\"Data da matrícula: 14/10/2026\"},{\"tipo\":\"pessoa\",\"valor\":\"MARCOS VINICIUS DE ALMEIDA SANTOS\",\"origem\":\"literal\",\"evidencia\":\"Nome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS\"}],\"dados_pessoais_detectados\":[\"CPF\",\"RG\",\"data de nascimento\",\"e-mail\"],\"campos_ausentes\":[],\"requer_revisao\":false,\"motivos_revisao\":[],\"alertas_seguranca\":[]}",
+      "valida_no_esquema": true,
+      "erros": [],
+      "latencia_s": 3.1,
+      "tokens_entrada": 2346,
+      "tokens_saida": 1136,
+      "custo_usd": 0.001033
+    }
+  ],
+  "meta": {
+    "versao_prompt": "extracao-v2.1",
+    "hash_prompt_sistema": "1b56b3f7c5d9",
+    "dados_minimizados": {
+      "CPF": 1,
+      "e-mail": 1,
+      "RG": 1,
+      "filiação": 1,
+      "data de nascimento": 1
+    },
+    "versao_contrato": "solicitacao_extraida-v0.1.0",
+    "versao_prompt_correcao": "correcao-esquema-v1.0",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "arquivo_origem": "dados/processados/caso03_ocr_revisado.txt",
+    "sha256_origem": "321951d86d14cc1fd5b7381d6306f8f99d14b032df9ca9344c032f5553b22212",
+    "texto_enviado": "FICHA DE MATRÍCULA DIGITALIZADA (TEXTO EXTRAÍDO E REVISADO)\nProtocolo/Código: 2026-000142\nData da matrícula: 14/10/2026\nCanal de entrada: Documento digitalizado (Ficha de Matrícula)\nNome do solicitante: MARCOS VINICIUS DE ALMEIDA SANTOS\nData de nascimento: [DATA DE NASCIMENTO REMOVIDA]\nCPF: [CPF REMOVIDO] | RG [RG REMOVIDO]\nNome da mãe: [FILIAÇÃO REMOVIDA]\nE-mail: [E-MAIL REMOVIDO]\nCurso: TÉCNICO EM ENFERMAGEM | Eixo: SAÚDE\nCarga horária: 1200 HORAS | Turno: NOTURNO\nInício do curso: 01/02/2027\nSolicitação: Efetivação de matrícula conforme ficha manuscrita apresentada na Secretaria Escolar.\n"
+  },
+  "libera_minuta": true,
+  "comparacao_gabarito": {
+    "campos": {
+      "protocolo": true,
+      "data_solicitacao": true,
+      "canal": true,
+      "solicitante": true,
+      "curso": true
+    },
+    "categoria": true,
+    "campos_ausentes": true,
+    "requer_revisao": true,
+    "alerta": true,
+    "encaminhamento": true,
+    "nao_deve_aparecer": []
+  }
+}
