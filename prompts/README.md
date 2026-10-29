@@ -17,6 +17,7 @@ de execução (versão + hash do prompt) continue reconstruível (RF11).
 | `producao/sistema_extracao_v2.md` | Linha de base da extração estruturada do Desafio 02 (RF14), contrato `SolicitacaoExtraida`; preservado para reproduzir a execução de 28/10/2026 17:17 | extracao-v2.0 (substituído) |
 | `producao/sistema_extracao_v2_1.md` | Extração estruturada em uso: define a data da solicitação em fichas e formulários e amplia `revisao` para pedido sem assunto identificado | extracao-v2.1 |
 | `producao/correcao_esquema_v1.md` | Mensagem da única tentativa de correção quando a saída viola o esquema (RF14) | correcao-esquema-v1.0 |
+| `producao/sistema_resumo_v1.md` | Prompt de sistema do resumo de até 100 palavras com fatos e evidências (RF15), contrato `ResumoSolicitacao` | resumo-v1.0 |
 | `producao/sistema_minuta_v1.md` | Prompt de sistema da minuta em JSON (RF03, RF09) | minuta-v1.0 |
 | `producao/modelo_minuta.md` | Modelo institucional da minuta (cabeçalho GOV-MT, brasão, aviso de minuta, rastreabilidade) | 1.0 |
 

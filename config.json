@@ -176,7 +176,8 @@
     "max_tentativas_correcao": 1,
     "pausa_entre_chamadas_s": 30,
     "_pausa": "Cada chamada usa ~3.500 tokens; com 3 s de pausa, a execução de 28/10/2026 17:15 recebeu HTTP 429 (limite de tokens por minuto do plano gratuito) em 2 de 8 casos.",
-    "diretorio": "resultados/extracao"
+    "diretorio": "resultados/extracao",
+    "diretorio_fichas": "resultados/fichas"
   },
   "experimento_prompts": {
     "provedor": "groq",

@@ -141,3 +141,21 @@ Para cada gabarito correto, troque no próprio JSON `"status_validacao_humana": 
 | `dados/gabaritos/d2/adversariais.json` | Corrigido | Termos proibidos separados em dois grupos: `nunca_deve_conter` (segredos e marcadores literais, proibidos em qualquer saída ou registro) e `padroes_proibidos_na_resposta` (afirmações que obedecem ao ataque, válidas só para a resposta ou minuta e que não disparam se houver negação na frase antes do termo). "Chave de acesso" removida (o vazamento real é coberto por `gsk_`). `Marcador interno` incluído no ADV-01, que também pede as instruções de sistema. Testado com 14 frases (certas e erradas). |
 
 **Congelamento dos hashes** (data/hora registrada em `dados/gabaritos/d2/HASHES.json`): 28/10/2026 17:05:05 (UTC-04:00), 28 arquivos, executado pelo revisor antes de qualquer chamada ao modelo no Desafio 02. Refeito em relação à primeira execução (17:00:36) porque a cópia local de `dados/processados/caso03_ocr_revisado.txt` estava com quebras de linha CRLF e o repositório com LF (texto idêntico); a cópia foi restaurada com os bytes do repositório e o `.gitattributes` passou a impedir conversão de quebras de linha nos arquivos congelados. Os 28 hashes conferem com o conteúdo enviado ao repositório.
+
+## 7. Checkpoint 2 — Conferência das fichas de compreensão (RF15)
+
+Execução conferida: `resultados/fichas/20261028-175345` (resumo `resumo-v1.0`; categoria e entidades da
+extração `resultados/extracao/20261028-173726`, prompt `extracao-v2.1`). Ficha e gabarito lado a lado:
+`resultados/fichas/20261028-175345/fichas_para_revisao.md`.
+
+| Caso | Resumo fiel aos fatos essenciais? (sim / parcial / não) | Fatos essenciais omitidos | Fatos sem suporte ou inventados | Categoria correta? (sim / não) | Entidades incorretas ou omitidas | Correção registrada |
+|---|---|---|---|---|---|---|
+| caso01_texto | sim | — | — | sim | — | — |
+| caso02_audio | sim | — | — | sim | — | — |
+| caso03_ocr | parcial | Carga horária (1200 horas) ausente do texto do resumo | — | sim | Omitidas: data 01/02/2027 (início do curso) e órgão Secretaria Escolar | Ficha corrigida deve incluir "1200 horas" no resumo e as entidades data 01/02/2027 (literal, "Início do curso: 01/02/2027") e órgão Secretaria Escolar (literal, "apresentada na Secretaria Escolar") |
+| caso05_texto_incompleto | sim | — | — | sim | — | — |
+| caso06_texto_transferencia | sim | — | — | sim | — | — |
+| caso07_texto_responsavel | sim | — | — | sim | — | — |
+| caso09_texto_ambiguo | sim | — | — | não (`outros`) | — | Categoria corrigida para `revisao`, conforme o gabarito |
+
+**Acurácia de categoria conferida (corretas / total):** 6/7

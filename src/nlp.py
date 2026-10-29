@@ -15,6 +15,7 @@ Uso:
   python -m src.nlp extrair --todos [--modo json_schema_estrito|json_object] [--dry-run]
   python -m src.nlp extrair --caso caso05_texto_incompleto
   python -m src.nlp comparar-json
+  python -m src.nlp fichas --todos --reusar-extracao resultados/extracao/<execução>   # RF15
 """
 from __future__ import annotations
 
@@ -171,13 +172,14 @@ def para_exibicao(extracao: dict[str, Any]) -> dict[str, Any]:
 
 # ---------------------------------------------------------------- Chamada ao modelo
 
-def parametros_saida(modo: str, parametros: dict[str, Any]) -> tuple[dict[str, Any], bool]:
+def parametros_saida(modo: str, parametros: dict[str, Any],
+                     contrato: type[schemas.Contrato] = schemas.SolicitacaoExtraida,
+                     nome: str = "solicitacao_extraida") -> tuple[dict[str, Any], bool]:
     """Devolve (parametros, json_mode). O esquema estrito vai em `response_format`, sem alterar o cliente."""
     params = dict(parametros)
     if modo == "json_schema_estrito":
         params["response_format"] = {"type": "json_schema", "json_schema": {
-            "name": "solicitacao_extraida", "strict": True,
-            "schema": schemas.SolicitacaoExtraida.model_json_schema()}}
+            "name": nome, "strict": True, "schema": contrato.model_json_schema()}}
         return params, False
     if modo == "json_object":
         return params, True
@@ -232,6 +234,25 @@ def extrair(texto: str, arquivo_origem: str, caso_id: str, cfg: dict[str, Any] |
     if dry_run:
         return ResultadoExtracao(caso_id, "dry_run", BLOQUEADA, meta=meta)
 
+    def validar(saida: str):
+        estado_v, _, objeto_v, erros_v = validar_extracao(saida, texto, texto_enviado, hoje)
+        return estado_v, objeto_v, erros_v
+
+    estado, objeto, erros, tentativas = _gerar_com_correcao(msgs, validar, cfg, params, json_mode, chamar)
+    resultado = ResultadoExtracao(caso_id, estado, decidir_encaminhamento(estado, objeto),
+                                  objeto.model_dump() if objeto else None, erros, tentativas, meta)
+    _auditar("extracao_estruturada", caso_id, f"{resultado.estado} -> {resultado.encaminhamento}",
+             erros, tentativas, meta, cfg, caminho_log)
+    return resultado
+
+
+def _gerar_com_correcao(msgs: list[dict[str, str]], validar: Callable[[str], tuple[str, Any, list[dict]]],
+                        cfg: dict[str, Any], params: dict[str, Any], json_mode: bool,
+                        chamar: Callable[..., dict[str, Any]]) -> tuple[str, Any, list[dict], list[dict]]:
+    """Gera e valida com no máximo uma tentativa de correção. Devolve (estado, objeto, erros, tentativas).
+
+    `validar(saida)` devolve (estado, objeto, erros); só o estado `rejeitada_esquema` gera nova tentativa.
+    """
     perfil = CONFIG["provedores"][cfg["provedor"]]
     conversa = list(msgs)
     tentativas: list[dict[str, Any]] = []
@@ -254,7 +275,7 @@ def extrair(texto: str, arquivo_origem: str, caso_id: str, cfg: dict[str, Any] |
                                "recusada_pelo_provedor": True})
             conversa += [{"role": "user", "content": prompts.mensagem_correcao_esquema(erros)}]
             continue
-        estado, _, objeto, erros = validar_extracao(resp.get("texto", ""), texto, texto_enviado, hoje)
+        estado, objeto, erros = validar(resp.get("texto", ""))
         tentativas.append({"numero": n, "texto_bruto": resp.get("texto", ""),
                            "valida_no_esquema": estado != "rejeitada_esquema", "erros": erros,
                            **{k: resp.get(k) for k in ("latencia_s", "tokens_entrada", "tokens_saida", "custo_usd")}})
@@ -262,26 +283,165 @@ def extrair(texto: str, arquivo_origem: str, caso_id: str, cfg: dict[str, Any] |
             break
         conversa += [{"role": "assistant", "content": resp.get("texto", "")},
                      {"role": "user", "content": prompts.mensagem_correcao_esquema(erros)}]
-
-    resultado = ResultadoExtracao(caso_id, estado, decidir_encaminhamento(estado, objeto),
-                                  objeto.model_dump() if objeto else None, erros, tentativas, meta)
-    _auditar(resultado, cfg, caminho_log)
-    return resultado
+    return estado, objeto, erros, tentativas
 
 
-def _auditar(res: ResultadoExtracao, cfg: dict[str, Any], caminho_log: Path | None) -> None:
+def _auditar(etapa: str, caso_id: str, resumo_resultado: str, erros: list[dict], tentativas: list[dict],
+             meta: dict[str, Any], cfg: dict[str, Any], caminho_log: Path | None) -> None:
     """Registra a execução no log de auditoria (RF21), sem o texto da solicitação."""
     registro = audit.criar_registro(
-        caso_id=res.caso_id, etapa="extracao_estruturada", modalidade="texto",
-        arquivo_origem=res.meta["arquivo_origem"], provedor=cfg["provedor"], modelo=cfg["modelo"],
-        parametros={**cfg["parametros"], "modo_saida": res.meta["modo_saida"]},
-        versao_prompt=res.meta["versao_prompt"], hash_prompt=res.meta["hash_prompt_sistema"],
-        dados_minimizados=res.meta["dados_minimizados"], resposta_llm=_somar_uso(res.tentativas),
-        resumo_resultado=f"{res.estado} -> {res.encaminhamento}",
-        erro="; ".join(f"{e['camada']}:{e['campo']}:{e['categoria']}" for e in res.erros) or None)
-    registro.update({"versao_contrato": res.meta["versao_contrato"],
-                     "tentativas_correcao": max(0, len(res.tentativas) - 1)})
+        caso_id=caso_id, etapa=etapa, modalidade="texto",
+        arquivo_origem=meta["arquivo_origem"], provedor=cfg["provedor"], modelo=cfg["modelo"],
+        parametros={**cfg["parametros"], "modo_saida": meta["modo_saida"]},
+        versao_prompt=meta["versao_prompt"], hash_prompt=meta["hash_prompt_sistema"],
+        dados_minimizados=meta["dados_minimizados"], resposta_llm=_somar_uso(tentativas),
+        resumo_resultado=resumo_resultado,
+        erro="; ".join(f"{e['camada']}:{e['campo']}:{e['categoria']}" for e in erros) or None)
+    registro.update({"versao_contrato": meta["versao_contrato"],
+                     "tentativas_correcao": max(0, len(tentativas) - 1)})
     audit.registrar_execucao(registro, caminho_log)
+
+
+# ---------------------------------------------------------------- RF15: resumo e ficha de compreensão
+
+_NUMERO = re.compile(r"\d[\d./:-]*\d")
+
+
+@dataclass
+class ResultadoResumo:
+    caso_id: str
+    estado: str  # valida | bloqueada_negocio | rejeitada_esquema | erro_provedor | dry_run
+    resumo: dict[str, Any] | None = None
+    erros: list[dict[str, Any]] = field(default_factory=list)
+    tentativas: list[dict[str, Any]] = field(default_factory=list)
+    meta: dict[str, Any] = field(default_factory=dict)
+
+
+def _sem_ponto_de_milhar(texto: str) -> str:
+    return re.sub(r"(?<=\d)\.(?=\d{3}\b)", "", texto)
+
+
+def _ler_data(valor: str) -> date | None:
+    """Data em DD/MM/AAAA ou por extenso ("14 de outubro de 2026"); None se não for data válida."""
+    try:
+        return datetime.strptime(valor.strip(), "%d/%m/%Y").date()
+    except ValueError:
+        pass
+    m = re.fullmatch(r"(\d{1,2})o? de ([a-z]+) de (\d{4})", normalizar(valor))
+    meses = [normalizar(x) for x in MESES]
+    if m and m.group(2) in meses:
+        try:
+            return date(int(m.group(3)), meses.index(m.group(2)) + 1, int(m.group(1)))
+        except ValueError:
+            return None
+    return None
+
+
+def regras_resumo(resumo: schemas.ResumoSolicitacao, texto_original: str,
+                  texto_enviado: str = "") -> list[dict[str, str]]:
+    """Camada 3 do resumo: fatos sem trecho no original, números ou datas sem suporte e dado pessoal."""
+    textos = (texto_original, texto_enviado)
+    erros = [_erro_negocio("fato_sem_suporte", f"fatos.{i}.evidencia", "o trecho citado não aparece no texto original")
+             for i, fato in enumerate(resumo.fatos) if not _presente(fato.evidencia, textos)]
+    corpo = " ".join([resumo.resumo, *(f.afirmacao for f in resumo.fatos)])
+    base = " ".join(_sem_ponto_de_milhar(normalizar(t)) for t in textos if t)
+    for token in sorted(set(_NUMERO.findall(corpo))):
+        d = _ler_data(token)
+        if d and any(_presente(forma, textos) for forma in _formas_data(d)):
+            continue
+        if _sem_ponto_de_milhar(normalizar(token)) not in base:
+            erros.append(_erro_negocio("valor_sem_suporte", "resumo", "número ou data que não aparece no texto original"))
+    _, detectados = prompts.minimizar(corpo)
+    if detectados:
+        erros.append(_erro_negocio("dado_pessoal_no_resumo", "resumo",
+                                   f"o resumo reproduz dado pessoal: {', '.join(sorted(detectados))}"))
+    return erros
+
+
+def validar_resumo(texto_json: str, texto_original: str,
+                   texto_enviado: str = "") -> tuple[str, schemas.ResumoSolicitacao | None, list[dict]]:
+    """Camadas 1, 2 e 3 do resumo. Retorna (estado, objeto, erros)."""
+    res = schemas.validar_texto_json(schemas.ResumoSolicitacao, texto_json)
+    if not res.valido:
+        return "rejeitada_esquema", None, [
+            {**e, "camada": "sintatica" if e["categoria"] == "json_invalido" else "esquema"} for e in res.erros]
+    erros = regras_resumo(res.objeto, texto_original, texto_enviado)
+    return ("bloqueada_negocio" if erros else "valida"), res.objeto, erros
+
+
+def resumir(texto: str, arquivo_origem: str, caso_id: str, cfg: dict[str, Any] | None = None, *,
+            modo: str | None = None, chamar: Callable[..., dict[str, Any]] = llm_client.chamar_chat,
+            dry_run: bool = False, caminho_log: Path | None = None) -> ResultadoResumo:
+    """Resume a solicitação (RF15) com a mesma disciplina da extração: esquema, 1 correção e regras."""
+    cfg = cfg or CONFIG["extracao_estruturada"]
+    modo = modo or cfg["modo_saida"]
+    msgs, meta = prompts.montar_mensagens_resumo(texto, arquivo_origem)
+    texto_enviado = meta.pop("texto_enviado")
+    params, json_mode = parametros_saida(modo, cfg["parametros"], schemas.ResumoSolicitacao, "resumo_solicitacao")
+    meta.update({
+        "versao_contrato": f"resumo_solicitacao-v{schemas.ResumoSolicitacao.VERSAO}",
+        "versao_prompt_correcao": prompts.VERSOES["correcao_esquema"][1],
+        "provedor": cfg["provedor"], "modelo": cfg["modelo"], "modo_saida": modo,
+        "arquivo_origem": arquivo_origem,
+        "sha256_origem": hashlib.sha256(texto.encode("utf-8")).hexdigest(),
+        "texto_enviado": texto_enviado,
+    })
+    if dry_run:
+        return ResultadoResumo(caso_id, "dry_run", meta=meta)
+    estado, objeto, erros, tentativas = _gerar_com_correcao(
+        msgs, lambda saida: validar_resumo(saida, texto, texto_enviado), cfg, params, json_mode, chamar)
+    _auditar("resumo", caso_id, estado, erros, tentativas, meta, cfg, caminho_log)
+    return ResultadoResumo(caso_id, estado, objeto.model_dump() if objeto else None, erros, tentativas, meta)
+
+
+def montar_ficha(caso_id: str, extracao: dict[str, Any] | None, estado_extracao: str, versao_prompt_extracao: str,
+                 resumo: ResultadoResumo) -> dict[str, Any] | None:
+    """Ficha exibida ao operador; só existe quando extração e resumo passaram nas três camadas."""
+    if extracao is None or estado_extracao != "valida" or resumo.estado != "valida":
+        return None
+    ficha = schemas.FichaCompreensao.model_validate({
+        "id_caso": caso_id, "extracao": extracao, "resumo": resumo.resumo,
+        "versao_prompt_extracao": versao_prompt_extracao, "versao_prompt_resumo": resumo.meta["versao_prompt"]})
+    return ficha.model_dump()
+
+
+def _mesmo_valor(esperado: str, obtido: str) -> bool:
+    de, do = _ler_data(esperado), _ler_data(obtido)
+    if de and do:
+        return de == do
+    return _confere(esperado, obtido) or _confere(obtido, esperado)
+
+
+def avaliar_ficha(extracao: dict[str, Any] | None, resumo: dict[str, Any] | None, gab: dict[str, Any]) -> dict[str, Any]:
+    """Parte automática da conferência do RF15. Fidelidade do resumo aos fatos essenciais é avaliação humana."""
+    obtidas = (extracao or {}).get("entidades") or []
+    esperadas = gab["entidades_esperadas"]
+
+    def mesmo(e, o):
+        return e["tipo"] == o["tipo"] and _mesmo_valor(e["valor"], o["valor"])
+
+    pares = [(e, next((o for o in obtidas if mesmo(e, o)), None)) for e in esperadas]
+    corpo = " ".join([(resumo or {}).get("resumo", ""), *(f["afirmacao"] for f in (resumo or {}).get("fatos", []))])
+    categoria = (extracao or {}).get("categoria")
+    return {
+        "categoria": {"obtida": categoria, "esperada": gab["extracao_esperada"]["categoria"],
+                      "correta": categoria == gab["extracao_esperada"]["categoria"]},
+        "entidades": {
+            "esperadas": len(esperadas),
+            "encontradas": sum(o is not None for _, o in pares),
+            "omitidas": [f"{e['tipo']}: {e['valor']}" for e, o in pares if o is None],
+            "a_mais": [f"{o['tipo']}: {o['valor']} ({o['origem']})" for o in obtidas
+                       if not any(mesmo(e, o) for e in esperadas)],
+            "origem_divergente": [f"{e['tipo']}: {e['valor']} (esperado {e['origem']}, obtido {o['origem']})"
+                                  for e, o in pares if o is not None and o["origem"] != e["origem"]],
+        },
+        "resumo": {
+            "palavras": schemas.contar_palavras(resumo["resumo"]) if resumo else None,
+            "padroes_proibidos": [p for p in gab.get("padroes_proibidos_resumo", []) if re.search(p, corpo, re.I)],
+            "nao_deve_aparecer": [v for v in gab.get("nao_deve_aparecer_na_extracao", [])
+                                  if normalizar(v) in normalizar(corpo)],
+        },
+    }
 
 
 # ---------------------------------------------------------------- Comparação com o gabarito
@@ -368,6 +528,79 @@ def executar_lote(caso: str | None, modo: str | None, dry_run: bool) -> Path:
     return destino
 
 
+def _secao_revisao(gab: dict[str, Any], extracao: dict[str, Any] | None, resumo: dict[str, Any] | None) -> str:
+    """Ficha e gabarito lado a lado, sem os resultados automáticos, para a conferência humana (Checkpoint 2)."""
+    resumo = resumo or {}
+    fatos = "\n".join(f"- {f['afirmacao']} — evidência: \"{f['evidencia']}\"" for f in resumo.get("fatos", [])) or "- (nenhum)"
+    entidades = "\n".join(f"- {e['tipo']} · {e['valor']} · {e['origem']} · \"{e['evidencia']}\""
+                          for e in (extracao or {}).get("entidades", [])) or "- (nenhuma)"
+    essenciais = "\n".join(f"- {f}" for f in gab["fatos_essenciais"])
+    esperadas = "\n".join(f"- {e['tipo']} · {e['valor']} · {e['origem']}" for e in gab["entidades_esperadas"])
+    palavras = schemas.contar_palavras(resumo["resumo"]) if resumo.get("resumo") else 0
+    return (f"## {gab['caso_id']}\n\nTexto original: `{gab['arquivo_origem']}`\n\n"
+            f"### Ficha gerada\n\n**Resumo ({palavras} palavras):** {resumo.get('resumo', '(sem resumo)')}\n\n"
+            f"**Fatos citados:**\n{fatos}\n\n**Categoria:** {(extracao or {}).get('categoria', '—')}\n\n"
+            f"**Entidades (tipo · valor · origem · evidência):**\n{entidades}\n\n"
+            f"### Gabarito validado\n\n**Fatos essenciais:**\n{essenciais}\n\n"
+            f"**Categoria:** {gab['extracao_esperada']['categoria']}\n\n"
+            f"**Entidades esperadas (tipo · valor · origem):**\n{esperadas}\n")
+
+
+def executar_fichas(caso: str | None, reusar: Path | None, dry_run: bool) -> Path:
+    """Gera as fichas do conjunto RF15. Com `reusar`, aproveita a extração de uma execução do RF14."""
+    cfg = CONFIG["extracao_estruturada"]
+    destino = RAIZ / cfg["diretorio_fichas"] / datetime.now().strftime("%Y%m%d-%H%M%S")
+    destino.mkdir(parents=True, exist_ok=True)
+    casos = [g for g in carregar_casos(caso) if g.get("conjunto_rf15")]
+    linhas, secoes, corretas, custo = [], [], 0, 0.0
+    for i, gab in enumerate(casos):
+        if i and not dry_run:
+            time.sleep(cfg["pausa_entre_chamadas_s"])
+        texto = (RAIZ / gab["arquivo_origem"]).read_text(encoding="utf-8")
+        if reusar:
+            ext = json.loads((reusar / f"{gab['caso_id']}.json").read_text(encoding="utf-8"))
+            extracao, estado_ext, versao_ext = ext["extracao"], ext["estado"], ext["meta"]["versao_prompt"]
+        else:
+            r = extrair(texto, gab["arquivo_origem"], gab["caso_id"], cfg, dry_run=dry_run)
+            extracao, estado_ext, versao_ext = r.extracao, r.estado, r.meta["versao_prompt"]
+            custo += _somar_uso(r.tentativas)["custo_usd"] or 0
+        res = resumir(texto, gab["arquivo_origem"], gab["caso_id"], cfg, dry_run=dry_run)
+        custo += _somar_uso(res.tentativas)["custo_usd"] or 0
+        ficha = montar_ficha(gab["caso_id"], extracao, estado_ext, versao_ext, res)
+        av = avaliar_ficha(extracao, res.resumo, gab)
+        corretas += av["categoria"]["correta"]
+        (destino / f"{gab['caso_id']}.json").write_text(json.dumps({
+            "caso_id": gab["caso_id"], "origem_extracao": relativo(reusar) if reusar else "nova",
+            "estado_extracao": estado_ext, "versao_prompt_extracao": versao_ext, "extracao": extracao,
+            "resumo": asdict(res), "ficha": ficha, "avaliacao_automatica": av,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+        print(f"  {gab['caso_id']}: extração {estado_ext}, resumo {res.estado}, ficha {'ok' if ficha else 'retida'}")
+        ent, rs = av["entidades"], av["resumo"]
+        sem_suporte = [e["categoria"] for e in res.erros if e["camada"] == "negocio"]
+        linhas.append(
+            f"| {gab['caso_id']} | {av['categoria']['obtida']} ({_marca(av['categoria']['correta'])}) | "
+            f"{ent['encontradas']}/{ent['esperadas']} | {'; '.join(ent['omitidas']) or '—'} | "
+            f"{'; '.join(ent['a_mais']) or '—'} | {'; '.join(ent['origem_divergente']) or '—'} | "
+            f"{res.estado} | {rs['palavras'] if rs['palavras'] is not None else '—'} | {', '.join(sem_suporte) or '—'} | "
+            f"{len(rs['padroes_proibidos'])} | {', '.join(rs['nao_deve_aparecer']) or '—'} |")
+        secoes.append(_secao_revisao(gab, extracao, res.resumo))
+    origem = f"extração reaproveitada de `{relativo(reusar)}`" if reusar else "extração nova"
+    (destino / "matriz_rf15.md").write_text(
+        f"# RF15 — Ficha de compreensão ({destino.name})\n\n"
+        f"Resumo: `{prompts.VERSOES['resumo'][1]}` · {origem} · modelo `{cfg['modelo']}`"
+        f"{' · DRY-RUN' if dry_run else ''} · custo estimado: US$ {custo:.6f}\n\n"
+        f"**Acurácia de categoria: {corretas}/{len(casos)}.** Conferência automática; a fidelidade do resumo aos "
+        "fatos essenciais é avaliada por pessoa (Checkpoint 2).\n\n"
+        "| Caso | Categoria | Entidades esperadas encontradas | Omitidas | A mais (a conferir) | Origem divergente "
+        "| Resumo | Palavras | Sem suporte | Padrões proibidos | Dado proibido |\n"
+        "|---|---|---|---|---|---|---|---|---|---|---|\n" + "\n".join(linhas) + "\n",
+        encoding="utf-8", newline="\n")
+    (destino / "fichas_para_revisao.md").write_text(
+        f"# Fichas para conferência humana ({destino.name})\n\n" + "\n---\n\n".join(secoes),
+        encoding="utf-8", newline="\n")
+    return destino
+
+
 # ---------------------------------------------------------------- Comparação JSON sintático × esquema
 
 def _avaliar_camadas(rotulo: str, origem: str, texto_json: str, texto_original: str) -> dict[str, Any]:
@@ -445,13 +678,25 @@ def main(argv: list[str] | None = None) -> int:
     p_ext.add_argument("--modo", choices=["json_schema_estrito", "json_object"], help="Sobrescreve config.json")
     p_ext.add_argument("--dry-run", action="store_true", help="Monta as mensagens sem chamar o provedor")
     sub.add_parser("comparar-json", help="Gera a comparação JSON sintático × esquema (resultados/metricas)")
+    p_fic = sub.add_parser("fichas", help="Gera as fichas de compreensão do conjunto RF15 (resumo + extração)")
+    alvo_f = p_fic.add_mutually_exclusive_group(required=True)
+    alvo_f.add_argument("--caso", help="ID do caso")
+    alvo_f.add_argument("--todos", action="store_true", help="Todos os casos do conjunto RF15")
+    p_fic.add_argument("--reusar-extracao", type=Path, help="Pasta de uma execução do RF14 (resultados/extracao/...)")
+    p_fic.add_argument("--dry-run", action="store_true", help="Monta as mensagens sem chamar o provedor")
     args = parser.parse_args(argv)
 
-    if args.comando == "extrair":
+    if args.comando in ("extrair", "fichas"):
         from dotenv import load_dotenv
         load_dotenv(RAIZ / ".env")
+    if args.comando == "extrair":
         destino = executar_lote(args.caso, args.modo, args.dry_run)
         print(f"[OK] Resultados em {relativo(destino)} (matriz_rf14.md)")
+    elif args.comando == "fichas":
+        reusar = (RAIZ / args.reusar_extracao) if args.reusar_extracao and not args.reusar_extracao.is_absolute() \
+            else args.reusar_extracao
+        destino = executar_fichas(args.caso, reusar, args.dry_run)
+        print(f"[OK] Resultados em {relativo(destino)} (matriz_rf15.md, fichas_para_revisao.md)")
     else:
         print(f"[OK] {relativo(comparar_json())}")
     return 0

@@ -1,0 +1,222 @@
+{
+  "caso_id": "caso01_texto",
+  "origem_extracao": "resultados/extracao/20261028-173726",
+  "estado_extracao": "valida",
+  "versao_prompt_extracao": "extracao-v2.1",
+  "extracao": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "curso": "Técnico em Enfermagem",
+    "assunto": "Informação sobre documentos necessários para efetivação de matrícula",
+    "pedido": "Peço que me informem quais documentos ainda preciso apresentar.",
+    "categoria": "matricula",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000142",
+        "origem": "literal",
+        "evidencia": "Protocolo: 2026-000142"
+      },
+      {
+        "tipo": "data",
+        "valor": "14/10/2026",
+        "origem": "literal",
+        "evidencia": "Data: 14/10/2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Marcos Vinícius de Almeida Santos",
+        "origem": "literal",
+        "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+      },
+      {
+        "tipo": "local",
+        "valor": "Cuiabá",
+        "origem": "literal",
+        "evidencia": "nasci em [DATA DE NASCIMENTO REMOVIDA], em Cuiabá"
+      },
+      {
+        "tipo": "data",
+        "valor": "01/02/2027",
+        "origem": "literal",
+        "evidencia": "o curso tem início em 01/02/2027"
+      }
+    ],
+    "dados_pessoais_detectados": [
+      "CPF",
+      "RG",
+      "data de nascimento",
+      "filiação",
+      "e-mail"
+    ],
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "motivos_revisao": [],
+    "alertas_seguranca": []
+  },
+  "resumo": {
+    "caso_id": "caso01_texto",
+    "estado": "valida",
+    "resumo": {
+      "resumo": "Marcos Vinícius de Almeida Santos solicita a efetivação da matrícula no curso Técnico em Enfermagem (Saúde), 1200 h, turno noturno, com início em 01/02/2027, e informa que a matrícula foi registrada em 14/10/2026. Declara estar ciente da possibilidade de cancelamento por faltas nos primeiros dias de aula e pede que lhe sejam indicados os documentos ainda necessários.",
+      "fatos": [
+        {
+          "afirmacao": "O solicitante se chama Marcos Vinícius de Almeida Santos.",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "afirmacao": "Ele solicita a efetivação da matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno.",
+          "evidencia": "solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno"
+        },
+        {
+          "afirmacao": "O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026.",
+          "evidencia": "O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026"
+        },
+        {
+          "afirmacao": "Ele declara estar ciente da política de cancelamento por faltas nos primeiros dias de aula.",
+          "evidencia": "Declaro estar ciente de que a matrícula será automaticamente cancelada se eu faltar, sem justificativa comprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos ou não, nos dez primeiros dias de aula"
+        },
+        {
+          "afirmacao": "Ele pede informações sobre quais documentos ainda precisa apresentar.",
+          "evidencia": "Peço que me informem quais documentos ainda preciso apresentar"
+        }
+      ]
+    },
+    "erros": [],
+    "tentativas": [
+      {
+        "numero": 1,
+        "texto_bruto": "{\n  \"resumo\": \"Marcos Vinícius de Almeida Santos solicita a efetivação da matrícula no curso Técnico em Enfermagem (Saúde), 1200 h, turno noturno, com início em 01/02/2027, e informa que a matrícula foi registrada em 14/10/2026. Declara estar ciente da possibilidade de cancelamento por faltas nos primeiros dias de aula e pede que lhe sejam indicados os documentos ainda necessários.\",\n  \"fatos\": [\n    {\n      \"afirmacao\": \"O solicitante se chama Marcos Vinícius de Almeida Santos.\",\n      \"evidencia\": \"Meu nome é Marcos Vinícius de Almeida Santos\"\n    },\n    {\n      \"afirmacao\": \"Ele solicita a efetivação da matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno.\",\n      \"evidencia\": \"solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno\"\n    },\n    {\n      \"afirmacao\": \"O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026.\",\n      \"evidencia\": \"O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026\"\n    },\n    {\n      \"afirmacao\": \"Ele declara estar ciente da política de cancelamento por faltas nos primeiros dias de aula.\",\n      \"evidencia\": \"Declaro estar ciente de que a matrícula será automaticamente cancelada se eu faltar, sem justificativa comprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos ou não, nos dez primeiros dias de aula\"\n    },\n    {\n      \"afirmacao\": \"Ele pede informações sobre quais documentos ainda precisa apresentar.\",\n      \"evidencia\": \"Peço que me informem quais documentos ainda preciso apresentar\"\n    }\n  ]\n}",
+        "valida_no_esquema": true,
+        "erros": [],
+        "latencia_s": 3.72,
+        "tokens_entrada": 1065,
+        "tokens_saida": 1374,
+        "custo_usd": 0.000984
+      }
+    ],
+    "meta": {
+      "versao_prompt": "resumo-v1.0",
+      "hash_prompt_sistema": "403d054887af",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      },
+      "versao_contrato": "resumo_solicitacao-v0.1.0",
+      "versao_prompt_correcao": "correcao-esquema-v1.0",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "modo_saida": "json_schema_estrito",
+      "arquivo_origem": "dados/originais/entrada_texto.txt",
+      "sha256_origem": "8bc1318c6b3165a12d9a93b94cbc42ae9ee54d71d8eb55c428c332979a04e1b8",
+      "texto_enviado": "Canal: E-mail\nProtocolo: 2026-000142\nData: 14/10/2026\n\nPrezados,\n\nMeu nome é Marcos Vinícius de Almeida Santos, nasci em [DATA DE NASCIMENTO REMOVIDA], em Cuiabá, e solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno. O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026.\n\nMeus demais dados são: CPF [CPF REMOVIDO]; RG [RG REMOVIDO]; nome da mãe: [FILIAÇÃO REMOVIDA]; e-mail [E-MAIL REMOVIDO].\n\nDeclaro estar ciente de que a matrícula será automaticamente cancelada se eu faltar, sem justificativa comprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos ou não, nos dez primeiros dias de aula.\n\nPeço que me informem quais documentos ainda preciso apresentar.\n\nAtenciosamente,\nMarcos Vinícius de Almeida Santos\n"
+    }
+  },
+  "ficha": {
+    "id_caso": "caso01_texto",
+    "extracao": {
+      "protocolo": "2026-000142",
+      "data_solicitacao": "14/10/2026",
+      "canal": "E-mail",
+      "solicitante": "Marcos Vinícius de Almeida Santos",
+      "curso": "Técnico em Enfermagem",
+      "assunto": "Informação sobre documentos necessários para efetivação de matrícula",
+      "pedido": "Peço que me informem quais documentos ainda preciso apresentar.",
+      "categoria": "matricula",
+      "entidades": [
+        {
+          "tipo": "protocolo",
+          "valor": "2026-000142",
+          "origem": "literal",
+          "evidencia": "Protocolo: 2026-000142"
+        },
+        {
+          "tipo": "data",
+          "valor": "14/10/2026",
+          "origem": "literal",
+          "evidencia": "Data: 14/10/2026"
+        },
+        {
+          "tipo": "pessoa",
+          "valor": "Marcos Vinícius de Almeida Santos",
+          "origem": "literal",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "tipo": "local",
+          "valor": "Cuiabá",
+          "origem": "literal",
+          "evidencia": "nasci em [DATA DE NASCIMENTO REMOVIDA], em Cuiabá"
+        },
+        {
+          "tipo": "data",
+          "valor": "01/02/2027",
+          "origem": "literal",
+          "evidencia": "o curso tem início em 01/02/2027"
+        }
+      ],
+      "dados_pessoais_detectados": [
+        "CPF",
+        "RG",
+        "data de nascimento",
+        "filiação",
+        "e-mail"
+      ],
+      "campos_ausentes": [],
+      "requer_revisao": false,
+      "motivos_revisao": [],
+      "alertas_seguranca": []
+    },
+    "resumo": {
+      "resumo": "Marcos Vinícius de Almeida Santos solicita a efetivação da matrícula no curso Técnico em Enfermagem (Saúde), 1200 h, turno noturno, com início em 01/02/2027, e informa que a matrícula foi registrada em 14/10/2026. Declara estar ciente da possibilidade de cancelamento por faltas nos primeiros dias de aula e pede que lhe sejam indicados os documentos ainda necessários.",
+      "fatos": [
+        {
+          "afirmacao": "O solicitante se chama Marcos Vinícius de Almeida Santos.",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "afirmacao": "Ele solicita a efetivação da matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno.",
+          "evidencia": "solicito a efetivação da minha matrícula no curso Técnico em Enfermagem, eixo tecnológico Saúde, com carga horária de 1200 horas, turno noturno"
+        },
+        {
+          "afirmacao": "O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026.",
+          "evidencia": "O curso tem início em 01/02/2027 e a data da matrícula é 14/10/2026"
+        },
+        {
+          "afirmacao": "Ele declara estar ciente da política de cancelamento por faltas nos primeiros dias de aula.",
+          "evidencia": "Declaro estar ciente de que a matrícula será automaticamente cancelada se eu faltar, sem justificativa comprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos ou não, nos dez primeiros dias de aula"
+        },
+        {
+          "afirmacao": "Ele pede informações sobre quais documentos ainda precisa apresentar.",
+          "evidencia": "Peço que me informem quais documentos ainda preciso apresentar"
+        }
+      ]
+    },
+    "versao_prompt_extracao": "extracao-v2.1",
+    "versao_prompt_resumo": "resumo-v1.0"
+  },
+  "avaliacao_automatica": {
+    "categoria": {
+      "obtida": "matricula",
+      "esperada": "matricula",
+      "correta": true
+    },
+    "entidades": {
+      "esperadas": 5,
+      "encontradas": 5,
+      "omitidas": [],
+      "a_mais": [],
+      "origem_divergente": []
+    },
+    "resumo": {
+      "palavras": 57,
+      "padroes_proibidos": [],
+      "nao_deve_aparecer": []
+    }
+  }
+}

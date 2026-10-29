@@ -22,6 +22,7 @@ VERSOES = {
     # v2.0 (producao/sistema_extracao_v2.md) fica preservado: é a linha de base da execução de 28/10/2026 17:17.
     "extracao_v2": ("producao/sistema_extracao_v2_1.md", "extracao-v2.1"),
     "correcao_esquema": ("producao/correcao_esquema_v1.md", "correcao-esquema-v1.0"),
+    "resumo": ("producao/sistema_resumo_v1.md", "resumo-v1.0"),
 }
 
 # Nome próprio: palavras com inicial maiúscula na mesma linha, admitindo "de/da/do/dos/das" entre elas.
@@ -111,6 +112,18 @@ def montar_mensagens_extracao_v2(texto: str, arquivo_origem: str, minimizar_dado
     sistema = ler_prompt(VERSOES["extracao_v2"][0]).replace("{{CATEGORIAS}}", categorias_formatadas())
     usuario = ("Extraia os dados do conteúdo abaixo no formato do esquema.\n\n" + delimitar(texto, arquivo_origem))
     meta = {"versao_prompt": VERSOES["extracao_v2"][1], "hash_prompt_sistema": hash_texto(sistema),
+            "dados_minimizados": removidos, "texto_enviado": texto}
+    return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
+def montar_mensagens_resumo(texto: str, arquivo_origem: str, minimizar_dados: bool = True):
+    """Mensagens da sumarização (RF15, contrato ResumoSolicitacao). Retorna (mensagens, metadados)."""
+    removidos = {}
+    if minimizar_dados:
+        texto, removidos = minimizar(texto)
+    sistema = ler_prompt(VERSOES["resumo"][0])
+    usuario = "Resuma o conteúdo abaixo no formato do esquema.\n\n" + delimitar(texto, arquivo_origem)
+    meta = {"versao_prompt": VERSOES["resumo"][1], "hash_prompt_sistema": hash_texto(sistema),
             "dados_minimizados": removidos, "texto_enviado": texto}
     return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
 
