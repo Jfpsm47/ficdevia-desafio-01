@@ -23,12 +23,8 @@
     "rotulo": "B. Saída real do Desafio 02 (prompt v2, esquema estrito)",
     "origem": "resultados/extracao/20261028-173726/caso01_texto.json",
     "aceito_so_sintatico": true,
-    "estado": "bloqueada_negocio",
-    "erros_por_categoria": {
-      "evidencia_sem_suporte": [
-        "entidades.3.evidencia"
-      ]
-    }
+    "estado": "valida",
+    "erros_por_categoria": {}
   },
   {
     "rotulo": "C. Saída B com três defeitos controlados",

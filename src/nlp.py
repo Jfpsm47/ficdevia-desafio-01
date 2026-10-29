@@ -1,7 +1,8 @@
-"""Compreensão das solicitações (Desafio 02): extração estruturada e validação em três camadas (RF14).
+"""Compreensão das solicitações (Desafio 02): extração estruturada e validação em três camadas (RF14),
+resumo e ficha de compreensão (RF15).
 
 Responsabilidade: Estudante 1. Fluxo de `extrair`:
-1. minimiza dados pessoais e monta as mensagens (prompt extracao-v2.0, conteúdo delimitado);
+1. minimiza dados pessoais e monta as mensagens (prompt extracao-v2.1, conteúdo delimitado);
 2. pede saída restrita pelo JSON Schema do contrato (modo estrito) ou apenas JSON (`json_object`);
 3. valida as camadas 1 (sintática) e 2 (contrato); se falhar, faz no máximo UMA tentativa de correção e
    rejeita a saída que continuar inválida;
@@ -9,7 +10,9 @@ Responsabilidade: Estudante 1. Fluxo de `extrair`:
 5. decide o encaminhamento: só `minuta_pendente_de_aprovacao` libera a geração da minuta, que continua
    sujeita à aprovação humana.
 
-`validar_extracao` (camadas 1 a 3, sem chamar o provedor) é o ponto de integração com o fluxo principal.
+`resumir` aplica a mesma disciplina ao resumo. Pontos de integração com o fluxo principal (ver
+documentacao/INTEGRACAO_RF14.md): `compreender` (extração + resumo + ficha) e `validar_extracao`
+(camadas 1 a 3 sobre uma saída já recebida, sem chamar o provedor).
 
 Uso:
   python -m src.nlp extrair --todos [--modo json_schema_estrito|json_object] [--dry-run]
@@ -405,6 +408,36 @@ def montar_ficha(caso_id: str, extracao: dict[str, Any] | None, estado_extracao:
     return ficha.model_dump()
 
 
+@dataclass
+class Compreensao:
+    """Resultado de `compreender`: extração (RF14), resumo e ficha (RF15) de uma solicitação."""
+    extracao: ResultadoExtracao
+    resumo: ResultadoResumo
+    ficha: dict[str, Any] | None
+
+    @property
+    def libera_minuta(self) -> bool:
+        return self.extracao.libera_minuta
+
+    @property
+    def exibicao(self) -> dict[str, Any] | None:
+        return para_exibicao(self.extracao.extracao) if self.extracao.extracao else None
+
+
+def compreender(texto: str, arquivo_origem: str, caso_id: str, cfg: dict[str, Any] | None = None, *,
+                chamar: Callable[..., dict[str, Any]] = llm_client.chamar_chat, dry_run: bool = False,
+                caminho_log: Path | None = None) -> Compreensao:
+    """Ponto único de integração (decisão 3-B): extrai, resume e monta a ficha.
+
+    Só a extração decide a minuta (`libera_minuta`). O resumo é gerado mesmo quando a extração bloqueia,
+    porque ajuda a triagem humana; a ficha só existe com as duas saídas válidas.
+    """
+    ext = extrair(texto, arquivo_origem, caso_id, cfg, chamar=chamar, dry_run=dry_run, caminho_log=caminho_log)
+    res = resumir(texto, arquivo_origem, caso_id, cfg, chamar=chamar, dry_run=dry_run, caminho_log=caminho_log)
+    ficha = montar_ficha(caso_id, ext.extracao, ext.estado, ext.meta["versao_prompt"], res)
+    return Compreensao(ext, res, ficha)
+
+
 def _mesmo_valor(esperado: str, obtido: str) -> bool:
     de, do = _ler_data(esperado), _ler_data(obtido)
     if de and do:
@@ -603,13 +636,15 @@ def executar_fichas(caso: str | None, reusar: Path | None, dry_run: bool) -> Pat
 
 # ---------------------------------------------------------------- Comparação JSON sintático × esquema
 
-def _avaliar_camadas(rotulo: str, origem: str, texto_json: str, texto_original: str) -> dict[str, Any]:
+def _avaliar_camadas(rotulo: str, origem: str, texto_json: str, texto_original: str,
+                     texto_enviado: str) -> dict[str, Any]:
     try:
         json.loads(texto_json)
         sintatico = True
     except json.JSONDecodeError:
         sintatico = False
-    estado, _, _, erros = validar_extracao(texto_json, texto_original)
+    # Como em `extrair`: a evidência pode citar o texto enviado, que já chega minimizado ao modelo.
+    estado, _, _, erros = validar_extracao(texto_json, texto_original, texto_enviado)
     por_categoria: dict[str, list[str]] = {}
     for e in erros:
         por_categoria.setdefault(e["categoria"], []).append(e["campo"])
@@ -627,7 +662,9 @@ def comparar_json(execucao: Path | None = None) -> Path:
                                 None)
     if execucao is None:
         raise SystemExit("Rode antes: python -m src.nlp extrair --caso caso01_texto")
-    v2 = json.loads((execucao / "caso01_texto.json").read_text(encoding="utf-8"))["extracao"]
+    registro = json.loads((execucao / "caso01_texto.json").read_text(encoding="utf-8"))
+    v2, enviado_v2 = registro["extracao"], registro["meta"]["texto_enviado"]
+    enviado_v1 = prompts.minimizar(texto_original)[0]  # o Desafio 01 também minimizava antes do envio
 
     # Defeitos controlados sobre a saída válida: os três tipos de erro que o RF14 manda diferenciar.
     mutada = copy.deepcopy(v2)
@@ -637,12 +674,13 @@ def comparar_json(execucao: Path | None = None) -> Path:
 
     amostras = [
         _avaliar_camadas("A. Saída real do Desafio 01 (prompt v1, modo json_object)", relativo(d1),
-                         d1.read_text(encoding="utf-8"), texto_original),
+                         d1.read_text(encoding="utf-8"), texto_original, enviado_v1),
         _avaliar_camadas("B. Saída real do Desafio 02 (prompt v2, esquema estrito)",
-                         relativo(execucao / "caso01_texto.json"), json.dumps(v2, ensure_ascii=False), texto_original),
+                         relativo(execucao / "caso01_texto.json"), json.dumps(v2, ensure_ascii=False), texto_original,
+                         enviado_v2),
         _avaliar_camadas("C. Saída B com três defeitos controlados", "chave extra 'prioridade'; "
                          "requer_revisao como texto; 'pedido' removido", json.dumps(mutada, ensure_ascii=False),
-                         texto_original),
+                         texto_original, enviado_v2),
     ]
     destino = RAIZ / "resultados/metricas"
     destino.mkdir(parents=True, exist_ok=True)

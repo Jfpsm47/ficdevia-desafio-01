@@ -16,6 +16,89 @@
   documento de OCR e aprovou a peça visual final. As correções ficaram restritas às versões revisadas,
   preservando as saídas brutas. As decisões e os hashes estão em `resultados/logs/execucoes.jsonl`.
 
+## Atualização do Estudante 1 — 28/10/2026 — Desafio 02 (esquemas, NLP, dados fictícios e gabaritos)
+
+- **Ferramenta de desenvolvimento:** Claude Code (CLI), modelo Claude Opus 5.5 (`claude-opus-5-5`).
+- **IA do produto:** GroqCloud, `openai/gpt-oss-120b`, nas execuções reais do RF14 e do RF15 (custos em
+  `documentacao/RF14_EXTRACAO.md` e `documentacao/RF15_FICHAS.md`).
+- **Trabalho produzido:** contratos em `src/schemas.py` e JSON Schema em `prompts/esquemas/`; acervo,
+  solicitações, perguntas, avaliações, ataques e gabaritos em `dados/` (`src/dados_ficticios.py`); prompts
+  `extracao-v2.0`, `extracao-v2.1`, `correcao-esquema-v1.0` e `resumo-v1.0`; extração, validação em três
+  camadas, resumo, ficha e ponto de integração em `src/nlp.py`; testes `test_schemas.py`,
+  `test_dados_ficticios.py`, `test_nlp.py` e `test_fichas.py`; documentação do Desafio 02.
+- **Método de trabalho:** plano em 5 fases aprovado pelo revisor; a IA não registrou decisões humanas por
+  conta própria. Nas avaliações humanas, a IA mostrava o conteúdo real e, só a pedido do revisor, os pontos de
+  atenção num bloco recolhido do chat ("leia depois de formar sua opinião"); os formulários ficaram neutros e
+  o registro trouxe somente o que o revisor decidiu. Os commits foram feitos pelo revisor.
+- **Serviço real × simulação:** as execuções em `resultados/extracao/` e `resultados/fichas/` são chamadas
+  reais ao Groq. Os testes automatizados usam um provedor simulado (`ProvedorFalso` em `testes/test_nlp.py`),
+  identificado como tal, e o `--dry-run` não chama o provedor; nenhum resultado simulado foi apresentado como
+  medida do modelo.
+
+### Solicitações relevantes (Desafio 02)
+
+1. **28/10/2026:** "avalie o estado atual do projeto, entenda o contexto do desafio atual e me proponha o
+   plano completo de implementação de forma didatica" → plano em 5 fases (contratos; dados e gabaritos com
+   Checkpoint 1; RF14; RF15 com Checkpoint 2; integração e documentação) e três decisões para o revisor.
+2. **28/10/2026:** "1-A, 2-A e 3-B, pode começar a Fase 0" → contratos versionados para toda a equipe, par
+   contraditório sem regra de prioridade e integração entregue como funções prontas mais nota para o
+   Estudante 2.
+3. **28/10/2026:** "Podemos fazer uma sessão de avaliação? você me resume tudo oque eu devo avaliar, eu avalio
+   e você vai marcado como avaliado" e "Pode colocar seus pontos de atenção em cada um dos itens daqui do
+   bloco?" → sessões por blocos nos Checkpoints 1 e 2, com o registro restrito às decisões do revisor.
+4. **28/10/2026:** "vamos com a sua recomendação" → prompt `extracao-v2.1` adotado, com a execução v2.0
+   preservada como linha de base e o risco de sobreajuste documentado.
+5. **28/10/2026:** "pode começar a Fase 4" → ponto único de integração `nlp.compreender`, nota de integração
+   atualizada, matriz de testes, métricas do RF23, README e relatório técnico.
+
+### Sugestões aceitas, modificadas e rejeitadas (Desafio 02)
+
+| Sugestão da IA | Decisão | Justificativa |
+|---|---|---|
+| Par ACV-04 × ACV-05 sem regra de prioridade; esperado `conflito_fontes` e revisão | Aceita (1-A) | Caminho mais exigente do RF19 e previsto no enunciado quando falta regra suficiente |
+| Estudante 1 rascunhar os contratos de RAG, sentimento e revisão como proposta 0.x | Aceita (2-A) | "Esquemas" é atribuição do Estudante 1; os colegas podem pedir mudança antes da 1.0 |
+| Alterar `main.py` diretamente na integração | Rejeitada; adotada a 3-B | O Estudante 2 faz o encaixe com funções prontas e nota, para manter e demonstrar o fluxo |
+| ACV-04 e ACV-05 em setores diferentes | Modificada | O revisor colocou os dois no mesmo setor, para que nenhum tenha precedência pela origem |
+| caso07 como solicitação ambígua | Modificada | O revisor o considerou só incompleto; foi criado o caso09 como ambíguo |
+| Nome real da variável de ambiente do projeto no ataque do caso08 | Modificada | Removido; o ataque pede "a chave de API configurada no sistema" |
+| Padrões de verificação (vaga no caso06; P03, P06 e P07; termos dos ataques; AV-06 no guia) | Modificada | Corrigidos a pedido do revisor e testados com frases certas e erradas antes de gravar |
+| Contar descrição do ataque em `alertas_seguranca` como vazamento no caso04 | Modificada | O revisor mandou ignorar esse campo: descrever o ataque é o comportamento correto |
+| Prompt `extracao-v2.1` com as duas execuções documentadas | Aceita | Corrigiu o caso03; o caso09 ficou instável, registrado como risco residual |
+| Fichas do caso03 e do caso09 como saíram do modelo | Modificada | O revisor registrou o caso03 como parcial (carga horária e 2 entidades) e a categoria do caso09 como incorreta |
+
+### Erros encontrados (Desafio 02)
+
+**Encontrados durante o desenvolvimento (pela IA, por testes ou nas execuções):**
+
+- Uma substituição com `sed` trocou o corpo da própria função `relativo` e criou recursão infinita; corrigido.
+- Testes que dependiam do estado real dos gabaritos (pendentes, sem hashes) quebraram depois da validação;
+  passaram a usar cópias temporárias.
+- O hash de `caso03_ocr_revisado.txt` divergiu do repositório por conversão CRLF; foi criado o
+  `.gitattributes` e o congelamento foi refeito pelo revisor.
+- Minimização: o padrão de filiação engolia o resto da frase, o nome atravessava a quebra de linha e levava o
+  rótulo "E-mail:", e o RG levava o ponto final; corrigidos com testes.
+- O Pydantic em modo flexível convertia `"talvez"` em booleano; os contratos passaram a `strict=True`.
+- A recusa HTTP 400 do modo estrito do Groq era tratada como falha do provedor, sem a correção prevista;
+  passou a erro de esquema (execução `20261028-173235`).
+- HTTP 429 com pausa de 3 s entre chamadas; a pausa passou a 30 s.
+- `comparar_json` validava sem o texto minimizado enviado ao modelo e marcava como bloqueada uma saída real
+  válida; corrigido na Fase 4, com teste e arquivo regenerado sem nova chamada.
+- Na redação da matriz de testes e do relatório, a IA trocou os identificadores das perguntas contraditória
+  e sem resposta e descreveu o caso07 com um perfil inexistente; a conferência contra os gabaritos corrigiu os
+  dois pontos antes da entrega.
+
+**Encontrados pelo revisor humano (Estudante 1):** padrões de verificação imprecisos (vaga, P03, P06, P07,
+termos dos ataques), rótulo da AV-06 no guia, perfil do caso07, setor dos documentos contraditórios, omissões
+do caso03 e categoria do caso09 (registros em `documentacao/AVALIACAO_HUMANA.md`, seções 6 e 7).
+
+### Validação (Desafio 02)
+
+- Código: suíte offline `python -m unittest discover -s testes -t .` em 28/10/2026, com `PYTHONUTF8=1`: 130
+  testes, 129 aprovados e 1 erro conhecido fora do escopo do Estudante 1 (`test_sintese_voz`, encoding no
+  Windows, a cargo do Estudante 3). Todos os testes de contratos, dados, RF14 e RF15 passam.
+- Conteúdo: gabaritos validados e congelados pelo revisor antes das chamadas (Checkpoint 1); fichas conferidas
+  pelo revisor (Checkpoint 2); varredura de dados pessoais e segredos nas saídas antes dos commits das Fases 3 e 4.
+
 > Seções marcadas com **[HUMANO]** só podem ser preenchidas pela equipe.
 
 ## 1. Ferramentas, modelos e versões

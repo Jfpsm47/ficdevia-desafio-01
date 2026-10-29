@@ -96,6 +96,30 @@ class TestFicha(BaseResumo):
         self.assertIsNone(nlp.montar_ficha("caso05", VALIDA_05, "valida", "extracao-v2.1", retido))
 
 
+class TestCompreender(BaseResumo):
+    """Ponto único de integração (decisão 3-B): extração + resumo + ficha."""
+
+    def compreender(self, provedor, **kw):
+        return nlp.compreender(TEXTO_05, "dados/originais/x.txt", "caso_teste", CFG, chamar=provedor,
+                               caminho_log=self.log, **kw)
+
+    def test_extracao_e_resumo_validos_geram_ficha_e_liberam_minuta(self):
+        c = self.compreender(ProvedorFalso(VALIDA_05, RESUMO_05))
+        self.assertTrue(c.libera_minuta)
+        self.assertEqual(c.ficha["versao_prompt_extracao"], "extracao-v2.1")
+        self.assertEqual(c.exibicao["protocolo"], "não localizado")
+
+    def test_extracao_bloqueada_retem_ficha_mas_mantem_resumo_para_triagem(self):
+        c = self.compreender(ProvedorFalso(com(VALIDA_05, solicitante="Pessoa Inventada"), RESUMO_05))
+        self.assertEqual((c.extracao.estado, c.libera_minuta, c.ficha), ("bloqueada_negocio", False, None))
+        self.assertEqual(c.resumo.estado, "valida")
+
+    def test_dry_run_nao_chama_o_provedor(self):
+        provedor = ProvedorFalso()
+        c = self.compreender(provedor, dry_run=True)
+        self.assertEqual((provedor.chamadas, c.ficha, c.libera_minuta), ([], None, False))
+
+
 class TestAvaliacaoDaFicha(unittest.TestCase):
     def test_ficha_igual_ao_gabarito(self):
         av = nlp.avaliar_ficha(VALIDA_05, RESUMO_05, GAB_05)

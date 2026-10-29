@@ -256,5 +256,17 @@ class TestComparacaoComGabarito(unittest.TestCase):
         self.assertEqual(nlp.comparar_com_gabarito(obtido, nlp.REVISAO_ANTES, gab)["nao_deve_aparecer"], ["Art. 99"])
 
 
+class TestComparacaoJson(unittest.TestCase):
+    def test_evidencia_citada_do_texto_minimizado_e_aceita(self):
+        # Saída real (20261028-173726) cuja evidência cita "[DATA DE NASCIMENTO REMOVIDA]": a comparação
+        # JSON precisa validar como `extrair`, também contra o texto enviado.
+        registro = json.loads((RAIZ / "resultados/extracao/20261028-173726/caso01_texto.json").read_text(encoding="utf-8"))
+        texto_json = json.dumps(registro["extracao"], ensure_ascii=False)
+        avaliacao = nlp._avaliar_camadas("B", "x", texto_json, TEXTO_01, registro["meta"]["texto_enviado"])
+        self.assertEqual((avaliacao["estado"], avaliacao["erros_por_categoria"]), ("valida", {}))
+        sem_enviado = nlp._avaliar_camadas("B", "x", texto_json, TEXTO_01, "")
+        self.assertEqual(sem_enviado["erros_por_categoria"], {"evidencia_sem_suporte": ["entidades.3.evidencia"]})
+
+
 if __name__ == "__main__":
     unittest.main()

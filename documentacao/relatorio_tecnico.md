@@ -140,3 +140,95 @@ visual é mais simples do que o de modelos maiores. Detalhes em [RF10_IMAGEM.md]
 - **Áudio e TTS (RF06/RF07):** há uma única amostra real. A transcrição em nuvem expõe a gravação ao provedor e a voz sintetizada ainda requer escuta humana para nomes, siglas, datas e números. O modelo Piper precisa estar instalado localmente para nova execução.
 - **OCR/visão (RF08):** a máscara de assinatura foi calibrada para uma única página e um único layout. O comparador textual não substitui a leitura visual; outros formulários, ruído, rotação ou páginas adicionais exigem nova validação.
 - **Imagem (RF10):** o FLUX.2 klein 4B quantizado foi escolhido para rodar localmente após limite da alternativa gratuita hospedada. Ele preserva privacidade e elimina custo de API, porém produz menos variações e acabamento visual mais simples; a peça só pode ser usada depois de revisão humana.
+
+## 10. Desafio 02 — Esquemas, NLP, dados fictícios e gabaritos (Estudante 1)
+
+Detalhes e reprodução: [CONTRATOS_DADOS.md](CONTRATOS_DADOS.md), [DADOS_E_GABARITOS_D2.md](DADOS_E_GABARITOS_D2.md),
+[RF14_EXTRACAO.md](RF14_EXTRACAO.md), [RF15_FICHAS.md](RF15_FICHAS.md), [INTEGRACAO_RF14.md](INTEGRACAO_RF14.md) e
+[MATRIZ_TESTES_D2.md](MATRIZ_TESTES_D2.md).
+
+### 10.1 Compreensão da solicitação no fluxo
+
+```
+texto da solicitação (digitado | transcrição revisada | OCR revisado)
+   ▼
+minimização (src/prompts.minimizar) + delimitação do conteúdo não confiável
+   ▼
+extração [extracao-v2.1, JSON Schema estrito] ── camada 1 sintática → camada 2 contrato
+   │                                                (no máximo 1 correção; ainda inválida → rejeitada)
+   ▼
+camada 3: regras de negócio contra o original ── violação → bloqueada, revisão humana, sem minuta
+   ▼
+resumo [resumo-v1.0] com fatos e evidências ── mesmas 3 camadas
+   ▼
+ficha de compreensão + encaminhamento: minuta pendente | revisão antes da minuta | bloqueada
+   ▼
+(Estudante 2) recuperação no acervo e minuta fundamentada → revisão humana
+```
+
+O ponto único de integração é `nlp.compreender`; o encaixe em `src/main.py` é feito pelo Estudante 2
+(decisão de equipe 3-B).
+
+### 10.2 Contratos de dados
+
+`src/schemas.py` define 13 contratos Pydantic versionados (v0.1.0), com `extra="forbid"` e `strict=True` (sem
+coerção de tipo), exportados como JSON Schema em `prompts/esquemas/`. Além da solicitação e da ficha, há
+contratos para acervo, trechos indexados, resposta RAG com citações, avaliação, sentimento e decisão de
+revisão, propostos aos colegas (decisão 2-A). Regras que o JSON Schema não expressa ficam no contrato:
+`campos_ausentes` igual aos campos nulos, resumo de até 100 palavras, `sem_evidencia` sem afirmações,
+`conflito_fontes` com ao menos 2 documentos e `enviada_ao_cidadao` sempre `false`. Os erros de validação
+nunca reproduzem o valor recebido.
+
+### 10.3 Dados fictícios e gabaritos
+
+| Entrada | Quantidade | Observação |
+|---|---|---|
+| Acervo | 6 documentos (ACV-01 a ACV-06), 2 temas, TXT e PDF textual | Identificador, título, versão e vigência em `dados/acervo/catalogo.json` |
+| Solicitações | 7 no conjunto RF15 (4 completas, 2 incompletas, 1 ambígua) | Inclui a transcrição do áudio e o OCR revisados do Desafio 01 |
+| Perguntas RAG | 8 (5 respondíveis, P06 contraditória, P07 e P08 sem resposta) | Contradição ACV-04 × ACV-05 sem regra de prioridade: esperado `conflito_fontes` e revisão (decisão 1-A) |
+| Avaliações | 12 (3 positivas, 3 negativas, 3 neutras, 3 ambíguas ou mistas) | Guia de rotulagem com justificativa dos rótulos ambíguos |
+| Ataques | 3 (na solicitação, no acervo e pedido de segredo) | Gabarito em `adversariais.json` |
+
+Todos os gabaritos foram validados pelo revisor e congelados (SHA-256) antes da primeira chamada ao modelo.
+
+### 10.4 Resultados medidos
+
+Modelo `openai/gpt-oss-120b` (Groq), `temperature` 0, saída restrita por JSON Schema.
+
+| Métrica (numerador/denominador) | Resultado |
+|---|---|
+| Saída válida no esquema na 1ª tentativa (extração) | 8/8 |
+| Campos curtos corretos | 40/40 |
+| Encaminhamento correto | 7/8 |
+| Acurácia de categoria, conjunto RF15 (conferida pelo revisor) | 6/7 |
+| Resumos fiéis aos fatos essenciais (conferido pelo revisor) | 6/7 |
+| Entidades esperadas encontradas | 24/26 |
+| Fatos sem suporte nos resumos | 0 |
+
+Custos: RF14, US$ 0,034 em 32 chamadas mais US$ 0,0004 da sonda do modo estrito; RF15, US$ 0,0059 em 7
+chamadas de resumo (preços de 16/10/2026 no `config.json`).
+
+Falhas encontradas e tratadas: bloqueio real por regra de negócio (nome do solicitante escrito diferente do
+original); HTTP 429 com pausa de 3 s (pausa passou a 30 s); recusa HTTP 400 do modo estrito tratada como
+falha do provedor (passou a erro de esquema, com 1 correção); data da solicitação nula no OCR (ajuste no
+prompt v2.0 → v2.1); comparação JSON validando sem o texto minimizado (corrigida na Fase 4).
+
+### 10.5 Privacidade
+
+A minimização passou a cobrir dados ditos em frase, como em transcrições ("meu RG é...", "o nome da minha mãe
+é..."), além do formato de formulário. A camada 3 bloqueia extração ou resumo que reproduza CPF, RG, e-mail,
+telefone, filiação ou data de nascimento. Os registros de auditoria guardam versões, hashes, tokens, custo e
+tipos de dado minimizados, sem o texto da solicitação.
+
+### 10.6 Limitações e riscos residuais
+
+- **Categoria instável em caso de fronteira:** o caso09 saiu `revisao` em 3 de 5 execuções com o v2.1. Como
+  `revisao` é a categoria que manda o caso à triagem antes da minuta, o erro reduz a proteção.
+- **Ajuste do prompt depois de ver os resultados (v2.0 → v2.1)**, num conjunto de 8 casos: risco de
+  sobreajuste, documentado.
+- **Regras de negócio por presença de texto:** detectam incoerência, mas não garantem correção (abreviação
+  legítima é bloqueada; valor presente em outro contexto passa).
+- **Omissão de fato essencial e paráfrase que muda o sentido não são detectadas automaticamente** (caso03): a
+  conferência humana da ficha continua obrigatória.
+- **O modo estrito do Groq valida depois da geração** e devolve HTTP 400; a validação local é indispensável.
+- **Amostra pequena** (7 solicitações fictícias) e encaixe no fluxo principal ainda pendente.

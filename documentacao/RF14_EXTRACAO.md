@@ -34,6 +34,12 @@ Detalhe: `resultados/metricas/rf14_comparacao_json.md`. É o mesmo caso (caso01)
 | Saída real do Desafio 02 (prompt v2.1, esquema estrito) | aceita | válida |
 | Saída do Desafio 02 com 3 defeitos controlados | aceita | rejeitada: `chave_extra` (prioridade), `tipo_incorreto` (requer_revisao como texto), `campo_ausente` (pedido) |
 
+**Correção em 28/10/2026 (Fase 4):** a primeira versão de `comparar_json` validava as amostras só contra o
+texto original, sem o texto minimizado enviado ao modelo, diferentemente de `extrair`. Por isso, a amostra B
+aparecia como `bloqueada_negocio` (`evidencia_sem_suporte`), porque a evidência de uma entidade cita
+"[DATA DE NASCIMENTO REMOVIDA]". A função passou a usar o texto enviado, o arquivo foi regenerado (sem nova
+chamada ao modelo) e há teste para o caso (`TestComparacaoJson`).
+
 ## 3. Execuções e resultados
 
 Modelo `openai/gpt-oss-120b` (Groq), `temperature` 0, esquema estrito. Gabaritos validados e congelados antes

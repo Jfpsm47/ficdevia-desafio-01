@@ -45,7 +45,7 @@ A conferência tem uma parte automática (`nlp.avaliar_ficha`) e uma humana:
 Execução `resultados/fichas/20261028-175345`: resumo `resumo-v1.0`, categoria e entidades reaproveitadas da
 extração final do RF14 (`resultados/extracao/20261028-173726`, prompt `extracao-v2.1`), modelo
 `openai/gpt-oss-120b` (Groq), `temperature` 0, esquema estrito. Conjunto RF15: 7 solicitações (4 completas,
-1 incompleta, 1 de responsável, 1 ambígua). Os gabaritos foram validados e congelados antes das chamadas.
+2 incompletas, 1 ambígua). Os gabaritos foram validados e congelados antes das chamadas.
 
 | Métrica (numerador/denominador) | Automática | Conferida pelo revisor |
 |---|---|---|
