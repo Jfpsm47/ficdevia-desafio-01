@@ -4,6 +4,10 @@
 .env.*
 !.env.example
 
+# Índices temporários de experimentos/testes (o índice oficial reproduzível fica em indice/padrao/)
+indice/experimento_*/
+indice/tmp_*/
+
 # Python
 __pycache__/
 *.py[cod]

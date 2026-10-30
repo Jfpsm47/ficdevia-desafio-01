@@ -1,0 +1,80 @@
+{
+  "teste": "T06 — RF17: Reutilização após reinício e reindexação sem duplicatas",
+  "antes": {
+    "versao": "idx-008437e371",
+    "vetores": 16,
+    "carregado_do_disco": true
+  },
+  "resultado_reindexacao": {
+    "versao_indice": "idx-008437e371",
+    "modelo_embedding": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "dimensao": 384,
+    "configuracao_chunking": "caracteres-700-sobreposicao-120",
+    "total_documentos": 6,
+    "total_vetores": 16,
+    "indexados_ou_atualizados": 0,
+    "reutilizados_sem_duplicar": 6,
+    "detalhes": [
+      {
+        "documento_id": "ACV-01",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 4
+      },
+      {
+        "documento_id": "ACV-02",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 3
+      },
+      {
+        "documento_id": "ACV-03",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 2
+      },
+      {
+        "documento_id": "ACV-04",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 3
+      },
+      {
+        "documento_id": "ACV-05",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 2
+      },
+      {
+        "documento_id": "ACV-06",
+        "acao": "reutilizado_sem_duplicar",
+        "chunks": 2
+      }
+    ]
+  },
+  "depois": {
+    "versao": "idx-008437e371",
+    "vetores": 16
+  },
+  "amostra_busca_top3": [
+    {
+      "chunk_id": "ACV-01#c2",
+      "documento_id": "ACV-01",
+      "pagina": 1,
+      "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+      "similaridade": 0.6453,
+      "metrica": "similaridade_cosseno"
+    },
+    {
+      "chunk_id": "ACV-02#c2",
+      "documento_id": "ACV-02",
+      "pagina": null,
+      "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+      "similaridade": 0.6232,
+      "metrica": "similaridade_cosseno"
+    },
+    {
+      "chunk_id": "ACV-01#c3",
+      "documento_id": "ACV-01",
+      "pagina": 2,
+      "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+      "similaridade": 0.6113,
+      "metrica": "similaridade_cosseno"
+    }
+  ]
+}

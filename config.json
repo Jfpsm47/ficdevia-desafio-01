@@ -10,7 +10,11 @@
     "audios": "resultados/audios",
     "imagens": "resultados/imagens",
     "logs": "resultados/logs",
-    "brasao": "dados/originais/brasao.png"
+    "brasao": "dados/originais/brasao.png",
+    "acervo": "dados/acervo",
+    "indice": "indice",
+    "metricas": "resultados/metricas",
+    "rag": "resultados/rag"
   },
   "provedores": {
     "gemini": {
@@ -52,6 +56,14 @@
       "modelos": [
         "llama3.2",
         "qwen2.5:7b"
+      ]
+    },
+    "simulado": {
+      "base_url": "simulado://local",
+      "env_chave": null,
+      "simulado": true,
+      "modelos": [
+        "simulado-deterministico-v1"
       ]
     }
   },
@@ -230,5 +242,94 @@
       "entrada": 0.8,
       "saida": 4.0
     }
+  },
+  "indexacao": {
+    "_comentario": "Desafio 02, RF17 e RF18 (Estudante 2). Embeddings locais multilíngues independentes do provedor de geração (RF21).",
+    "provedor_embedding": "fastembed_local",
+    "modelo_embedding": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "dimensao": 384,
+    "cache_modelos": ".cache/fastembed",
+    "diretorio_indice": "indice/padrao",
+    "metrica": "similaridade_cosseno",
+    "sentido_metrica": "Produto interno sobre vetores normalizados L2 em [-1, 1]: quanto maior o valor (mais próximo de 1.0), maior a proximidade semântica. Similaridade vetorial NÃO é garantia de verdade (Seção 16).",
+    "chunking": {
+      "unidade": "caracteres",
+      "tamanho": 700,
+      "sobreposicao": 120
+    },
+    "top_k_padrao": 4
+  },
+  "experimento_chunking": {
+    "_comentario": "Desafio 02, RF18 (Estudante 2). Duas configurações comparadas com o mesmo modelo de embedding e mesmo top-k sobre P01..P05.",
+    "top_k": 3,
+    "configuracoes": {
+      "config_a_granular": {
+        "unidade": "caracteres",
+        "tamanho": 320,
+        "sobreposicao": 50,
+        "diretorio_indice": "indice/experimento_chunk_a"
+      },
+      "config_b_contextual": {
+        "unidade": "caracteres",
+        "tamanho": 700,
+        "sobreposicao": 120,
+        "diretorio_indice": "indice/experimento_chunk_b"
+      }
+    },
+    "diretorio_saida": "resultados/metricas"
+  },
+  "geracao_rag": {
+    "_comentario": "Desafio 02, RF19 e RF21 (Estudante 2). Serviço de geração isolado da recuperação; suporta troca de configuração sem reconstruir o índice.",
+    "provedor": "groq",
+    "modelo": "openai/gpt-oss-120b",
+    "modo_saida": "json_schema_estrito",
+    "parametros": {
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 4096
+    },
+    "timeout_s": 60,
+    "tentativas_transitorias": 2,
+    "max_tentativas_correcao": 1,
+    "pausa_entre_chamadas_s": 25,
+    "orcamento_execucao": {
+      "max_chamadas": 12,
+      "max_tokens_total": 45000
+    },
+    "configuracao_secundaria": {
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "modo_saida": "json_schema_estrito",
+      "parametros": {
+        "temperature": 0,
+        "top_p": 1.0,
+        "max_tokens": 4096
+      }
+    },
+    "configuracao_contingencia_local": {
+      "provedor": "simulado",
+      "modelo": "simulado-deterministico-v1",
+      "modo_saida": "json_object",
+      "parametros": {
+        "temperature": 0
+      }
+    },
+    "diretorio_saida": "resultados/rag"
+  },
+  "retencao_privacidade": {
+    "_comentario": "Desafio 02, RF24. Governança de retenção, exclusão do índice/derivados e revisão humana obrigatória.",
+    "somente_dados_ficticios": true,
+    "minimizar_antes_do_envio": true,
+    "mascarar_identificadores_nos_logs": true,
+    "envio_automatico_ao_cidadao": false,
+    "exigir_revisao_humana_para_aprovar": true,
+    "retencao_dias": {
+      "logs_auditoria": 180,
+      "minutas_e_resultados_derivados": 90,
+      "indice_vetorial": "enquanto_documento_vigente_no_catalogo"
+    },
+    "diretorios_derivados_exclusao": [
+      "resultados/rag"
+    ]
   }
 }

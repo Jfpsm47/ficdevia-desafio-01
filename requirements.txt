@@ -9,3 +9,6 @@ pydantic==2.14.1
 # Desafio 02 — Estudante 1: geração (fpdf2) e leitura (pypdf) dos PDFs textuais do acervo fictício.
 fpdf2==2.8.9
 pypdf==6.21.4
+# Desafio 02 — Estudante 2: embeddings locais multilíngues e índice vetorial persistente (RF17, RF18, RF19).
+faiss-cpu==1.15.1
+fastembed==0.9.1

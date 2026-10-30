@@ -1,0 +1,615 @@
+{
+  "experimento": "RF18 — Comparação de Chunking e Recuperação",
+  "modelo_embedding": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "provedor_embedding": "fastembed_local",
+  "dimensao": 384,
+  "top_k": 3,
+  "criterio_acerto": "Uma pergunta conta como acerto (RF18) quando ao menos um trecho recuperado no top-k pertence ao documento da referência e contém o trecho de referência (comparação sem acentos, sem diferença de caixa e com espaços normalizados). Taxa = acertos / 5 perguntas respondíveis.",
+  "configuracoes": {
+    "config_a_granular": {
+      "id_configuracao": "caracteres-320-sobreposicao-50",
+      "unidade": "caracteres",
+      "tamanho": 320,
+      "sobreposicao": 50,
+      "versao_indice": "idx-4313588891",
+      "p01_lista_integral_no_top1": false,
+      "total_trechos_acervo": 37,
+      "media_caracteres_por_trecho": 225.9,
+      "qtd_secoes_em_multiplos_chunks": 16,
+      "secoes_em_multiplos_chunks": [
+        "ACV-01 — 2. Documentos exigidos para a matrícula (2 chunks)",
+        "ACV-01 — 4. Efetivação da matrícula (2 chunks)",
+        "ACV-01 — 5. Cancelamento automático por faltas (2 chunks)",
+        "ACV-02 — 1. Posso fazer a matrícula por meio de outra pessoa? (2 chunks)",
+        "ACV-02 — 2. A matrícula pode ser feita pela internet? (2 chunks)",
+        "ACV-02 — 3. Como sei se a minha matrícula foi efetivada? (2 chunks)",
+        "ACV-03 — 1. Tipos de declaração (2 chunks)",
+        "ACV-03 — 2. Como solicitar (2 chunks)",
+        "ACV-03 — 3. Prazo de emissão (2 chunks)",
+        "ACV-04 — 1. Finalidade (2 chunks)",
+        "ACV-04 — 2. Como solicitar o trancamento (2 chunks)",
+        "ACV-04 — 4. Duração do trancamento (2 chunks)",
+        "ACV-04 — 5. Retorno ao curso (2 chunks)",
+        "ACV-05 — 2. Justificativa de faltas (2 chunks)",
+        "ACV-05 — 3. Prazo para trancamento (2 chunks)",
+        "ACV-06 — 3. Observação técnica (2 chunks)"
+      ],
+      "acerto_recuperacao": {
+        "numerador": 4,
+        "denominador": 5,
+        "taxa": 0.8,
+        "percentual": "80%",
+        "formatado": "4/5 (80%)"
+      },
+      "cobertura_integral_referencias": {
+        "numerador": 4,
+        "denominador": 5,
+        "taxa": 0.8,
+        "percentual": "80%",
+        "formatado": "4/5 (80%)"
+      },
+      "resultados_por_pergunta": [
+        {
+          "id": "P01",
+          "tipo": "respondivel",
+          "pergunta": "Quais documentos são exigidos para a matrícula nos cursos técnicos?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-01",
+              "secao": "2. Documentos exigidos para a matrícula",
+              "trecho_referencia": "comprovante de residência emitido nos últimos 90 dias",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c3"
+              ]
+            },
+            {
+              "documento_id": "ACV-01",
+              "secao": "2. Documentos exigidos para a matrícula",
+              "trecho_referencia": "documento oficial de identidade com foto",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c3"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-01#c3",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 1,
+              "secao": "2. Documentos exigidos para a matrícula",
+              "similaridade": 0.7003,
+              "caracteres": 319
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-02#c3",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?",
+              "similaridade": 0.6454,
+              "caracteres": 233
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-01#c4",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 1,
+              "secao": "2. Documentos exigidos para a matrícula",
+              "similaridade": 0.588,
+              "caracteres": 259
+            }
+          ]
+        },
+        {
+          "id": "P02",
+          "tipo": "respondivel",
+          "pergunta": "Qual é o prazo para entregar um documento que ficou pendente na matrícula?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-01",
+              "secao": "3. Documentos pendentes",
+              "trecho_referencia": "tem até 10 (dez) dias úteis, contados da data da matrícula",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c5"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-01#c5",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "3. Documentos pendentes",
+              "similaridade": 0.7183,
+              "caracteres": 290
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-03#c5",
+              "documento_id": "ACV-03",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Como solicitar; 3. Prazo de emissão",
+              "similaridade": 0.6511,
+              "caracteres": 252
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-02#c4",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+              "similaridade": 0.6176,
+              "caracteres": 262
+            }
+          ]
+        },
+        {
+          "id": "P03",
+          "tipo": "respondivel",
+          "pergunta": "Em quanto tempo a declaração de matrícula fica pronta?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-03",
+              "secao": "3. Prazo de emissão",
+              "trecho_referencia": "são emitidas em até 3 (três) dias úteis após o pedido",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-03#c5"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-03#c5",
+              "documento_id": "ACV-03",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Como solicitar; 3. Prazo de emissão",
+              "similaridade": 0.7309,
+              "caracteres": 252
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-01#c5",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "3. Documentos pendentes",
+              "similaridade": 0.6608,
+              "caracteres": 290
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-05#c4",
+              "documento_id": "ACV-05",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Justificativa de faltas; 3. Prazo para trancamento",
+              "similaridade": 0.6589,
+              "caracteres": 190
+            }
+          ]
+        },
+        {
+          "id": "P04",
+          "tipo": "respondivel",
+          "pergunta": "Posso fazer a matrícula pela internet?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-02",
+              "secao": "2. A matrícula pode ser feita pela internet?",
+              "trecho_referencia": "O formulário web serve apenas para a pré-matrícula",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-02#c3"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-02#c3",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?",
+              "similaridade": 0.5764,
+              "caracteres": 233
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-02#c2",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "1. Posso fazer a matrícula por meio de outra pessoa?",
+              "similaridade": 0.5239,
+              "caracteres": 294
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-02#c4",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+              "similaridade": 0.4966,
+              "caracteres": 262
+            }
+          ]
+        },
+        {
+          "id": "P05",
+          "tipo": "respondivel",
+          "pergunta": "Por quanto tempo o curso pode ficar trancado?",
+          "acerto_top_k": false,
+          "cobriu_todas_referencias": false,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-04",
+              "secao": "4. Duração do trancamento",
+              "trecho_referencia": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez",
+              "encontrada": false,
+              "chunks_correspondentes": []
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-04#c5",
+              "documento_id": "ACV-04",
+              "versao_documento": "1.1",
+              "pagina": 1,
+              "secao": "2. Como solicitar o trancamento; 3. Prazo para solicitar o trancamento",
+              "similaridade": 0.7928,
+              "caracteres": 182
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-05#c4",
+              "documento_id": "ACV-05",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Justificativa de faltas; 3. Prazo para trancamento",
+              "similaridade": 0.7866,
+              "caracteres": 190
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-04#c3",
+              "documento_id": "ACV-04",
+              "versao_documento": "1.1",
+              "pagina": 1,
+              "secao": "1. Finalidade",
+              "similaridade": 0.6754,
+              "caracteres": 134
+            }
+          ]
+        }
+      ]
+    },
+    "config_b_contextual": {
+      "id_configuracao": "caracteres-700-sobreposicao-120",
+      "unidade": "caracteres",
+      "tamanho": 700,
+      "sobreposicao": 120,
+      "versao_indice": "idx-008437e371",
+      "p01_lista_integral_no_top1": true,
+      "total_trechos_acervo": 16,
+      "media_caracteres_por_trecho": 522.6,
+      "qtd_secoes_em_multiplos_chunks": 8,
+      "secoes_em_multiplos_chunks": [
+        "ACV-01 — 1. Finalidade (2 chunks)",
+        "ACV-01 — 4. Efetivação da matrícula (2 chunks)",
+        "ACV-02 — 1. Posso fazer a matrícula por meio de outra pessoa? (2 chunks)",
+        "ACV-02 — 3. Como sei se a minha matrícula foi efetivada? (2 chunks)",
+        "ACV-03 — 2. Como solicitar (2 chunks)",
+        "ACV-04 — 2. Como solicitar o trancamento (2 chunks)",
+        "ACV-05 — 2. Justificativa de faltas (2 chunks)",
+        "ACV-06 — 2. Organização do atendimento (2 chunks)"
+      ],
+      "acerto_recuperacao": {
+        "numerador": 5,
+        "denominador": 5,
+        "taxa": 1.0,
+        "percentual": "100%",
+        "formatado": "5/5 (100%)"
+      },
+      "cobertura_integral_referencias": {
+        "numerador": 5,
+        "denominador": 5,
+        "taxa": 1.0,
+        "percentual": "100%",
+        "formatado": "5/5 (100%)"
+      },
+      "resultados_por_pergunta": [
+        {
+          "id": "P01",
+          "tipo": "respondivel",
+          "pergunta": "Quais documentos são exigidos para a matrícula nos cursos técnicos?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-01",
+              "secao": "2. Documentos exigidos para a matrícula",
+              "trecho_referencia": "comprovante de residência emitido nos últimos 90 dias",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c2"
+              ]
+            },
+            {
+              "documento_id": "ACV-01",
+              "secao": "2. Documentos exigidos para a matrícula",
+              "trecho_referencia": "documento oficial de identidade com foto",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c2"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-01#c2",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 1,
+              "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+              "similaridade": 0.6891,
+              "caracteres": 650
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-01#c1",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 1,
+              "secao": "Cabeçalho institucional; 1. Finalidade",
+              "similaridade": 0.6392,
+              "caracteres": 505
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-02#c1",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "Cabeçalho institucional; 1. Posso fazer a matrícula por meio de outra pessoa?",
+              "similaridade": 0.6203,
+              "caracteres": 613
+            }
+          ]
+        },
+        {
+          "id": "P02",
+          "tipo": "respondivel",
+          "pergunta": "Qual é o prazo para entregar um documento que ficou pendente na matrícula?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-01",
+              "secao": "3. Documentos pendentes",
+              "trecho_referencia": "tem até 10 (dez) dias úteis, contados da data da matrícula",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-01#c3"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-01#c3",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+              "similaridade": 0.7126,
+              "caracteres": 569
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-03#c2",
+              "documento_id": "ACV-03",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Como solicitar; 3. Prazo de emissão; 4. Condições para emissão",
+              "similaridade": 0.6669,
+              "caracteres": 520
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-01#c4",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "4. Efetivação da matrícula; 5. Cancelamento automático por faltas; 6. Atendimento",
+              "similaridade": 0.5727,
+              "caracteres": 462
+            }
+          ]
+        },
+        {
+          "id": "P03",
+          "tipo": "respondivel",
+          "pergunta": "Em quanto tempo a declaração de matrícula fica pronta?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-03",
+              "secao": "3. Prazo de emissão",
+              "trecho_referencia": "são emitidas em até 3 (três) dias úteis após o pedido",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-03#c2"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-03#c2",
+              "documento_id": "ACV-03",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Como solicitar; 3. Prazo de emissão; 4. Condições para emissão",
+              "similaridade": 0.6932,
+              "caracteres": 520
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-01#c3",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+              "similaridade": 0.6665,
+              "caracteres": 569
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-05#c2",
+              "documento_id": "ACV-05",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+              "similaridade": 0.5507,
+              "caracteres": 390
+            }
+          ]
+        },
+        {
+          "id": "P04",
+          "tipo": "respondivel",
+          "pergunta": "Posso fazer a matrícula pela internet?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-02",
+              "secao": "2. A matrícula pode ser feita pela internet?",
+              "trecho_referencia": "O formulário web serve apenas para a pré-matrícula",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-02#c2"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-02#c2",
+              "documento_id": "ACV-02",
+              "versao_documento": "1.2",
+              "pagina": null,
+              "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+              "similaridade": 0.6257,
+              "caracteres": 514
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-01#c2",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 1,
+              "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+              "similaridade": 0.4668,
+              "caracteres": 650
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-01#c3",
+              "documento_id": "ACV-01",
+              "versao_documento": "2.0",
+              "pagina": 2,
+              "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+              "similaridade": 0.4605,
+              "caracteres": 569
+            }
+          ]
+        },
+        {
+          "id": "P05",
+          "tipo": "respondivel",
+          "pergunta": "Por quanto tempo o curso pode ficar trancado?",
+          "acerto_top_k": true,
+          "cobriu_todas_referencias": true,
+          "referencias_avaliadas": [
+            {
+              "documento_id": "ACV-04",
+              "secao": "4. Duração do trancamento",
+              "trecho_referencia": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez",
+              "encontrada": true,
+              "chunks_correspondentes": [
+                "ACV-04#c3"
+              ]
+            }
+          ],
+          "top_k_recuperado": [
+            {
+              "posicao": 1,
+              "chunk_id": "ACV-05#c2",
+              "documento_id": "ACV-05",
+              "versao_documento": "1.0",
+              "pagina": null,
+              "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+              "similaridade": 0.7856,
+              "caracteres": 390
+            },
+            {
+              "posicao": 2,
+              "chunk_id": "ACV-04#c2",
+              "documento_id": "ACV-04",
+              "versao_documento": "1.1",
+              "pagina": 1,
+              "secao": "2. Como solicitar o trancamento; 3. Prazo para solicitar o trancamento",
+              "similaridade": 0.7227,
+              "caracteres": 254
+            },
+            {
+              "posicao": 3,
+              "chunk_id": "ACV-04#c3",
+              "documento_id": "ACV-04",
+              "versao_documento": "1.1",
+              "pagina": 2,
+              "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+              "similaridade": 0.7039,
+              "caracteres": 507
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "configuracao_escolhida": "config_b_contextual",
+  "id_configuracao_escolhida": "caracteres-700-sobreposicao-120",
+  "justificativa_escolha": "A configuração 'config_b_contextual' (caracteres-700-sobreposicao-120) foi selecionada para o índice oficial porque obteve acerto de recuperação de 5/5 (100%) (cobertura integral das referências: 5/5 (100%)) e preserva integralmente as seções normativas críticas em um único trecho — em especial a seção '2. Documentos exigidos para a matrícula' do ACV-01 (~470 caracteres), evitando a fragmentação da lista de documentos e da condição para menores de 18 anos observada na configuração granular de 320 caracteres.",
+  "falhas_e_ajustes_registrados": [
+    "Na configuração granular (320 caracteres, sobreposição 50), a seção 2 do ACV-01 foi dividida em dois chunks (ACV-01#c3 e ACV-01#c4), separando os primeiros itens da lista de matrícula da exigência de foto 3x4 e documento do responsável para menores de 18 anos.",
+    "Ajuste aplicado no divisor (`src/ingestion.py`): nunca misturar páginas distintas de um PDF no mesmo chunk para garantir que o metadado `pagina` permaneça exato e conferível nas citações do RF19."
+  ]
+}
