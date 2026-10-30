@@ -1,0 +1,41 @@
+{
+  "protocolo": "2026-000203",
+  "data_solicitacao": "20/10/2026",
+  "canal": "Formulário web",
+  "solicitante": "Juliana Martins Rocha",
+  "curso": "Técnico em Logística",
+  "assunto": "Transferência de turno para noturno",
+  "pedido": "Solicito a transferência para o turno noturno e informações sobre vagas e procedimentos.",
+  "categoria": "transferencia",
+  "entidades": [
+    {
+      "tipo": "protocolo",
+      "valor": "2026-000203",
+      "origem": "literal",
+      "evidencia": "Protocolo: 2026-000203"
+    },
+    {
+      "tipo": "data",
+      "valor": "20/10/2026",
+      "origem": "literal",
+      "evidencia": "Data: 20/10/2026"
+    },
+    {
+      "tipo": "pessoa",
+      "valor": "Juliana Martins Rocha",
+      "origem": "literal",
+      "evidencia": "Sou Juliana Martins Rocha"
+    },
+    {
+      "tipo": "local",
+      "valor": "Distrito Industrial de Cuiabá",
+      "origem": "literal",
+      "evidencia": "Distrito Industrial de Cuiabá"
+    }
+  ],
+  "dados_pessoais_detectados": [],
+  "campos_ausentes": [],
+  "requer_revisao": false,
+  "motivos_revisao": [],
+  "alertas_seguranca": []
+}

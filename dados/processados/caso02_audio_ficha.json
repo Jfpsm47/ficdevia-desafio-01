@@ -1,0 +1,76 @@
+{
+  "id_caso": "caso02_audio",
+  "extracao": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": null,
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "curso": "técnico em enfermagem",
+    "assunto": "Efetivação de matrícula e solicitação de documentos",
+    "pedido": "Solicito a efetivação da matrícula e a lista de documentos pendentes.",
+    "categoria": "matricula",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000142",
+        "origem": "literal",
+        "evidencia": "meu protocolo é 2026-000142"
+      },
+      {
+        "tipo": "data",
+        "valor": "14/10/2026",
+        "origem": "literal",
+        "evidencia": "14 de outubro de 2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Marcos Vinícius de Almeida Santos",
+        "origem": "literal",
+        "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+      },
+      {
+        "tipo": "local",
+        "valor": "Cuiabá",
+        "origem": "literal",
+        "evidencia": "em Cuiabá"
+      }
+    ],
+    "dados_pessoais_detectados": [
+      "CPF",
+      "RG",
+      "data de nascimento",
+      "e-mail"
+    ],
+    "campos_ausentes": [
+      "canal"
+    ],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "campo ausente: canal"
+    ],
+    "alertas_seguranca": []
+  },
+  "resumo": {
+    "resumo": "Marcos Vinícius de Almeida Santos, protocolo 2026-000142 de 14/10/2026, solicita a efetivação da matrícula no curso técnico em enfermagem (eixo saúde, 1.200 h, turno noturno) e pede informações sobre os documentos ainda necessários para concluir a matrícula.",
+    "fatos": [
+      {
+        "afirmacao": "O solicitante se chama Marcos Vinícius de Almeida Santos.",
+        "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+      },
+      {
+        "afirmacao": "O protocolo informado é 2026-000142 de 14 de outubro de 2026.",
+        "evidencia": "meu protocolo é 2026-000142 de 14 de outubro de 2026"
+      },
+      {
+        "afirmacao": "Ele pede a efetivação da matrícula no curso técnico em enfermagem, eixo tecnológico de saúde, 1.200 horas, turno noturno.",
+        "evidencia": "quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno"
+      },
+      {
+        "afirmacao": "Solicita informações sobre os documentos ainda necessários para concluir a matrícula.",
+        "evidencia": "Peço que informem quais os documentos ainda preciso apresentar"
+      }
+    ]
+  },
+  "versao_prompt_extracao": "extracao-v2.1",
+  "versao_prompt_resumo": "resumo-v1.0"
+}

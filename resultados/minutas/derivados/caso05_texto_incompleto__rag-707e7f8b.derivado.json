@@ -1,0 +1,48 @@
+{
+  "id_execucao": "rag-707e7f8b",
+  "caso_id": "caso05_texto_incompleto",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-03",
+    "ACV-04"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado Sr. Carlos Eduardo Nunes, em atenção ao seu pedido de trancamento do curso Técnico em Administração, informamos que o procedimento está previsto na Orientação sobre Trancamento de Matrícula (documento ACV-04). O trancamento deve ser solicitado mediante requerimento preenchido e assinado, entregue na Secretaria Escolar, conforme descrito no item 2 da seção indicada.\n\nO trancamento tem validade de um módulo letivo, podendo ser renovado uma única vez, conforme o item 4 da mesma orientação.\n\nComo o protocolo e a data da solicitação não foram informados, solicitamos que inclua esses dados ao protocolar o requerimento. A decisão final ficará a cargo da Secretaria Escolar após análise da documentação apresentada.",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante for menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.",
+        "chunk_ids": [
+          "ACV-04#c1"
+        ]
+      },
+      {
+        "texto": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.",
+        "chunk_ids": [
+          "ACV-04#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-04#c1",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+      },
+      {
+        "chunk_id": "ACV-04#c3",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 2,
+        "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+        "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Protocolo e data da solicitação não foram informados. | protocolo ausente | data_solicitacao ausente"
+  }
+}

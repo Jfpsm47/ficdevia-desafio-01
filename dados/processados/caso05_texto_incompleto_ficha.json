@@ -1,0 +1,51 @@
+{
+  "id_caso": "caso05_texto_incompleto",
+  "extracao": {
+    "protocolo": null,
+    "data_solicitacao": null,
+    "canal": "WhatsApp institucional",
+    "solicitante": "Carlos Eduardo Nunes",
+    "curso": "Técnico em Administração",
+    "assunto": "Trancamento de curso de Técnico em Administração",
+    "pedido": "Solicita orientações para trancar o curso de Técnico em Administração.",
+    "categoria": "cancelamento_trancamento",
+    "entidades": [
+      {
+        "tipo": "pessoa",
+        "valor": "Carlos Eduardo Nunes",
+        "origem": "literal",
+        "evidencia": "Meu nome é Carlos Eduardo Nunes"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [
+      "protocolo",
+      "data_solicitacao"
+    ],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "protocolo ausente",
+      "data_solicitacao ausente"
+    ],
+    "alertas_seguranca": []
+  },
+  "resumo": {
+    "resumo": "Carlos Eduardo Nunes solicita informações sobre como trancar o curso Técnico em Administração, alegando que começou a trabalhar à noite.",
+    "fatos": [
+      {
+        "afirmacao": "O solicitante se chama Carlos Eduardo Nunes.",
+        "evidencia": "Meu nome é Carlos Eduardo Nunes."
+      },
+      {
+        "afirmacao": "Ele deseja trancar o curso de Técnico em Administração.",
+        "evidencia": "Quero saber como faço pra trancar meu curso de Técnico em Administração"
+      },
+      {
+        "afirmacao": "O motivo do pedido é que começou a trabalhar à noite.",
+        "evidencia": "porque comecei a trabalhar à noite"
+      }
+    ]
+  },
+  "versao_prompt_extracao": "extracao-v2.1",
+  "versao_prompt_resumo": "resumo-v1.0"
+}

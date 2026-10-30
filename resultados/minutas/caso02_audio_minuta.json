@@ -3,31 +3,49 @@
     "protocolo": "2026-000142",
     "data": "14/10/2026"
   },
-  "destinatario": "Marcos Vinicius de Almeida Santos",
-  "assunto": "Informação sobre documentos pendentes para efetivação de matrícula",
-  "saudacao": "Prezado(a) Senhor(a) Marcos Vinicius de Almeida Santos,",
+  "destinatario": "Marcos Vinícius de Almeida Santos",
+  "assunto": "Efetivação de matrícula e solicitação de documentos",
+  "saudacao": "Prezado(a) Marcos Vinícius de Almeida Santos,",
   "corpo": [
-    "Recebemos seu pedido de efetivação de matrícula no curso técnico em enfermagem, turno noturno, registrado sob o protocolo 2026-000142, datado de 14/10/2026.",
-    "Informamos que, nos dados disponíveis, não consta a relação dos documentos ainda necessários para a conclusão da matrícula; essa informação será confirmada pelo servidor responsável.",
-    "Colocamo-nos à disposição para quaisquer esclarecimentos adicionais."
+    "Prezado(a) Sr(a). Marcos Vinícius de Almeida Santos, protocolo 2026-000142, referente ao curso técnico em enfermagem, informamos que a efetivação da matrícula depende da entrega de todos os documentos exigidos, conforme o Manual de Matrícula (documento ACV-01, seção 2). Os documentos necessários são: documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; estudantes menores de 18 anos devem ainda apresentar documento de identidade do responsável legal.\nCaso algum documento ainda não tenha sido apresentado, a Secretaria registrará a pendência e o estudante terá até 10 (dez) dias úteis, contados da data da matrícula, para regularizá‑la, permanecendo a matrícula em situação provisória até a entrega completa, conforme o Manual de Matrícula (seção 3).\nA matrícula será considerada efetivada somente após a conferência de todos os documentos; a Secretaria comunicará a situação da matrícula ao estudante. Solicitamos que compareça à Secretaria com os documentos listados ou, se já os entregou, aguarde a confirmação da efetivação."
   ],
   "fecho": "Atenciosamente,",
   "informacoes_nao_localizadas": [
-    "lista dos documentos ainda necessários para a efetivação da matrícula"
+    "Campo ausente na solicitação: canal"
   ],
   "afirmacoes_e_evidencias": [
     {
-      "afirmacao": "Pedido de efetivação de matrícula no curso técnico em enfermagem, turno noturno, registrado sob o protocolo 2026-000142, datado de 14/10/2026",
-      "trecho_fonte": "Meu protocolo é 2026-000142 ... curso tecnico em enfermagem ... turno noturno"
+      "afirmacao": "Os documentos exigidos para a efetivação da matrícula são: documento oficial de identidade com foto, CPF, comprovante de residência (últimos 90 dias), histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; menores de 18 anos devem apresentar documento de identidade do responsável legal.",
+      "trecho_fonte": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
     },
     {
-      "afirmacao": "Não há informação disponível sobre os documentos ainda necessários para a efetivação da matrícula",
-      "trecho_fonte": "- Lista de documentos exigidos para matrícula ou para qualquer outro procedimento."
+      "afirmacao": "Quando faltar algum documento no ato da matrícula, a Secretaria registra a pendência e o estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá‑lo; a matrícula permanece provisória até a entrega e só é considerada efetivada após a conferência de todos os documentos.",
+      "trecho_fonte": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
     }
   ],
   "alertas_seguranca": [],
   "fontes": [
     "dados/originais/entrada_audio.mp3",
-    "contexto_institucional"
+    "ACV-01 v2.0 [ACV-01#c2, pág. 1, seção '1. Finalidade; 2. Documentos exigidos para a matrícula']",
+    "ACV-01 v2.0 [ACV-01#c3, pág. 2, seção '3. Documentos pendentes; 4. Efetivação da matrícula']"
+  ],
+  "status_rag": "fundamentada",
+  "citacoes_estruturadas": [
+    {
+      "chunk_id": "ACV-01#c2",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "pagina": 1,
+      "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+      "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+    },
+    {
+      "chunk_id": "ACV-01#c3",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "pagina": 2,
+      "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+      "trecho": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+    }
   ]
 }

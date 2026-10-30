@@ -1,0 +1,47 @@
+{
+  "id_execucao": "rag-abd0befc",
+  "caso_id": "caso03_ocr",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado(a) solicitante, recebemos seu pedido de matrícula no curso Técnico em Enfermagem (protocolo 2026-000142). Informamos que, conforme o Manual de Matrícula dos Cursos Técnicos, a efetivação da matrícula depende da apresentação presencial dos documentos exigidos. Para tanto, o estudante deve levar à Secretaria Escolar, em original e cópia, documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; menores de 18 anos ainda precisam do documento de identidade do responsável legal. Ressaltamos que a matrícula não pode ser concluída via internet, sendo o formulário online destinado apenas à pré‑matrícula; a conferência e a entrega dos documentos devem ocorrer presencialmente na Secretaria Escolar. Devido à ausência de informações essenciais (campo \"canal\" e descrição do \"pedido\"), sua solicitação será encaminhada para revisão antes de prosseguirmos com a análise definitiva.",
+    "afirmacoes": [
+      {
+        "texto": "Para efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia, documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula), e foto 3x4 recente. Estudantes menores de 18 anos também precisam do documento de identidade do responsável legal.",
+        "chunk_ids": [
+          "ACV-01#c2"
+        ]
+      },
+      {
+        "texto": "A matrícula não pode ser realizada pela internet; o formulário web serve apenas para a pré‑matrícula, sendo necessária a entrega presencial dos documentos na Secretaria Escolar.",
+        "chunk_ids": [
+          "ACV-02#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c2",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 1,
+        "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+        "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+      },
+      {
+        "chunk_id": "ACV-02#c2",
+        "documento_id": "ACV-02",
+        "versao_documento": "1.2",
+        "pagina": null,
+        "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+        "trecho": "exigidos no Manual de Matrícula (ACV-01). Para estudante menor de 18 anos, a matrícula é feita pelo responsável legal.\n\n2. A matrícula pode ser feita pela internet?\nNão. O formulário web serve apenas para a pré-matrícula. A entrega e a conferência dos documentos são presenciais, na Secretaria Escolar.\n\n3. Como sei se a minha matrícula foi efetivada?\nA situação da matrícula é informada pela Secretaria Escolar depois da conferência dos documentos. Mensagens automáticas de recebimento não confirmam a efetivação."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Campos obrigatórios ausentes na solicitação: canal e pedido. | campo canal ausente | campo pedido ausente"
+  }
+}

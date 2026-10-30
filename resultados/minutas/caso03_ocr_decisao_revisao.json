@@ -1,0 +1,9 @@
+{
+  "id_minuta": "rag-abd0befc",
+  "estado": "revisar",
+  "revisor": "Erick Rodrigues Costa",
+  "justificativa": "Fundamentação normativa correta (ACV-01 v2.0 e ACV-02 v1.2), mas o trecho final expõe termos internos do esquema JSON ('campo canal' e descrição do 'pedido') ao cidadão e duplica saudação.",
+  "data_hora": "2026-10-29T20:06:40-04:00",
+  "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+  "enviada_ao_cidadao": false
+}

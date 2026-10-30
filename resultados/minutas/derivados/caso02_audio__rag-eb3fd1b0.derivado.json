@@ -1,0 +1,47 @@
+{
+  "id_execucao": "rag-eb3fd1b0",
+  "caso_id": "caso02_audio",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado(a) Sr(a). Marcos Vinícius de Almeida Santos, protocolo 2026-000142, referente ao curso técnico em enfermagem, informamos que a efetivação da matrícula depende da entrega de todos os documentos exigidos, conforme o Manual de Matrícula (documento ACV-01, seção 2). Os documentos necessários são: documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; estudantes menores de 18 anos devem ainda apresentar documento de identidade do responsável legal.\nCaso algum documento ainda não tenha sido apresentado, a Secretaria registrará a pendência e o estudante terá até 10 (dez) dias úteis, contados da data da matrícula, para regularizá‑la, permanecendo a matrícula em situação provisória até a entrega completa, conforme o Manual de Matrícula (seção 3).\nA matrícula será considerada efetivada somente após a conferência de todos os documentos; a Secretaria comunicará a situação da matrícula ao estudante. Solicitamos que compareça à Secretaria com os documentos listados ou, se já os entregou, aguarde a confirmação da efetivação.",
+    "afirmacoes": [
+      {
+        "texto": "Os documentos exigidos para a efetivação da matrícula são: documento oficial de identidade com foto, CPF, comprovante de residência (últimos 90 dias), histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; menores de 18 anos devem apresentar documento de identidade do responsável legal.",
+        "chunk_ids": [
+          "ACV-01#c2"
+        ]
+      },
+      {
+        "texto": "Quando faltar algum documento no ato da matrícula, a Secretaria registra a pendência e o estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá‑lo; a matrícula permanece provisória até a entrega e só é considerada efetivada após a conferência de todos os documentos.",
+        "chunk_ids": [
+          "ACV-01#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c2",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 1,
+        "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+        "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+      },
+      {
+        "chunk_id": "ACV-01#c3",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 2,
+        "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+        "trecho": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "campo ausente: canal"
+  }
+}

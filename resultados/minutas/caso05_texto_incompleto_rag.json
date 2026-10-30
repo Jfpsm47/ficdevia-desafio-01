@@ -1,0 +1,159 @@
+{
+  "id_execucao": "rag-707e7f8b",
+  "caso_id": "caso05_texto_incompleto",
+  "etapa": "minuta_rag",
+  "estado": "valida",
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado Sr. Carlos Eduardo Nunes, em atenção ao seu pedido de trancamento do curso Técnico em Administração, informamos que o procedimento está previsto na Orientação sobre Trancamento de Matrícula (documento ACV-04). O trancamento deve ser solicitado mediante requerimento preenchido e assinado, entregue na Secretaria Escolar, conforme descrito no item 2 da seção indicada.\n\nO trancamento tem validade de um módulo letivo, podendo ser renovado uma única vez, conforme o item 4 da mesma orientação.\n\nComo o protocolo e a data da solicitação não foram informados, solicitamos que inclua esses dados ao protocolar o requerimento. A decisão final ficará a cargo da Secretaria Escolar após análise da documentação apresentada.",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante for menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.",
+        "chunk_ids": [
+          "ACV-04#c1"
+        ]
+      },
+      {
+        "texto": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.",
+        "chunk_ids": [
+          "ACV-04#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-04#c1",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+      },
+      {
+        "chunk_id": "ACV-04#c3",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 2,
+        "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+        "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Protocolo e data da solicitação não foram informados. | protocolo ausente | data_solicitacao ausente"
+  },
+  "decisao_revisao": {
+    "id_minuta": "rag-707e7f8b",
+    "estado": "pendente",
+    "revisor": null,
+    "justificativa": null,
+    "data_hora": null,
+    "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+    "enviada_ao_cidadao": false
+  },
+  "trechos_recuperados": [
+    {
+      "posicao": 1,
+      "similaridade": 0.7644,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c1",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 1,
+      "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+    },
+    {
+      "posicao": 2,
+      "similaridade": 0.6574,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c3",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 2,
+      "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+    },
+    {
+      "posicao": 3,
+      "similaridade": 0.5951,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Manual de Matrícula dos Cursos Técnicos",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-01#c1",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "hash_documento": "2f619fb1add72b77ca32a056002bb93b261a49d6c00d82f87bd1e222a369564b",
+      "pagina": 1,
+      "secao": "Cabeçalho institucional; 1. Finalidade",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-01\nTítulo: Manual de Matrícula dos Cursos Técnicos\nVersão: 2.0\nTema: Matrícula e documentação escolar\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEste manual orienta candidatos aprovados e estudantes sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027."
+    },
+    {
+      "posicao": 4,
+      "similaridade": 0.5759,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação para Emissão de Declarações Escolares",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-03#c1",
+      "documento_id": "ACV-03",
+      "versao_documento": "1.0",
+      "hash_documento": "d1e61ac4dbd988bc306ceabd3c9f6848345be9a4bd00131aee9955c04993480a",
+      "pagina": null,
+      "secao": "Cabeçalho institucional; 1. Tipos de declaração; 2. Como solicitar",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-03\nTítulo: Orientação para Emissão de Declarações Escolares\nVersão: 1.0\nTema: Matrícula e documentação escolar\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Tipos de declaração\nA Secretaria Escolar emite declaração de matrícula, declaração de frequência e declaração de conclusão de curso.\n\n2. Como solicitar\nA declaração pode ser solicitada pelo formulário web da escola ou presencialmente na Secretaria Escolar. O pedido deve informar o nome completo do estudante, o curso e a finalidade da declaração."
+    }
+  ],
+  "versao_indice": "idx-008437e371",
+  "provedor": "groq",
+  "modelo": "openai/gpt-oss-120b",
+  "simulado": false,
+  "alertas_seguranca": [],
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "valida": true,
+      "erros": [],
+      "latencia_s": 3.01,
+      "tokens_entrada": 2733,
+      "tokens_saida": 1084,
+      "custo_usd": 0.00106,
+      "metrica_custo_status": "disponivel"
+    }
+  ],
+  "meta": {
+    "versao_prompt": "rag-minuta-v1.0",
+    "hash_prompt_sistema": "8f3cf2734e3d",
+    "dados_minimizados": {},
+    "uso_total": {
+      "latencia_s": 3.01,
+      "tokens_entrada": 2733,
+      "tokens_saida": 1084,
+      "custo_usd": 0.00106,
+      "tentativas": 1,
+      "simulado": false,
+      "metrica_custo_status": "disponivel"
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "id_execucao": "rag-eb3fd1b0",
+  "caso_id": "caso02_audio",
+  "etapa": "minuta_rag",
+  "estado": "valida",
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado(a) Sr(a). Marcos Vinícius de Almeida Santos, protocolo 2026-000142, referente ao curso técnico em enfermagem, informamos que a efetivação da matrícula depende da entrega de todos os documentos exigidos, conforme o Manual de Matrícula (documento ACV-01, seção 2). Os documentos necessários são: documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; estudantes menores de 18 anos devem ainda apresentar documento de identidade do responsável legal.\nCaso algum documento ainda não tenha sido apresentado, a Secretaria registrará a pendência e o estudante terá até 10 (dez) dias úteis, contados da data da matrícula, para regularizá‑la, permanecendo a matrícula em situação provisória até a entrega completa, conforme o Manual de Matrícula (seção 3).\nA matrícula será considerada efetivada somente após a conferência de todos os documentos; a Secretaria comunicará a situação da matrícula ao estudante. Solicitamos que compareça à Secretaria com os documentos listados ou, se já os entregou, aguarde a confirmação da efetivação.",
+    "afirmacoes": [
+      {
+        "texto": "Os documentos exigidos para a efetivação da matrícula são: documento oficial de identidade com foto, CPF, comprovante de residência (últimos 90 dias), histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; menores de 18 anos devem apresentar documento de identidade do responsável legal.",
+        "chunk_ids": [
+          "ACV-01#c2"
+        ]
+      },
+      {
+        "texto": "Quando faltar algum documento no ato da matrícula, a Secretaria registra a pendência e o estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá‑lo; a matrícula permanece provisória até a entrega e só é considerada efetivada após a conferência de todos os documentos.",
+        "chunk_ids": [
+          "ACV-01#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c2",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 1,
+        "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+        "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+      },
+      {
+        "chunk_id": "ACV-01#c3",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 2,
+        "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+        "trecho": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "campo ausente: canal"
+  },
+  "decisao_revisao": {
+    "id_minuta": "rag-eb3fd1b0",
+    "estado": "pendente",
+    "revisor": null,
+    "justificativa": null,
+    "data_hora": null,
+    "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+    "enviada_ao_cidadao": false
+  },
+  "trechos_recuperados": [
+    {
+      "posicao": 1,
+      "similaridade": 0.5795,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Manual de Matrícula dos Cursos Técnicos",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-01#c3",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "hash_documento": "2f619fb1add72b77ca32a056002bb93b261a49d6c00d82f87bd1e222a369564b",
+      "pagina": 2,
+      "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+    },
+    {
+      "posicao": 2,
+      "similaridade": 0.5623,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Perguntas Frequentes sobre Matrícula",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-02#c1",
+      "documento_id": "ACV-02",
+      "versao_documento": "1.2",
+      "hash_documento": "de4a8ea70e3ca029b83c14fbb52109935395f30779ec10af550b651a273e5567",
+      "pagina": null,
+      "secao": "Cabeçalho institucional; 1. Posso fazer a matrícula por meio de outra pessoa?",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-02\nTítulo: Perguntas Frequentes sobre Matrícula\nVersão: 1.2\nTema: Matrícula e documentação escolar\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Posso fazer a matrícula por meio de outra pessoa?\nSim. A matrícula pode ser feita por procurador, com procuração simples assinada pelo estudante, acompanhada dos documentos exigidos no Manual de Matrícula (ACV-01). Para estudante menor de 18 anos, a matrícula é feita pelo responsável legal."
+    },
+    {
+      "posicao": 3,
+      "similaridade": 0.5575,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Perguntas Frequentes sobre Matrícula",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-02#c2",
+      "documento_id": "ACV-02",
+      "versao_documento": "1.2",
+      "hash_documento": "de4a8ea70e3ca029b83c14fbb52109935395f30779ec10af550b651a273e5567",
+      "pagina": null,
+      "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "exigidos no Manual de Matrícula (ACV-01). Para estudante menor de 18 anos, a matrícula é feita pelo responsável legal.\n\n2. A matrícula pode ser feita pela internet?\nNão. O formulário web serve apenas para a pré-matrícula. A entrega e a conferência dos documentos são presenciais, na Secretaria Escolar.\n\n3. Como sei se a minha matrícula foi efetivada?\nA situação da matrícula é informada pela Secretaria Escolar depois da conferência dos documentos. Mensagens automáticas de recebimento não confirmam a efetivação."
+    },
+    {
+      "posicao": 4,
+      "similaridade": 0.5541,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Manual de Matrícula dos Cursos Técnicos",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-01#c2",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "hash_documento": "2f619fb1add72b77ca32a056002bb93b261a49d6c00d82f87bd1e222a369564b",
+      "pagina": 1,
+      "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+    }
+  ],
+  "versao_indice": "idx-008437e371",
+  "provedor": "groq",
+  "modelo": "openai/gpt-oss-120b",
+  "simulado": false,
+  "alertas_seguranca": [],
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "valida": true,
+      "erros": [],
+      "latencia_s": 3.52,
+      "tokens_entrada": 3000,
+      "tokens_saida": 1315,
+      "custo_usd": 0.001239,
+      "metrica_custo_status": "disponivel"
+    }
+  ],
+  "meta": {
+    "versao_prompt": "rag-minuta-v1.0",
+    "hash_prompt_sistema": "8f3cf2734e3d",
+    "dados_minimizados": {
+      "CPF": 1,
+      "e-mail": 1,
+      "RG": 1,
+      "filiação": 1,
+      "data de nascimento": 1
+    },
+    "uso_total": {
+      "latencia_s": 3.52,
+      "tokens_entrada": 3000,
+      "tokens_saida": 1315,
+      "custo_usd": 0.001239,
+      "tentativas": 1,
+      "simulado": false,
+      "metrica_custo_status": "disponivel"
+    }
+  }
+}

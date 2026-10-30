@@ -1,0 +1,67 @@
+{
+  "id_caso": "caso06_texto_transferencia",
+  "extracao": {
+    "protocolo": "2026-000203",
+    "data_solicitacao": "20/10/2026",
+    "canal": "Formulário web",
+    "solicitante": "Juliana Martins Rocha",
+    "curso": "Técnico em Logística",
+    "assunto": "Transferência de turno para noturno",
+    "pedido": "Solicito a transferência para o turno noturno e informações sobre vagas e procedimentos.",
+    "categoria": "transferencia",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000203",
+        "origem": "literal",
+        "evidencia": "Protocolo: 2026-000203"
+      },
+      {
+        "tipo": "data",
+        "valor": "20/10/2026",
+        "origem": "literal",
+        "evidencia": "Data: 20/10/2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Juliana Martins Rocha",
+        "origem": "literal",
+        "evidencia": "Sou Juliana Martins Rocha"
+      },
+      {
+        "tipo": "local",
+        "valor": "Distrito Industrial de Cuiabá",
+        "origem": "literal",
+        "evidencia": "Distrito Industrial de Cuiabá"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [],
+    "requer_revisao": false,
+    "motivos_revisao": [],
+    "alertas_seguranca": []
+  },
+  "resumo": {
+    "resumo": "Juliana Martins Rocha, aluna do 2º módulo do Técnico em Logística (turno matutino), solicita transferência para o turno noturno a partir do próximo módulo, alegando contrato como jovem aprendiz com horário das 8h às 14h. Pergunta se há vagas no turno noturno e quais os procedimentos para a mudança.",
+    "fatos": [
+      {
+        "afirmacao": "Juliana Martins Rocha é aluna do 2º módulo do curso Técnico em Logística, turno matutino.",
+        "evidencia": "Sou Juliana Martins Rocha, aluna do 2º módulo do curso Técnico em Logística, turno matutino."
+      },
+      {
+        "afirmacao": "Solicita transferência para o turno noturno a partir do próximo módulo.",
+        "evidencia": "Solicito a transferência para o turno noturno a partir do próximo módulo, pois fui contratada como jovem aprendiz em uma empresa no Distrito Industrial de Cuiabá e meu horário de trabalho é das 8h às 14h."
+      },
+      {
+        "afirmacao": "O motivo da transferência é contrato como jovem aprendiz com horário de trabalho das 8h às 14h.",
+        "evidencia": "pois fui contratada como jovem aprendiz em uma empresa no Distrito Industrial de Cuiabá e meu horário de trabalho é das 8h às 14h."
+      },
+      {
+        "afirmacao": "Pergunta se há vaga no turno noturno e quais são os próximos passos.",
+        "evidencia": "Gostaria de saber se há vaga no turno noturno e quais são os próximos passos."
+      }
+    ]
+  },
+  "versao_prompt_extracao": "extracao-v2.1",
+  "versao_prompt_resumo": "resumo-v1.0"
+}

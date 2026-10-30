@@ -1,44 +1,29 @@
 {
-  "protocolo": "não localizado",
-  "data_solicitacao": "não localizado",
+  "protocolo": null,
+  "data_solicitacao": null,
   "canal": "WhatsApp institucional",
   "solicitante": "Carlos Eduardo Nunes",
+  "curso": "Técnico em Administração",
   "assunto": "Trancamento de curso de Técnico em Administração",
-  "pedido": "Trancar o curso de Técnico em Administração",
-  "perguntas_do_cidadao": [
-    "como faço pra trancar meu curso"
-  ],
+  "pedido": "Solicita orientações para trancar o curso de Técnico em Administração.",
   "categoria": "cancelamento_trancamento",
-  "dados_do_curso": {
-    "curso": "Técnico em Administração",
-    "eixo_tecnologico": "não localizado",
-    "carga_horaria": "não localizado",
-    "turno": "não localizado",
-    "inicio_curso": "não localizado",
-    "data_matricula": "não localizado"
-  },
-  "dados_pessoais_detectados": [
-    "nome"
+  "entidades": [
+    {
+      "tipo": "pessoa",
+      "valor": "Carlos Eduardo Nunes",
+      "origem": "literal",
+      "evidencia": "Meu nome é Carlos Eduardo Nunes"
+    }
   ],
+  "dados_pessoais_detectados": [],
   "campos_ausentes": [
     "protocolo",
-    "data_solicitacao",
-    "eixo_tecnologico",
-    "carga_horaria",
-    "turno",
-    "inicio_curso",
-    "data_matricula"
+    "data_solicitacao"
   ],
-  "evidencias": {
-    "solicitante": "Meu nome é Carlos Eduardo Nunes.",
-    "pedido": "como faço pra trancar meu curso de Técnico em Administração"
-  },
-  "confianca": "baixa",
-  "requer_revisao_humana": true,
+  "requer_revisao": true,
   "motivos_revisao": [
-    "Campos obrigatórios ausentes (protocolo, data_solicitacao)"
+    "protocolo ausente",
+    "data_solicitacao ausente"
   ],
-  "alertas_seguranca": [],
-  "arquivo_origem": "dados/originais/caso05_texto_incompleto.txt",
-  "texto_original_preservado": "Canal: WhatsApp institucional (mensagem copiada pelo atendente)\n\nOi, bom dia. Quero saber como faço pra trancar meu curso de Técnico em Administração, porque comecei a trabalhar à noite. Meu nome é Carlos Eduardo Nunes. Obrigado.\n"
+  "alertas_seguranca": []
 }

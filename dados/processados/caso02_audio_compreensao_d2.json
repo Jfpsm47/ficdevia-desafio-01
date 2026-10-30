@@ -1,0 +1,278 @@
+{
+  "caso_id": "caso02_audio",
+  "modalidade": "audio",
+  "arquivo_origem": "dados/originais/entrada_audio.mp3",
+  "encaminhamento_efetivo": "minuta_pendente_de_aprovacao",
+  "libera_minuta": true,
+  "extracao_resultado": {
+    "caso_id": "caso02_audio",
+    "estado": "valida",
+    "encaminhamento": "minuta_pendente_de_aprovacao",
+    "extracao": {
+      "protocolo": "2026-000142",
+      "data_solicitacao": "14/10/2026",
+      "canal": null,
+      "solicitante": "Marcos Vinícius de Almeida Santos",
+      "curso": "técnico em enfermagem",
+      "assunto": "Efetivação de matrícula e solicitação de documentos",
+      "pedido": "Solicito a efetivação da matrícula e a lista de documentos pendentes.",
+      "categoria": "matricula",
+      "entidades": [
+        {
+          "tipo": "protocolo",
+          "valor": "2026-000142",
+          "origem": "literal",
+          "evidencia": "meu protocolo é 2026-000142"
+        },
+        {
+          "tipo": "data",
+          "valor": "14/10/2026",
+          "origem": "literal",
+          "evidencia": "14 de outubro de 2026"
+        },
+        {
+          "tipo": "pessoa",
+          "valor": "Marcos Vinícius de Almeida Santos",
+          "origem": "literal",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "tipo": "local",
+          "valor": "Cuiabá",
+          "origem": "literal",
+          "evidencia": "em Cuiabá"
+        }
+      ],
+      "dados_pessoais_detectados": [
+        "CPF",
+        "RG",
+        "data de nascimento",
+        "e-mail"
+      ],
+      "campos_ausentes": [
+        "canal"
+      ],
+      "requer_revisao": true,
+      "motivos_revisao": [
+        "campo ausente: canal"
+      ],
+      "alertas_seguranca": []
+    },
+    "erros": [],
+    "tentativas": [
+      {
+        "numero": 1,
+        "texto_bruto": "{\"protocolo\":\"2026-000142\",\"data_solicitacao\":\"14/10/2026\",\"canal\":null,\"solicitante\":\"Marcos Vinícius de Almeida Santos\",\"curso\":\"técnico em enfermagem\",\"assunto\":\"Efetivação de matrícula e solicitação de documentos\",\"pedido\":\"Solicito a efetivação da matrícula e a lista de documentos pendentes.\",\"categoria\":\"matricula\",\"entidades\":[{\"tipo\":\"protocolo\",\"valor\":\"2026-000142\",\"origem\":\"literal\",\"evidencia\":\"meu protocolo é 2026-000142\"},{\"tipo\":\"data\",\"valor\":\"14/10/2026\",\"origem\":\"literal\",\"evidencia\":\"14 de outubro de 2026\"},{\"tipo\":\"pessoa\",\"valor\":\"Marcos Vinícius de Almeida Santos\",\"origem\":\"literal\",\"evidencia\":\"Meu nome é Marcos Vinícius de Almeida Santos\"},{\"tipo\":\"local\",\"valor\":\"Cuiabá\",\"origem\":\"literal\",\"evidencia\":\"em Cuiabá\"}],\"dados_pessoais_detectados\":[\"CPF\",\"RG\",\"data de nascimento\",\"e-mail\"],\"campos_ausentes\":[\"canal\"],\"requer_revisao\":true,\"motivos_revisao\":[\"campo ausente: canal\"],\"alertas_seguranca\":[]}",
+        "valida_no_esquema": true,
+        "erros": [],
+        "latencia_s": 3.42,
+        "tokens_entrada": 2335,
+        "tokens_saida": 1281,
+        "custo_usd": 0.001119
+      }
+    ],
+    "meta": {
+      "versao_prompt": "extracao-v2.1",
+      "hash_prompt_sistema": "1b56b3f7c5d9",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      },
+      "versao_contrato": "solicitacao_extraida-v0.1.0",
+      "versao_prompt_correcao": "correcao-esquema-v1.0",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "modo_saida": "json_schema_estrito",
+      "arquivo_origem": "dados/originais/entrada_audio.mp3",
+      "sha256_origem": "02175fd7b494da504d42ecd9f44c776301c1b350fc10ea8b75bd95b169ae89b2",
+      "texto_enviado": " Bom dia, meu protocolo é 2026-000142 de 14 de outubro de 2026. Meu nome é Marcos Vinícius de Almeida Santos, nasci em [DATA DE NASCIMENTO REMOVIDA] em Cuiabá e quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno. Meu CPF é [CPF REMOVIDO]. Meu RG [RG REMOVIDO]. O nome da minha mãe: [FILIAÇÃO REMOVIDA] e o meu e-mail é [E-MAIL REMOVIDO] Declaro estar ciente de que a matrícula será cancelada automaticamente se eu faltar sem justificativa comprovada nos dois primeiros dias de aula consecutivos ou em três dias de aula consecutivos ou não nos dez primeiros dias de aula. Peço que informem quais os documentos ainda preciso apresentar. Muito obrigado."
+    },
+    "libera_minuta": true
+  },
+  "resumo_resultado": {
+    "caso_id": "caso02_audio",
+    "estado": "valida",
+    "resumo": {
+      "resumo": "Marcos Vinícius de Almeida Santos, protocolo 2026-000142 de 14/10/2026, solicita a efetivação da matrícula no curso técnico em enfermagem (eixo saúde, 1.200 h, turno noturno) e pede informações sobre os documentos ainda necessários para concluir a matrícula.",
+      "fatos": [
+        {
+          "afirmacao": "O solicitante se chama Marcos Vinícius de Almeida Santos.",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "afirmacao": "O protocolo informado é 2026-000142 de 14 de outubro de 2026.",
+          "evidencia": "meu protocolo é 2026-000142 de 14 de outubro de 2026"
+        },
+        {
+          "afirmacao": "Ele pede a efetivação da matrícula no curso técnico em enfermagem, eixo tecnológico de saúde, 1.200 horas, turno noturno.",
+          "evidencia": "quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno"
+        },
+        {
+          "afirmacao": "Solicita informações sobre os documentos ainda necessários para concluir a matrícula.",
+          "evidencia": "Peço que informem quais os documentos ainda preciso apresentar"
+        }
+      ]
+    },
+    "erros": [],
+    "tentativas": [
+      {
+        "numero": 1,
+        "texto_bruto": "{\n  \"resumo\": \"Marcos Vinícius de Almeida Santos, protocolo 2026-000142 de 14/10/2026, solicita a efetivação da matrícula no curso técnico em enfermagem (eixo saúde, 1.200 h, turno noturno) e pede informações sobre os documentos ainda necessários para concluir a matrícula.\",\n  \"fatos\": [\n    {\n      \"afirmacao\": \"O solicitante se chama Marcos Vinícius de Almeida Santos.\",\n      \"evidencia\": \"Meu nome é Marcos Vinícius de Almeida Santos\"\n    },\n    {\n      \"afirmacao\": \"O protocolo informado é 2026-000142 de 14 de outubro de 2026.\",\n      \"evidencia\": \"meu protocolo é 2026-000142 de 14 de outubro de 2026\"\n    },\n    {\n      \"afirmacao\": \"Ele pede a efetivação da matrícula no curso técnico em enfermagem, eixo tecnológico de saúde, 1.200 horas, turno noturno.\",\n      \"evidencia\": \"quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno\"\n    },\n    {\n      \"afirmacao\": \"Solicita informações sobre os documentos ainda necessários para concluir a matrícula.\",\n      \"evidencia\": \"Peço que informem quais os documentos ainda preciso apresentar\"\n    }\n  ]\n}",
+        "valida_no_esquema": true,
+        "erros": [],
+        "latencia_s": 3.48,
+        "tokens_entrada": 1022,
+        "tokens_saida": 1354,
+        "custo_usd": 0.000966
+      }
+    ],
+    "meta": {
+      "versao_prompt": "resumo-v1.0",
+      "hash_prompt_sistema": "403d054887af",
+      "dados_minimizados": {
+        "CPF": 1,
+        "e-mail": 1,
+        "RG": 1,
+        "filiação": 1,
+        "data de nascimento": 1
+      },
+      "versao_contrato": "resumo_solicitacao-v0.1.0",
+      "versao_prompt_correcao": "correcao-esquema-v1.0",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "modo_saida": "json_schema_estrito",
+      "arquivo_origem": "dados/originais/entrada_audio.mp3",
+      "sha256_origem": "02175fd7b494da504d42ecd9f44c776301c1b350fc10ea8b75bd95b169ae89b2",
+      "texto_enviado": " Bom dia, meu protocolo é 2026-000142 de 14 de outubro de 2026. Meu nome é Marcos Vinícius de Almeida Santos, nasci em [DATA DE NASCIMENTO REMOVIDA] em Cuiabá e quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno. Meu CPF é [CPF REMOVIDO]. Meu RG [RG REMOVIDO]. O nome da minha mãe: [FILIAÇÃO REMOVIDA] e o meu e-mail é [E-MAIL REMOVIDO] Declaro estar ciente de que a matrícula será cancelada automaticamente se eu faltar sem justificativa comprovada nos dois primeiros dias de aula consecutivos ou em três dias de aula consecutivos ou não nos dez primeiros dias de aula. Peço que informem quais os documentos ainda preciso apresentar. Muito obrigado."
+    }
+  },
+  "ficha": {
+    "id_caso": "caso02_audio",
+    "extracao": {
+      "protocolo": "2026-000142",
+      "data_solicitacao": "14/10/2026",
+      "canal": null,
+      "solicitante": "Marcos Vinícius de Almeida Santos",
+      "curso": "técnico em enfermagem",
+      "assunto": "Efetivação de matrícula e solicitação de documentos",
+      "pedido": "Solicito a efetivação da matrícula e a lista de documentos pendentes.",
+      "categoria": "matricula",
+      "entidades": [
+        {
+          "tipo": "protocolo",
+          "valor": "2026-000142",
+          "origem": "literal",
+          "evidencia": "meu protocolo é 2026-000142"
+        },
+        {
+          "tipo": "data",
+          "valor": "14/10/2026",
+          "origem": "literal",
+          "evidencia": "14 de outubro de 2026"
+        },
+        {
+          "tipo": "pessoa",
+          "valor": "Marcos Vinícius de Almeida Santos",
+          "origem": "literal",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "tipo": "local",
+          "valor": "Cuiabá",
+          "origem": "literal",
+          "evidencia": "em Cuiabá"
+        }
+      ],
+      "dados_pessoais_detectados": [
+        "CPF",
+        "RG",
+        "data de nascimento",
+        "e-mail"
+      ],
+      "campos_ausentes": [
+        "canal"
+      ],
+      "requer_revisao": true,
+      "motivos_revisao": [
+        "campo ausente: canal"
+      ],
+      "alertas_seguranca": []
+    },
+    "resumo": {
+      "resumo": "Marcos Vinícius de Almeida Santos, protocolo 2026-000142 de 14/10/2026, solicita a efetivação da matrícula no curso técnico em enfermagem (eixo saúde, 1.200 h, turno noturno) e pede informações sobre os documentos ainda necessários para concluir a matrícula.",
+      "fatos": [
+        {
+          "afirmacao": "O solicitante se chama Marcos Vinícius de Almeida Santos.",
+          "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+        },
+        {
+          "afirmacao": "O protocolo informado é 2026-000142 de 14 de outubro de 2026.",
+          "evidencia": "meu protocolo é 2026-000142 de 14 de outubro de 2026"
+        },
+        {
+          "afirmacao": "Ele pede a efetivação da matrícula no curso técnico em enfermagem, eixo tecnológico de saúde, 1.200 horas, turno noturno.",
+          "evidencia": "quero pedir a efetivação da minha matrícula no curso técnico em enfermagem do eixo tecnológico de saúde com carga horária de 1.200 horas no turno noturno"
+        },
+        {
+          "afirmacao": "Solicita informações sobre os documentos ainda necessários para concluir a matrícula.",
+          "evidencia": "Peço que informem quais os documentos ainda preciso apresentar"
+        }
+      ]
+    },
+    "versao_prompt_extracao": "extracao-v2.1",
+    "versao_prompt_resumo": "resumo-v1.0"
+  },
+  "exibicao_interface": {
+    "protocolo": "2026-000142",
+    "data_solicitacao": "14/10/2026",
+    "canal": "não localizado",
+    "solicitante": "Marcos Vinícius de Almeida Santos",
+    "curso": "técnico em enfermagem",
+    "assunto": "Efetivação de matrícula e solicitação de documentos",
+    "pedido": "Solicito a efetivação da matrícula e a lista de documentos pendentes.",
+    "categoria": "matricula",
+    "entidades": [
+      {
+        "tipo": "protocolo",
+        "valor": "2026-000142",
+        "origem": "literal",
+        "evidencia": "meu protocolo é 2026-000142"
+      },
+      {
+        "tipo": "data",
+        "valor": "14/10/2026",
+        "origem": "literal",
+        "evidencia": "14 de outubro de 2026"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Marcos Vinícius de Almeida Santos",
+        "origem": "literal",
+        "evidencia": "Meu nome é Marcos Vinícius de Almeida Santos"
+      },
+      {
+        "tipo": "local",
+        "valor": "Cuiabá",
+        "origem": "literal",
+        "evidencia": "em Cuiabá"
+      }
+    ],
+    "dados_pessoais_detectados": [
+      "CPF",
+      "RG",
+      "data de nascimento",
+      "e-mail"
+    ],
+    "campos_ausentes": [
+      "canal"
+    ],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "campo ausente: canal"
+    ],
+    "alertas_seguranca": []
+  }
+}

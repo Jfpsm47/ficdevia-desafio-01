@@ -1,0 +1,61 @@
+{
+  "id_execucao": "rag-afdbaf6c",
+  "caso_id": "caso01_texto",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Referente ao protocolo 2026-000142, relativo à sua solicitação de efetivação da matrícula no curso Técnico em Enfermagem, informamos que a matrícula será considerada efetivada somente após a conferência de todos os documentos exigidos pela Secretaria Escolar.\nPara efetivar a matrícula, o estudante deve apresentar, em original e cópia, os seguintes documentos: documento oficial de identidade com foto, CPF, comprovante de residência emitido nos últimos 90 dias, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula no ensino médio) e foto 3x4 recente; estudantes menores de 18 anos também devem apresentar documento de identidade do responsável legal.\nCaso algum documento esteja pendente no ato da matrícula, a Secretaria registrará a pendência e o estudante terá até 10 (dez) dias úteis, contados da data da matrícula, para entregá‑lo. Enquanto houver pendência, a matrícula permanecerá em situação provisória; a efetivação será comunicada pela Secretaria após a conferência completa dos documentos.",
+    "afirmacoes": [
+      {
+        "texto": "Para efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia, os documentos exigidos: documento oficial de identidade com foto, CPF, comprovante de residência, histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula), e foto 3x4 recente; menores de 18 anos devem apresentar documento de identidade do responsável legal.",
+        "chunk_ids": [
+          "ACV-01#c2"
+        ]
+      },
+      {
+        "texto": "Caso falte algum documento no ato da matrícula, a Secretaria registra a pendência e o estudante tem até 10 dias úteis, contados da data da matrícula, para entregá‑lo; a matrícula permanece provisória até a entrega de todos os documentos.",
+        "chunk_ids": [
+          "ACV-01#c3"
+        ]
+      },
+      {
+        "texto": "A situação da matrícula é informada pela Secretaria Escolar depois da conferência dos documentos; mensagens automáticas de recebimento não confirmam a efetivação.",
+        "chunk_ids": [
+          "ACV-02#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c2",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 1,
+        "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+        "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+      },
+      {
+        "chunk_id": "ACV-01#c3",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 2,
+        "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+        "trecho": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+      },
+      {
+        "chunk_id": "ACV-02#c2",
+        "documento_id": "ACV-02",
+        "versao_documento": "1.2",
+        "pagina": null,
+        "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+        "trecho": "exigidos no Manual de Matrícula (ACV-01). Para estudante menor de 18 anos, a matrícula é feita pelo responsável legal.\n\n2. A matrícula pode ser feita pela internet?\nNão. O formulário web serve apenas para a pré-matrícula. A entrega e a conferência dos documentos são presenciais, na Secretaria Escolar.\n\n3. Como sei se a minha matrícula foi efetivada?\nA situação da matrícula é informada pela Secretaria Escolar depois da conferência dos documentos. Mensagens automáticas de recebimento não confirmam a efetivação."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}
