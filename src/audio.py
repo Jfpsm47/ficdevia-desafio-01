@@ -474,7 +474,7 @@ def sintetizar_minuta_aprovada(caso_id: str, *, config: dict | None = None,
     try:
         resposta = _chamar_piper_tts(texto, cfg)
         pasta.mkdir(parents=True)
-        arquivo_texto.write_text(texto + "\n", encoding="utf-8")
+        arquivo_texto.write_text(texto + "\n", encoding="utf-8", newline="\n")
         arquivo_audio.write_bytes(resposta["audio"])
         meta.update(tentativas=resposta["tentativas"], latencia_s=resposta["latencia_s"],
                     caracteres_entrada=resposta["caracteres_entrada"], custo_usd=resposta["custo_usd"],

@@ -94,7 +94,7 @@ class TestVision(unittest.TestCase):
             resultado = self.extrair()
         pasta = (self.raiz / resultado["arquivo_metadados"]).parent
         self.assertEqual(self.origem.read_bytes(), original)
-        self.assertEqual((pasta / "bruta.txt").read_text(), resultado["texto"])
+        self.assertEqual((pasta / "bruta.txt").read_text(encoding="utf-8"), resultado["texto"])
         self.assertEqual((pasta / "revisada.txt").read_bytes(), (pasta / "bruta.txt").read_bytes())
         self.assertTrue((pasta / "comparacao.json").exists())
         self.assertEqual(resultado["decisao_humana"], "PENDENTE")

@@ -2,4 +2,5 @@
 # converter quebras de linha, senão um checkout no Windows (core.autocrlf) altera os bytes e invalida os hashes.
 dados/** -text
 resultados/transcricoes/** -text
+resultados/ocr/** -text
 *.pdf binary

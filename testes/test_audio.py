@@ -76,7 +76,7 @@ class TestAudio(unittest.TestCase):
             res = self.transcrever()
         pasta = (self.raiz / res["arquivo_metadados"]).parent
         self.assertEqual(self.origem.read_bytes(), original)
-        self.assertEqual((pasta / "bruta.txt").read_text(), res["texto"])
+        self.assertEqual((pasta / "bruta.txt").read_text(encoding="utf-8"), res["texto"])
         self.assertEqual((pasta / "revisada.txt").read_bytes(), (pasta / "bruta.txt").read_bytes())
         self.assertTrue((pasta / "comparacao.json").exists())
         self.assertEqual(res["decisao_humana"], "PENDENTE")
