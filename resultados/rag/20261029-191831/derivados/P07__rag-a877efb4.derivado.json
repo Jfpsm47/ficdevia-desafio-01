@@ -1,0 +1,17 @@
+{
+  "id_execucao": "rag-a877efb4",
+  "caso_id": "P07",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "sem_evidencia",
+    "resposta": "Não foi possível produzir resposta institucional validada automaticamente nesta execução. A solicitação foi retida e encaminhada para revisão humana da Secretaria Escolar.",
+    "afirmacoes": [],
+    "citacoes": [],
+    "requer_revisao": true,
+    "motivo_revisao": "Saída retida (provedor:limite_requisicoes)."
+  }
+}

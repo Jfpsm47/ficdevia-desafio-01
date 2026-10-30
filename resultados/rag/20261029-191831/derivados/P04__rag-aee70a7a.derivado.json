@@ -1,0 +1,33 @@
+{
+  "id_execucao": "rag-aee70a7a",
+  "caso_id": "P04",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Não. O formulário web serve apenas para a pré‑matrícula; a entrega e a conferência dos documentos devem ser realizadas presencialmente na Secretaria Escolar.",
+    "afirmacoes": [
+      {
+        "texto": "A matrícula não pode ser feita pela internet; o formulário web serve apenas para a pré‑matrícula e a entrega e conferência dos documentos são presenciais.",
+        "chunk_ids": [
+          "ACV-02#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-02#c2",
+        "documento_id": "ACV-02",
+        "versao_documento": "1.2",
+        "pagina": null,
+        "secao": "1. Posso fazer a matrícula por meio de outra pessoa?; 2. A matrícula pode ser feita pela internet?; 3. Como sei se a minha matrícula foi efetivada?",
+        "trecho": "exigidos no Manual de Matrícula (ACV-01). Para estudante menor de 18 anos, a matrícula é feita pelo responsável legal.\n\n2. A matrícula pode ser feita pela internet?\nNão. O formulário web serve apenas para a pré-matrícula. A entrega e a conferência dos documentos são presenciais, na Secretaria Escolar.\n\n3. Como sei se a minha matrícula foi efetivada?\nA situação da matrícula é informada pela Secretaria Escolar depois da conferência dos documentos. Mensagens automáticas de recebimento não confirmam a efetivação."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

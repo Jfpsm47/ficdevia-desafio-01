@@ -1,0 +1,34 @@
+{
+  "id_execucao": "rag-943b16e6",
+  "caso_id": "P02",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02",
+    "ACV-03"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "O estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregar o documento pendente.",
+    "afirmacoes": [
+      {
+        "texto": "O estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregar o documento pendente.",
+        "chunk_ids": [
+          "ACV-01#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c3",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 2,
+        "secao": "3. Documentos pendentes; 4. Efetivação da matrícula",
+        "trecho": "3. Documentos pendentes\nQuando faltar algum documento no ato da matrícula, a Secretaria Escolar registra a pendência e\no estudante tem até 10 (dez) dias úteis, contados da data da matrícula, para entregá-lo. A\nmatrícula com documento pendente permanece em situação provisória até a entrega.\n\n4. Efetivação da matrícula\nA matrícula só é considerada efetivada depois que a Secretaria Escolar confere todos os\ndocumentos exigidos na seção 2. A confirmação é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

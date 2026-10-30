@@ -1,0 +1,33 @@
+{
+  "id_execucao": "rag-b2ba7f8e",
+  "caso_id": "P01",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Para efetivar a matrícula nos cursos técnicos, o estudante deve apresentar na Secretaria Escolar, em original e cópia, os seguintes documentos: documento oficial de identidade com foto; CPF; comprovante de residência emitido nos últimos 90 dias; histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no ensino médio para os cursos concomitantes; uma foto 3x4 recente. Estudantes menores de 18 anos também devem apresentar documento de identidade do responsável legal.",
+    "afirmacoes": [
+      {
+        "texto": "Documentos exigidos: identidade com foto, CPF, comprovante de residência (últimos 90 dias), histórico escolar ou certificado de conclusão do ensino médio (ou declaração de matrícula), foto 3x4 recente; menores de 18 anos precisam do documento de identidade do responsável legal.",
+        "chunk_ids": [
+          "ACV-01#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-01#c2",
+        "documento_id": "ACV-01",
+        "versao_documento": "2.0",
+        "pagina": 1,
+        "secao": "1. Finalidade; 2. Documentos exigidos para a matrícula",
+        "trecho": "sobre a matrícula nos cursos técnicos\nda Escola Técnica Estadual de Cuiabá. Aplica-se às turmas com início em 2027.\n\n2. Documentos exigidos para a matrícula\nPara efetivar a matrícula, o estudante deve apresentar na Secretaria Escolar, em original e cópia,\nos seguintes documentos:\n- documento oficial de identidade com foto;\n- CPF;\n- comprovante de residência emitido nos últimos 90 dias;\n- histórico escolar ou certificado de conclusão do ensino médio, ou declaração de matrícula no\nensino médio para os cursos concomitantes;\n- uma foto 3x4 recente.\nEstudantes menores de 18 anos também devem apresentar documento de identidade do\nresponsável legal."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

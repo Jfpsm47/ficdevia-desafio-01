@@ -1,0 +1,18 @@
+{
+  "id_execucao": "rag-1c605812",
+  "caso_id": "P08",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-04",
+    "ACV-05"
+  ],
+  "resposta_rag": {
+    "status": "sem_evidencia",
+    "resposta": "O acervo institucional consultado não contém orientações sobre o procedimento de aproveitamento de disciplinas cursadas em outra instituição. A solicitação deve ser encaminhada para revisão humana na Secretaria Escolar.",
+    "afirmacoes": [],
+    "citacoes": [],
+    "requer_revisao": true,
+    "motivo_revisao": "Nenhum trecho recuperado trata do aproveitamento de disciplinas."
+  }
+}

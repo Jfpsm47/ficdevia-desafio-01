@@ -1,0 +1,17 @@
+{
+  "id_execucao": "rag-b41e04b0",
+  "caso_id": "P07",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-02"
+  ],
+  "resposta_rag": {
+    "status": "sem_evidencia",
+    "resposta": "O acervo institucional consultado não contém orientações sobre bolsas ou auxílios financeiros para estudantes dos cursos técnicos. A consulta deve ser encaminhada para revisão humana da Secretaria Escolar.",
+    "afirmacoes": [],
+    "citacoes": [],
+    "requer_revisao": true,
+    "motivo_revisao": "Acervo recuperado não contém informações sobre bolsas ou auxílios financeiros."
+  }
+}

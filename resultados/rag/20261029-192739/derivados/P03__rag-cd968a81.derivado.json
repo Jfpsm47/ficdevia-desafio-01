@@ -1,0 +1,34 @@
+{
+  "id_execucao": "rag-cd968a81",
+  "caso_id": "P03",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-03",
+    "ACV-05"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "A declaração de matrícula é emitida em até 3 (três) dias úteis após o pedido.",
+    "afirmacoes": [
+      {
+        "texto": "A declaração de matrícula é emitida em até 3 (três) dias úteis após o pedido.",
+        "chunk_ids": [
+          "ACV-03#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-03#c2",
+        "documento_id": "ACV-03",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "2. Como solicitar; 3. Prazo de emissão; 4. Condições para emissão",
+        "trecho": "na Secretaria Escolar. O pedido deve informar o nome completo do estudante, o curso e a finalidade da declaração.\n\n3. Prazo de emissão\nA declaração de matrícula e a declaração de frequência são emitidas em até 3 (três) dias úteis após o pedido. A declaração de conclusão de curso é emitida em até 10 (dez) dias úteis.\n\n4. Condições para emissão\nA declaração de matrícula só é emitida para estudante com matrícula efetivada. A Secretaria Escolar não emite declaração com informação que não conste nos registros escolares."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

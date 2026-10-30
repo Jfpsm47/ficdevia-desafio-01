@@ -1,7 +1,7 @@
-"""Prompts de produção (RF03), minimização de dados (RF12) e modelo institucional da minuta (RF09).
+"""Prompts de produção (RF03, RF14, RF15, RF19), minimização de dados (RF12) e modelo institucional da minuta (RF09).
 
 Os textos dos prompts ficam versionados em prompts/; este módulo apenas os carrega e monta as
-mensagens, mantendo instruções do sistema separadas do conteúdo não confiável do cidadão.
+mensagens, mantendo instruções do sistema separadas do conteúdo não confiável do cidadão e do acervo.
 """
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ import json
 import re
 import secrets
 from pathlib import Path
+from typing import Any
 
 RAIZ = Path(__file__).resolve().parent.parent
 DIR_PROMPTS = RAIZ / "prompts"
@@ -23,6 +24,8 @@ VERSOES = {
     "extracao_v2": ("producao/sistema_extracao_v2_1.md", "extracao-v2.1"),
     "correcao_esquema": ("producao/correcao_esquema_v1.md", "correcao-esquema-v1.0"),
     "resumo": ("producao/sistema_resumo_v1.md", "resumo-v1.0"),
+    "rag_consulta": ("producao/sistema_rag_consulta_v1.md", "rag-consulta-v1.0"),
+    "rag_minuta": ("producao/sistema_rag_minuta_v1.md", "rag-minuta-v1.0"),
 }
 
 # Nome próprio: palavras com inicial maiúscula na mesma linha, admitindo "de/da/do/dos/das" entre elas.
@@ -46,7 +49,10 @@ _PADROES_MINIMIZACAO = [
 ]
 
 _TAGS_RESERVADAS = re.compile(
-    r"<\s*/?\s*(conteudo_nao_confiavel|contexto_institucional|dados_extraidos)[^>]*>", re.I)
+    r"<\s*/?\s*(conteudo_nao_confiavel|contexto_institucional|dados_extraidos|"
+    r"acervo_recuperado|consulta_nao_confiavel|dados_solicitacao|trecho_acervo)[^>]*>",
+    re.I,
+)
 
 
 def ler_prompt(caminho_relativo: str) -> str:
@@ -85,6 +91,47 @@ def delimitar(texto: str, arquivo_origem: str) -> str:
     nonce = secrets.token_hex(4)
     return (f'<conteudo_nao_confiavel id="{nonce}" arquivo="{arquivo_origem}">\n'
             f"{neutralizado.strip()}\n</conteudo_nao_confiavel>")
+
+
+def delimitar_consulta(consulta: str) -> str:
+    """Envolve uma pergunta externa ao RAG em tag com nonce e neutraliza tags reservadas (RF16, RF19)."""
+    neutralizado = _TAGS_RESERVADAS.sub("[tag removida]", consulta)
+    nonce = secrets.token_hex(4)
+    return f'<consulta_nao_confiavel id="{nonce}">\n{neutralizado.strip()}\n</consulta_nao_confiavel>'
+
+
+def delimitar_acervo_recuperado(trechos_busca: list[Any]) -> str:
+    """Delimita os trechos recuperados do acervo tratando instruções internas como dados não confiáveis (RF16, RF19)."""
+    nonce = secrets.token_hex(4)
+    if not trechos_busca:
+        return f'<acervo_recuperado id="{nonce}">\n(nenhum trecho recuperado)\n</acervo_recuperado>'
+
+    partes: list[str] = []
+    for item in trechos_busca:
+        d = item.para_dict() if hasattr(item, "para_dict") else (item.model_dump() if hasattr(item, "model_dump") else dict(item))
+        texto_limpo = _TAGS_RESERVADAS.sub("[tag removida]", str(d.get("texto", ""))).strip()
+        pag = d.get("pagina")
+        pag_str = str(pag) if pag is not None else "nao_aplicavel"
+        secao_str = str(d.get("secao") or "sem_secao").replace('"', "'")
+        titulo_str = str(d.get("titulo_documento") or "").replace('"', "'")
+        vig_str = str(d.get("vigencia_inicio") or "nao_informada")
+        sim_val = d.get("similaridade")
+        sim_str = f"{sim_val:.4f}" if isinstance(sim_val, (int, float)) else "—"
+
+        atributos = (
+            f'chunk_id="{d["chunk_id"]}" '
+            f'documento_id="{d["documento_id"]}" '
+            f'versao="{d["versao_documento"]}" '
+            f'titulo="{titulo_str}" '
+            f'vigencia_inicio="{vig_str}" '
+            f'pagina="{pag_str}" '
+            f'secao="{secao_str}" '
+            f'similaridade_vetorial="{sim_str}"'
+        )
+        partes.append(f"<trecho_acervo {atributos}>\n{texto_limpo}\n</trecho_acervo>")
+
+    corpo = "\n\n".join(partes)
+    return f'<acervo_recuperado id="{nonce}">\n{corpo}\n</acervo_recuperado>'
 
 
 def montar_mensagens_extracao(texto: str, arquivo_origem: str, minimizar_dados: bool = True):
@@ -128,8 +175,63 @@ def montar_mensagens_resumo(texto: str, arquivo_origem: str, minimizar_dados: bo
     return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
 
 
+def montar_mensagens_rag_consulta(
+    consulta: str,
+    trechos_busca: list[Any],
+    minimizar_dados: bool = True,
+):
+    """Monta mensagens seguras para consulta fundamentada ao acervo com RAG (RF19)."""
+    removidos: dict[str, int] = {}
+    if minimizar_dados:
+        consulta, removidos = minimizar(consulta)
+    sistema = ler_prompt(VERSOES["rag_consulta"][0])
+    usuario = (
+        f"{delimitar_consulta(consulta)}\n\n"
+        f"{delimitar_acervo_recuperado(trechos_busca)}\n\n"
+        "Responda à consulta no formato estrito do esquema, citando apenas chunk_ids presentes em <acervo_recuperado>."
+    )
+    meta = {
+        "versao_prompt": VERSOES["rag_consulta"][1],
+        "hash_prompt_sistema": hash_texto(sistema),
+        "dados_minimizados": removidos,
+        "consulta_enviada": consulta,
+    }
+    return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
+def montar_mensagens_rag_minuta(
+    texto_solicitacao: str,
+    arquivo_origem: str,
+    dados_solicitacao: dict[str, Any] | None,
+    trechos_busca: list[Any],
+    minimizar_dados: bool = True,
+):
+    """Monta mensagens seguras para geração de minuta separando dados do cidadão e orientações do acervo (RF19)."""
+    removidos: dict[str, int] = {}
+    if minimizar_dados:
+        texto_solicitacao, removidos = minimizar(texto_solicitacao)
+    sistema = ler_prompt(VERSOES["rag_minuta"][0])
+    bloco_dados = _TAGS_RESERVADAS.sub(
+        "[tag removida]",
+        json.dumps(dados_solicitacao or {}, ensure_ascii=False, indent=2),
+    )
+    usuario = (
+        f"<dados_solicitacao>\n{bloco_dados}\n</dados_solicitacao>\n\n"
+        f"{delimitar(texto_solicitacao, arquivo_origem)}\n\n"
+        f"{delimitar_acervo_recuperado(trechos_busca)}\n\n"
+        "Redija a minuta fundamentada no formato estrito do esquema, separando fatos do caso e normas do acervo."
+    )
+    meta = {
+        "versao_prompt": VERSOES["rag_minuta"][1],
+        "hash_prompt_sistema": hash_texto(sistema),
+        "dados_minimizados": removidos,
+        "texto_enviado": texto_solicitacao,
+    }
+    return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
 def mensagem_correcao_esquema(erros: list[dict[str, str]]) -> str:
-    """Mensagem da única tentativa de correção (RF14). Os erros trazem campo e motivo, nunca valores."""
+    """Mensagem da única tentativa de correção (RF14, RF19). Os erros trazem campo e motivo, nunca valores."""
     linhas = "\n".join(f"- {e['campo']}: {e['categoria']} ({e['detalhe']})" for e in erros)
     return ler_prompt(VERSOES["correcao_esquema"][0]).replace("{{ERROS}}", linhas)
 

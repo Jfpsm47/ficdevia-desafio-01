@@ -1,0 +1,174 @@
+{
+  "id_execucao": "rag-99aade0a",
+  "caso_id": "P06",
+  "etapa": "consulta_rag",
+  "estado": "valida",
+  "resposta_rag": {
+    "status": "conflito_fontes",
+    "resposta": "O documento ACV-05 (versão 1.0) estabelece que o trancamento da matrícula pode ser solicitado até 60 (sessenta) dias corridos após o início das aulas do módulo. O documento ACV-04 (versão 1.1) indica que o prazo para solicitar o trancamento é de 30 (trinta) dias corridos após o início das aulas do módulo.",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento pode ser solicitado até 60 dias corridos após o início das aulas do módulo.",
+        "chunk_ids": [
+          "ACV-05#c2"
+        ]
+      },
+      {
+        "texto": "O trancamento pode ser solicitado até 30 dias corridos após o início das aulas do módulo.",
+        "chunk_ids": [
+          "ACV-04#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-05#c2",
+        "documento_id": "ACV-05",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+        "trecho": "com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas.\n\n3. Prazo para trancamento\nO trancamento da matrícula pode ser solicitado até 60 (sessenta) dias corridos após o início das aulas do módulo.\n\n4. Acompanhamento\nA Coordenação Pedagógica acompanha os estudantes com frequência abaixo de 75% e pode convocá-los para orientação."
+      },
+      {
+        "chunk_id": "ACV-04#c2",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "2. Como solicitar o trancamento; 3. Prazo para solicitar o trancamento",
+        "trecho": "legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.\n\n3. Prazo para solicitar o trancamento\nO trancamento pode ser solicitado até 30 (trinta) dias corridos após o início das aulas do módulo."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Os trechos ACV-05#c2 e ACV-04#c2 apresentam prazos diferentes (60 dias vs 30 dias) para o mesmo procedimento, sem indicação de prioridade ou revogação."
+  },
+  "decisao_revisao": {
+    "id_minuta": "rag-99aade0a",
+    "estado": "pendente",
+    "revisor": null,
+    "justificativa": null,
+    "data_hora": null,
+    "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+    "enviada_ao_cidadao": false
+  },
+  "trechos_recuperados": [
+    {
+      "posicao": 1,
+      "similaridade": 0.7957,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Frequência, Faltas e Trancamento",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-05#c2",
+      "documento_id": "ACV-05",
+      "versao_documento": "1.0",
+      "hash_documento": "ccef4212d0454a8380eef0fdb09b7d634cc627ef26612f95c086f0e4e19340a4",
+      "pagina": null,
+      "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas.\n\n3. Prazo para trancamento\nO trancamento da matrícula pode ser solicitado até 60 (sessenta) dias corridos após o início das aulas do módulo.\n\n4. Acompanhamento\nA Coordenação Pedagógica acompanha os estudantes com frequência abaixo de 75% e pode convocá-los para orientação."
+    },
+    {
+      "posicao": 2,
+      "similaridade": 0.7722,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c2",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 1,
+      "secao": "2. Como solicitar o trancamento; 3. Prazo para solicitar o trancamento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.\n\n3. Prazo para solicitar o trancamento\nO trancamento pode ser solicitado até 30 (trinta) dias corridos após o início das aulas do módulo."
+    },
+    {
+      "posicao": 3,
+      "similaridade": 0.7658,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c3",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 2,
+      "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+    },
+    {
+      "posicao": 4,
+      "similaridade": 0.724,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c1",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 1,
+      "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+    }
+  ],
+  "versao_indice": "idx-008437e371",
+  "provedor": "groq",
+  "modelo": "openai/gpt-oss-120b",
+  "simulado": false,
+  "alertas_seguranca": [],
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "valida": true,
+      "erros": [],
+      "latencia_s": 2.32,
+      "tokens_entrada": 2370,
+      "tokens_saida": 788,
+      "custo_usd": 0.000828,
+      "metrica_custo_status": "disponivel"
+    }
+  ],
+  "meta": {
+    "versao_prompt": "rag-consulta-v1.0",
+    "hash_prompt_sistema": "e5a16859c260",
+    "dados_minimizados": {},
+    "uso_total": {
+      "latencia_s": 2.32,
+      "tokens_entrada": 2370,
+      "tokens_saida": 788,
+      "custo_usd": 0.000828,
+      "tentativas": 1,
+      "simulado": false,
+      "metrica_custo_status": "disponivel"
+    }
+  },
+  "pergunta": "Até quando posso pedir o trancamento do curso?",
+  "tipo": "contraditoria",
+  "verificacao": {
+    "status_obtido": "conflito_fontes",
+    "status_esperado": "conflito_fontes",
+    "status_confere": true,
+    "total_afirmacoes": 2,
+    "afirmacoes_sustentadas": 2,
+    "citacoes_verificadas": true,
+    "erros_citacao": [],
+    "docs_esperados_citados": true,
+    "padroes_proibidos_acionados": [],
+    "todas_afirmacoes_sustentadas": true,
+    "requer_revisao": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id_execucao": "rag-25fc44e5",
+  "caso_id": "P05",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-04",
+    "ACV-05"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.",
+        "chunk_ids": [
+          "ACV-04#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-04#c3",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 2,
+        "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+        "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

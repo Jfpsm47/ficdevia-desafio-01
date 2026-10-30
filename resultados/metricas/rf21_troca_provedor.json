@@ -1,0 +1,76 @@
+{
+  "teste": "T12 — RF21: Troca de configuração de geração e falha do serviço",
+  "pergunta": "Em quanto tempo a declaração de matrícula fica pronta?",
+  "indice_preservado_sem_reconstrucao": true,
+  "versao_indice_antes": "idx-008437e371",
+  "versao_indice_depois": "idx-008437e371",
+  "mtime_ns_faiss_antes": 1793315857077072300,
+  "mtime_ns_faiss_depois": 1793315857077072300,
+  "execucoes": {
+    "configuracao_principal": {
+      "id_execucao": "rag-06598bdd",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-120b",
+      "simulado": false,
+      "estado": "valida",
+      "status_rag": "fundamentada",
+      "uso": {
+        "latencia_s": 1.69,
+        "tokens_entrada": 2397,
+        "tokens_saida": 298,
+        "custo_usd": 0.000538,
+        "tentativas": 1,
+        "simulado": false,
+        "metrica_custo_status": "disponivel"
+      }
+    },
+    "configuracao_secundaria": {
+      "id_execucao": "rag-665f903e",
+      "provedor": "groq",
+      "modelo": "openai/gpt-oss-20b",
+      "simulado": false,
+      "estado": "valida",
+      "status_rag": "fundamentada",
+      "uso": {
+        "latencia_s": 1.23,
+        "tokens_entrada": 2395,
+        "tokens_saida": 299,
+        "custo_usd": 0.000269,
+        "tentativas": 1,
+        "simulado": false,
+        "metrica_custo_status": "disponivel"
+      }
+    },
+    "adaptador_simulado_identificado": {
+      "id_execucao": "rag-15fdd883",
+      "provedor": "simulado",
+      "modelo": "simulado-deterministico-v1",
+      "simulado": true,
+      "estado": "valida",
+      "status_rag": "fundamentada",
+      "uso": {
+        "latencia_s": 0.0003,
+        "tokens_entrada": null,
+        "tokens_saida": null,
+        "custo_usd": null,
+        "tentativas": 1,
+        "simulado": true,
+        "metrica_custo_status": "indisponivel_execucao_local_simulada"
+      }
+    },
+    "falha_servico_tratada_e_auditada": {
+      "id_execucao": "rag-d2d1b4b5",
+      "estado": "erro_provedor",
+      "erros": [
+        {
+          "camada": "provedor",
+          "campo": "(chamada)",
+          "categoria": "servico_indisponivel",
+          "detalhe": "Provedor temporariamente indisponível (HTTP 503) durante verificação T12."
+        }
+      ],
+      "requer_revisao": true,
+      "motivo_revisao": "Saída retida (provedor:servico_indisponivel)."
+    }
+  }
+}

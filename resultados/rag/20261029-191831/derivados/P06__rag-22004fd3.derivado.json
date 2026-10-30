@@ -1,0 +1,47 @@
+{
+  "id_execucao": "rag-22004fd3",
+  "caso_id": "P06",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-04",
+    "ACV-05"
+  ],
+  "resposta_rag": {
+    "status": "conflito_fontes",
+    "resposta": "O documento ACV-05 (versão 1.0) estabelece que o trancamento da matrícula pode ser solicitado até 60 dias corridos após o início das aulas do módulo. Já o documento ACV-04 (versão 1.1) estabelece que o trancamento pode ser solicitado até 30 dias corridos após o início das aulas do módulo.",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento da matrícula pode ser solicitado até 60 dias corridos após o início das aulas do módulo.",
+        "chunk_ids": [
+          "ACV-05#c2"
+        ]
+      },
+      {
+        "texto": "O trancamento pode ser solicitado até 30 dias corridos após o início das aulas do módulo.",
+        "chunk_ids": [
+          "ACV-04#c2"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-05#c2",
+        "documento_id": "ACV-05",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+        "trecho": "com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas.\n\n3. Prazo para trancamento\nO trancamento da matrícula pode ser solicitado até 60 (sessenta) dias corridos após o início das aulas do módulo.\n\n4. Acompanhamento\nA Coordenação Pedagógica acompanha os estudantes com frequência abaixo de 75% e pode convocá-los para orientação."
+      },
+      {
+        "chunk_id": "ACV-04#c2",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "2. Como solicitar o trancamento; 3. Prazo para solicitar o trancamento",
+        "trecho": "legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.\n\n3. Prazo para solicitar o trancamento\nO trancamento pode ser solicitado até 30 (trinta) dias corridos após o início das aulas do módulo."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Conflito entre documentos ACV-05#c2 (prazo de 60 dias) e ACV-04#c2 (prazo de 30 dias) sobre o prazo para solicitar o trancamento."
+  }
+}

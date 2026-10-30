@@ -1,0 +1,70 @@
+{
+  "teste": "T14 — RF24: Exclusão de documento, vetores e resultados derivados",
+  "documento_excluido": "ACV-03",
+  "consulta_verificacao": "Qual é o prazo para emitir a declaração de matrícula?",
+  "acv03_recuperado_antes": true,
+  "acv03_recuperado_depois": false,
+  "acv03_restante_no_indice_recarregado": false,
+  "derivados_antes": [
+    "T14-antes-exclusao__rag-db4b8b6e.derivado.json"
+  ],
+  "derivados_depois": [],
+  "evento_exclusao": {
+    "documento_id": "ACV-03",
+    "data_hora": "2026-10-29T19:17:38-04:00",
+    "operador": "João Flávio Pompeo",
+    "motivo": "Demonstração prática de retenção e exclusão de documento e derivados (RF24 / T14).",
+    "trechos_removidos": 2,
+    "derivados_removidos": [
+      "resultados/metricas/tmp_derivados_rf24/T14-antes-exclusao__rag-db4b8b6e.derivado.json"
+    ],
+    "versao_indice_anterior": "idx-008437e371",
+    "versao_indice_nova": "idx-5585e502a1",
+    "total_vetores_restantes": 14,
+    "total_documentos_restantes": 5
+  },
+  "top_k_antes": [
+    {
+      "chunk_id": "ACV-03#c2",
+      "documento_id": "ACV-03",
+      "similaridade": 0.7232
+    },
+    {
+      "chunk_id": "ACV-01#c3",
+      "documento_id": "ACV-01",
+      "similaridade": 0.7024
+    },
+    {
+      "chunk_id": "ACV-01#c2",
+      "documento_id": "ACV-01",
+      "similaridade": 0.5951
+    },
+    {
+      "chunk_id": "ACV-02#c2",
+      "documento_id": "ACV-02",
+      "similaridade": 0.5764
+    }
+  ],
+  "top_k_depois": [
+    {
+      "chunk_id": "ACV-01#c3",
+      "documento_id": "ACV-01",
+      "similaridade": 0.7024
+    },
+    {
+      "chunk_id": "ACV-01#c2",
+      "documento_id": "ACV-01",
+      "similaridade": 0.5951
+    },
+    {
+      "chunk_id": "ACV-02#c2",
+      "documento_id": "ACV-02",
+      "similaridade": 0.5764
+    },
+    {
+      "chunk_id": "ACV-01#c4",
+      "documento_id": "ACV-01",
+      "similaridade": 0.5561
+    }
+  ]
+}
