@@ -243,3 +243,48 @@ sem mudança nas regras.
 > A equipe declara que utilizou as ferramentas de IA acima de forma transparente, revisou, testou e
 > compreendeu o código e o conteúdo entregues e assume a responsabilidade pelo resultado final.
 > Data de consolidação do registro: **18/10/2026**.
+
+
+---
+
+## Atualização do Estudante 2 — 29/10/2026 — Desafio 02 (embeddings, índice vetorial, RAG, provedor, auditoria e fluxo integrado)
+
+- **Responsável (Estudante 2):** Erick Rodrigues Costa.
+- **Ferramenta de desenvolvimento:** Google Antigravity (agente de codificação).
+- **IA e motores do produto:**
+  - *Embeddings locais (RF17/RF18):* `fastembed 0.9.1` com `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (ONNX CPU, `384` dimensões) + `faiss-cpu 1.15.1` (`IndexFlatIP` normalizado em norma L2).
+  - *Geração em serviço real (RF19/RF21/T15):* GroqCloud (`openai/gpt-oss-120b` na configuração principal e `openai/gpt-oss-20b` na secundária), com saída restrita por JSON Schema.
+  - *Contingência/testes (RF21):* `AdaptadorSimulado` (`simulado/simulado-deterministico-v1`), explicitamente rotulado com `simulado=true`, `metrica_custo_status="indisponivel_execucao_local_simulada"` e aviso no texto, nunca tratado como equivalente a modelo real.
+- **Trabalho produzido:** `src/ingestion.py`, `src/embeddings.py`, `src/rag.py`, `src/metrics.py`, evolução de `src/llm_client.py`, `src/audit.py`, `src/prompts.py` e `src/main.py`, prompts `rag-consulta-v1.0` e `rag-minuta-v1.0`, testes offline `testes/test_ingestion_embeddings.py`, `testes/test_rag.py` e `testes/test_provedor_auditoria_d2.py`, execuções reais em `indice/padrao/`, `resultados/metricas/`, `resultados/rag/20261029-192739/` e `resultados/minutas/`, e documentação do Desafio 02.
+
+### Solicitações relevantes feitas à IA (Desafio 02 — Estudante 2)
+
+1. **29/10/2026:** *"fiquei responsável por fazer a parte do estudante 2, faça o planejamento completo e detalhado do que precisa ser feito na minha parte, seguindo os requisitos e especificações do pdf do desafio"* → inspeção completa da entrega já congelada do Estudante 1 (`schemas.py`, `nlp.py`, `HASHES.json`, `INTEGRACAO_RF14.md`) e elaboração de plano em 11 etapas cobrindo RF17, RF18, RF19, RF21, RF23, RF24 e integração do RF14/RF15.
+2. **29/10/2026:** aprovação do plano para execução completa → implementação dos módulos de ingestão, índice FAISS persistente, experimento de chunking, motor RAG com reconstrução determinística de citações, adaptadores de provedor com orçamento de execução, auditoria mascarada e integração em `src/main.py`.
+3. **29/10/2026:** revisão humana das minutas geradas pelo fluxo integrado (`caso01_texto` e `caso03_ocr`) → a IA apresentou o texto integral gerado sem induzir a decisão, e o revisor humano (`Erick Rodrigues Costa`) aprovou `caso01_texto` (`rag-afdbaf6c`) e encaminhou `caso03_ocr` (`rag-abd0befc`) para revisão (`revisar`), decisões persistidas via `--registrar-decisao` sem envio automático.
+
+### Sugestões da IA aceitas, modificadas e rejeitadas (Desafio 02 — Estudante 2)
+
+| Sugestão da IA | Decisão | Justificativa |
+|---|---|---|
+| Embeddings locais via `fastembed` (`paraphrase-multilingual-MiniLM-L12-v2`, `384d`) separados do provedor HTTP de geração | **Aceita** | Garante independência real entre índice vetorial e provedor de geração (RF21 / `T12`), sem depender de endpoint pago de embeddings e sem instalar PyTorch pesado |
+| Reconstruir `Citacao` em código a partir de `TrechoIndexado` em vez de pedir metadados bibliográficos ao LLM | **Aceita** | Impede alucinação de `documento_id`, versão, página ou seção: o modelo referencia apenas `chunk_ids` recuperados e o sistema preenche o objeto `Citacao` a partir do índice |
+| Manter páginas de PDF separadas durante o chunking (`src/ingestion.py`) | **Aceita** | Assegura que `Citacao.pagina` corresponda exatamente à página física do PDF normativo |
+| Contabilizar qualquer retorno `status="sem_evidencia"` na métrica de abstenção do RF23 | **Modificada** | Na bateria diagnóstica `20261029-191831`, `P07` sofreu HTTP 429 e caiu na contingência (`estado="erro_provedor"`). `calcular_metricas_rag_rf23` foi corrigida para exigir `estado == "valida"`, distinguindo falha de serviço de abstenção real do modelo |
+| Inspecionar prompt injection indireto apenas nos chunks dentro do `top_k` | **Modificada** | Como `ACV-06#c2` ficou na posição 16/16 (`0,3017`) na consulta de horário (`ADV-02`), `detectar_instrucoes_suspeitas_trechos` passou a inspecionar também trechos irmãos do mesmo documento de origem (`ACV-06`) e foi adicionada sub-verificação com exposição direta de `ACV-06#c2` no prompt |
+| Registrar decisões humanas de revisão das minutas automaticamente pela IA | **Rejeitada** | Viola a governança do projeto (RF24 / Seção 16). Toda minuta nasce `pendente` (`enviada_ao_cidadao=false`), e somente as decisões explícitas do revisor `Erick Rodrigues Costa` foram gravadas |
+| Nomes de classes de teste acoplados a códigos `Txx`/`RFxx` | **Modificada** | Padronizados para nomes semânticos em português (`TestIndiceVetorialPersistente`, `TestComportamentosMotorRAG`, `TestFluxoIntegradoERegressao`), mantendo o mapeamento `T06..T15` nas docstrings |
+
+### Erros, inadequações e achados reais detectados e corrigidos
+
+1. **Quebra de linha `CRLF` no Windows em `src/audio.py` e `resultados/ocr/ocr-99704b6a/*.txt`:** `test_sintese_voz.py` e `vision.obter_ocr_confirmado` falhavam no Windows porque `write_text` gravava `\r\n` enquanto o SHA-256 esperado usava `\n`; corrigido com `newline="\n"` em `src/audio.py:477` e normalização LF nos artefatos de OCR.
+2. **Proteção de arquivo congelado em `HASHES.json`:** `obter_texto_da_entrada` em `src/main.py` regravava `dados/processados/caso03_ocr_revisado.txt` em `--dry-run`; ajustado para apenas ler o arquivo quando já existente, preservando os 28 hashes congelados (`dados_ficticios verificar` → `[OK] Conjunto coerente.`).
+3. **Assinatura estrita de `DecisaoRevisao` (`data_hora` vs `horario`):** capturado imediatamente por `test_provedor_auditoria_d2.py` graças ao `extra="forbid"` de `src/schemas.py` e corrigido em `src/main.py`.
+4. **Limite de tokens por minuto (`HTTP 429`) e métrica de abstenção (`20261029-191831` → `20261029-192739`):** pausa ajustada para `25 s` em `geracao_rag` e validação estrita de `estado == "valida"` adicionada em `src/metrics.py` com teste de regressão.
+5. **Bloqueio real da Camada 3 no fluxo integrado (`caso01_texto`):** na primeira execução integrada, `gpt-oss-120b` grafou `"Marcos Vinício"` em `solicitante`; `src/main.py` reteve automaticamente antes da minuta (`resultados/metricas/t02_bloqueio_real_main_caso01.json`).
+6. **Vocabulário técnico interno na minuta de `caso03_ocr` (`rag-abd0befc`):** na conferência humana, o revisor identificou menção literal a `campo "canal"` e `"pedido"` no parágrafo final e saudação duplicada, encaminhando a minuta para `revisar`.
+
+### Forma de validação (Atualização Desafio 02)
+
+- **Testes automatizados offline:** **150 testes aprovados em 2,68 s** (`python -m unittest discover -s testes -t .` com `PYTHONUTF8=1`) e integridade integral dos gabaritos (`python -m src.dados_ficticios verificar` → `[OK] Conjunto coerente.`).
+- **Execuções reais e revisão humana:** bateria RAG `resultados/rag/20261029-192739/` (`8/8` válidas + `ADV-02`), demonstrações `T06`, `T07`, `T12` e `T14` em `resultados/metricas/`, regressão integrada `T15` em texto/áudio/OCR e revisão humana documentada em `documentacao/AVALIACAO_HUMANA.md` §8.

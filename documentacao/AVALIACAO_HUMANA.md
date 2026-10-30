@@ -159,3 +159,14 @@ extração `resultados/extracao/20261028-173726`, prompt `extracao-v2.1`). Ficha
 | caso09_texto_ambiguo | sim | — | — | não (`outros`) | — | Categoria corrigida para `revisao`, conforme o gabarito |
 
 **Acurácia de categoria conferida (corretas / total):** 6/7
+
+
+## 8. Checkpoint 3 — Revisão humana das minutas fundamentadas com RAG (RF19 / RF24)
+
+Revisor: Erick Rodrigues Costa (Estudante 2) · Data: 29/10/2026  
+Artefatos conferidos: `resultados/minutas/caso01_texto_rag.json` (`caso01_texto_minuta.pdf`) e `resultados/minutas/caso03_ocr_rag.json` (`caso03_ocr_minuta.pdf`). Nenhuma minuta foi enviada ao cidadão (`enviada_ao_cidadao: false`).
+
+| Caso | `id_minuta` | Citações verificadas no índice | Decisão humana (`DecisaoRevisao.estado`) | Justificativa do revisor |
+|---|---|---|---|---|
+| `caso01_texto` | `rag-afdbaf6c` | `ACV-01#c2` (v2.0, pág. 1, §2), `ACV-01#c3` (v2.0, pág. 2, §3–4), `ACV-02#c2` (v1.2, §3) | **`aprovada`** | Texto fiel à solicitação e integralmente sustentado pelas citações `ACV-01#c2`, `ACV-01#c3` e `ACV-02#c2`, sem dados pessoais desnecessários nem confirmação indevida de matrícula. |
+| `caso03_ocr` | `rag-abd0befc` | `ACV-01#c2` (v2.0, pág. 1, §2), `ACV-02#c2` (v1.2, §2) | **`revisar`** | Fundamentação normativa correta (`ACV-01` v2.0 e `ACV-02` v1.2), mas o trecho final expõe termos internos do esquema JSON (`campo 'canal'` e descrição do `'pedido'`) ao cidadão e duplica saudação. |

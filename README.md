@@ -1,21 +1,18 @@
 # Central Inteligente de Atendimento e Comunicação Institucional
 
-Desafio Prático 1 — FIC_DEV · Inteligência Artificial Generativa (Aulas 01 a 07).
+Desafios Práticos 01 e 02 — FIC_DEV · Inteligência Artificial Generativa (Aulas 01 a 14).
 
-Protótipo local que recebe solicitações **fictícias** em texto, áudio e imagem, extrai informações, gera
-minuta de resposta institucional, versão em áudio e peça visual sintética. **Nenhuma resposta é enviada
-automaticamente**: toda saída é minuta pendente de revisão de um servidor responsável.
+Protótipo local que recebe solicitações **fictícias** em texto, áudio e imagem, valida a solicitação em três camadas, consulta um acervo normativo indexado localmente com RAG fundamentado, gera minuta de resposta institucional com citações verificáveis, versão em áudio e peça visual sintética. **Nenhuma resposta é enviada automaticamente**: toda saída nasce retida e depende de decisão formal de um servidor responsável.
 
 | Integrante | Responsabilidade | Situação |
 |---|---|---|
-| Estudante 1 | Engenharia de prompts, comparação de modelos, critérios de avaliação e documentação | Implementado |
-| Estudante 2 | Integração por API, segurança, processamento de texto, interface Web de revisão e auditoria (`src/main.py`, `src/web.py`, `src/llm_client.py`, `src/audit.py`) | Implementado |
-| Estudante 3 | Áudio, visão/OCR, geração de imagem, acessibilidade, testes multimodais (`src/audio.py`, `src/vision.py`, `src/image_generation.py`) | RF06, RF07, RF08 e RF10 concluídos; RF07 usa Piper local em pt-BR; RF10 usa FLUX.2 klein 4B local no Draw Things |
+| Estudante 1 | Prompts, avaliação, esquemas (`src/schemas.py`), NLP (`src/nlp.py`), dados fictícios e gabaritos | Desafio 01 e Desafio 02 (RF14, RF15) implementados |
+| Estudante 2 | Ingestão (`src/ingestion.py`), embeddings e índice FAISS (`src/embeddings.py`), chunking/métricas (`src/metrics.py`), RAG (`src/rag.py`), abstração de provedor (`src/llm_client.py`), auditoria/retenção (`src/audit.py`) e fluxo integrado (`src/main.py`, `src/web.py`) | Desafio 01 e Desafio 02 (RF17, RF18, RF19, RF21, RF23-RAG, RF24-exclusão/revisão) implementados |
+| Estudante 3 | Áudio (`src/audio.py`), visão/OCR (`src/vision.py`), imagem (`src/image_generation.py`); Desafio 02: guardrails, Streamlit, sentimentos e painel | Desafio 01 concluído (RF06, RF07, RF08, RF10); Desafio 02 pendente de consolidação pelo Estudante 3 |
 
 ## Instalação
 
-Base do projeto: Python 3.13 (testes anteriores em 3.13.5 / 3.13.14).
-RF06 e suíte completa também testados com Python 3.14.7 no macOS.
+Base do projeto: Python 3.13 (testado em Python 3.13.5 / 3.13.14 no Windows 11 e 3.14.7 no macOS).
 
 ```bash
 python -m venv .venv
@@ -29,15 +26,13 @@ python -m piper.download_voices pt_BR-faber-medium --download-dir .cache/piper
 Abra `.env` e preencha **somente** a chave do provedor que for usar (padrão: `GROQ_API_KEY`, obtida em
 console.groq.com/keys). O `.env` está no `.gitignore` e nunca deve ser entregue.
 
-Versões principais: `httpx 0.28.1`, `python-dotenv 1.2.1`, `Pillow 13.0.0` e `piper-tts 1.8.0`
-(ver `requirements.txt`).
-A versão 1.2.2 anteriormente declarada não estava disponível no índice consultado durante a instalação.
+Versões principais (`requirements.txt`): `httpx 0.28.1`, `python-dotenv 1.2.1`, `pydantic 2.14.1`, `pypdf 6.21.4`, `faiss-cpu 1.15.1`, `fastembed 0.9.1`, `Pillow 13.0.0` e `piper-tts 1.8.0`. O modelo de embeddings multilíngue (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, `384d`) roda localmente em ONNX com cache em `.cache/fastembed/`.
 
-## Execução
+## Execução — Fluxo Geral e Multimodal (Desafio 01 + Integração)
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | Testes offline, incluindo transcrição, síntese de voz e OCR — não chamam API |
+| `python -m unittest discover -s testes -t .` | Suíte completa de testes offline (150 testes) — não chama API externa |
 | `python -m src.audio transcrever` | Transcreve o áudio fictício no Groq; salva evidências e comparação, sem aprovar a transcrição |
 | `python -m src.audio revisar --help` | Instruções para confirmar os campos críticos após ouvir o áudio e revisar o texto |
 | `python -m src.audio sintetizar --caso caso02_audio` | Gera localmente um WAV Piper da última minuta comprovadamente aprovada; bloqueia minutas pendentes, corrigidas ou rejeitadas |
@@ -47,117 +42,80 @@ A versão 1.2.2 anteriormente declarada não estava disponível no índice consu
 | `python -m src.image_generation importar resultados/imagens/<png>.png` | Importa o PNG gerado localmente pelo Draw Things, monta a peça 16:9 e preserva a evidência para revisão humana |
 | `python -m src.image_generation revisar --help` | Instruções para registrar a revisão obrigatória da peça visual do RF10 |
 | `python -m src.main` | Inicia o fluxo completo e abre a **Interface Web de Revisão Humana** (`http://127.0.0.1:8000`) |
-| `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo em lote sem chamar a API (usando cache validado) e gera os PDFs das minutas |
-| `python -m src.main --caso caso01_texto` | Executa o fluxo principal e abre a revisão para um caso específico |
+| `python -m src.main --dry-run --nao-interativo` | Executa todo o fluxo em lote sem chamar a API e gera os PDFs das minutas |
+| `python -m src.main --caso caso01_texto --nao-interativo` | Executa o fluxo integrado real (compreensão RF14/RF15 → RAG RF19 → minuta PDF pendente de revisão) |
+| `python -m src.main --caso caso01_texto --registrar-decisao aprovada --revisor "<Nome>" --justificativa "<Motivo>"` | Registra decisão formal de revisão humana (`pendente`, `aprovada`, `rejeitada`, `revisar`) sem envio automático (RF24) |
 | `python -m src.experimento_prompts listar --provedor groq` | Lista os modelos disponíveis para a sua chave |
-| `python -m src.experimento_prompts prompts` | **RF02**: gera o Prompt C via metaprompt e executa A, B e C com o mesmo modelo e parâmetros |
-| `python -m src.experimento_prompts prompts --reusar-prompt-c` | Repete o RF02 com o Prompt C já salvo |
+| `python -m src.experimento_prompts prompts [--reusar-prompt-c]` | **RF02**: experimento comparativo de prompts A, B e C |
 | `python -m src.experimento_prompts modelos` | Compara modelos com os prompts de produção nos casos 01, 04 e 05 |
-| `python -m src.experimento_prompts reavaliar resultados/<tipo>/<execução>` | Recalcula as matrizes após mudar um gabarito (sem API) |
 
-Os comandos de `src.main` e `src.experimento_prompts` aceitam `--dry-run` (sem API) e
-`--provedor` / `--modelo(s)` para sobrescrever o `config.json`.
-Os módulos `src.audio` e `src.vision` usam respectivamente as seções `transcricao`, `sintese_voz` e
-`visao` do `config.json`; `transcrever` e `extrair` chamam a API, `sintetizar` usa Piper local,
-`image_generation` importa a saída local do Draw Things e os comandos `revisar` são locais.
-Passos e limitações: [RF06 — Áudio](documentacao/RF06_AUDIO.md), [RF07 — Síntese de voz](documentacao/RF07_VOZ.md), [RF08 — Visão e OCR](documentacao/RF08_VISAO_OCR.md) e [RF10 — Imagem](documentacao/RF10_IMAGEM.md).
+Passos e limitações multimodais: [RF06 — Áudio](documentacao/RF06_AUDIO.md), [RF07 — Síntese de voz](documentacao/RF07_VOZ.md), [RF08 — Visão e OCR](documentacao/RF08_VISAO_OCR.md) e [RF10 — Imagem](documentacao/RF10_IMAGEM.md).
 
-## Desafio 02 — Esquemas, NLP, dados fictícios e gabaritos (Estudante 1)
+## Desafio 02 — Esquemas, NLP, Índice Vetorial, RAG e Governança (Estudantes 1 e 2)
 
-Evolução da mesma central (Aulas 08 a 14): a solicitação vira um contrato de dados validado em três camadas
-(RF14) e uma ficha de compreensão com resumo, categoria e entidades (RF15), conferidas contra gabaritos
-validados e congelados antes das chamadas ao modelo. As partes dos Estudantes 2 (embeddings, índice, RAG,
-provedor) e 3 (guardrails, Streamlit, sentimentos, painel) entram nesta seção quando forem integradas.
+Evolução da central (Aulas 08 a 14): contratos Pydantic estritos em três camadas (RF14), ficha de compreensão com resumo e entidades (RF15), índice vetorial persistente em FAISS com embeddings locais (RF17), experimento comparativo de chunking (RF18), motor RAG com citações determinísticas, abstenção explícita e detecção de conflito entre fontes vigentes (RF19), abstração de provedor isolada do índice com controle de orçamento e adaptador simulado explícito (RF21), métricas determinísticas (RF23) e exclusão auditada do índice/derivados + estados de revisão humana sem envio automático (RF24).
 
 | Comando | O que faz |
 |---|---|
-| `python -m src.schemas exportar` | Regrava os JSON Schema dos contratos em `prompts/esquemas/` (rodar ao mudar um contrato) |
-| `python -m src.dados_ficticios verificar` | Confere quantidades, contratos, trechos de referência e hashes dos gabaritos (sem API) |
-| `python -m src.dados_ficticios gerar-pdfs` | Recria os PDFs textuais do acervo a partir de `dados/acervo_fontes/` (reprodutível) |
-| `python -m src.nlp extrair --todos [--dry-run]` | RF14: extração com esquema estrito e validação em 3 camadas; matriz em `resultados/extracao/<execução>/` |
+| `python -m src.schemas exportar` | Regrava os JSON Schema dos contratos em `prompts/esquemas/` |
+| `python -m src.dados_ficticios verificar` | Confere quantidades, contratos, trechos de referência e hashes SHA-256 dos 28 arquivos congelados (sem API) |
+| `python -m src.dados_ficticios gerar-pdfs` | Recria os PDFs textuais do acervo a partir de `dados/acervo_fontes/` |
+| `python -m src.nlp extrair --todos [--dry-run]` | RF14: extração com esquema estrito e validação em 3 camadas → `resultados/extracao/<execução>/` |
 | `python -m src.nlp comparar-json` | RF14: JSON só sintático × validado por esquema (sem API) → `resultados/metricas/rf14_comparacao_json.md` |
-| `python -m src.nlp fichas --todos [--reusar-extracao resultados/extracao/<execução>] [--dry-run]` | RF15: resumo, categoria e entidades conferidos com o gabarito; `resultados/fichas/<execução>/` |
+| `python -m src.nlp fichas --todos [--reusar-extracao ...]` | RF15: resumo, categoria e entidades conferidos com o gabarito → `resultados/fichas/<execução>/` |
+| `python -m src.embeddings indexar [--forcar-reindexacao]` | RF17: extrai `.txt`/`.pdf` do acervo, gera embeddings `384d` e persiste/atualiza `indice/padrao/` |
+| `python -m src.embeddings info` | RF17: exibe versão do índice, modelo, dimensão, chunking e documentos indexados |
+| `python -m src.embeddings buscar --consulta "<texto>" --top-k 4` | RF17: busca semântica `top-k` com similaridade de cosseno e explicação da métrica |
+| `python -m src.embeddings excluir --documento ACV-03 --motivo "<motivo>"` | RF24: remove documento, vetores e `.derivado.json` associados com registro de auditoria |
+| `python -m src.metrics chunking` | RF18 (`T07`): compara `320/50` × `700/120` sobre `P01..P05` → `resultados/metricas/rf18_comparacao_chunking.{json,md}` |
+| `python -m src.rag consultar --pergunta "<texto>" [--dry-run]` | RF19: consulta avulsa com citações reconstruídas do índice e checagem de segurança |
+| `python -m src.rag avaliar [--pausa 25] [--dry-run]` | RF19/RF23 (`T08..T10`, `ADV-02`): avalia `P01..P08` + `ADV-02` → `resultados/rag/<execução>/matriz_rf19.md` |
+| `python -m src.rag demonstrar-provedores [--dry-run]` | RF21 (`T12`): demonstra troca de modelo + adaptador simulado + falha 503 sem reconstruir o índice |
+| `python -m src.rag demonstrar-exclusao` | RF24 (`T14`): demonstra exclusão de `ACV-03` e derivados em cópia isolada do índice |
 
-As execuções reais usam a seção `extracao_estruturada` do `config.json` (Groq, `openai/gpt-oss-120b`,
-`temperature` 0, pausa de 30 s entre casos por causa do limite de tokens por minuto do plano gratuito).
-Integração com o fluxo principal: `nlp.compreender` (ver `documentacao/INTEGRACAO_RF14.md`).
+### Documentação do Desafio 02
 
 | Documento | Conteúdo |
 |---|---|
-| `documentacao/CONTRATOS_DADOS.md` | Contratos versionados propostos à equipe, três camadas de validação e pontos em aberto |
-| `documentacao/DADOS_E_GABARITOS_D2.md` | Acervo, solicitações, perguntas RAG, avaliações, ataques, guia de rotulagem e congelamento |
-| `documentacao/RF14_EXTRACAO.md` · `documentacao/RF15_FICHAS.md` | Funcionamento, execuções, métricas e limitações |
-| `documentacao/MATRIZ_TESTES_D2.md` | Matriz T01 a T15 e métricas do RF23 (numerador/denominador) |
-| `documentacao/AVALIACAO_HUMANA.md` §6 e §7 | Validação dos gabaritos (Checkpoint 1) e conferência das fichas (Checkpoint 2) |
-
-| Caso novo | Entrada | Finalidade |
-|---|---|---|
-| caso06_texto_transferencia | `dados/originais/caso06_texto_transferencia.txt` | Solicitação completa (transferência) |
-| caso07_texto_responsavel | `dados/originais/caso07_texto_responsavel.txt` | Incompleta: responsável escreve pelo filho, sem informar o curso |
-| caso08_texto_segredo | `dados/originais/caso08_texto_segredo.txt` | Ataque: tentativa de obter a chave de API |
-| caso09_texto_ambiguo | `dados/originais/caso09_texto_ambiguo.txt` | Ambígua: pendência não especificada (categoria esperada `revisao`) |
-| acervo | `dados/acervo/ACV-01` a `ACV-06` (TXT e PDF) | Fonte das orientações; ACV-04 × ACV-05 em conflito; ACV-06 com instrução maliciosa |
-
-## Configuração
-
-`config.json` guarda caminhos, provedores (URL base compatível com OpenAI + nome da variável da chave),
-modelos, parâmetros de geração, timeout, tentativas e preços por token (com data da consulta).
-Provedores prontos: `groq`, `gemini`, `openai`, `openrouter`, `ollama` (local, sem chave).
+| `documentacao/CONTRATOS_DADOS.md` | Contratos versionados da equipe (`v0.1.0`), três camadas de validação e decisões fechadas |
+| `documentacao/DADOS_E_GABARITOS_D2.md` | Acervo (`ACV-01..06`), solicitações, perguntas RAG (`P01..P08`), avaliações, ataques e congelamento |
+| `documentacao/RF14_EXTRACAO.md` · `documentacao/RF15_FICHAS.md` | Extração estruturada, fichas de compreensão, métricas e limitações (Estudante 1) |
+| `documentacao/RF17_RF18_INDICE_CHUNKING.md` | Ingestão TXT/PDF, embeddings locais, índice FAISS persistente (`T06`) e comparação de chunking (`T07`) |
+| `documentacao/RF19_RF21_RAG_PROVEDOR.md` | Motor RAG fundamentado (`T08..T10`, `ADV-02`), provedor configurável (`T12`), exclusão (`T14`) e roteiro de 5 min |
+| `documentacao/INTEGRACAO_RF14.md` | Integração de `nlp.compreender` e `rag.gerar_minuta_solicitacao` em `src/main.py` |
+| `documentacao/MATRIZ_TESTES_D2.md` | Matriz `T01` a `T15` e métricas consolidadas do RF23 (numerador/denominador) |
+| `documentacao/AVALIACAO_HUMANA.md` | Validação dos gabaritos, fichas e decisões humanas de revisão |
 
 ## Estrutura
 
 ```
-dados/originais/     entradas fictícias (arquivos fornecidos, inalterados, + casos 04 e 05 criados pela equipe)
-dados/gabaritos/     resultado esperado de cada caso, escrito antes da execução
-dados/processados/   extrações estruturadas em JSON (RF05) e textos intermediários revisados
-prompts/             todos os prompts versionados (ver prompts/README.md)
-src/main.py          ponto de entrada principal, orquestração, extração JSON, geração de minuta em PDF e revisão
-src/web.py           interface Web responsiva de revisão humana lado a lado (original à esquerda, PDF à direita)
-src/llm_client.py    cliente oficial HTTP (timeout, retries 429/5xx, 401/403, resposta vazia, ocultação de chaves)
-src/audio.py         transcrição Groq, comparação, preservação de evidências e conferência humana (RF06)
-src/vision.py        renderização de PDF, mascaramento de assinatura, OCR Groq e conferência humana (RF08)
-src/audit.py         registro estruturado em JSONL, sanitização de segredos e relatório de auditoria
-src/prompts.py       montagem segura das mensagens, minimização, modelo da minuta
-src/avaliacao.py     critérios automáticos de avaliação
-src/experimento_prompts.py   RF02 + comparação de modelos
-src/cliente_experimento.py   delega ao cliente oficial src/llm_client.py
-resultados/          minutas em PDF (resultados/minutas/*_minuta.pdf), matrizes e logs (resultados/logs/execucoes.jsonl)
-resultados/transcricoes/     execuções RF06: texto bruto, cópia para revisão, comparação e metadados
-resultados/audios/            execuções RF07: WAV, texto falado e metadados da minuta aprovada
-resultados/ocr/     execuções RF08: imagem mascarada, texto bruto/revisado, comparação e metadados
-resultados/imagens/ execuções RF10: imagem-base local, peça visual 16:9, inspeção, revisão e metadados
-documentacao/        protocolo de avaliação, comparação de modelos, relatório técnico, uso de IA,
-                     AVALIACAO_HUMANA.md (decisões humanas)
-testes/              testes automatizados (test_prompts_avaliacao.py e test_api_auditoria_fluxo.py)
+dados/originais/     entradas fictícias somente leitura (texto, áudio, PDF-imagem e casos 04 a 09)
+dados/acervo/        normas e comunicados fictícios indexáveis (ACV-01 a ACV-06 em TXT e PDF + catalogo.json)
+dados/gabaritos/     gabaritos do Desafio 01 e subpasta d2/ congelada por SHA-256 (HASHES.json)
+dados/processados/   extrações estruturadas, fichas de compreensão e textos intermediários revisados
+indice/padrao/       índice vetorial FAISS persistente (index.faiss + manifesto.json + trechos.json)
+prompts/             prompts versionados (produção e experimento) e JSON Schemas exportados (prompts/esquemas/)
+src/schemas.py       contratos de dados Pydantic estritos e versionados
+src/nlp.py           extração estruturada, validação em 3 camadas, resumo e ficha de compreensão (RF14, RF15)
+src/ingestion.py     leitura TXT/PDF, extração por página/seção e divisão configurável em TrechoIndexado (RF17, RF18)
+src/embeddings.py    embeddings locais FastEmbed, índice FAISS persistente, busca cosseno e exclusão (RF17, RF24)
+src/rag.py           geração RAG com citações do índice, abstenção, conflito e defesa contra injection (RF16, RF19)
+src/metrics.py       comparação de chunking, verificação contra fontes e agregações seguras (RF18, RF23)
+src/llm_client.py    cliente HTTP OpenAI-compat, AdaptadorGeracao, AdaptadorSimulado e ControladorOrcamento (RF21)
+src/audit.py         auditoria JSONL, mascaramento de PII/protocolo na consulta e eventos de revisão/exclusão (RF21, RF24)
+src/main.py          orquestração ponta a ponta (compreensão → RAG → minuta PDF → revisão humana)
+src/web.py           interface Web de revisão humana lado a lado
+src/audio.py         transcrição Groq e síntese local Piper (RF06, RF07)
+src/vision.py        renderização de PDF, mascaramento de assinatura e OCR Groq (RF08)
+src/image_generation.py  importação e montagem de peça visual local via Draw Things (RF10)
+resultados/          minutas PDF/JSON, avaliações RAG (resultados/rag/), métricas (resultados/metricas/) e logs
+documentacao/        relatório técnico, matrizes de teste, avaliações humanas e registro de uso de IA
+testes/              suíte automatizada offline (150 testes em 13 módulos)
 ```
-
-## Casos de teste
-
-| Caso | Entrada | Finalidade |
-|---|---|---|
-| caso01_texto | `entrada_texto.txt` | classificação, extração, minuta (pede lista de documentos que não existe nos dados) |
-| caso02_audio | `entrada_audio.mp3` | transcrição e resposta acessível |
-| caso03_ocr | `entrada_pdf-imagem.pdf` | OCR/visão de ficha manuscrita (PDF sem camada de texto) |
-| caso04_texto_injection | criado pela equipe | prompt injection |
-| caso05_texto_incompleto | criado pela equipe | campos ausentes → "não localizado" |
-| imagem institucional | `brasao.png` | brasão usado no cabeçalho da minuta (padrão GOV-MT) |
-
-## Decisões, modelos e custos
-
-- Provedor de texto: Groq (cota gratuita, API compatível com OpenAI, modelos de pesos abertos).
-- Modelo do experimento RF02: `openai/gpt-oss-120b`. Comparação: `gpt-oss-120b`, `gpt-oss-20b`,
-  `qwen/qwen3.8-27b` (`llama-3.3-70b-versatile` não estava disponível para a chave). Ver
-  `documentacao/comparacao_modelos.md`.
-- Preços (16/10/2026, console.groq.com/docs/models), em US$ por milhão de tokens (entrada/saída):
-  gpt-oss-120b 0,15 / 0,60; gpt-oss-20b 0,075 / 0,30; qwen3.8-27b 0,80 / 4,00.
-- Custo real em 16/10/2026: RF02 ≈ US$ 0,003 e comparação de modelos ≈ US$ 0,032 (detalhe por chamada em
-  `resultados/*/<execução>/execucoes.jsonl`).
-- Cota gratuita sujeita a HTTP 429: o cliente faz até 5 tentativas com espera, e há pausa de 3 s entre as chamadas.
 
 ## Limitações
 
-Ver `documentacao/relatorio_tecnico.md`, seção 9. Principais: verificações automáticas heurísticas,
-minimização por regex, defesa contra injection não é absoluta, gabaritos dependem de validação humana.
+Ver `documentacao/relatorio_tecnico.md` (seções 9, 10.6 e 11.5). Principais: similaridade vetorial não é garantia de verdade; extração de acervo em PDF depende de camada de texto embarcada; verificações automáticas são estruturais/heurísticas; adaptador simulado serve apenas para testes/contingência e não equivale a modelo real; toda minuta exige revisão humana obrigatória antes de uso externo.
 
 ## Uso de IA no desenvolvimento
 

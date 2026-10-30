@@ -232,3 +232,59 @@ tipos de dado minimizados, sem o texto da solicitação.
   conferência humana da ficha continua obrigatória.
 - **O modo estrito do Groq valida depois da geração** e devolve HTTP 400; a validação local é indispensável.
 - **Amostra pequena** (7 solicitações fictícias) e encaixe no fluxo principal ainda pendente.
+
+
+---
+
+## 11. Desafio 02 — Embeddings, Índice Vetorial, RAG Fundamentado e Provedor Configurável (Estudante 2)
+
+### 11.1 Arquitetura integrada ponta a ponta
+
+```
+entrada (.txt | transcrição revisada .mp3 | OCR revisado .pdf)
+   ▼
+nlp.compreender (RF14 + RF15) ── não libera minuta ──► retida antes da minuta + auditoria (PENDENTE)
+   │ libera_minuta = true (ou liberada após triagem humana auditada)
+   ▼
+busca top-k no IndiceVetorial persistente (FAISS IndexFlatIP + L2 = cosseno, fastembed 384d local)
+   ▼
+montagem segura (fatos da solicitação ≠ trechos do acervo, delimitados em prompts versionados)
+   ▼
+AdaptadorGeracao (Groq OpenAI-compat | modelo secundário | AdaptadorSimulado explícito)
+   ▼
+validação em 3 camadas + reconstrução determinística de Citacao a partir do índice (máx. 1 correção)
+   ▼
+minuta PDF institucional (ENVIO AUTOMÁTICO BLOQUEADO) + DecisaoRevisao (pendente → aprovada/rejeitada/revisar)
+```
+
+### 11.2 Ingestão, embeddings e comparação de chunking (RF17, RF18)
+
+- **Extração e metadados (`src/ingestion.py`):** leitura de `.txt` e `.pdf` (`pypdf`), preservando número de página e seção temática sem misturar páginas distintas num mesmo chunk; validação estrita de cada `TrechoIndexado` (`v0.1.0`).
+- **Índice persistente (`src/embeddings.py`):** modelo local `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (`fastembed` ONNX, dimensão `384`), persistido em `indice/padrao/` (`idx-008437e371`, 16 vetores em 6 documentos). Reindexação do mesmo acervo reutiliza `6/6` documentos por SHA-256 sem duplicar vetores (`T06`); mudança de modelo, dimensão ou chunking levanta `ErroIndiceDesatualizado` até reindexação explícita. Similaridade de cosseno em `[-1, 1]` acompanha aviso expresso de que **similaridade vetorial não garante verdade**.
+- **Comparação de chunking (`T07` — `resultados/metricas/rf18_comparacao_chunking.md`):**
+  - `config_a_granular` (`320` caracteres, sobreposição `50`, 29 chunks): acerto `top-3` = **4/5 (80%)** — fragmentou a seção 2 do `ACV-01` em dois chunks, separando itens da lista de matrícula e a regra para menores de 18 anos.
+  - `config_b_contextual` (`700` caracteres, sobreposição `120`, 16 chunks): acerto `top-3` = **5/5 (100%)** — selecionada para o índice oficial.
+
+### 11.3 Geração fundamentada com RAG, conflito e segurança (RF19, RF16)
+
+Na bateria oficial `resultados/rag/20261029-192739/` (`groq/openai/gpt-oss-120b`, `temperature=0`, custo `US$ 0,006438` em 10 chamadas reais):
+
+| Métrica / Cenário | Resultado | Observação |
+|---|---:|---|
+| Acerto de recuperação (`P01..P05`, `top_k=4`) | **5/5 (100%)** | Trechos normativos exatos recuperados |
+| Respostas institucionais sustentadas (`P01..P06`) | **6/6 (100%)** | Citações reconstruídas em código a partir de `TrechoIndexado` (`T08`) |
+| Abstenção correta (`P07, P08`) | **2/2 (100%)** | `estado="valida"`, `status="sem_evidencia"`, sem inventar bolsas ou prazos (`T09`) |
+| Conflito entre fontes vigentes (`P06`) | **1/1** | `conflito_fontes` citando `ACV-04` (30d) e `ACV-05` (60d), `requer_revisao=true` (`T10`) |
+| Prompt injection indireto no acervo (`ADV-02` / `ACV-06 §3`) | **Atendido** | Testado em `top_k=4` (alerta de integridade documental) e com exposição direta de `ACV-06#c2` no prompt |
+
+### 11.4 Abstração de provedor, auditoria, retenção e regressão (RF21, RF23, RF24)
+
+- **Troca de geração sem reindexar (`T12` — `resultados/metricas/rf21_troca_provedor.json`):** demonstrada entre `openai/gpt-oss-120b` (`US$ 0,000538`), `openai/gpt-oss-20b` (`US$ 0,000269`) e `AdaptadorSimulado` (`simulado=true`, `metrica_custo_status="indisponivel_execucao_local_simulada"`, claramente identificado como não equivalente a modelo real), mais falha controlada HTTP 503 tratada e auditada, sem tocar em `indice/padrao/vetores.faiss`.
+- **Privacidade, retenção e exclusão (`T14` — `resultados/metricas/rf24_exclusao_documento.json`):** `src/audit.mascarar_identificadores_log` oculta CPF, RG, e-mail, telefone, protocolo (`20\d{2}-\d{4,8}`) e segredos na consulta gravada; `excluir_documento("ACV-03")` removeu os vetores de `ACV-03` (`16 -> 14`), apagou `.derivado.json` e confirmou remoção após recarga em disco.
+- **Regressão integrada (`T15`):** entradas de texto (`caso01_texto`, `caso05_texto_incompleto`, `caso06_texto_transferencia`), áudio (`caso02_audio`) e imagem/OCR (`caso03_ocr`) percorreram compreensão RF14/RF15 + minuta fundamentada RAG + PDF bloqueado para revisão humana, enquanto entradas inválidas ou suspeitas (`caso04_texto_injection` e uma ocorrência real de `"Marcos Vinício"` no `caso01_texto`) foram retidas antes da minuta.
+
+### 11.5 Limitações e riscos residuais (escopo Estudante 2)
+
+- **Extração de PDF restrita à camada textual:** `pypdf` não faz OCR em normas digitalizadas como imagem; acervo sem texto selecionável exigiria passagem prévia por `src/vision.py`.
+- **Sustentação verificada estruturalmente:** o verificador garante correspondência exata de `chunk_ids` e metadados do índice e ausência de padrões proibidos, mas paráfrases sutis continuam exigindo revisão humana.
+- **Exposição ocasional de vocabulário técnico no texto da minuta:** no `caso03_ocr`, ao justificar a ausência de campos da ficha manuscrita, o modelo mencionou `campo "canal"` e `"pedido"` no texto ao cidadão — reforçando a obrigatoriedade da revisão humana antes de qualquer uso externo.

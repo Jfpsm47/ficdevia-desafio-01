@@ -84,3 +84,11 @@ registrando a justificativa).
 | Entidades | `c.extracao.extracao["entidades"]` | Mostrar `origem` (literal ou inferida) e evidência |
 | Campos ausentes | `c.exibicao` | "não localizado" só na tela |
 | Ficha retida | `c.ficha is None` | Mostrar `c.extracao.erros` e `c.resumo.erros` (campo, categoria, motivo; nunca o valor) |
+
+
+## Integração concluída em `src/main.py` (Estudante 2 · 29/10/2026)
+
+1. **`processar_caso` (`src/main.py`):** substituiu a extração v1 por `nlp.compreender(...)` e grava `dados/processados/<caso>_compreensao_d2.json`, `<caso>_extracao.json` e (quando válida) `<caso>_ficha.json`.
+2. **Bloqueio obrigatório antes da minuta (RF14):** quando `not c.libera_minuta` (`revisao_humana_antes_da_minuta` ou `bloqueada_revisao_humana`), `processar_caso` encerra o caso sem chamar a geração de minuta, preserva a entrada, os erros por camada e `DecisaoRevisao(estado="pendente", enviada_ao_cidadao=False)`, e audita `etapa="triagem_retida"`.
+3. **Liberação formal após triagem humana:** `processar_caso(..., liberar_apos_triagem={"categoria": ..., "revisor": ..., "justificativa": ...})` (ou CLI `--liberar-triagem --categoria-triagem <id> --revisor "<nome>" --justificativa-triagem "<motivo>"`) permite ao operador reclassificar um caso retido em `revisao_humana_antes_da_minuta` e liberar a geração da minuta com registro em `etapa="liberacao_triagem"`.
+4. **Minuta fundamentada com RAG e revisão humana (RF19, RF24):** a etapa 4 passou a chamar `rag.gerar_minuta_solicitacao(...)` + `rag.converter_rag_em_minuta_institucional(...)`, gravando `resultados/minutas/<caso>_rag.json` e `<caso>_minuta.pdf` sempre com estado inicial `PENDENTE` e selo `ENVIO AUTOMÁTICO BLOQUEADO`. As transições `pendente`, `aprovada`, `rejeitada` e `revisar` são gravadas por `registrar_decisao_revisao_minuta` (`--registrar-decisao`).
