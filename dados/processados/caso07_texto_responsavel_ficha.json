@@ -1,0 +1,57 @@
+{
+  "id_caso": "caso07_texto_responsavel",
+  "extracao": {
+    "protocolo": "2026-000219",
+    "data_solicitacao": "22/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Rosana Alves",
+    "curso": "curso técnico",
+    "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+    "pedido": "Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho",
+    "categoria": "frequencia_justificativa",
+    "entidades": [
+      {
+        "tipo": "pessoa",
+        "valor": "Pedro Henrique Alves",
+        "origem": "literal",
+        "evidencia": "Meu filho Pedro Henrique Alves"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Rosana Alves",
+        "origem": "literal",
+        "evidencia": "Rosana Alves"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "curso"
+    ],
+    "alertas_seguranca": []
+  },
+  "resumo": {
+    "resumo": "Rosana Alves solicita informações sobre opções para seu filho Pedro Henrique Alves, aluno do curso técnico da escola, que está com dificuldades para frequentar todas as aulas devido ao início de trabalho. Ela pergunta se é possível trancar o curso, mudar de horário ou justificar as faltas, expressando preocupação para que ele não perca a vaga.",
+    "fatos": [
+      {
+        "afirmacao": "A solicitante é Rosana Alves, mãe do aluno Pedro Henrique Alves.",
+        "evidencia": "Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola"
+      },
+      {
+        "afirmacao": "Pedro Henrique Alves começou a trabalhar e não consegue ir a todas as aulas.",
+        "evidencia": "começou a trabalhar, então não está conseguindo ir em todas as aulas"
+      },
+      {
+        "afirmacao": "Rosana Alves pergunta sobre trancamento, mudança de horário ou justificativa de faltas.",
+        "evidencia": "Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas"
+      },
+      {
+        "afirmacao": "Ela quer evitar que o filho perca a vaga no curso.",
+        "evidencia": "Não quero que ele perca a vaga"
+      }
+    ]
+  },
+  "versao_prompt_extracao": "extracao-v2.1",
+  "versao_prompt_resumo": "resumo-v1.0"
+}

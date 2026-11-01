@@ -1,0 +1,168 @@
+{
+  "id_execucao": "rag-aa1528ad",
+  "caso_id": "caso07_texto_responsavel",
+  "etapa": "minuta_rag",
+  "estado": "valida",
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Em atenção ao protocolo nº 2026-000219, referente ao curso técnico, informamos que o estudante deve manter frequência mínima de 75% da carga horária de cada componente curricular para continuidade no curso. Faltas por motivo de saúde podem ser justificadas mediante apresentação de atestado médico na Coordenação Pedagógica em até cinco dias úteis após o retorno às aulas, conforme orientação vigente (documento ACV-05, seção 1 e 2).\n\nQuanto ao trancamento de matrícula, este pode ser solicitado pelo próprio estudante ou pelo responsável legal, mediante requerimento preenchido e assinado na Secretaria Escolar. O trancamento tem duração de um módulo letivo, podendo ser renovado uma única vez por igual período. Para retorno, é necessário solicitar a reabertura da matrícula antes do início do módulo seguinte, estando sujeito à oferta da turma (documento ACV-04, seções 2, 4 e 5).\n\nInformamos que a mudança de horário não está contemplada nas orientações normativas disponíveis. Para esclarecimentos adicionais ou procedimentos específicos, recomendamos contato direto com a Secretaria Escolar para atendimento personalizado.",
+    "afirmacoes": [
+      {
+        "texto": "O estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular e faltas por motivo de saúde podem ser justificadas com atestado médico em até 5 dias úteis após retorno às aulas.",
+        "chunk_ids": [
+          "ACV-05#c1"
+        ]
+      },
+      {
+        "texto": "O trancamento de matrícula é solicitado por requerimento na Secretaria Escolar, tem duração de um módulo letivo e pode ser renovado uma vez; o retorno depende da solicitação antes do início do módulo seguinte e da oferta da turma.",
+        "chunk_ids": [
+          "ACV-04#c1",
+          "ACV-04#c3"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-05#c1",
+        "documento_id": "ACV-05",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "Cabeçalho institucional; 1. Frequência mínima; 2. Justificativa de faltas",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-05\nTítulo: Orientação sobre Frequência, Faltas e Trancamento\nVersão: 1.0\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Frequência mínima\nO estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.\n\n2. Justificativa de faltas\nFaltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas."
+      },
+      {
+        "chunk_id": "ACV-04#c1",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+      },
+      {
+        "chunk_id": "ACV-04#c3",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 2,
+        "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+        "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "curso"
+  },
+  "decisao_revisao": {
+    "id_minuta": "rag-aa1528ad",
+    "estado": "pendente",
+    "revisor": null,
+    "justificativa": null,
+    "data_hora": null,
+    "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
+    "enviada_ao_cidadao": false
+  },
+  "trechos_recuperados": [
+    {
+      "posicao": 1,
+      "similaridade": 0.6449,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Frequência, Faltas e Trancamento",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-05#c1",
+      "documento_id": "ACV-05",
+      "versao_documento": "1.0",
+      "hash_documento": "ccef4212d0454a8380eef0fdb09b7d634cc627ef26612f95c086f0e4e19340a4",
+      "pagina": null,
+      "secao": "Cabeçalho institucional; 1. Frequência mínima; 2. Justificativa de faltas",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-05\nTítulo: Orientação sobre Frequência, Faltas e Trancamento\nVersão: 1.0\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Frequência mínima\nO estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.\n\n2. Justificativa de faltas\nFaltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas."
+    },
+    {
+      "posicao": 2,
+      "similaridade": 0.5924,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c1",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 1,
+      "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+    },
+    {
+      "posicao": 3,
+      "similaridade": 0.5363,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Orientação sobre Trancamento de Matrícula",
+      "tema_documento": "Trancamento, cancelamento e frequência",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-04#c3",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "hash_documento": "665a0f5dd7e99bbc245a3451a21b97cc264b188ccf4d154997e06175ce4212db",
+      "pagina": 2,
+      "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+    },
+    {
+      "posicao": 4,
+      "similaridade": 0.5166,
+      "metrica": "similaridade_cosseno",
+      "sentido_metrica": "Similaridade de cosseno calculada por produto interno sobre vetores normalizados em norma L2 (intervalo [-1, 1]): quanto maior o valor (mais próximo de 1,0), maior a proximidade semântica entre a consulta e o trecho. Similaridade vetorial NÃO constitui garantia de verdade (Seção 16).",
+      "titulo_documento": "Manual de Matrícula dos Cursos Técnicos",
+      "tema_documento": "Matrícula e documentação escolar",
+      "vigencia_inicio": "01/08/2026",
+      "vigencia_fim": null,
+      "chunk_id": "ACV-01#c4",
+      "documento_id": "ACV-01",
+      "versao_documento": "2.0",
+      "hash_documento": "2f619fb1add72b77ca32a056002bb93b261a49d6c00d82f87bd1e222a369564b",
+      "pagina": 2,
+      "secao": "4. Efetivação da matrícula; 5. Cancelamento automático por faltas; 6. Atendimento",
+      "configuracao_chunking": "caracteres-700-sobreposicao-120",
+      "texto": "é informada ao estudante pela Secretaria\nEscolar; o envio da ficha de matrícula, por si só, não efetiva a matrícula.\n\n5. Cancelamento automático por faltas\nA matrícula é cancelada automaticamente quando o estudante faltar, sem justificativa\ncomprovada, nos dois primeiros dias de aula consecutivos ou em três dias de aula, consecutivos\nou não, nos dez primeiros dias de aula.\n\n6. Atendimento\nDúvidas sobre a matrícula devem ser encaminhadas à Secretaria Escolar."
+    }
+  ],
+  "versao_indice": "idx-008437e371",
+  "provedor": "openai",
+  "modelo": "gpt-4.1-mini",
+  "simulado": false,
+  "alertas_seguranca": [],
+  "erros": [],
+  "tentativas": [
+    {
+      "numero": 1,
+      "valida": true,
+      "erros": [],
+      "latencia_s": 3.05,
+      "tokens_entrada": 2653,
+      "tokens_saida": 395,
+      "custo_usd": null,
+      "metrica_custo_status": "tarifa_nao_cadastrada_para_modelo"
+    }
+  ],
+  "meta": {
+    "versao_prompt": "rag-minuta-v1.0",
+    "hash_prompt_sistema": "8f3cf2734e3d",
+    "dados_minimizados": {},
+    "uso_total": {
+      "latencia_s": 3.05,
+      "tokens_entrada": 2653,
+      "tokens_saida": 395,
+      "custo_usd": null,
+      "tentativas": 1,
+      "simulado": false,
+      "metrica_custo_status": "tarifa_nao_cadastrada_para_modelo"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "protocolo": "2026-000219",
+  "data_solicitacao": "22/10/2026",
+  "canal": "E-mail",
+  "solicitante": "Rosana Alves",
+  "curso": "curso técnico",
+  "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+  "pedido": "Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho",
+  "categoria": "frequencia_justificativa",
+  "entidades": [
+    {
+      "tipo": "pessoa",
+      "valor": "Pedro Henrique Alves",
+      "origem": "literal",
+      "evidencia": "Meu filho Pedro Henrique Alves"
+    },
+    {
+      "tipo": "pessoa",
+      "valor": "Rosana Alves",
+      "origem": "literal",
+      "evidencia": "Rosana Alves"
+    }
+  ],
+  "dados_pessoais_detectados": [],
+  "campos_ausentes": [],
+  "requer_revisao": true,
+  "motivos_revisao": [
+    "curso"
+  ],
+  "alertas_seguranca": []
+}

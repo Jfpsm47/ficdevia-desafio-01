@@ -12,3 +12,6 @@ pypdf==6.21.4
 # Desafio 02 — Estudante 2: embeddings locais multilíngues e índice vetorial persistente (RF17, RF18, RF19).
 faiss-cpu==1.15.1
 fastembed==0.9.1
+# Desafio 02 — Estudante 3: assistente de documentos e painel de sentimentos (RF20, RF22).
+streamlit==1.66.1
+pandas==3.1.0

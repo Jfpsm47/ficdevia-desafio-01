@@ -1,0 +1,226 @@
+{
+  "caso_id": "caso07_texto_responsavel",
+  "modalidade": "texto",
+  "arquivo_origem": "dados/originais/caso07_texto_responsavel.txt",
+  "encaminhamento_efetivo": "minuta_pendente_de_aprovacao",
+  "libera_minuta": true,
+  "extracao_resultado": {
+    "caso_id": "caso07_texto_responsavel",
+    "estado": "valida",
+    "encaminhamento": "minuta_pendente_de_aprovacao",
+    "extracao": {
+      "protocolo": "2026-000219",
+      "data_solicitacao": "22/10/2026",
+      "canal": "E-mail",
+      "solicitante": "Rosana Alves",
+      "curso": "curso técnico",
+      "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+      "pedido": "Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho",
+      "categoria": "frequencia_justificativa",
+      "entidades": [
+        {
+          "tipo": "pessoa",
+          "valor": "Pedro Henrique Alves",
+          "origem": "literal",
+          "evidencia": "Meu filho Pedro Henrique Alves"
+        },
+        {
+          "tipo": "pessoa",
+          "valor": "Rosana Alves",
+          "origem": "literal",
+          "evidencia": "Rosana Alves"
+        }
+      ],
+      "dados_pessoais_detectados": [],
+      "campos_ausentes": [],
+      "requer_revisao": true,
+      "motivos_revisao": [
+        "curso"
+      ],
+      "alertas_seguranca": []
+    },
+    "erros": [],
+    "tentativas": [
+      {
+        "numero": 1,
+        "texto_bruto": "{\"protocolo\":\"2026-000219\",\"data_solicitacao\":\"22/10/2026\",\"canal\":\"E-mail\",\"solicitante\":\"Rosana Alves\",\"curso\":\"curso técnico\",\"assunto\":\"Dúvidas sobre faltas, trancamento e mudança de horário\",\"pedido\":\"Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho\",\"categoria\":\"frequencia_justificativa\",\"entidades\":[{\"tipo\":\"pessoa\",\"valor\":\"Pedro Henrique Alves\",\"origem\":\"literal\",\"evidencia\":\"Meu filho Pedro Henrique Alves\"},{\"tipo\":\"pessoa\",\"valor\":\"Rosana Alves\",\"origem\":\"literal\",\"evidencia\":\"Rosana Alves\"}],\"dados_pessoais_detectados\":[],\"campos_ausentes\":[\"pedido\"],\"requer_revisao\":true,\"motivos_revisao\":[\"curso\",\"pedido\"],\"alertas_seguranca\":[]}",
+        "valida_no_esquema": false,
+        "erros": [
+          {
+            "campo": "(raiz)",
+            "categoria": "regra_do_contrato",
+            "detalhe": "campos_ausentes deve listar exatamente os campos nulos; nulos sem declaração: []; declarados mas preenchidos: ['pedido']",
+            "camada": "esquema"
+          }
+        ],
+        "latencia_s": 2.13,
+        "tokens_entrada": 2061,
+        "tokens_saida": 191,
+        "custo_usd": null
+      },
+      {
+        "numero": 2,
+        "texto_bruto": "{\"protocolo\":\"2026-000219\",\"data_solicitacao\":\"22/10/2026\",\"canal\":\"E-mail\",\"solicitante\":\"Rosana Alves\",\"curso\":\"curso técnico\",\"assunto\":\"Dúvidas sobre faltas, trancamento e mudança de horário\",\"pedido\":\"Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho\",\"categoria\":\"frequencia_justificativa\",\"entidades\":[{\"tipo\":\"pessoa\",\"valor\":\"Pedro Henrique Alves\",\"origem\":\"literal\",\"evidencia\":\"Meu filho Pedro Henrique Alves\"},{\"tipo\":\"pessoa\",\"valor\":\"Rosana Alves\",\"origem\":\"literal\",\"evidencia\":\"Rosana Alves\"}],\"dados_pessoais_detectados\":[],\"campos_ausentes\":[],\"requer_revisao\":true,\"motivos_revisao\":[\"curso\"],\"alertas_seguranca\":[]}",
+        "valida_no_esquema": true,
+        "erros": [],
+        "latencia_s": 2.0,
+        "tokens_entrada": 2414,
+        "tokens_saida": 187,
+        "custo_usd": null
+      }
+    ],
+    "meta": {
+      "versao_prompt": "extracao-v2.1",
+      "hash_prompt_sistema": "1b56b3f7c5d9",
+      "dados_minimizados": {},
+      "versao_contrato": "solicitacao_extraida-v0.1.0",
+      "versao_prompt_correcao": "correcao-esquema-v1.0",
+      "provedor": "openai",
+      "modelo": "gpt-4.1-mini",
+      "modo_saida": "json_schema_estrito",
+      "arquivo_origem": "dados/originais/caso07_texto_responsavel.txt",
+      "sha256_origem": "1615ac4a04792850dff1cfad0c5d94c3815375e5d8dc2f4ee21238a6ed86e59d",
+      "texto_enviado": "Canal: E-mail\nProtocolo: 2026-000219\nData: 22/10/2026\n\nBoa noite. Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola e começou a trabalhar, então não está conseguindo ir em todas as aulas. Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas. Não quero que ele perca a vaga.\n\nRosana Alves\n"
+    },
+    "libera_minuta": true
+  },
+  "resumo_resultado": {
+    "caso_id": "caso07_texto_responsavel",
+    "estado": "valida",
+    "resumo": {
+      "resumo": "Rosana Alves solicita informações sobre opções para seu filho Pedro Henrique Alves, aluno do curso técnico da escola, que está com dificuldades para frequentar todas as aulas devido ao início de trabalho. Ela pergunta se é possível trancar o curso, mudar de horário ou justificar as faltas, expressando preocupação para que ele não perca a vaga.",
+      "fatos": [
+        {
+          "afirmacao": "A solicitante é Rosana Alves, mãe do aluno Pedro Henrique Alves.",
+          "evidencia": "Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola"
+        },
+        {
+          "afirmacao": "Pedro Henrique Alves começou a trabalhar e não consegue ir a todas as aulas.",
+          "evidencia": "começou a trabalhar, então não está conseguindo ir em todas as aulas"
+        },
+        {
+          "afirmacao": "Rosana Alves pergunta sobre trancamento, mudança de horário ou justificativa de faltas.",
+          "evidencia": "Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas"
+        },
+        {
+          "afirmacao": "Ela quer evitar que o filho perca a vaga no curso.",
+          "evidencia": "Não quero que ele perca a vaga"
+        }
+      ]
+    },
+    "erros": [],
+    "tentativas": [
+      {
+        "numero": 1,
+        "texto_bruto": "{\"resumo\":\"Rosana Alves solicita informações sobre opções para seu filho Pedro Henrique Alves, aluno do curso técnico da escola, que está com dificuldades para frequentar todas as aulas devido ao início de trabalho. Ela pergunta se é possível trancar o curso, mudar de horário ou justificar as faltas, expressando preocupação para que ele não perca a vaga.\",\"fatos\":[{\"afirmacao\":\"A solicitante é Rosana Alves, mãe do aluno Pedro Henrique Alves.\",\"evidencia\":\"Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola\"},{\"afirmacao\":\"Pedro Henrique Alves começou a trabalhar e não consegue ir a todas as aulas.\",\"evidencia\":\"começou a trabalhar, então não está conseguindo ir em todas as aulas\"},{\"afirmacao\":\"Rosana Alves pergunta sobre trancamento, mudança de horário ou justificativa de faltas.\",\"evidencia\":\"Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas\"},{\"afirmacao\":\"Ela quer evitar que o filho perca a vaga no curso.\",\"evidencia\":\"Não quero que ele perca a vaga\"}]}",
+        "valida_no_esquema": true,
+        "erros": [],
+        "latencia_s": 2.04,
+        "tokens_entrada": 804,
+        "tokens_saida": 237,
+        "custo_usd": null
+      }
+    ],
+    "meta": {
+      "versao_prompt": "resumo-v1.0",
+      "hash_prompt_sistema": "403d054887af",
+      "dados_minimizados": {},
+      "versao_contrato": "resumo_solicitacao-v0.1.0",
+      "versao_prompt_correcao": "correcao-esquema-v1.0",
+      "provedor": "openai",
+      "modelo": "gpt-4.1-mini",
+      "modo_saida": "json_schema_estrito",
+      "arquivo_origem": "dados/originais/caso07_texto_responsavel.txt",
+      "sha256_origem": "1615ac4a04792850dff1cfad0c5d94c3815375e5d8dc2f4ee21238a6ed86e59d",
+      "texto_enviado": "Canal: E-mail\nProtocolo: 2026-000219\nData: 22/10/2026\n\nBoa noite. Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola e começou a trabalhar, então não está conseguindo ir em todas as aulas. Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas. Não quero que ele perca a vaga.\n\nRosana Alves\n"
+    }
+  },
+  "ficha": {
+    "id_caso": "caso07_texto_responsavel",
+    "extracao": {
+      "protocolo": "2026-000219",
+      "data_solicitacao": "22/10/2026",
+      "canal": "E-mail",
+      "solicitante": "Rosana Alves",
+      "curso": "curso técnico",
+      "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+      "pedido": "Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho",
+      "categoria": "frequencia_justificativa",
+      "entidades": [
+        {
+          "tipo": "pessoa",
+          "valor": "Pedro Henrique Alves",
+          "origem": "literal",
+          "evidencia": "Meu filho Pedro Henrique Alves"
+        },
+        {
+          "tipo": "pessoa",
+          "valor": "Rosana Alves",
+          "origem": "literal",
+          "evidencia": "Rosana Alves"
+        }
+      ],
+      "dados_pessoais_detectados": [],
+      "campos_ausentes": [],
+      "requer_revisao": true,
+      "motivos_revisao": [
+        "curso"
+      ],
+      "alertas_seguranca": []
+    },
+    "resumo": {
+      "resumo": "Rosana Alves solicita informações sobre opções para seu filho Pedro Henrique Alves, aluno do curso técnico da escola, que está com dificuldades para frequentar todas as aulas devido ao início de trabalho. Ela pergunta se é possível trancar o curso, mudar de horário ou justificar as faltas, expressando preocupação para que ele não perca a vaga.",
+      "fatos": [
+        {
+          "afirmacao": "A solicitante é Rosana Alves, mãe do aluno Pedro Henrique Alves.",
+          "evidencia": "Meu filho Pedro Henrique Alves estuda no curso técnico aí da escola"
+        },
+        {
+          "afirmacao": "Pedro Henrique Alves começou a trabalhar e não consegue ir a todas as aulas.",
+          "evidencia": "começou a trabalhar, então não está conseguindo ir em todas as aulas"
+        },
+        {
+          "afirmacao": "Rosana Alves pergunta sobre trancamento, mudança de horário ou justificativa de faltas.",
+          "evidencia": "Queria saber o que dá pra fazer: se ele tranca, se muda de horário ou se dá pra justificar as faltas"
+        },
+        {
+          "afirmacao": "Ela quer evitar que o filho perca a vaga no curso.",
+          "evidencia": "Não quero que ele perca a vaga"
+        }
+      ]
+    },
+    "versao_prompt_extracao": "extracao-v2.1",
+    "versao_prompt_resumo": "resumo-v1.0"
+  },
+  "exibicao_interface": {
+    "protocolo": "2026-000219",
+    "data_solicitacao": "22/10/2026",
+    "canal": "E-mail",
+    "solicitante": "Rosana Alves",
+    "curso": "curso técnico",
+    "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+    "pedido": "Informações sobre trancamento, mudança de horário ou justificativa de faltas para o filho",
+    "categoria": "frequencia_justificativa",
+    "entidades": [
+      {
+        "tipo": "pessoa",
+        "valor": "Pedro Henrique Alves",
+        "origem": "literal",
+        "evidencia": "Meu filho Pedro Henrique Alves"
+      },
+      {
+        "tipo": "pessoa",
+        "valor": "Rosana Alves",
+        "origem": "literal",
+        "evidencia": "Rosana Alves"
+      }
+    ],
+    "dados_pessoais_detectados": [],
+    "campos_ausentes": [],
+    "requer_revisao": true,
+    "motivos_revisao": [
+      "curso"
+    ],
+    "alertas_seguranca": []
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "referencia": {
+    "protocolo": "2026-000219",
+    "data": "22/10/2026"
+  },
+  "destinatario": "Rosana Alves",
+  "assunto": "Dúvidas sobre faltas, trancamento e mudança de horário",
+  "saudacao": "Prezado(a) Rosana Alves,",
+  "corpo": [
+    "Em atenção ao protocolo nº 2026-000219, referente ao curso técnico, informamos que o estudante deve manter frequência mínima de 75% da carga horária de cada componente curricular para continuidade no curso. Faltas por motivo de saúde podem ser justificadas mediante apresentação de atestado médico na Coordenação Pedagógica em até cinco dias úteis após o retorno às aulas, conforme orientação vigente (documento ACV-05, seção 1 e 2).",
+    "Quanto ao trancamento de matrícula, este pode ser solicitado pelo próprio estudante ou pelo responsável legal, mediante requerimento preenchido e assinado na Secretaria Escolar. O trancamento tem duração de um módulo letivo, podendo ser renovado uma única vez por igual período. Para retorno, é necessário solicitar a reabertura da matrícula antes do início do módulo seguinte, estando sujeito à oferta da turma (documento ACV-04, seções 2, 4 e 5).",
+    "Informamos que a mudança de horário não está contemplada nas orientações normativas disponíveis. Para esclarecimentos adicionais ou procedimentos específicos, recomendamos contato direto com a Secretaria Escolar para atendimento personalizado."
+  ],
+  "fecho": "Atenciosamente,",
+  "informacoes_nao_localizadas": [],
+  "afirmacoes_e_evidencias": [
+    {
+      "afirmacao": "O estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular e faltas por motivo de saúde podem ser justificadas com atestado médico em até 5 dias úteis após retorno às aulas.",
+      "trecho_fonte": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-05\nTítulo: Orientação sobre Frequência, Faltas e Trancamento\nVersão: 1.0\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Frequência mínima\nO estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.\n\n2. Justificativa de faltas\nFaltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas."
+    },
+    {
+      "afirmacao": "O trancamento de matrícula é solicitado por requerimento na Secretaria Escolar, tem duração de um módulo letivo e pode ser renovado uma vez; o retorno depende da solicitação antes do início do módulo seguinte e da oferta da turma.",
+      "trecho_fonte": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+    }
+  ],
+  "alertas_seguranca": [],
+  "fontes": [
+    "dados/originais/caso07_texto_responsavel.txt",
+    "ACV-05 v1.0 [ACV-05#c1, seção 'Cabeçalho institucional; 1. Frequência mínima; 2. Justificativa de faltas']",
+    "ACV-04 v1.1 [ACV-04#c1, pág. 1, seção 'Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento']",
+    "ACV-04 v1.1 [ACV-04#c3, pág. 2, seção '4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido']"
+  ],
+  "status_rag": "fundamentada",
+  "citacoes_estruturadas": [
+    {
+      "chunk_id": "ACV-05#c1",
+      "documento_id": "ACV-05",
+      "versao_documento": "1.0",
+      "pagina": null,
+      "secao": "Cabeçalho institucional; 1. Frequência mínima; 2. Justificativa de faltas",
+      "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-05\nTítulo: Orientação sobre Frequência, Faltas e Trancamento\nVersão: 1.0\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Frequência mínima\nO estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.\n\n2. Justificativa de faltas\nFaltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas."
+    },
+    {
+      "chunk_id": "ACV-04#c1",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "pagina": 1,
+      "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+      "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+    },
+    {
+      "chunk_id": "ACV-04#c3",
+      "documento_id": "ACV-04",
+      "versao_documento": "1.1",
+      "pagina": 2,
+      "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+      "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+    }
+  ]
+}
