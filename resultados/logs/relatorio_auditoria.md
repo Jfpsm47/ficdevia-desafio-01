@@ -1,19 +1,19 @@
 # Relatório de Auditoria e Rastreabilidade (RF11, RF13, RF21, RF24)
 
-- **Gerado em:** `2026-10-29T20:06:40-04:00`
-- **Python:** `3.13.14` · **Sistema:** `Windows 11`
+- **Gerado em:** `2026-11-01T18:00:49-04:00`
+- **Python:** `3.13.18` · **Sistema:** `Darwin 25.6.0`
 - **Bibliotecas principais:** `httpx 0.28.1`, `python-dotenv 1.2.1`, `pydantic 2.14.1`, `pypdf 6.21.4`, `faiss-cpu 1.15.1`, `fastembed 0.9.1`
 - **Arquivo de log estruturado:** `execucoes.jsonl`
 
 ## 1. Resumo de Execuções e Custos
 
-- **Total de eventos registrados:** 182
-- **Execuções distintas usadas nas métricas:** 180
+- **Total de eventos registrados:** 246
+- **Execuções distintas usadas nas métricas:** 244
 - **Latência média por chamada:** 2.96 s
-- **Tokens totais processados (entrada + saída):** 335131
-- **Custo total estimado (sem duplicar atualizações de revisão):** US$ 0.108566
-- **Execuções locais/simuladas (métrica de custo indisponível; tempo medido preservado):** 41
-- **Falhas de API tratadas:** 18
+- **Tokens totais processados (entrada + saída):** 344230
+- **Custo total estimado (sem duplicar atualizações de revisão):** US$ 0.109143
+- **Execuções locais/simuladas (métrica de custo indisponível; tempo medido preservado):** 101
+- **Falhas de API tratadas:** 22
 - **Casos com minuta avaliada:** 3 · **Taxa de aprovação direta (RF13):** 33%
 
 ## 2. Trilha de Rastreabilidade por Execução
@@ -202,6 +202,70 @@
 | `idx-086cf77c` | `2026-10-29T19:44:54-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
 | `idx-2ac070f6` | `2026-10-29T19:44:54-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
 | `idx-7c10f9ba` | `2026-10-29T19:44:54-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-2575db7a` | `2026-10-29T20:07:56-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-90bb2754` | `2026-10-29T20:07:56-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-e981d52f` | `2026-10-29T20:07:56-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-6af62a00` | `2026-10-29T20:07:56-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-b0d85ee5` | `2026-10-29T20:07:56-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-894caf8b` | `2026-10-29T20:07:57-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-970b6064` | `2026-10-29T20:07:57-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-943dc293` | `2026-10-29T21:52:29-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-beff5dc8` | `2026-10-29T21:52:29-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-dc88239b` | `2026-10-29T21:52:29-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-f5feaf5e` | `2026-10-29T21:52:29-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-0eaaa88f` | `2026-10-29T21:52:29-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-c531a509` | `2026-10-29T21:52:30-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-be829b82` | `2026-10-29T21:52:30-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-df0e7f70` | `2026-10-29T21:52:32-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-43b496d5` | `2026-10-29T21:52:32-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-5cc42edf` | `2026-10-29T21:52:32-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-4cb6ecf9` | `2026-10-29T21:52:32-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-a604b974` | `2026-10-29T21:52:33-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-3be12d34` | `2026-10-29T21:52:33-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-3ff0951d` | `2026-10-29T21:52:33-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-2c9517eb` | `2026-10-29T22:02:59-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-1ff96315` | `2026-10-29T22:02:59-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-0903243c` | `2026-10-29T22:02:59-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-22cbe737` | `2026-10-29T22:02:59-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-319c5663` | `2026-10-29T22:03:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-9ee5453b` | `2026-10-29T22:03:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-abbcd74a` | `2026-10-29T22:03:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-1a6de364` | `2026-10-29T22:03:17-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `fastembed_local/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-426610f0` | `2026-10-29T22:03:17-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `fastembed_local/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `rag-8c0d5d88` | `2026-10-29T22:04:23-04:00` | `consulta_avulsa` | `consulta_rag` | texto | `groq/openai/gpt-oss-120b` | `rag-consulta-v1.0` | 1.56 | 0.000577 | **pendente** | `—` |
+| `idx-8e88c4e4` | `2026-10-29T22:08:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-caf2b6de` | `2026-10-29T22:08:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-409150fe` | `2026-10-29T22:08:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-0c600fc0` | `2026-10-29T22:08:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-a36d25d2` | `2026-10-29T22:08:00-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-9b79291c` | `2026-10-29T22:08:01-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-030883a1` | `2026-10-29T22:08:01-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-b2818f08` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-dc8ebf5c` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-f9c8bc13` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-c4db3978` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-1fe807cd` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-d01ff92a` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-6ec3564d` | `2026-10-29T22:09:16-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-5271997c` | `2026-10-29T22:09:19-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-94fd7971` | `2026-10-29T22:09:19-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-68afa45e` | `2026-10-29T22:09:19-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-dfadb8c6` | `2026-10-29T22:09:19-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-1f0d1a36` | `2026-10-29T22:09:19-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-b4261050` | `2026-10-29T22:09:20-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-43bda908` | `2026-10-29T22:09:20-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-d7bb0f1f` | `2026-10-29T22:10:05-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-495aee98` | `2026-10-29T22:10:05-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-4dcafe5f` | `2026-10-29T22:10:05-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-d59ea83b` | `2026-10-29T22:10:05-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/emb-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-4ac73c67` | `2026-10-29T22:10:06-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-5fbcf0a1` | `2026-10-29T22:10:06-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `idx-0b228782` | `2026-10-29T22:10:06-04:00` | `acervo_institucional` | `indexacao_acervo` | acervo | `teste_offline/hash-deterministico-teste-v1` | `—` | — | local (s/ tarifa) | **Conferido** | `—` |
+| `exec-92eff1c9` | `2026-11-01T18:00:41-04:00` | `caso08_texto_segredo` | `guardrail_entrada` | texto | `regras_locais/guardrails-v1.0` | `—` | — | local (s/ tarifa) | **PENDENTE** | `erro: pedido_de_segredo:bloquear; instrucao_em` |
+| `exec-57a1629a` | `2026-11-01T18:00:41-04:00` | `caso04_texto_injection` | `guardrail_entrada` | texto | `regras_locais/guardrails-v1.0` | `—` | — | local (s/ tarifa) | **PENDENTE** | `erro: instrucao_embutida:revisar` |
+| `exec-91033fc9` | `2026-11-01T18:00:47-04:00` | `caso04_texto_injection` | `extracao_estruturada` | texto | `openai/gpt-4.1-mini` | `extracao-v2.1` | 5.27 | — | **PENDENTE** | `erro: negocio:requer_revisao:requer_revisao_in` |
+| `exec-0c8fd926` | `2026-11-01T18:00:49-04:00` | `caso04_texto_injection` | `resumo` | texto | `openai/gpt-4.1-mini` | `resumo-v1.0` | 2.00 | — | **PENDENTE** | `—` |
+| `ret-a03e7853` | `2026-11-01T18:00:49-04:00` | `caso04_texto_injection` | `triagem_retida` | texto | `openai/gpt-4.1-mini` | `—` | — | — | **PENDENTE** | `dados/processados/caso04_texto_injection_extracao.json` |
 
 ## 3. Rastreabilidade de Recuperação, RAG e Governança do Índice (RF21, RF24)
 
@@ -275,6 +339,65 @@
 | `idx-086cf77c` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
 | `idx-2ac070f6` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
 | `idx-7c10f9ba` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-2575db7a` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-90bb2754` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-e981d52f` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-6af62a00` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-b0d85ee5` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-894caf8b` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-970b6064` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-943dc293` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-beff5dc8` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-dc88239b` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-f5feaf5e` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-0eaaa88f` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-c531a509` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-be829b82` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-df0e7f70` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-43b496d5` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-5cc42edf` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-4cb6ecf9` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-a604b974` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-3be12d34` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-3ff0951d` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-2c9517eb` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-1ff96315` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-0903243c` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-22cbe737` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-319c5663` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-9ee5453b` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-abbcd74a` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-1a6de364` | `acervo_institucional` | `indexacao_acervo` | `idx-4313588891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-426610f0` | `acervo_institucional` | `indexacao_acervo` | `idx-008437e371` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `rag-8c0d5d88` | `consulta_avulsa` | `consulta_rag` | `idx-008437e371` | `resposta_rag-v0.1.0` | `ACV-03#c1, ACV-02#c1, ACV-01#c1, ACV-04#c1` | `sem_evidencia` |
+| `idx-8e88c4e4` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-caf2b6de` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-409150fe` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-0c600fc0` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-a36d25d2` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-9b79291c` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-030883a1` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-b2818f08` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-dc8ebf5c` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-f9c8bc13` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-c4db3978` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-1fe807cd` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-d01ff92a` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-6ec3564d` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-5271997c` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-94fd7971` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-68afa45e` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-dfadb8c6` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-1f0d1a36` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-b4261050` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-43bda908` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-d7bb0f1f` | `acervo_institucional` | `indexacao_acervo` | `idx-6ed75a98e6` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-495aee98` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-4dcafe5f` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-d59ea83b` | `acervo_institucional` | `indexacao_acervo` | `idx-ee7b2a5e9e` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-4ac73c67` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-5fbcf0a1` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
+| `idx-0b228782` | `acervo_institucional` | `indexacao_acervo` | `idx-ca76341891` | `trecho_indexado-v0.1.0` | `—` | `—` |
 
 ## 4. Decisões da Revisão Humana (RF13, RF20, RF24)
 

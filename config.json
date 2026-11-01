@@ -14,7 +14,8 @@
     "acervo": "dados/acervo",
     "indice": "indice",
     "metricas": "resultados/metricas",
-    "rag": "resultados/rag"
+    "rag": "resultados/rag",
+    "sentimentos": "resultados/sentimentos"
   },
   "provedores": {
     "gemini": {
@@ -315,6 +316,33 @@
       }
     },
     "diretorio_saida": "resultados/rag"
+  },
+  "guardrails": {
+    "_comentario": "Desafio 02, RF16 (Estudante 3). Regras locais de entrada/saída; limites de chamadas, tokens, timeout e repetição ficam em geracao_rag e extracao_estruturada.",
+    "versao": "1.0",
+    "min_caracteres_entrada": 20,
+    "max_caracteres_entrada": 6000,
+    "max_bytes_arquivo": {
+      "texto": 100000,
+      "audio": 25000000,
+      "imagem": 20000000
+    }
+  },
+  "sentimentos": {
+    "_comentario": "Desafio 02, RF22 (Estudante 3). Uma chamada por avaliação, só ID + texto. No máximo 1 correção de esquema e 1 repetição por falha transitória (RF16). Totais são contados por código.",
+    "provedor": "openai",
+    "modelo": "gpt-4.1-mini",
+    "modo_saida": "json_schema_estrito",
+    "parametros": {
+      "temperature": 0,
+      "top_p": 1.0,
+      "max_tokens": 400
+    },
+    "timeout_s": 60,
+    "tentativas_transitorias": 2,
+    "max_tentativas_correcao": 1,
+    "pausa_entre_chamadas_s": 1,
+    "max_chamadas": 30
   },
   "retencao_privacidade": {
     "_comentario": "Desafio 02, RF24. Governança de retenção, exclusão do índice/derivados e revisão humana obrigatória.",

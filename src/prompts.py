@@ -26,6 +26,7 @@ VERSOES = {
     "resumo": ("producao/sistema_resumo_v1.md", "resumo-v1.0"),
     "rag_consulta": ("producao/sistema_rag_consulta_v1.md", "rag-consulta-v1.0"),
     "rag_minuta": ("producao/sistema_rag_minuta_v1.md", "rag-minuta-v1.0"),
+    "sentimento": ("producao/sistema_sentimento_v1.md", "sentimento-v1.0"),
 }
 
 # Nome próprio: palavras com inicial maiúscula na mesma linha, admitindo "de/da/do/dos/das" entre elas.
@@ -172,6 +173,22 @@ def montar_mensagens_resumo(texto: str, arquivo_origem: str, minimizar_dados: bo
     usuario = "Resuma o conteúdo abaixo no formato do esquema.\n\n" + delimitar(texto, arquivo_origem)
     meta = {"versao_prompt": VERSOES["resumo"][1], "hash_prompt_sistema": hash_texto(sistema),
             "dados_minimizados": removidos, "texto_enviado": texto}
+    return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
+
+
+def montar_mensagens_sentimento(id_avaliacao: str, texto: str, minimizar_dados: bool = True):
+    """Mensagens da classificação de sentimento (RF22, contrato ClassificacaoSentimento).
+
+    Só o ID e o texto da avaliação vão ao provedor; data, canal e categoria ficam fora (minimização).
+    """
+    removidos = {}
+    if minimizar_dados:
+        texto, removidos = minimizar(texto)
+    sistema = ler_prompt(VERSOES["sentimento"][0])
+    usuario = (f"Classifique a avaliação de atendimento id_avaliacao={id_avaliacao} no formato do esquema.\n\n"
+               + delimitar(texto, f"avaliacoes.csv#{id_avaliacao}"))
+    meta = {"versao_prompt": VERSOES["sentimento"][1], "hash_prompt_sistema": hash_texto(sistema),
+            "dados_minimizados": removidos}
     return [{"role": "system", "content": sistema}, {"role": "user", "content": usuario}], meta
 
 

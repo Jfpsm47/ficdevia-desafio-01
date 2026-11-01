@@ -1,0 +1,808 @@
+{
+  "gerado_em": "2026-11-01T18:03:33-04:00",
+  "provedor": "openai",
+  "modelo": "gpt-4.1-mini",
+  "simulado": false,
+  "dry_run": false,
+  "versao_prompt": "sentimento-v1.0",
+  "versao_contrato": "classificacao_sentimento-v0.1.0",
+  "gabarito": "dados/gabaritos/d2/sentimentos.json (validado e congelado antes das chamadas)",
+  "uso": {
+    "chamadas": 12,
+    "tokens_entrada": 12618,
+    "tokens_saida": 737,
+    "latencia_s": 12.61,
+    "custo_usd": null,
+    "orcamento": {
+      "chamadas_realizadas": 12,
+      "max_chamadas": 30,
+      "tokens_acumulados": 13355,
+      "max_tokens_total": null
+    }
+  },
+  "resultados": [
+    {
+      "id_avaliacao": "AV-01",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-01",
+        "polaridade": "positiva",
+        "justificativa": "O texto elogia o atendimento, destacando que foi feito com calma e explicações claras.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-01\",\"polaridade\":\"positiva\",\"justificativa\":\"O texto elogia o atendimento, destacando que foi feito com calma e explicações claras.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.04,
+          "tokens_entrada": 1055,
+          "tokens_saida": 56,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-01"
+      },
+      "polaridade_final": "positiva",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-02",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-02",
+        "polaridade": "positiva",
+        "justificativa": "O texto elogia a rapidez e a facilidade do atendimento, expressando agradecimento.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-02\",\"polaridade\":\"positiva\",\"justificativa\":\"O texto elogia a rapidez e a facilidade do atendimento, expressando agradecimento.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 0.87,
+          "tokens_entrada": 1056,
+          "tokens_saida": 54,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-02"
+      },
+      "polaridade_final": "positiva",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-03",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-03",
+        "polaridade": "positiva",
+        "justificativa": "O texto elogia o atendimento por telefone como excelente e destaca que todas as dúvidas foram esclarecidas.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-03\",\"polaridade\":\"positiva\",\"justificativa\":\"O texto elogia o atendimento por telefone como excelente e destaca que todas as dúvidas foram esclarecidas.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.2,
+          "tokens_entrada": 1047,
+          "tokens_saida": 57,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-03"
+      },
+      "polaridade_final": "positiva",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-04",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-04",
+        "polaridade": "negativa",
+        "justificativa": "O texto relata demora excessiva no atendimento e falta de informação clara sobre documentos necessários, indicando falha no atendimento.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-04\",\"polaridade\":\"negativa\",\"justificativa\":\"O texto relata demora excessiva no atendimento e falta de informação clara sobre documentos necessários, indicando falha no atendimento.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.03,
+          "tokens_entrada": 1056,
+          "tokens_saida": 60,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-04"
+      },
+      "polaridade_final": "negativa",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-05",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-05",
+        "polaridade": "negativa",
+        "justificativa": "O texto relata falha no atendimento pela falta de resposta às mensagens, avaliando-o de forma desfavorável.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-05\",\"polaridade\":\"negativa\",\"justificativa\":\"O texto relata falha no atendimento pela falta de resposta às mensagens, avaliando-o de forma desfavorável.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 0.93,
+          "tokens_entrada": 1049,
+          "tokens_saida": 60,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-05"
+      },
+      "polaridade_final": "negativa",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-06",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-06",
+        "polaridade": "negativa",
+        "justificativa": "O texto relata uma falha no atendimento, pois a declaração veio com erro no nome do curso, causando a necessidade de retorno à escola para correção.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-06\",\"polaridade\":\"negativa\",\"justificativa\":\"O texto relata uma falha no atendimento, pois a declaração veio com erro no nome do curso, causando a necessidade de retorno à escola para correção.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.03,
+          "tokens_entrada": 1050,
+          "tokens_saida": 68,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-06"
+      },
+      "polaridade_final": "negativa",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-07",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-07",
+        "polaridade": "neutra",
+        "justificativa": "O texto relata um fato simples e objetivo sobre o atendimento, sem expressar avaliação favorável ou desfavorável.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-07\",\"polaridade\":\"neutra\",\"justificativa\":\"O texto relata um fato simples e objetivo sobre o atendimento, sem expressar avaliação favorável ou desfavorável.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.02,
+          "tokens_entrada": 1053,
+          "tokens_saida": 60,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-07"
+      },
+      "polaridade_final": "neutra",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-08",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-08",
+        "polaridade": "neutra",
+        "justificativa": "O texto relata um fato objetivo sobre o horário de atendimento, sem expressar avaliação favorável ou desfavorável.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-08\",\"polaridade\":\"neutra\",\"justificativa\":\"O texto relata um fato objetivo sobre o horário de atendimento, sem expressar avaliação favorável ou desfavorável.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.05,
+          "tokens_entrada": 1055,
+          "tokens_saida": 60,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-08"
+      },
+      "polaridade_final": "neutra",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-09",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-09",
+        "polaridade": "neutra",
+        "justificativa": "O texto relata um fato sobre o atendimento (preenchimento da pré-matrícula e recebimento do protocolo) sem emitir avaliação positiva ou negativa.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-09\",\"polaridade\":\"neutra\",\"justificativa\":\"O texto relata um fato sobre o atendimento (preenchimento da pré-matrícula e recebimento do protocolo) sem emitir avaliação positiva ou negativa.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.12,
+          "tokens_entrada": 1049,
+          "tokens_saida": 67,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-09"
+      },
+      "polaridade_final": "neutra",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-10",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-10",
+        "polaridade": "indeterminada",
+        "justificativa": "O texto elogia a atendente, mas relata falhas no processo que causaram transtornos, apresentando avaliação mista sem indicação clara de prevalência.",
+        "requer_revisao": true,
+        "confianca_declarada": "media"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-10\",\"polaridade\":\"indeterminada\",\"justificativa\":\"O texto elogia a atendente, mas relata falhas no processo que causaram transtornos, apresentando avaliação mista sem indicação clara de prevalência.\",\"requer_revisao\":true,\"confianca_declarada\":\"media\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.15,
+          "tokens_entrada": 1055,
+          "tokens_saida": 70,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-10"
+      },
+      "polaridade_final": "indeterminada",
+      "incerto": true
+    },
+    {
+      "id_avaliacao": "AV-11",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-11",
+        "polaridade": "negativa",
+        "justificativa": "O texto elogia a agilidade, mas relata falha no atendimento pois as faltas não foram registradas como justificadas, indicando prejuízo.",
+        "requer_revisao": false,
+        "confianca_declarada": "alta"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-11\",\"polaridade\":\"negativa\",\"justificativa\":\"O texto elogia a agilidade, mas relata falha no atendimento pois as faltas não foram registradas como justificadas, indicando prejuízo.\",\"requer_revisao\":false,\"confianca_declarada\":\"alta\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.14,
+          "tokens_entrada": 1058,
+          "tokens_saida": 67,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-11"
+      },
+      "polaridade_final": "negativa",
+      "incerto": false
+    },
+    {
+      "id_avaliacao": "AV-12",
+      "estado": "valida",
+      "classificacao": {
+        "id_avaliacao": "AV-12",
+        "polaridade": "indeterminada",
+        "justificativa": "O texto é muito curto e depende de contexto externo não fornecido para entender a avaliação do atendimento.",
+        "requer_revisao": true,
+        "confianca_declarada": "media"
+      },
+      "alertas": [],
+      "erros": [],
+      "tentativas": [
+        {
+          "numero": 1,
+          "texto_bruto": "{\"id_avaliacao\":\"AV-12\",\"polaridade\":\"indeterminada\",\"justificativa\":\"O texto é muito curto e depende de contexto externo não fornecido para entender a avaliação do atendimento.\",\"requer_revisao\":true,\"confianca_declarada\":\"media\"}",
+          "valida_no_esquema": true,
+          "erros": [],
+          "latencia_s": 1.03,
+          "tokens_entrada": 1035,
+          "tokens_saida": 58,
+          "custo_usd": null
+        }
+      ],
+      "meta": {
+        "versao_prompt": "sentimento-v1.0",
+        "hash_prompt_sistema": "6e12c8ac5091",
+        "dados_minimizados": {},
+        "versao_contrato": "classificacao_sentimento-v0.1.0",
+        "provedor": "openai",
+        "modelo": "gpt-4.1-mini",
+        "modo_saida": "json_schema_estrito",
+        "arquivo_origem": "dados/avaliacoes/avaliacoes.csv#AV-12"
+      },
+      "polaridade_final": "indeterminada",
+      "incerto": true
+    }
+  ],
+  "comparacao": {
+    "linhas": [
+      {
+        "id_avaliacao": "AV-01",
+        "grupo": "positiva",
+        "esperado": "positiva",
+        "obtido": "positiva",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto elogia o atendimento, destacando que foi feito com calma e explicações claras.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-02",
+        "grupo": "positiva",
+        "esperado": "positiva",
+        "obtido": "positiva",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto elogia a rapidez e a facilidade do atendimento, expressando agradecimento.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-03",
+        "grupo": "positiva",
+        "esperado": "positiva",
+        "obtido": "positiva",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto elogia o atendimento por telefone como excelente e destaca que todas as dúvidas foram esclarecidas.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-04",
+        "grupo": "negativa",
+        "esperado": "negativa",
+        "obtido": "negativa",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata demora excessiva no atendimento e falta de informação clara sobre documentos necessários, indicando falha no atendimento.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-05",
+        "grupo": "negativa",
+        "esperado": "negativa",
+        "obtido": "negativa",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata falha no atendimento pela falta de resposta às mensagens, avaliando-o de forma desfavorável.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-06",
+        "grupo": "negativa",
+        "esperado": "negativa",
+        "obtido": "negativa",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata uma falha no atendimento, pois a declaração veio com erro no nome do curso, causando a necessidade de retorno à escola para correção.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-07",
+        "grupo": "neutra",
+        "esperado": "neutra",
+        "obtido": "neutra",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata um fato simples e objetivo sobre o atendimento, sem expressar avaliação favorável ou desfavorável.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-08",
+        "grupo": "neutra",
+        "esperado": "neutra",
+        "obtido": "neutra",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata um fato objetivo sobre o horário de atendimento, sem expressar avaliação favorável ou desfavorável.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-09",
+        "grupo": "neutra",
+        "esperado": "neutra",
+        "obtido": "neutra",
+        "acerto": true,
+        "revisao_esperada": false,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto relata um fato sobre o atendimento (preenchimento da pré-matrícula e recebimento do protocolo) sem emitir avaliação positiva ou negativa.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-10",
+        "grupo": "ambigua_ou_mista",
+        "esperado": "indeterminada",
+        "obtido": "indeterminada",
+        "acerto": true,
+        "revisao_esperada": true,
+        "revisao_obtida": true,
+        "incerto": true,
+        "estado": "valida",
+        "confianca_declarada": "media",
+        "justificativa": "O texto elogia a atendente, mas relata falhas no processo que causaram transtornos, apresentando avaliação mista sem indicação clara de prevalência.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-11",
+        "grupo": "ambigua_ou_mista",
+        "esperado": "negativa",
+        "obtido": "negativa",
+        "acerto": true,
+        "revisao_esperada": true,
+        "revisao_obtida": false,
+        "incerto": false,
+        "estado": "valida",
+        "confianca_declarada": "alta",
+        "justificativa": "O texto elogia a agilidade, mas relata falha no atendimento pois as faltas não foram registradas como justificadas, indicando prejuízo.",
+        "alertas": []
+      },
+      {
+        "id_avaliacao": "AV-12",
+        "grupo": "ambigua_ou_mista",
+        "esperado": "indeterminada",
+        "obtido": "indeterminada",
+        "acerto": true,
+        "revisao_esperada": true,
+        "revisao_obtida": true,
+        "incerto": true,
+        "estado": "valida",
+        "confianca_declarada": "media",
+        "justificativa": "O texto é muito curto e depende de contexto externo não fornecido para entender a avaliação do atendimento.",
+        "alertas": []
+      }
+    ],
+    "acuracia_polaridade": {
+      "numerador": 12,
+      "denominador": 12,
+      "taxa": 1.0,
+      "percentual": "100%",
+      "formatado": "12/12 (100%)"
+    },
+    "concordancia_revisao": {
+      "numerador": 11,
+      "denominador": 12,
+      "taxa": 0.9167,
+      "percentual": "92%",
+      "formatado": "11/12 (92%)"
+    },
+    "ambiguos_sinalizados": {
+      "numerador": 2,
+      "denominador": 3,
+      "taxa": 0.6667,
+      "percentual": "67%",
+      "formatado": "2/3 (67%)"
+    },
+    "saidas_validas": {
+      "numerador": 12,
+      "denominador": 12,
+      "taxa": 1.0,
+      "percentual": "100%",
+      "formatado": "12/12 (100%)"
+    },
+    "erros": []
+  },
+  "agregado": {
+    "total_recebidos": 12,
+    "duplicatas_ignoradas": 0,
+    "denominador_filtrado": 12,
+    "contagens": {
+      "positiva": 3,
+      "negativa": 4,
+      "neutra": 3,
+      "indeterminada": 2,
+      "sem_classificacao_valida": 0
+    },
+    "proporcoes": {
+      "indeterminada": {
+        "numerador": 2,
+        "denominador": 12,
+        "taxa": 0.1667,
+        "percentual": "17%",
+        "formatado": "2/12 (17%)"
+      },
+      "negativa": {
+        "numerador": 4,
+        "denominador": 12,
+        "taxa": 0.3333,
+        "percentual": "33%",
+        "formatado": "4/12 (33%)"
+      },
+      "neutra": {
+        "numerador": 3,
+        "denominador": 12,
+        "taxa": 0.25,
+        "percentual": "25%",
+        "formatado": "3/12 (25%)"
+      },
+      "positiva": {
+        "numerador": 3,
+        "denominador": 12,
+        "taxa": 0.25,
+        "percentual": "25%",
+        "formatado": "3/12 (25%)"
+      }
+    },
+    "incertos": {
+      "numerador": 2,
+      "denominador": 12,
+      "taxa": 0.1667,
+      "percentual": "17%",
+      "formatado": "2/12 (17%)"
+    },
+    "por_canal": {
+      "E-mail": {
+        "positiva": 0,
+        "negativa": 1,
+        "neutra": 0,
+        "indeterminada": 1,
+        "sem_classificacao_valida": 0
+      },
+      "Formulário web": {
+        "positiva": 1,
+        "negativa": 0,
+        "neutra": 1,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "Presencial": {
+        "positiva": 1,
+        "negativa": 1,
+        "neutra": 1,
+        "indeterminada": 1,
+        "sem_classificacao_valida": 0
+      },
+      "Telefone": {
+        "positiva": 1,
+        "negativa": 0,
+        "neutra": 1,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "WhatsApp institucional": {
+        "positiva": 0,
+        "negativa": 2,
+        "neutra": 0,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      }
+    },
+    "por_categoria": {
+      "cancelamento_trancamento": {
+        "positiva": 0,
+        "negativa": 1,
+        "neutra": 0,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "documentacao_escolar": {
+        "positiva": 1,
+        "negativa": 1,
+        "neutra": 1,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "frequencia_justificativa": {
+        "positiva": 0,
+        "negativa": 1,
+        "neutra": 0,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "informacoes_cursos": {
+        "positiva": 1,
+        "negativa": 0,
+        "neutra": 1,
+        "indeterminada": 0,
+        "sem_classificacao_valida": 0
+      },
+      "matricula": {
+        "positiva": 1,
+        "negativa": 1,
+        "neutra": 1,
+        "indeterminada": 1,
+        "sem_classificacao_valida": 0
+      },
+      "outros": {
+        "positiva": 0,
+        "negativa": 0,
+        "neutra": 0,
+        "indeterminada": 1,
+        "sem_classificacao_valida": 0
+      }
+    },
+    "confianca_declarada_estimativa": {
+      "alta": 10,
+      "media": 2,
+      "baixa": 0
+    },
+    "aviso_confianca": "Confiança declarada pelo modelo: estimativa NÃO calibrada; não é probabilidade de acerto nem medida do sentimento da população.",
+    "fonte_totais": "contagem determinística por código a partir dos rótulos; o modelo não calcula totais",
+    "filtros": {}
+  }
+}

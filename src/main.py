@@ -32,7 +32,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from src import audit, avaliacao, embeddings, llm_client, nlp, prompts, rag, schemas
+from src import audit, avaliacao, embeddings, guardrails, llm_client, nlp, prompts, rag, schemas
 from src.llm_client import ErroProvedor
 
 RAIZ = prompts.RAIZ
@@ -1056,8 +1056,17 @@ def processar_caso(
         gabarito_d2 = carregar_gabarito_d2_solicitacao(caso_id)
 
     arquivo_origem = _resolver_arquivo_origem(caso_id, arquivo_avulso, gabarito_d1, gabarito_d2)
-    _, modalidade = validar_arquivo_entrada(arquivo_origem)
+    caminho_origem, modalidade = validar_arquivo_entrada(arquivo_origem)
     print(f"\n> Caso: {caso_id} ({modalidade}) | Origem: {arquivo_origem}")
+
+    # ---------------- Etapa 1: Guardrails de entrada (RF16) — arquivo antes de transcrever/ler
+    decisoes_guardrail: list[dict[str, Any]] = []
+    ctx_guard = {"caso_id": caso_id, "modalidade": modalidade, "arquivo_origem": arquivo_origem, "caminho_log": log_alvo}
+    dec_arquivo = guardrails.validar_arquivo(caminho_origem, modalidade)
+    decisoes_guardrail.append(dec_arquivo.para_json())
+    if dec_arquivo.decisao == "bloquear":
+        guardrails.registrar_decisao(dec_arquivo, **ctx_guard)
+        return _resultado_bloqueado_guardrail(caso_id, modalidade, dec_arquivo, decisoes_guardrail)
 
     texto_entrada = obter_texto_da_entrada(
         caso_id=caso_id,
@@ -1069,6 +1078,15 @@ def processar_caso(
         dry_run=dry_run,
         caminho_log=log_alvo,
     )
+
+    # ---------------- Etapa 2: Guardrails do texto (RF16) — bloqueio aqui impede qualquer chamada ao provedor
+    dec_entrada = guardrails.avaliar_entrada(texto_entrada)
+    decisoes_guardrail.append(dec_entrada.para_json())
+    guardrails.registrar_decisao(dec_entrada, **ctx_guard)
+    if dec_entrada.decisao == "bloquear":
+        return _resultado_bloqueado_guardrail(caso_id, modalidade, dec_entrada, decisoes_guardrail)
+    if dec_entrada.decisao == "revisar":
+        print(f"  [GUARDRAIL] {dec_entrada.resumo()} — segue como dado não confiável, com revisão obrigatória")
 
     # ---------------- Etapa 3: Compreensão e Sumarização Estruturada (RF14, RF15 — Decisão 3-B)
     cfg_nlp = dict(CONFIG.get("extracao_estruturada", {}))
@@ -1215,9 +1233,22 @@ def processar_caso(
             "decisao_revisao": decisao_retida.model_dump(),
             "arquivo_extracao": caminho_extracao_rel,
             "arquivo_minuta": None,
+            "guardrails": decisoes_guardrail,
         }
 
     print(f"  [OK] Compreensão validada ({encaminhamento_efetivo}) salva em: {caminho_extracao_rel}")
+
+    # RF16: alerta de entrada (instrução embutida, moderação, escopo incerto) força revisão na geração RAG
+    extracao_para_rag = extracao_dict
+    if dec_entrada.decisao == "revisar":
+        extracao_para_rag = {
+            **extracao_dict,
+            "requer_revisao": True,
+            "alertas_seguranca": list(dict.fromkeys([
+                *(extracao_dict.get("alertas_seguranca") or []),
+                f"Guardrail de entrada: {dec_entrada.resumo()}",
+            ])),
+        }
 
     if not dry_run and adaptador_rag is None:
         pausa_s = max(
@@ -1240,7 +1271,7 @@ def processar_caso(
     if dry_run:
         cache_min = _buscar_cache_execucao(modelo, caso_id, "minuta")
         bruto_min = avaliacao.extrair_json(cache_min["texto"]) if cache_min else None
-        minuta_json = normalizar_minuta(bruto_min, extracao_dict, arquivo_origem)
+        minuta_json = normalizar_minuta(bruto_min, extracao_para_rag, arquivo_origem)
         id_min = audit.gerar_id_execucao("min")
         versao_prompt_min = prompts.VERSOES["minuta"][1]
         resposta_rag_out = None
@@ -1258,7 +1289,7 @@ def processar_caso(
             caso_id=caso_id,
             texto_solicitacao=texto_entrada,
             arquivo_origem=arquivo_origem,
-            extracao=extracao_dict,
+            extracao=extracao_para_rag,
             modalidade=modalidade,
             indice=idx,
             adaptador=adp,
@@ -1273,7 +1304,7 @@ def processar_caso(
         )
         minuta_json = rag.converter_rag_em_minuta_institucional(
             res_rag.resposta_rag,
-            extracao_dict,
+            extracao_para_rag,
             arquivo_origem,
             alertas_extras=res_rag.alertas_seguranca,
         )
@@ -1286,6 +1317,17 @@ def processar_caso(
         nome_revisor = "—"
         justificativa_hum = "Minuta fundamentada aguardando decisão do operador humano (sem envio automático)."
         arq_corrigido_rel = None
+
+    # ---------------- Etapa 5: Guardrails de saída (RF16) — antes de gravar a minuta e o PDF
+    dec_saida = guardrails.verificar_minuta(minuta_json, texto_entrada)
+    decisoes_guardrail.append(dec_saida.para_json())
+    guardrails.registrar_decisao(dec_saida, **ctx_guard)
+    if dec_saida.decisao == "bloquear":
+        minuta_json = guardrails.reter_minuta(minuta_json, dec_saida)
+        print(f"  [GUARDRAIL] {dec_saida.resumo()} — corpo da minuta retido")
+    elif dec_saida.decisao == "revisar":
+        minuta_json["alertas_seguranca"] = list(dict.fromkeys([
+            *(minuta_json.get("alertas_seguranca") or []), f"Guardrail de saída: {dec_saida.resumo()}"]))
 
     arq_min_json.write_text(
         json.dumps(minuta_json, ensure_ascii=False, indent=2) + "\n",
@@ -1351,6 +1393,36 @@ def processar_caso(
         "decisao_revisao": decisao_revisao_d2,
         "arquivo_extracao": caminho_extracao_rel,
         "arquivo_minuta": saida_efetiva,
+        "guardrails": decisoes_guardrail,
+    }
+
+
+def _resultado_bloqueado_guardrail(
+    caso_id: str,
+    modalidade: str,
+    decisao: guardrails.DecisaoGuardrail,
+    decisoes_guardrail: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Resultado de um caso barrado pelo guardrail de entrada: nenhuma chamada ao provedor, minuta ou envio."""
+    print(f"  [BLOQUEADO PELO GUARDRAIL] {caso_id} -> {decisao.resumo()}")
+    decisao_retida = schemas.DecisaoRevisao(
+        id_minuta=audit.gerar_id_execucao("grd"), estado="pendente", enviada_ao_cidadao=False
+    )
+    return {
+        "caso_id": caso_id,
+        "modalidade": modalidade,
+        "bloqueado_antes_minuta": True,
+        "bloqueado_guardrail": True,
+        "encaminhamento": "bloqueada_guardrail_entrada",
+        "extracao": None,
+        "ficha": None,
+        "minuta": None,
+        "resposta_rag": None,
+        "decisao_humana": "PENDENTE",
+        "decisao_revisao": decisao_retida.model_dump(),
+        "arquivo_extracao": None,
+        "arquivo_minuta": None,
+        "guardrails": decisoes_guardrail,
     }
 
 
