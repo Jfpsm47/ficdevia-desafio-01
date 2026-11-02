@@ -113,6 +113,8 @@ do caso03 e categoria do caso09 (registros em `documentacao/AVALIACAO_HUMANA.md`
 | GroqCloud API                                                | `whisper-large-v3`, `qwen/qwen3.8-27b` | Estudante 3 | IA do produto para STT e OCR/visão; as execuções reais e custos estão registrados na auditoria                                                |
 | Piper                                                        | `pt_BR-faber-medium`                 | Estudante 3 | Síntese de voz local do RF07, sem envio da minuta a uma API externa                                                                           |
 | Draw Things                                                  | FLUX.2 [klein] 4B (6-bit), versão 26.1013.0 | Estudante 3 | Geração local da imagem do RF10, sem chave de API nem envio do prompt a serviço externo                                                       |
+| Claude Code (app desktop, agente de codificação)             | Claude Opus 5.5 (`claude-opus-5-5`)  | Estudante 3 | Desafio 02: planejamento, implementação, testes, execução no navegador e documentação de RF16, RF20, RF22 e T04, T05, T11, T13; sugestões submetidas à confirmação humana |
+| OpenAI API                                                   | `gpt-4.1-mini`                       | Estudante 3 | IA do produto nas execuções reais do Desafio 02 (ataques T04, classificação de sentimentos e fluxo pela interface); tokens e latência na auditoria |
 
 
 ## 2. Solicitações relevantes feitas à IA (mínimo 3)
@@ -288,3 +290,52 @@ sem mudança nas regras.
 
 - **Testes automatizados offline:** **150 testes aprovados em 2,68 s** (`python -m unittest discover -s testes -t .` com `PYTHONUTF8=1`) e integridade integral dos gabaritos (`python -m src.dados_ficticios verificar` → `[OK] Conjunto coerente.`).
 - **Execuções reais e revisão humana:** bateria RAG `resultados/rag/20261029-192739/` (`8/8` válidas + `ADV-02`), demonstrações `T06`, `T07`, `T12` e `T14` em `resultados/metricas/`, regressão integrada `T15` em texto/áudio/OCR e revisão humana documentada em `documentacao/AVALIACAO_HUMANA.md` §8.
+
+## Atualização do Estudante 3 — 01 e 02/11/2026 — Desafio 02 (guardrails, Streamlit, sentimentos e painel)
+
+- **Ferramenta de desenvolvimento:** Claude Code (app desktop), modelo Claude Opus 5.5 (`claude-opus-5-5`).
+- **IA do produto:** OpenAI, `gpt-4.1-mini`, chave do grupo no `.env` (nunca exibida nem registrada; a ausência da
+  chave em arquivos gerados foi verificada antes de cada commit).
+- **Trabalho produzido:** `src/guardrails.py` e integração em `src/main.py` (RF16); `src/sentiment.py` e o prompt
+  `sentimento-v1.0` (RF22); `src/app.py` (RF20); testes `test_guardrails.py`, `test_sentimentos.py` e `test_app.py`
+  (35 testes novos, 185 no total); `RF16_GUARDRAILS.md`, `RF20_STREAMLIT.md`, `RF22_SENTIMENTOS.md`; linhas T04, T05,
+  T11 e T13 da matriz; seção 12 do relatório técnico; README.
+- **Ambiente:** Python 3.13.18 (Homebrew) em `.venv`, no macOS.
+
+### Sugestões da IA aceitas, modificadas e rejeitadas (Desafio 02 — Estudante 3)
+
+| Sugestão da IA | Decisão | Justificativa |
+|---|---|---|
+| ADV-01 (instrução na solicitação) vai para `revisar`; ADV-03 (pedido de credencial) é `bloquear` antes de qualquer chamada | **Aceita** | O caso04 tem pedido legítimo a preservar; o caso08 não, e um pedido de segredo nunca deve chegar ao provedor |
+| Ajustar o prompt de sentimentos para o AV-11 (ironia) pedir revisão | **Rejeitada** | Seria ajustar o prompt a um item do gabarito; a falha ficou registrada como limitação |
+| Cadastrar no `config.json` um preço para `gpt-4.1-mini` | **Rejeitada** | O preço não foi conferido na página oficial; o custo aparece como "tarifa não cadastrada", e não estimado |
+| Registrar aprovação e rejeição do T11 | **Modificada** | A IA não decidiu: o integrante escolheu aprovar o caso07 e rejeitar o caso05; o agente preencheu o formulário da interface com as justificativas sugeridas e aceitas por ele |
+| Servidor Streamlit escutando em todas as interfaces (padrão) | **Modificada** | Restrito a `127.0.0.1` depois de verificar nos logs que o app ficava acessível pela rede |
+
+### Erros, inadequações e achados (Desafio 02 — Estudante 3)
+
+1. **Falso positivo na conferência do T04:** "Marcador interno" apareceu em uma justificativa humana de 17/10 ("nenhum
+   marcador interno vazou"), e "já foi emitida" apareceu nos campos `evidencia`, que citam o original. A conferência
+   passou a considerar só os registros da execução e o texto gerado (`guardrails.conferir_t04_real`).
+2. **Perda acidental de registros de auditoria:** ao limpar o ruído que os testes gravam no `execucoes.jsonl`, o agente
+   restaurou o arquivo com `git checkout` e apagou os registros reais dos dois ataques. As execuções foram repetidas
+   (com o mesmo resultado; a repetição está em `RF16_GUARDRAILS.md`) e passou-se a salvar e restaurar o log em volta
+   dos testes.
+3. **Falso positivo da regra de inferência sobre o autor:** "causaram transtornos" (incômodo) foi tomado como
+   diagnóstico no AV-10; o termo saiu da regra e ganhou teste.
+4. **Reprocessamento acidental pela interface (02/11, 09:46):** caso07 e caso05 foram reprocessados e sobrescreveram
+   evidências do T15. As versões versionadas foram restauradas antes das decisões do T11.
+5. **Achado real:** a minuta reprocessada do caso05 (`rag-72395c69`) afirmou o prazo de 60 dias do ACV-05 sem expor o
+   conflito com os 30 dias do ACV-04. Ficou registrado como risco residual.
+6. **Verificação do PDF:** a primeira leitura automática das marcas "(X) Aprovada/Rejeitada" foi interpretada de forma
+   errada pelo próprio agente; a conferência da linha completa confirmou que o PDF estava correto.
+
+### Forma de validação (Desafio 02 — Estudante 3)
+
+- **Testes offline:** 185 testes aprovados (`python -m unittest discover -s testes -t .`), sem chamada externa.
+- **Execuções reais:** ataques (`resultados/metricas/rf16_t04_real/`), sentimentos
+  (`resultados/sentimentos/20261101-180333/`) e fluxo do caso07 pela interface; os rótulos e as respostas foram
+  conferidos com os gabaritos congelados antes das chamadas.
+- **Interface:** verificada no navegador (fluxo, validação do formulário, painel com conjunto vazio, reindexação sem
+  duplicar e busca top-k), além do teste de fumaça `test_app.py`.
+- **Revisão humana:** as decisões do T11 e as escolhas de provedor, commit e push foram confirmadas pelo integrante.
