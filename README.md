@@ -8,7 +8,7 @@ Protótipo local que recebe solicitações **fictícias** em texto, áudio e ima
 |---|---|---|
 | Estudante 1 | Prompts, avaliação, esquemas (`src/schemas.py`), NLP (`src/nlp.py`), dados fictícios e gabaritos | Desafio 01 e Desafio 02 (RF14, RF15) implementados |
 | Estudante 2 | Ingestão (`src/ingestion.py`), embeddings e índice FAISS (`src/embeddings.py`), chunking/métricas (`src/metrics.py`), RAG (`src/rag.py`), abstração de provedor (`src/llm_client.py`), auditoria/retenção (`src/audit.py`) e fluxo integrado (`src/main.py`, `src/web.py`) | Desafio 01 e Desafio 02 (RF17, RF18, RF19, RF21, RF23-RAG, RF24-exclusão/revisão) implementados |
-| Estudante 3 | Áudio (`src/audio.py`), visão/OCR (`src/vision.py`), imagem (`src/image_generation.py`); Desafio 02: guardrails, Streamlit, sentimentos e painel | Desafio 01 concluído (RF06, RF07, RF08, RF10); Desafio 02 pendente de consolidação pelo Estudante 3 |
+| Estudante 3 | Áudio (`src/audio.py`), visão/OCR (`src/vision.py`), imagem (`src/image_generation.py`); Desafio 02: guardrails, Streamlit, sentimentos e painel | Desafio 01 (RF06, RF07, RF08, RF10) e Desafio 02 (RF16 guardrails, RF20 Streamlit, RF22 sentimentos e painel, T04, T05, T11, T13) implementados |
 
 ## Instalação
 
@@ -26,13 +26,13 @@ python -m piper.download_voices pt_BR-faber-medium --download-dir .cache/piper
 Abra `.env` e preencha **somente** a chave do provedor que for usar (padrão: `GROQ_API_KEY`, obtida em
 console.groq.com/keys). O `.env` está no `.gitignore` e nunca deve ser entregue.
 
-Versões principais (`requirements.txt`): `httpx 0.28.1`, `python-dotenv 1.2.1`, `pydantic 2.14.1`, `pypdf 6.21.4`, `faiss-cpu 1.15.1`, `fastembed 0.9.1`, `Pillow 13.0.0` e `piper-tts 1.8.0`. O modelo de embeddings multilíngue (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, `384d`) roda localmente em ONNX com cache em `.cache/fastembed/`.
+Versões principais (`requirements.txt`): `httpx 0.28.1`, `python-dotenv 1.2.1`, `pydantic 2.14.1`, `pypdf 6.21.4`, `faiss-cpu 1.15.1`, `fastembed 0.9.1`, `Pillow 13.0.0`, `piper-tts 1.8.0`, `streamlit 1.66.1` e `pandas 3.1.0`. O modelo de embeddings multilíngue (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, `384d`) roda localmente em ONNX com cache em `.cache/fastembed/`.
 
 ## Execução — Fluxo Geral e Multimodal (Desafio 01 + Integração)
 
 | Comando | O que faz |
 |---|---|
-| `python -m unittest discover -s testes -t .` | Suíte completa de testes offline (150 testes) — não chama API externa |
+| `python -m unittest discover -s testes -t .` | Suíte completa de testes offline (185 testes) — não chama API externa |
 | `python -m src.audio transcrever` | Transcreve o áudio fictício no Groq; salva evidências e comparação, sem aprovar a transcrição |
 | `python -m src.audio revisar --help` | Instruções para confirmar os campos críticos após ouvir o áudio e revisar o texto |
 | `python -m src.audio sintetizar --caso caso02_audio` | Gera localmente um WAV Piper da última minuta comprovadamente aprovada; bloqueia minutas pendentes, corrigidas ou rejeitadas |
@@ -81,10 +81,40 @@ Evolução da central (Aulas 08 a 14): contratos Pydantic estritos em três cama
 | `documentacao/DADOS_E_GABARITOS_D2.md` | Acervo (`ACV-01..06`), solicitações, perguntas RAG (`P01..P08`), avaliações, ataques e congelamento |
 | `documentacao/RF14_EXTRACAO.md` · `documentacao/RF15_FICHAS.md` | Extração estruturada, fichas de compreensão, métricas e limitações (Estudante 1) |
 | `documentacao/RF17_RF18_INDICE_CHUNKING.md` | Ingestão TXT/PDF, embeddings locais, índice FAISS persistente (`T06`) e comparação de chunking (`T07`) |
+| `documentacao/RF16_GUARDRAILS.md` | Guardrails em camadas, ataques `ADV-01..03` (`T04`), escopo/arquivo/limites (`T05`) |
+| `documentacao/RF20_STREAMLIT.md` | Assistente Streamlit, mensagens ao operador e aprovação/rejeição pela interface (`T11`) |
+| `documentacao/RF22_SENTIMENTOS.md` | Sentimentos das 12 avaliações, regras de casos difíceis e agregação (`T13`) |
 | `documentacao/RF19_RF21_RAG_PROVEDOR.md` | Motor RAG fundamentado (`T08..T10`, `ADV-02`), provedor configurável (`T12`), exclusão (`T14`) e roteiro de 5 min |
 | `documentacao/INTEGRACAO_RF14.md` | Integração de `nlp.compreender` e `rag.gerar_minuta_solicitacao` em `src/main.py` |
 | `documentacao/MATRIZ_TESTES_D2.md` | Matriz `T01` a `T15` e métricas consolidadas do RF23 (numerador/denominador) |
 | `documentacao/AVALIACAO_HUMANA.md` | Validação dos gabaritos, fichas e decisões humanas de revisão |
+
+## Desafio 02 — Guardrails, Streamlit, Sentimentos e Painel (Estudante 3)
+
+### Assistente de documentos (Streamlit, RF20)
+
+```bash
+streamlit run src/app.py --server.address 127.0.0.1
+```
+
+Abra `http://localhost:8501`. Na barra lateral, escolha provedor e modelo: só aparecem os que têm chave no `.env`,
+além do `simulado`. Abas: **Solicitação e revisão** (guardrails → ficha → trechos → resposta → minuta → decisão
+humana), **Consulta ao acervo** (top-k e RAG com citações), **Acervo e índice** (estado, reindexação sem duplicar,
+inclusão e exclusão), **Painel de sentimentos** (filtros, totais com denominador, gráficos e conferência com o
+gabarito) e **Auditoria**. "Processar solicitação" sobrescreve os resultados salvos do caso. Detalhes em
+[RF20 — Streamlit](documentacao/RF20_STREAMLIT.md).
+
+| Comando | O que faz |
+|---|---|
+| `python -m src.guardrails demonstrar` | RF16 (`T04`, `T05`): cenários offline → `resultados/metricas/rf16_guardrails.{json,md}` |
+| `python -m src.guardrails verificar --texto "<texto>"` | Aplica a camada de entrada e mostra a decisão `permitir`/`bloquear`/`revisar` e as categorias |
+| `python -m src.main --caso caso08_texto_segredo --provedor openai --modelo gpt-4.1-mini --nao-interativo` | `ADV-03` no fluxo real: bloqueado antes de qualquer chamada ao provedor |
+| `python -m src.guardrails conferir-t04` | Confere a última execução real de `caso04`/`caso08` contra `adversariais.json` → `resultados/metricas/rf16_t04_real/` |
+| `python -m src.sentiment classificar [--provedor ...] [--modelo ...]` | RF22: classifica as 12 avaliações e compara com o gabarito → `resultados/sentimentos/<execução>/matriz_rf22.md` |
+| `python -m src.sentiment agregar [--canal ...] [--categoria ...] [--polaridade ...]` | `T13`: agrega a última execução por código (filtro, duplicatas, conjunto vazio) |
+
+Provedor usado nas execuções do Estudante 3: `openai` / `gpt-4.1-mini` (`OPENAI_API_KEY`). O padrão da equipe
+continua `groq`; troque com `--provedor` ou na barra lateral do Streamlit.
 
 ## Estrutura
 
@@ -108,9 +138,12 @@ src/web.py           interface Web de revisão humana lado a lado
 src/audio.py         transcrição Groq e síntese local Piper (RF06, RF07)
 src/vision.py        renderização de PDF, mascaramento de assinatura e OCR Groq (RF08)
 src/image_generation.py  importação e montagem de peça visual local via Draw Things (RF10)
+src/guardrails.py    guardrails de entrada, acervo e saída, limites de recursos e auditoria sem segredos (RF16)
+src/sentiment.py     classificação de sentimentos e agregação por código com filtro/duplicata/vazio (RF22, T13)
+src/app.py           assistente de documentos Streamlit: fluxo, evidências, revisão, índice, painel e auditoria (RF20)
 resultados/          minutas PDF/JSON, avaliações RAG (resultados/rag/), métricas (resultados/metricas/) e logs
 documentacao/        relatório técnico, matrizes de teste, avaliações humanas e registro de uso de IA
-testes/              suíte automatizada offline (150 testes em 13 módulos)
+testes/              suíte automatizada offline (185 testes em 16 módulos)
 ```
 
 ## Limitações
