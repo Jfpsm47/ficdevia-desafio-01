@@ -52,10 +52,10 @@
   },
   "decisao_revisao": {
     "id_minuta": "rag-aa1528ad",
-    "estado": "pendente",
-    "revisor": null,
-    "justificativa": null,
-    "data_hora": null,
+    "estado": "aprovada",
+    "revisor": "Caio Lopes",
+    "justificativa": "Resposta fundamentada em ACV-04 e ACV-05, cobre as três dúvidas (trancamento, mudança de horário e justificativa de faltas), informa a ausência de regra sobre mudança de horário e não inventa prazos.",
+    "data_hora": "2026-11-02T09:49:53-04:00",
     "participacao_ia": "Minuta gerada com apoio de IA; revisão humana obrigatória.",
     "enviada_ao_cidadao": false
   },

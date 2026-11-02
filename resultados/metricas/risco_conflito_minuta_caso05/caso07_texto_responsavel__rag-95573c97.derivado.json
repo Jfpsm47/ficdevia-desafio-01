@@ -1,0 +1,55 @@
+{
+  "id_execucao": "rag-95573c97",
+  "caso_id": "caso07_texto_responsavel",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-01",
+    "ACV-03",
+    "ACV-04",
+    "ACV-05"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Em atenção ao protocolo nº 2026-000219, referente ao curso técnico, informamos que o estudante Pedro Henrique Alves deve manter frequência mínima de 75% da carga horária de cada componente curricular para continuidade no curso, conforme orientação vigente a partir de 01/08/2026 (documento ACV-05, seção 1).\n\nQuanto à justificativa de faltas, estas podem ser apresentadas por motivo de saúde mediante atestado médico entregue à Coordenação Pedagógica em até cinco dias úteis após o retorno às aulas (ACV-05, seção 2). Sobre o trancamento de matrícula, este pode ser solicitado pelo próprio estudante ou responsável legal, mediante requerimento assinado na Secretaria Escolar (ACV-04, seção 2).\n\nInformamos que não há previsão normativa específica para mudança de horário no acervo consultado. Recomendamos que a senhora procure a Secretaria Escolar para orientações detalhadas e para formalizar qualquer pedido, garantindo assim a manutenção da vaga do estudante.",
+    "afirmacoes": [
+      {
+        "texto": "O estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.",
+        "chunk_ids": [
+          "ACV-05#c1"
+        ]
+      },
+      {
+        "texto": "Faltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas.",
+        "chunk_ids": [
+          "ACV-05#c1"
+        ]
+      },
+      {
+        "texto": "O trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante for menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar.",
+        "chunk_ids": [
+          "ACV-04#c1"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-05#c1",
+        "documento_id": "ACV-05",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "Cabeçalho institucional; 1. Frequência mínima; 2. Justificativa de faltas",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-05\nTítulo: Orientação sobre Frequência, Faltas e Trancamento\nVersão: 1.0\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Frequência mínima\nO estudante deve ter frequência mínima de 75% da carga horária de cada componente curricular.\n\n2. Justificativa de faltas\nFaltas por motivo de saúde podem ser justificadas com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas."
+      },
+      {
+        "chunk_id": "ACV-04#c1",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+      }
+    ],
+    "requer_revisao": false,
+    "motivo_revisao": null
+  }
+}

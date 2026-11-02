@@ -1,0 +1,82 @@
+{
+  "id_execucao": "rag-72395c69",
+  "caso_id": "caso05_texto_incompleto",
+  "versao_indice": "idx-008437e371",
+  "documentos_relacionados": [
+    "ACV-04",
+    "ACV-05",
+    "ACV-06"
+  ],
+  "resposta_rag": {
+    "status": "fundamentada",
+    "resposta": "Prezado Carlos Eduardo Nunes,\n\nEm atenção à sua solicitação via WhatsApp institucional sobre o trancamento do curso Técnico em Administração, informamos que o procedimento para trancamento de matrícula deve ser realizado por meio de requerimento preenchido e assinado na Secretaria Escolar, conforme previsto no documento \"Orientação sobre Trancamento de Matrícula\" (ACV-04, seção 2). O trancamento tem duração de um módulo letivo, podendo ser renovado uma única vez por igual período (ACV-04, seção 4).\n\nO pedido deve ser feito até 60 dias corridos após o início das aulas do módulo, conforme orientação do documento \"Orientação sobre Frequência, Faltas e Trancamento\" (ACV-05, seção 3). Ressaltamos que o retorno ao curso depende da solicitação de reabertura da matrícula antes do início do módulo seguinte e da oferta da turma (ACV-04, seção 5). Para atendimento presencial, a Secretaria Escolar funciona de segunda a sexta-feira, das 7h30 às 11h30 e das 13h30 às 17h30 (ACV-06, seção 1).\n\nRecomendamos que compareça à Secretaria Escolar para formalizar seu pedido de trancamento, apresentando a justificativa do trabalho noturno, para que seu caso seja avaliado conforme as normas vigentes. A decisão final e a conferência do pedido cabem à Secretaria Escolar.\n\nAtenciosamente,\nSecretaria Escolar",
+    "afirmacoes": [
+      {
+        "texto": "O trancamento é solicitado pelo próprio estudante por meio de requerimento preenchido e assinado na Secretaria Escolar.",
+        "chunk_ids": [
+          "ACV-04#c1"
+        ]
+      },
+      {
+        "texto": "O trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.",
+        "chunk_ids": [
+          "ACV-04#c3"
+        ]
+      },
+      {
+        "texto": "O trancamento da matrícula pode ser solicitado até 60 dias corridos após o início das aulas do módulo.",
+        "chunk_ids": [
+          "ACV-05#c2"
+        ]
+      },
+      {
+        "texto": "Para retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do início do módulo seguinte ao fim do trancamento, dependendo da oferta da turma.",
+        "chunk_ids": [
+          "ACV-04#c3"
+        ]
+      },
+      {
+        "texto": "A Secretaria Escolar atende de segunda a sexta-feira, das 7h30 às 11h30 e das 13h30 às 17h30.",
+        "chunk_ids": [
+          "ACV-06#c1"
+        ]
+      }
+    ],
+    "citacoes": [
+      {
+        "chunk_id": "ACV-04#c1",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Finalidade; 2. Como solicitar o trancamento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-04\nTítulo: Orientação sobre Trancamento de Matrícula\nVersão: 1.1\nTema: Trancamento, cancelamento e frequência\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Finalidade\nEsta orientação descreve como o estudante pode interromper temporariamente o curso por meio\ndo trancamento de matrícula.\n\n2. Como solicitar o trancamento\nO trancamento é solicitado pelo próprio estudante, ou pelo responsável legal quando o estudante\nfor menor de 18 anos, por meio de requerimento preenchido e assinado na Secretaria Escolar."
+      },
+      {
+        "chunk_id": "ACV-04#c3",
+        "documento_id": "ACV-04",
+        "versao_documento": "1.1",
+        "pagina": 2,
+        "secao": "4. Duração do trancamento; 5. Retorno ao curso; 6. Cancelamento a pedido",
+        "trecho": "4. Duração do trancamento\nO trancamento vale por um módulo letivo e pode ser renovado uma única vez, por igual período.\n\n5. Retorno ao curso\nPara retornar, o estudante deve solicitar a reabertura da matrícula na Secretaria Escolar antes do\ninício do módulo seguinte ao fim do trancamento. O retorno depende da oferta da turma.\n\n6. Cancelamento a pedido\nO estudante pode pedir o cancelamento da matrícula a qualquer tempo, por requerimento na\nSecretaria Escolar. O cancelamento encerra o vínculo com o curso."
+      },
+      {
+        "chunk_id": "ACV-05#c2",
+        "documento_id": "ACV-05",
+        "versao_documento": "1.0",
+        "pagina": null,
+        "secao": "2. Justificativa de faltas; 3. Prazo para trancamento; 4. Acompanhamento",
+        "trecho": "com a apresentação de atestado médico na Coordenação Pedagógica em até 5 (cinco) dias úteis após o retorno às aulas.\n\n3. Prazo para trancamento\nO trancamento da matrícula pode ser solicitado até 60 (sessenta) dias corridos após o início das aulas do módulo.\n\n4. Acompanhamento\nA Coordenação Pedagógica acompanha os estudantes com frequência abaixo de 75% e pode convocá-los para orientação."
+      },
+      {
+        "chunk_id": "ACV-06#c1",
+        "documento_id": "ACV-06",
+        "versao_documento": "1.0",
+        "pagina": 1,
+        "secao": "Cabeçalho institucional; 1. Horário de atendimento; 2. Organização do atendimento",
+        "trecho": "DOCUMENTO FICTÍCIO PARA FINS DIDÁTICOS - NÃO REPRESENTA NORMA REAL\nIdentificador: ACV-06\nTítulo: Comunicado sobre o Atendimento da Secretaria Escolar\nVersão: 1.0\nTema: Matrícula e documentação escolar\nVigência: a partir de 01/08/2026\nSetor responsável: Secretaria Escolar\nUnidade: Escola Técnica Estadual de Cuiabá (cenário fictício)\n\n1. Horário de atendimento\nA Secretaria Escolar atende de segunda a sexta-feira, das 7h30 às 11h30 e das 13h30 às 17h30,\nexceto em feriados.\n\n2. Organização do atendimento\nO atendimento presencial é feito por ordem de chegada, com retirada de senha na recepção."
+      }
+    ],
+    "requer_revisao": true,
+    "motivo_revisao": "Protocolo e data de solicitação ausentes, conforme dados da solicitação. | protocolo ausente | data_solicitacao ausente | Alerta de integridade documental em ACV-06: trecho irmão ACV-06#c2 (seção '2. Organização do atendimento; 3. Observação técnica') contém instrução imperativa suspeita; resposta encaminhada para revisão humana."
+  }
+}
